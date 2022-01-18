@@ -1,0 +1,12 @@
+{
+	"type": "service_account",
+	"project_id": "obinsun-merch",
+	"private_key_id": "eae07f27cfc72ffd17daf39e9c684d3b3afceae8",
+	"private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDXl+e3oa06JftS\ni4qiklFNWaprltZafchf00d8tNkE/CQmDaGQ7GTPZvTGdACJ6xY/mtpKK25kZCWi\npLCidbeiwNyinzBgyIjn971UKG4iwUrcwT4HeJBDuGl8ewY2pM+GVkKhThbYiVeT\nFe8DjuNjpT2PZeW8JTgyMo3/6h08OBnWLAix2taKtJhQEOikk+tJPwklZCnrxUiy\n8VcnnQfUqdz+TMeT6HNW4OP7BxacgYTJpeC63FK4kRbdRZGPMIYTnGBNR1rTBPQQ\nafnTz3R9cfodRP1VrS7VyMkl8iapK0C2PbXmF3m0bKYMKbq1n1zTboBP7rGhgMTR\ndF8V7icTAgMBAAECggEAG03Vvt/u/GpLBg0+JZC6Uz2D49RamWNMuTYc26JbydHV\nEiyvxZbqvYmgfnG6j70COFP4SWRuurAkRBDvfePCug4K412d1uQO0rIBfGMSb7xj\nKsoefPu76Ze1ZFqAUvNUhQLvtVYadpoOSUaB2sWB7uDChyK0kbt0/oaAjWStBy8o\nMT1dgdwrGTCp+3lUHorlJheBPQeTMLDg+iBwZgRPnl1qpKO84H6p/bi/2WLVLARs\n3V8Q6QmMtqGqqu1910lnCCKBMNhxnjSDG/ErbE2AK696g/wZd0lZMyisut7dDuXa\nnYHY0lVFEaGCZBGV0c9nnukbUeECoZTDJdgW43fHAQKBgQDwEFBbgAE0jD5sQIM3\nG2mfMpYDGIbbrI4UaAPZpI/1mvVAdABZJgr9ChaljkZgxSM/9wyR7mgcj7fjnqWS\n238cO6fHflDUjC6GT6EeO0MCnQi1pMgQP8VFk/+j6Mh1Pe4mNjTBCdpnTIJHWXfr\nWrEOZgcFlZA81fo7NL4hzJpEMwKBgQDl57zfL1S636AlBjLHn6ZMDt4YSwUGb3Pa\nQr3KTEBYGHxyCUzBNKJKHs+AHfUwQ2TnX53s9dTh488qtqmYJ5BmtjojgBOwJFnH\n7NIBy9fvT5TfsOmSy4xaX/RUYbGnH+QaxD8Lrckeh8orM94K9pcpGN71o6h275G9\n9ysNLzaxoQKBgHtrF7UC6Ru34jvLKuqA6FtVKXRr/qEfZGgvVZNmHDDbuqypNqie\ne1W+AwiYTaxgjY/MFiVMWTAd3x9hp6QJvp6oOMjCMxIjA6Q/egjN1NSaISkpj0Vz\nU5tCzFHbUnucHDx+774yr5sd5XiDEbjpBk/tujxvuRjdtWkM45cC1mirAoGAW/r3\nCaP6FjnZ7HYqYstw0QUxvi5leEmm5C/HluQi6hwBze4Ck1nnhBgHlI5nxkNwX1FV\n8bP409c8zy39dC6AC1fkssdPGS2x7dbFvoo7fjcsrMIu8NgW8yFos0nStbaAoGTb\nhGSnDlvtepNpxqEZoQueSFCN2efHO2VkCAZXr4ECgYBjCSqRcg6uCYXmINDh3IO8\nfZkkVJo2gG2zjVYqhBWSyZfxFfYS93TVWn2N0T24UlxqOJz517KsSOb2Q24SYGyd\nJOSHS/YSfdlpuPSOAeFHiQNHq4iuowH/e4hHz8SqbMf+XweJh6UEIJnMF6xcCMvc\nlwIuWqjgkaCxpgTJNRuzDg==\n-----END PRIVATE KEY-----\n",
+	"client_email": "obinsun-merch-auth@obinsun-merch.iam.gserviceaccount.com",
+	"client_id": "115931294894531679595",
+	"auth_uri": "https://accounts.google.com/o/oauth2/auth",
+	"token_uri": "https://oauth2.googleapis.com/token",
+	"auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+	"client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/obinsun-merch-auth%40obinsun-merch.iam.gserviceaccount.com"
+}

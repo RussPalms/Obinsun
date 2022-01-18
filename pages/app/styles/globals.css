@@ -1,0 +1,90 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Fuzzy+Bubbles:wght@400;700&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Fuzzy+Bubbles:wght@400;700&family=Grandstander:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+	/* top: 0;
+	left: 0; */
+	padding: 0;
+	margin: 0;
+	height: 100%;
+}
+* {
+	box-sizing: border-box;
+}
+
+/* html,
+body {
+	height: 100%;
+} */
+
+@layer components {
+	.glass {
+		@apply bg-white bg-opacity-20 shadow-glass border border-solid border-white border-opacity-25 rounded-[20px] backdrop-blur-[4px];
+	}
+	.design-container {
+		@apply list-none w-[100px] h-[100px] my-[10px] flex justify-center items-center;
+	}
+	.design {
+		@apply w-[80%] transition duration-500 transform hover:rotate-[-35deg];
+	}
+	.size {
+		@apply list-none w-[30px] h-[30px] bg-white text-[#1e6b7b] flex justify-center items-center m-[5px] border rounded-[4px] font-bold cursor-pointer transition duration-[0.25s] transform hover:translate-y-[-10px] shadow-size;
+	}
+	.asset {
+		@apply h-14 w-14 object-fill;
+	}
+
+	.glass-header-item-container {
+		@apply list-none mx-[10px] md:m-[2px];
+	}
+
+	.glass-header-item {
+		@apply md:inline-block no-underline font-medium text-[#8a2435] py-[8px] px-[15px] rounded-[25px] hover:bg-white hover:shadow-glass1a active:bg-white active:shadow-glass1a;
+	}
+
+	.glass-header-unit {
+		@apply md:mx-[10px] no-underline w-[50px] h-[50px] bg-[#fff] flex justify-center items-center rounded-[50%] my-[5px] shadow-glass1a;
+	}
+
+	.unit-movement {
+		@apply object-contain h-32 w-32 transform scale-[0.6] transition duration-[0.5s] hover:transform hover:scale-[0.6] hover:rotate-[360deg];
+	}
+
+	.unit-container {
+		@apply list-none;
+	}
+
+	.color {
+		@apply absolute blur-[150px] first:top-[-350px] first:w-[600px] first:h-[600px] first:bg-[#ff359b];
+	}
+	.square {
+		/* no adding calculated css variables that reference js */
+		@apply absolute backdrop-blur-[5px] bg-opacity-10 shadow-glass3 border border-white border-opacity-50 rounded-[10px] animate-squaremove 
+		first:top-[-50px] first:right-[-60px] first:w-[100px] first:h-[100px] 
+		/* delay-[calc(-1s_*_var(--i))] */;
+	}
+	.inputBox {
+		@apply w-full mt-[20px];
+	}
+	.input {
+		@apply text-[16px] tracking-[1px] text-white w-full bg-white/20 outline-none py-[10px] px-[20px] border border-white/50 rounded-[35px] shadow-glass3a placeholder-white;
+	}
+}
+
+.border-top-left-glass {
+	border-top: 1px solid rgba(255, 255, 255, 0.5) !important;
+	border-left: 1px solid rgba(255, 255, 255, 0.5) !important;
+}
+
+.border-bottom-right-glass {
+	border-right: 1px solid rgba(255, 255, 255, 0.2) !important;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.square-delay {
+	animation-delay: calc(-1s * var(--i));
+}
