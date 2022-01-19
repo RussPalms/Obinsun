@@ -18,7 +18,12 @@ async function createUser(email, password, role) {
 		throw new Error(userData.message || "Something went wrong!");
 	}
 
-	// signIn("email", { redirect: false, email: userData.email });
+	// await signIn("credentials", {
+	// 	redirect: false,
+	// 	email: userData.registered.email,
+	// 	password: userData.registered.password,
+	// 	// callbackUrl: `${window.location.origin}`,
+	// });
 
 	console.log(userData);
 
@@ -45,7 +50,9 @@ async function createEmail(email) {
 	return tokenData;
 }
 
-function Authentication({ csrfToken }) {
+function Authentication({ csrfToken, userData }) {
+	// const baseUrl = process.env.NEXTAUTH_URL;
+
 	const { data: session, status } = useSession();
 	const loading = status === "loading";
 	console.log(session);
@@ -85,6 +92,12 @@ function Authentication({ csrfToken }) {
 				// callbackUrl: `${window.location.origin}`,
 			});
 
+			// const result = await signIn("email", {
+			// 	redirect: false,
+			// 	email: enteredEmail,
+			// 	// callbackUrl: `${window.location.origin}`,
+			// });
+
 			if (!result.error) {
 				router.replace("/routes/protected/profile");
 			}
@@ -97,6 +110,28 @@ function Authentication({ csrfToken }) {
 					enteredPassword,
 					enteredRole
 				);
+
+				// await signIn("credentials", {
+				// 	redirect: false,
+				// 	// email: userData.registered.email,
+				// 	email: enteredEmail,
+				// 	password: enteredPassword,
+				// });
+
+				await signIn("email", {
+					redirect: false,
+					email: enteredEmail,
+				});
+				// router.replace("/routes/protected/profile");
+
+				await signIn("credentials", {
+					// redirect: "routes/protected/profile",
+					// email: userData.registered.email,
+					email: enteredEmail,
+					password: enteredPassword,
+					callbackUrl: "/routes/protected/profile",
+				});
+				// router.push("/routes/protected/profile");
 			} catch (error) {
 				console.log(error);
 			}
@@ -164,11 +199,11 @@ function Authentication({ csrfToken }) {
 							{/* {sendEmail ? (
 								<> */}
 							<div className="inputBox">
-								{/* <input
+								<input
 									name="csrfToken"
 									type="hidden"
 									defaultValue={csrfToken}
-								/> */}
+								/>
 
 								{/* <label htmlFor="email"></label> */}
 								<input

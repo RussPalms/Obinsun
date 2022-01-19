@@ -73,7 +73,30 @@ async function handler(req: any, res: any) {
 
 	await addDoc(collection(db, "users"), registerData);
 
-	res.status(201).json({ message: "Created user!" });
+	const getRegisteredUser = await query(
+		collection(db, "users"),
+		where("email", "==", email)
+	);
+
+	const registeredUser = await getDocs(getRegisteredUser);
+
+	// const registeredStatus: any = {};
+
+	// registeredUser.forEach((doc) => {
+	// 	// doc.data()
+	// 	// 		registeredStatus["userExistence"] = true;
+	// 	let a = doc.data();
+	// 	a["_id"] = doc.id;
+	// 	registeredStatus[doc.id] = a;
+	// });
+
+	// const registered = Object.values(registeredStatus)[0];
+
+	res.status(201).json({
+		message: "Created user!",
+		// User: JSON.stringify(registered),
+		registeredUser,
+	});
 }
 
 export default handler;

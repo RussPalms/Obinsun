@@ -21,10 +21,17 @@ const MainNav = (props) => {
 					<a>Home</a>
 				</Link>
 			</li>
-			{access("users", "read:any").granted && (
+			{access("app", "read:any").granted && (
 				<li>
 					<Link href="/routes/protected/admin/users">
-						<a>Manage users</a>
+						<a>Manage App</a>
+					</Link>
+				</li>
+			)}
+			{access("users", "read:any").granted && (
+				<li>
+					<Link href="/routes/protected/creator/studio">
+						<a>Manage Users</a>
 					</Link>
 				</li>
 			)}

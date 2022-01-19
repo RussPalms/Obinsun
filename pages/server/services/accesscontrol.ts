@@ -8,13 +8,20 @@ import AccessControl from "accesscontrol";
 export const ac = new AccessControl();
 
 // ac.grant("admin")
-// 	.resource("owner")
+// 	// .extend("owner")
+// 	.resource("users")
 // 	.readAny()
 // 	.createAny()
 // 	.updateAny()
-// 	.deleteAny();
+// 	.deleteAny()
+// 	// .resource("app")
+// 	// .readAny()
+// 	// .createAny()
+// 	// .updateAny()
+// 	// .deleteAny();
 
 // owners can manage all users
+// ac.grant("owner").resource().readAny().createAny().updateAny().deleteAny();
 ac.grant("owner")
 	.resource("users")
 	.readAny()
@@ -24,6 +31,39 @@ ac.grant("owner")
 
 // guests can manage only their own profile
 ac.grant("guest").resource("users").readOwn().updateOwn();
+
+ac.grant("admin")
+	.resource(["users", "app"])
+	// .readAny()
+	// .createAny()
+	// .updateAny()
+	// .deleteAny()
+	// .resource("app")
+	.readAny()
+	.createAny()
+	.updateAny()
+	.deleteAny();
+
+// owners can manage all users
+// ac.grant("owner")
+// 	.resource("users")
+// 	.readAny()
+// 	.createAny()
+// 	.updateAny()
+// 	.deleteAny();
+
+// ac.grant("admin")
+// 	.extend("owner")
+// 	.resource("users")
+// 	.readAny()
+// 	.createAny()
+// 	.updateAny()
+// 	.deleteAny()
+// 	.resource("app")
+// 	.readAny()
+// 	.createAny()
+// 	.updateAny()
+// 	.deleteAny();
 
 // we lock ACL to avoid updates out of this file
 ac.lock();
