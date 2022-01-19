@@ -1,12 +1,14 @@
 //@ts-nocheck
 
 import Link from "next/link";
-import useSnipcartCount from "../../../server/hooks/useSnipcartCount";
+// import useSnipcartCount from "../../../server/hooks/useSnipcartCount";
+import useStripeCount from "../../../server/hooks/useStripeCount";
 import useWishlistState from "../../../server/hooks/useWishlistState";
 
 const Layout = ({ children }) => {
   const { hasItems } = useWishlistState();
-  const { cart } = useSnipcartCount();
+  // const { cart } = useSnipcartCount();
+  const { cart } = useStripeCount();
   const cartHasItems = cart.items.count !== 0;
 
   return (
@@ -56,7 +58,8 @@ const Layout = ({ children }) => {
             </div>
             <div className="md:w-1/3 flex items-center justify-end space-x-3 -mr-2.5">
               <button
-                className="snipcart-customer-signin appearance-none px-2 text-gray-800 hover:text-blue-600 rounded-md cursor-pointer focus:outline-none focus:text-blue-600 transition relative"
+                // className="snipcart-customer-signin appearance-none px-2 text-gray-800 hover:text-blue-600 rounded-md cursor-pointer focus:outline-none focus:text-blue-600 transition relative"
+                className="stripe-customer-signin appearance-none px-2 text-gray-800 hover:text-blue-600 rounded-md cursor-pointer focus:outline-none focus:text-blue-600 transition relative"
                 aria-label="User login"
               >
                 <svg
@@ -87,7 +90,8 @@ const Layout = ({ children }) => {
                 </a>
               </Link>
               <button
-                className="snipcart-checkout appearance-none px-2 text-gray-800 hover:text-blue-600 rounded-md cursor-pointer focus:outline-none focus:text-blue-600 transition relative"
+                // className="snipcart-checkout appearance-none px-2 text-gray-800 hover:text-blue-600 rounded-md cursor-pointer focus:outline-none focus:text-blue-600 transition relative"
+                className="stripe-checkout appearance-none px-2 text-gray-800 hover:text-blue-600 rounded-md cursor-pointer focus:outline-none focus:text-blue-600 transition relative"
                 aria-label="Cart"
               >
                 {cartHasItems && (

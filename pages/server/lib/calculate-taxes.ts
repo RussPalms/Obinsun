@@ -1,10 +1,15 @@
 //@ts-nocheck
 
 import type { NextApiRequest, NextApiResponse } from "next";
-import { PrintfulShippingItem, SnipcartTaxItem } from "../../types";
+import {
+  PrintfulShippingItem,
+  // SnipcartTaxItem
+  StripeTaxItem,
+} from "../../types";
 import { printful } from "./printful-client";
 
-interface SnipcartRequest extends NextApiRequest {
+// interface SnipcartRequest extends NextApiRequest {
+interface StripeRequest extends NextApiRequest {
   body: {
     eventName: string;
     mode: string;
@@ -15,7 +20,8 @@ interface SnipcartRequest extends NextApiRequest {
 
 type Data = {
   /** An array of tax rates. */
-  taxes: SnipcartTaxItem[];
+  // taxes: SnipcartTaxItem[];
+  taxes: StripeTaxItem[];
 };
 
 type Error = {
@@ -23,7 +29,8 @@ type Error = {
 };
 
 const calculateTaxes = async (
-  req: SnipcartRequest,
+  // req: SnipcartRequest,
+  req: StripeRequest,
   res: NextApiResponse<Data | Error>
 ) => {
   const { content } = req.body;

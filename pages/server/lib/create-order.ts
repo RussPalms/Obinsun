@@ -1,6 +1,10 @@
 //@ts-nocheck
 
-import { PrintfulShippingItem, SnipcartWebhookContent } from "../../types";
+import {
+  PrintfulShippingItem,
+  // SnipcartWebhookContent
+  StripeWebhookContent,
+} from "../../types";
 import { printful } from "./printful-client";
 
 // import type { SnipcartWebhookContent, PrintfulShippingItem } from "../types";
@@ -11,7 +15,8 @@ const createOrder = async ({
   shippingAddress,
   items,
   shippingRateUserDefinedId,
-}: SnipcartWebhookContent) => {
+}: // }: SnipcartWebhookContent) => {
+StripeWebhookContent) => {
   const recipient = {
     ...(shippingAddress.name && { name: shippingAddress.name }),
     ...(shippingAddress.address1 && { address1: shippingAddress.address1 }),

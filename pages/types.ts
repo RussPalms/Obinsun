@@ -2,18 +2,22 @@ import type { NextApiRequest } from "next";
 
 declare global {
   interface Window {
-    Snipcart: any;
+    // Snipcart: any;
+    Stripe: any;
   }
   namespace JSX {
     interface IntrinsicElements {
       "address-fields": any;
-      "snipcart-label": any;
-      "snipcart-input": any;
+      // "snipcart-label": any;
+      // "snipcart-input": any;
+      "stripe-label": any;
+      "stripe-input": any;
     }
   }
 }
 
-export type SnipcartWebhookEvent =
+// export type SnipcartWebhookEvent =
+export type StripeWebhookEvent =
   | "order.completed"
   | "order.status.changed"
   | "order.paymentStatus.changed"
@@ -29,7 +33,8 @@ export type SnipcartWebhookEvent =
   | "taxes.calculate"
   | "customauth:customer_updated";
 
-export interface SnipcartWebhookContent {
+// export interface SnipcartWebhookContent {
+export interface StripeWebhookContent {
   discounts: { [key: string]: any };
   items: { [key: string]: any };
   shippingAddress: {
@@ -50,7 +55,8 @@ export interface SnipcartWebhookContent {
   [key: string]: any;
 }
 
-export type SnipcartShippingRate = {
+// export type SnipcartShippingRate = {
+export type StripeShippingRate = {
   /** Shipping method's price. */
   cost: number;
   /** Name or description of the shipping method. */
@@ -61,7 +67,8 @@ export type SnipcartShippingRate = {
   userDefinedId?: string;
 };
 
-export type SnipcartTaxItem = {
+// export type SnipcartTaxItem = {
+export type StripeTaxItem = {
   name: string;
   amount: number;
   rate: number;
@@ -70,15 +77,19 @@ export type SnipcartTaxItem = {
   appliesOnShipping?: boolean;
 };
 
-export interface SnipcartRequest extends NextApiRequest {
+// export interface SnipcartRequest extends NextApiRequest {
+export interface StripeRequest extends NextApiRequest {
   headers: {
-    "x-snipcart-requesttoken"?: string;
+    // "x-snipcart-requesttoken"?: string;
+    "x-stripe-requesttoken"?: string;
   };
   body: {
-    eventName: SnipcartWebhookEvent;
+    // eventName: SnipcartWebhookEvent;
+    eventName: StripeWebhookEvent;
     mode: string;
     createdOn: string;
-    content: SnipcartWebhookContent;
+    // content: SnipcartWebhookContent;
+    content: StripeWebhookContent;
   };
 }
 

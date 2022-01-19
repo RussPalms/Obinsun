@@ -1,11 +1,16 @@
 //@ts-nocheck
 
 import type { NextApiRequest, NextApiResponse } from "next";
-import { PrintfulShippingItem, SnipcartShippingRate } from "../../types";
+import {
+  PrintfulShippingItem,
+  // SnipcartShippingRate
+  StripeShippingRate,
+} from "../../types";
 
 import { printful } from "./printful-client";
 
-interface SnipcartRequest extends NextApiRequest {
+// interface SnipcartRequest extends NextApiRequest {
+interface StripeRequest extends NextApiRequest {
   body: {
     eventName: string;
     mode: string;
@@ -16,7 +21,8 @@ interface SnipcartRequest extends NextApiRequest {
 
 type Data = {
   /** An array of shipping rates. */
-  rates: SnipcartShippingRate[];
+  // rates: SnipcartShippingRate[];
+  rates: StripeShippingRate[];
 };
 
 type Error = {
@@ -24,7 +30,8 @@ type Error = {
 };
 
 export default async function handler(
-  req: SnipcartRequest,
+  // req: SnipcartRequest,
+  req: StripeRequest,
   res: NextApiResponse<Data | Error>
 ) {
   const { eventName, content } = req.body;
