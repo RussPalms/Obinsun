@@ -15,69 +15,69 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function Home(): NextPage {
-	// useEffect(async (error) => {
-	// 	console.log(error);
-	// console.log(errors);
-	// window.addEventListener("unhandledrejection", (event) => {
-	// 	console.warn(`UNHANDLED PROMISE REJECTION: ${event.reason}`);
-	// });
-	// window.onunhandledrejection = (event) => {
-	// 	console.warn(`UNHANDLED PROMISE REJECTION: ${event.reason}`);
-	// };
-	// window.addEventListener("unhandledrejection", function (event) {
-	// 	// ...your code here to handle the unhandled rejection...
-	// 	// Prevent the default handling (such as outputting the
-	// 	// error to the console)
-	// 	event.preventDefault();
-	// });
-	// }, []);
+  // useEffect(async (error) => {
+  // 	console.log(error);
+  // console.log(errors);
+  // window.addEventListener("unhandledrejection", (event) => {
+  // 	console.warn(`UNHANDLED PROMISE REJECTION: ${event.reason}`);
+  // });
+  // window.onunhandledrejection = (event) => {
+  // 	console.warn(`UNHANDLED PROMISE REJECTION: ${event.reason}`);
+  // };
+  // window.addEventListener("unhandledrejection", function (event) {
+  // 	// ...your code here to handle the unhandled rejection...
+  // 	// Prevent the default handling (such as outputting the
+  // 	// error to the console)
+  // 	event.preventDefault();
+  // });
+  // }, []);
 
-	const { data: session, status } = useSession();
-	const loading = status === "loading";
-	console.log(status);
-	console.log(session);
+  const { data: session, status } = useSession();
+  const loading = status === "loading";
+  console.log(status);
+  console.log(session);
 
-	const [isLoading, setIsLoading] = useState(true);
-	const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
-	// useEffect(async () => {
-	// 	await getSession().then((session) => {
-	// 		if (session) {
-	// 			router.replace("/");
-	// 		} else {
-	// 			setIsLoading(false);
-	// 		}
-	// 	});
-	// },
-	// [router]
-	// )
-	// ;
+  // useEffect(async () => {
+  // 	await getSession().then((session) => {
+  // 		if (session) {
+  // 			router.replace("/");
+  // 		} else {
+  // 			setIsLoading(false);
+  // 		}
+  // 	});
+  // },
+  // [router]
+  // )
+  // ;
 
-	if (status == "loading") {
-		return <p>Loading...</p>;
-	}
+  if (status == "loading") {
+    return <p>Loading...</p>;
+  }
 
-	return (
-		<>
-			<Head>
-				<title>Obinsun</title>
-				<link rel="icon" href="/Grim2021.svg" />
-			</Head>
+  return (
+    <>
+      <Head>
+        <title>Obinsun</title>
+        <link rel="icon" href="/Grim2021.svg" />
+      </Head>
 
-			<main>
-				<Heading />
-				{/* home */}
-				{/* <Headers /> */}
-				{/* <Header /> */}
-				<Designs />
-				{/* <Design /> */}
-				{/* <Entity /> */}
-				{/* <Entities /> */}
-				{/* <Login /> */}
-				{/* <Log /> */}
-			</main>
-		</>
-	);
+      <main>
+        <Heading />
+        {/* home */}
+        {/* <Headers /> */}
+        {/* <Header /> */}
+        <Designs />
+        {/* <Design /> */}
+        {/* <Entity /> */}
+        {/* <Entities /> */}
+        {/* <Login /> */}
+        {/* <Log /> */}
+      </main>
+    </>
+  );
 }
 
 // export async function getServerSideProps(context) {

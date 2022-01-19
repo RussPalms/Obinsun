@@ -73,7 +73,14 @@ module.exports = {
 		// },
 
 		extend: {
-			fontFamily: { grandstander: ["Grandstander", "cursive"] },
+			// fontFamily: { grandstander: ["Grandstander", "cursive"] },
+			fontFamily: {
+				grandstander: [
+					"Grandstander",
+					// ,
+					// ...defaultTheme.fontFamily.grandstander,
+				],
+			},
 			keyframes: {
 				move: {
 					"0%, 100%": {
@@ -121,7 +128,8 @@ module.exports = {
 			right: ["nth-child"],
 			width: ["nth-child"],
 			height: ["nth-child"],
+			backgroundColor: ["checked"],
 		},
 	},
-	plugins: [plugin.nthChild()],
+	plugins: [plugin.nthChild(), require("@tailwindcss/typography")],
 };
