@@ -17,8 +17,9 @@ import {
 	getFirestore,
 	setDoc,
 } from "firebase/firestore";
-import { firestoreConnect } from "../../lib/database/firebaseFirestore";
-import { hashEmail } from "../../lib/password-auth";
+import { firestoreConnect } from "../../server/lib/database/firebaseFirestore";
+import { hashEmail } from "../../server/lib/password-auth";
+// import { connectToFirebase } from "../../server/lib/database/firebaseFirestore";
 
 async function emailHandler(req: any, res: any) {
 	const ONE_DAY = { days: 1 };
@@ -38,17 +39,22 @@ async function emailHandler(req: any, res: any) {
 	// const db = await connectToFirebase();
 	const db = firestoreConnect;
 
-	const VerificationTokenInfo = {
-		identifier: email,
-		token: token,
-		expires: tokenExpiration,
+	const CreatorVerificationInfo = {
+		// identifier: email,
+		// token: token,
+		// expires: tokenExpiration,
+		requester: email,
+		verified: false,
 	};
 
-	await addDoc(collection(db, "VerificationToken"), VerificationTokenInfo);
+	await addDoc(
+		collection(db, "CreatorVerification"),
+		CreatorVerificationInfo
+	);
 
 	const VerificationQuery = query(
-		collection(db, "VerificationToken"),
-		where("identifier", "==", email)
+		collection(db, "CreatorVerification"),
+		where("requester", "==", email)
 	);
 
 	const TokenSnapshot = await getDocs(VerificationQuery);
@@ -61,11 +67,11 @@ async function emailHandler(req: any, res: any) {
 		TokenCollection[doc.id] = t;
 	});
 
-	const VerificationToken = await Object.values(TokenCollection)[0];
+	const CreatorVerification = await Object.values(TokenCollection)[0];
 
-	console.log(VerificationToken);
+	console.log(CreatorVerification);
 
-	res.status(200).json(VerificationToken);
+	res.status(200).json(CreatorVerification);
 }
 
 export default emailHandler;

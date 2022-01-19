@@ -8,8 +8,8 @@ import { useRouter } from "next/router";
 import { useUserContext } from "../features";
 
 const MainNav = (props) => {
-	// const { data: session, status } = useSession();
-	// console.log(session);
+	const { data: session, status } = useSession();
+	console.log(session);
 
 	const router = useRouter();
 	const { access } = useUserContext();
@@ -23,14 +23,14 @@ const MainNav = (props) => {
 			</li>
 			{access("users", "read:any").granted && (
 				<li>
-					<Link href="/users">
+					<Link href="/routes/protected/admin/users">
 						<a>Manage users</a>
 					</Link>
 				</li>
 			)}
 			{access("users", "read:own").granted && (
 				<li>
-					<Link href="/profile">
+					<Link href="/routes/protected/profile">
 						<a>Profile</a>
 					</Link>
 				</li>

@@ -7,12 +7,12 @@ import AccessControl from "accesscontrol";
 // unique back-end instance of AccessControl
 export const ac = new AccessControl();
 
-ac.grant("admin")
-	.resource("owner")
-	.readAny()
-	.createAny()
-	.updateAny()
-	.deleteAny();
+// ac.grant("admin")
+// 	.resource("owner")
+// 	.readAny()
+// 	.createAny()
+// 	.updateAny()
+// 	.deleteAny();
 
 // owners can manage all users
 ac.grant("owner")

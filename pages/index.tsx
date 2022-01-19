@@ -35,6 +35,7 @@ export default function Home(): NextPage {
 	const { data: session, status } = useSession();
 	const loading = status === "loading";
 	console.log(status);
+	console.log(session);
 
 	const [isLoading, setIsLoading] = useState(true);
 	const router = useRouter();

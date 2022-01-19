@@ -15,8 +15,11 @@ import {
 	FirestoreDataConverter,
 	getFirestore,
 } from "firebase/firestore";
-import { firestoreConnect } from "../../lib/database/firebaseFirestore";
-import { hashPassword, verifyPassword } from "../../lib/password-auth";
+import {
+	// connectToFirebase,
+	firestoreConnect,
+} from "../../server/lib/database/firebaseFirestore";
+import { hashPassword, verifyPassword } from "../../server/lib/password-auth";
 
 async function passwordHandler(req: any, res: any) {
 	if (req.method !== "PATCH") {
@@ -35,6 +38,7 @@ async function passwordHandler(req: any, res: any) {
 	const newPassword = req.body.newPassword;
 
 	const db = firestoreConnect;
+	// const db = await connectToFirebase();
 
 	const AuthenticationQuery = query(
 		collection(db, "users"),

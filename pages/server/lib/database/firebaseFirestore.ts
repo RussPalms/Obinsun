@@ -1,7 +1,13 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { firebaseConfig } from "../../api/keys/firebase";
+import { firebaseConfig } from "../../../api/keys/firebase";
 import { FirebaseAdapter } from "./firebase-adapter";
+
+export async function connectToFirebase() {
+	const firestoreConnect = await getFirestore(initializeApp(firebaseConfig));
+
+	return firestoreConnect;
+}
 
 export const firestoreConnect = getFirestore(initializeApp(firebaseConfig));
 

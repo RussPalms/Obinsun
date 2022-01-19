@@ -14,8 +14,11 @@ import {
 	FirestoreDataConverter,
 	getFirestore,
 } from "firebase/firestore";
-import { firestoreConnect } from "../../lib/database/firebaseFirestore";
-import { hashPassword } from "../../lib/password-auth";
+import {
+	// connectToFirebase,
+	firestoreConnect,
+} from "../../server/lib/database/firebaseFirestore";
+import { hashPassword } from "../../server/lib/password-auth";
 
 async function handler(req: any, res: any) {
 	if (req.method !== "POST") {
@@ -40,6 +43,7 @@ async function handler(req: any, res: any) {
 	}
 
 	const db = firestoreConnect;
+	// const db = await connectToFirebase();
 
 	const hashedPassword = await hashPassword(password);
 

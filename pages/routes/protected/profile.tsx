@@ -3,7 +3,7 @@
 import { getSession } from "next-auth/react";
 import UserProfile from "../../src/components/Profile/UserProfile";
 
-function dashboard() {
+function userProfile() {
 	return <UserProfile />;
 }
 export async function getServerSideProps(context) {
@@ -23,4 +23,4 @@ export async function getServerSideProps(context) {
 	};
 }
 
-export default dashboard;
+export default userProfile;

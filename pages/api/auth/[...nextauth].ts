@@ -7,9 +7,10 @@ import nodemailer from "nodemailer";
 import { html, text } from "../emails/email-create";
 import {
 	adapterInstance,
-	firestore,
+	// connectToFirebase,
+	// firestore,
 	firestoreConnect,
-} from "../../lib/database/firebaseFirestore";
+} from "../../server/lib/database/firebaseFirestore";
 import {
 	runTransaction,
 	collection,
@@ -26,7 +27,8 @@ import {
 	FirestoreDataConverter,
 	getFirestore,
 } from "firebase/firestore";
-import { verifyPassword } from "../../lib/password-auth";
+import { verifyPassword } from "../../server/lib/password-auth";
+import { ac } from "../../server/services";
 
 const THIRTY_DAYS = 30 * 24 * 60 * 60;
 const THIRTY_MINUTES = 30 * 60;
@@ -48,35 +50,43 @@ export default NextAuth({
 	providers: [
 		CredentialsProvider({
 			authorize: async (credentials) => {
+				// const db = await connectToFirebase();
+				// const db = firestoreConnect;
+
 				const AuthenticationQuery = query(
 					collection(db, "users"),
 					where("email", "==", credentials?.email)
 				);
-
 				const authSnapshot = await getDocs(AuthenticationQuery);
-
 				const userCollection = {};
-
 				authSnapshot.forEach((doc) => {
 					let a = doc.data();
 					a["_id"] = doc.id;
 					userCollection[doc.id] = a;
 				});
-
 				const user = Object.values(userCollection)[0];
-
 				const isValid = await verifyPassword(
 					credentials.password,
 					user.password
 				);
-
 				if (!isValid) {
 					throw new Error("Could not log you in!");
 				}
-
 				console.log(user);
-
-				return { email: user.email };
+				return { email: user.email, role: user.role };
+				// 		const payload = {
+				// 			email: user.email,
+				// 			password: user.password
+				// 		}
+				// 		const res = await fetch('http://localhost:3000/api/auth/session', {
+				//   method: 'POST',
+				//   body: JSON.stringify(payload),
+				//   headers: {
+				//     'Content-Type': 'application/json',
+				//     tenant: credentials.tenantKey,
+				//     'Accept-Language': 'en-US',
+				//   },
+				// });
 			},
 		}),
 		EmailProvider({
@@ -94,8 +104,7 @@ export default NextAuth({
 				url,
 				provider: { server, from },
 			}) {
-				adapterInstance.useVerificationToken;
-
+				// adapterInstance.useVerificationToken;
 				const { host } = new URL(url);
 				const transport = nodemailer.createTransport(server);
 				await transport.sendMail({
@@ -109,7 +118,29 @@ export default NextAuth({
 		}),
 	],
 	callbacks: {
+		// async jwt({ token, user, account }) {
+		// 	if (account && user) {
+		// 		return {
+		// 			...token,
+		// 			accessToken: user.data.token,
+		// 			refreshToken: user.data.refreshToken,
+		// 		};
+		// 	}
+
+		// 	return token;
+		// },
+
+		// async session({ session, token }) {
+		// 	session.user.accessToken = token.accessToken;
+		// 	session.user.refreshToken = token.refreshToken;
+		// 	session.user.accessTokenExpires = token.accessTokenExpires;
+
+		// 	return session;
+		// },
+
 		jwt: async ({ token }) => {
+			// const db = await connectToFirebase();
+
 			const authTokenQuery = query(
 				collection(db, "users"),
 				where("email", "==", token.email)
@@ -134,18 +165,20 @@ export default NextAuth({
 
 			return token;
 		},
-	},
-	session: async ({ session, token }) => {
-		if (token) session.id = token.id;
-		session.user.role = token.role;
+		session: async ({ session, token }) => {
+			if (token) session.id = token.id;
+			session.user.role = token.role;
 
-		const grants = ac.getGrants();
-		// expose only the current role permissions
-		session.user.permissions =
-			token.role in grants ? { [token.role]: grants[token.role] } : {};
+			const grants = ac.getGrants();
+			// expose only the current role permissions
+			session.user.permissions =
+				token.role in grants
+					? { [token.role]: grants[token.role] }
+					: {};
 
-		console.log(session);
+			console.log(session);
 
-		return Promise.resolve(session);
+			return Promise.resolve(session);
+		},
 	},
 });
