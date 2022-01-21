@@ -29,11 +29,11 @@
 
 //   useEffect(() => {
 //     if (hasSnipcart) {
-//       const unsubscribe = window.Snipcart.store.subscribe(() => {
-//         const itemsCount = window.Snipcart.store.getState();
+//       // const unsubscribe = window.Snipcart.store.subscribe(() => {
+//       //   const itemsCount = window.Snipcart.store.getState();
 
-//         dispatch({ type: "SET", payload: itemsCount });
-//       });
+//       //   dispatch({ type: "SET", payload: itemsCount });
+//       // });
 
 //       return unsubscribe;
 //     }

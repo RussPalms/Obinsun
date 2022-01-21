@@ -1,15 +1,15 @@
-//@ts-nocheck
-
 import Link from "next/link";
-// import useSnipcartCount from "../../../server/hooks/useSnipcartCount";
-import useStripeCount from "../../../server/hooks/useStripeCount";
 import useWishlistState from "../../../server/hooks/useWishlistState";
+import { getSession, signIn, signOut, useSession } from "next-auth/react";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import { selectItems } from "../../../app/state/slices/basketSlice";
 
-const Layout = ({ children }) => {
+const Layout = ({ children }: any) => {
+  const { data: session, status } = useSession();
   const { hasItems } = useWishlistState();
-  // const { cart } = useSnipcartCount();
-  const { cart } = useStripeCount();
-  const cartHasItems = cart.items.count !== 0;
+  const router = useRouter();
+  const items = useSelector(selectItems);
 
   return (
     <>
@@ -31,7 +31,7 @@ const Layout = ({ children }) => {
               </nav>
             </div>
             <div className="flex-1 flex items-center justify-center">
-              <Link href="/">
+              <Link href="/products">
                 <a className="flex items-center text-gray-900">
                   <div className="rounded-full w-12 h-12 flex items-center justify-center mr-4">
                     <svg
@@ -58,10 +58,18 @@ const Layout = ({ children }) => {
             </div>
             <div className="md:w-1/3 flex items-center justify-end space-x-3 -mr-2.5">
               <button
-                // className="snipcart-customer-signin appearance-none px-2 text-gray-800 hover:text-blue-600 rounded-md cursor-pointer focus:outline-none focus:text-blue-600 transition relative"
                 className="stripe-customer-signin appearance-none px-2 text-gray-800 hover:text-blue-600 rounded-md cursor-pointer focus:outline-none focus:text-blue-600 transition relative"
                 aria-label="User login"
               >
+                <div
+                  onClick={(!session ? signIn : signOut) as any}
+                  className="cursor-pointer link"
+                >
+                  <p className="hover:underline">
+                    {session ? `Hello, ${session?.user?.email}` : "Sign In"}
+                  </p>
+                  <p className="font-extrabold md:text-sm">Account & Lists</p>
+                </div>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -77,7 +85,7 @@ const Layout = ({ children }) => {
                   aria-label="Wishlist"
                 >
                   {hasItems && (
-                    <span className="absolute bg-red-500 rounded-full w-2 h-2 top-0 right-0 -mt-1 -mr-1"></span>
+                    <span className="absolute bg-red-500 rounded-full w-2 h-2 top-0 right-0 -mt-1 -mr-1" />
                   )}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -90,13 +98,14 @@ const Layout = ({ children }) => {
                 </a>
               </Link>
               <button
-                // className="snipcart-checkout appearance-none px-2 text-gray-800 hover:text-blue-600 rounded-md cursor-pointer focus:outline-none focus:text-blue-600 transition relative"
+                onClick={() => router.push("/checkout")}
                 className="stripe-checkout appearance-none px-2 text-gray-800 hover:text-blue-600 rounded-md cursor-pointer focus:outline-none focus:text-blue-600 transition relative"
                 aria-label="Cart"
               >
-                {cartHasItems && (
-                  <span className="absolute bg-blue-600 rounded-full w-2 h-2 top-0 right-0 -mt-1 -mr-1"></span>
-                )}
+                <span className="absolute bg-blue-600 rounded-full w-2 h-2 top-0 right-0 -mt-1 -mr-1">
+                  {items.length}
+                </span>
+
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -156,3 +165,12 @@ const Layout = ({ children }) => {
 };
 
 export default Layout;
+
+export const getServerSideProps = async (context: any) => {
+  const session = await getSession(context);
+  return {
+    props: {
+      session,
+    },
+  };
+};

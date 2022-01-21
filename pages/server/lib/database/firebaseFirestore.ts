@@ -3,20 +3,28 @@ import { getFirestore } from "firebase/firestore";
 import { firebaseConfig } from "../../../api/keys/firebase";
 import { FirebaseAdapter } from "./firebase-adapter";
 
-export async function connectToFirebase() {
-	const firestoreConnect = await getFirestore(initializeApp(firebaseConfig));
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
+// import "firebase/compat/auth";
 
-	return firestoreConnect;
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+export const db = firebaseApp.firestore();
+// const auth = firebase.auth();
+
+export async function connectToFirebase() {
+  const firestoreConnect = await getFirestore(initializeApp(firebaseConfig));
+
+  return firestoreConnect;
 }
 
 export const firestoreConnect = getFirestore(initializeApp(firebaseConfig));
 
 const firestore = () => {
-	const FirebaseClientObject = {
-		db: firestoreConnect,
-	};
+  const FirebaseClientObject = {
+    db: firestoreConnect,
+  };
 
-	return FirebaseClientObject;
+  return FirebaseClientObject;
 };
 
 export const adapterInstance = FirebaseAdapter(firestore());

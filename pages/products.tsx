@@ -1,5 +1,7 @@
 //@ts-nocheck
 
+import { NextPage } from "next";
+
 import * as React from "react";
 import { GetStaticProps } from "next";
 import shuffle from "lodash.shuffle";
@@ -7,6 +9,7 @@ import { PrintfulProduct } from "./types";
 import ProductGrid from "./src/components/ProductIntegration/ProductGrid";
 import { formatVariantName } from "./server/lib/format-variant-name";
 import { printful } from "./server/lib/printful-client";
+import { getSession } from "next-auth/react";
 
 type IndexPageProps = {
   products: PrintfulProduct[];

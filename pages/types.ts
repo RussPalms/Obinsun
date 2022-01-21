@@ -3,7 +3,7 @@ import type { NextApiRequest } from "next";
 declare global {
   interface Window {
     // Snipcart: any;
-    Stripe: any;
+    StripeCheckout: any;
   }
   namespace JSX {
     interface IntrinsicElements {
@@ -12,31 +12,65 @@ declare global {
       // "snipcart-input": any;
       "stripe-label": any;
       "stripe-input": any;
+      // id: any;
     }
   }
 }
 
 // export type SnipcartWebhookEvent =
 export type StripeWebhookEvent =
-  | "order.completed"
-  | "order.status.changed"
-  | "order.paymentStatus.changed"
-  | "order.trackingNumber.changed"
-  | "order.refund.created"
-  | "order.notification.created"
-  | "subscription.created"
-  | "subscription.cancelled"
-  | "subscription.paused"
-  | "subscription.resumed"
-  | "subscription.invoice.created"
-  | "shippingrates.fetch"
-  | "taxes.calculate"
-  | "customauth:customer_updated";
+  // | "order.completed"
+
+  // | 'order.payment_succeeded'
+  // | 'checkout.session.completed'
+  | "payment_intent.succeeded"
+
+  // | "order.status.changed"
+  | "order.updated"
+
+  // | "order.paymentStatus.changed"
+  | "payment_method.updated"
+
+  // | "order.trackingNumber.changed"
+
+  // | "order.refund.created"
+  // | 'charge.refunded'
+  | "order_return.created"
+
+  // | "order.notification.created"
+  | "order.created"
+
+  // | "subscription.created"
+  | "customer.subscription.created"
+
+  // | "subscription.cancelled"
+  | "customer.subscription.deleted"
+
+  // | "subscription.paused"
+  | "customer.subscription.pending_update_applied"
+
+  // | "subscription.resumed"
+  | "customer.subscription.updated"
+
+  // | "subscription.invoice.created"
+  | "invoice.created"
+
+  // | "shippingrates.fetch"
+
+  // | "taxes.calculate"
+  // | 'tax_rate.created'
+  | "tax_rate.updated"
+
+  // | "customauth:customer_updated";
+  // | 'account.updated'
+  // | "account.application.authorized"
+  | "account.external_account.updated";
 
 // export interface SnipcartWebhookContent {
 export interface StripeWebhookContent {
   discounts: { [key: string]: any };
   items: { [key: string]: any };
+  // products: { [key: string]: any };
   shippingAddress: {
     fullName: string;
     firstName?: string;

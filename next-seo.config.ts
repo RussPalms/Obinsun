@@ -3,19 +3,19 @@ const title = "Your SWAG store";
 const url = "https://localhost:3000";
 
 const seo = {
-	title,
-	titleTemplate: "%s | Obinsun Merch",
-	description,
-	openGraph: {
-		description,
-		title,
-		type: "website",
-		url,
-	},
-	twitter: {
-		handle: "@obinsun",
-		site: "@obinsun",
-	},
+  title,
+  titleTemplate: "%s | Obinsun Merch",
+  description,
+  openGraph: {
+    description,
+    title,
+    type: "website",
+    url,
+  },
+  twitter: {
+    handle: "@obinsun",
+    site: "@obinsun",
+  },
 };
 
 export { seo as defaultSEO, url as defaultUrl };

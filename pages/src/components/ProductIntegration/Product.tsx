@@ -2,12 +2,15 @@
 
 import { useState } from "react";
 import Image from "next/image";
-
 import VariantPicker from "./VariantPicker";
 import useWishlistDispatch from "../../../server/hooks/useWishlistDispatch";
 import useWishlistState from "../../../server/hooks/useWishlistState";
+import { useDispatch } from "react-redux";
+import { addToBasket } from "../../../app/state/slices/basketSlice";
 
-const Product = (product) => {
+const Product = (product: any) => {
+  const dispatch = useDispatch();
+
   const { addItem } = useWishlistDispatch();
   const { isSaved } = useWishlistState();
 
@@ -20,11 +23,11 @@ const Product = (product) => {
   );
 
   const activeVariant = variants.find(
-    (v) => v.external_id === activeVariantExternalId
+    (v: any) => v.external_id === activeVariantExternalId
   );
 
   const activeVariantFile = activeVariant.files.find(
-    ({ type }) => type === "preview"
+    ({ type }: any) => type === "preview"
   );
 
   const formattedPrice = new Intl.NumberFormat("en-US", {
@@ -35,6 +38,47 @@ const Product = (product) => {
   const addToWishlist = () => addItem(product);
 
   const onWishlist = isSaved(id);
+
+  // const addItemToBasket = async () => {
+  //   const productData = {
+  //     id: activeVariantExternalId,
+  //     price: activeVariant.retail_price as number,
+  //     url: `/api/products/${activeVariantExternalId}`,
+  //     description: activeVariant.name,
+  //     image: activeVariantFile.preview_url,
+  //     name: name,
+  //   };
+
+  //   await dispatch(addToBasket(productData));
+  // };
+
+  const addItemToBasket = async () => {
+    const productData = {
+      id: activeVariantExternalId,
+      price: activeVariant.retail_price,
+      // price: activeVariant.retail_price as number,
+      // price: formatedPrice,
+      url: `/api/products/${activeVariantExternalId}`,
+      description: activeVariant.name,
+      image: activeVariantFile.preview_url,
+      name: name,
+    };
+
+    // const productData = [
+    //   { id: activeVariantExternalId },
+    //   { price: activeVariant.retail_price },
+    //   // price: activeVariant.retail_price as number,
+    //   // price: formatedPrice,
+    //   { url: `/api/products/${activeVariantExternalId}` },
+    //   { description: activeVariant.name },
+    //   { image: activeVariantFile.preview_url },
+    //   { name: name },
+    // ];
+
+    console.log({ productproduct: productData });
+
+    await dispatch(addToBasket(productData));
+  };
 
   return (
     <article className="border border-gray-200 rounded bg-white flex flex-col relative">
@@ -83,14 +127,13 @@ const Product = (product) => {
       <div className="p-3 flex flex-col sm:flex-row justify-center items-center">
         <VariantPicker
           value={activeVariantExternalId}
-          onChange={({ target: { value } }) =>
+          onChange={({ target: { value } }: any) =>
             setActiveVariantExternalId(value)
           }
           variants={variants}
           disabled={oneStyle}
         />
         <button
-          // className="snipcart-add-item w-full md:w-auto transition flex-shrink-0 py-2 px-4 border border-gray-300 hover:border-transparent shadow-sm text-sm font-medium bg-white text-gray-900 focus:text-white hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:outline-none rounded"
           className="stripe-add-item w-full md:w-auto transition flex-shrink-0 py-2 px-4 border border-gray-300 hover:border-transparent shadow-sm text-sm font-medium bg-white text-gray-900 focus:text-white hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:outline-none rounded"
           data-item-id={activeVariantExternalId}
           data-item-price={activeVariant.retail_price}
@@ -98,6 +141,7 @@ const Product = (product) => {
           data-item-description={activeVariant.name}
           data-item-image={activeVariantFile.preview_url}
           data-item-name={name}
+          onClick={addItemToBasket}
         >
           Add to Cart
         </button>
