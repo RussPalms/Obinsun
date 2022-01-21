@@ -20,8 +20,10 @@ export default function Checkout(props: IAppProps) {
   console.log(total);
   console.log({ checkout: items, total });
   // console.log(items.price);
+  // [data:session, status] = useSession()
 
   const { data: session, status } = useSession();
+  console.log(session);
 
   const createCheckoutSession = async () => {
     const stripe = await stripePromise;
@@ -105,6 +107,8 @@ export default function Checkout(props: IAppProps) {
 
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);
+
+  console.log(session);
 
   return {
     props: {

@@ -13,8 +13,10 @@ export default async (req: any, res: any) => {
       currency: "usd",
       unit_amount: item.price * 100,
       product_data: {
-        name: item.title,
+        // name: item.title,
+        name: item.name,
         images: [item.image],
+        // url: item.url,
       },
     },
   }));

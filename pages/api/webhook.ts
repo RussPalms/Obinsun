@@ -23,7 +23,7 @@ const fulfillOrder = async (session: any) => {
       .firestore()
       .collection("users")
       // .doc(session.metadata.email)
-      .doc(session.metadata.id)
+      .doc(session.metadata.firebaseID)
       .collection("orders")
       .doc(session.id)
       .set({
