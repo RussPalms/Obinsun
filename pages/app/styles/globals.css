@@ -89,7 +89,7 @@ body {
   animation-delay: calc(-1s * var(--i));
 }
 
-/* .stripe {
+.stripe {
   @apply font-grandstander text-base text-gray-800 font-normal;
 }
 
@@ -158,4 +158,4 @@ body {
 
 .stripe-shipping-rates-list-item__price {
   @apply text-gray-900 text-sm leading-5;
-} */
+}

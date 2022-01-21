@@ -44,6 +44,9 @@ export const getStaticProps: GetStaticProps = async () => {
     })
   );
 
+  // console.log(products);
+  // console.log(products.price);
+
   return {
     props: {
       products: shuffle(products),

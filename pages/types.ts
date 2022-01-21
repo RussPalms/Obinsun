@@ -17,6 +17,14 @@ declare global {
   }
 }
 
+// declare type basketTotal = number;
+
+export interface total {
+  basketTotal: number;
+}
+
+// export declare type total = number;
+
 // export type SnipcartWebhookEvent =
 export type StripeWebhookEvent =
   // | "order.completed"

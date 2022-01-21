@@ -15,9 +15,11 @@ const stripePromise = loadStripe(`${process.env.stripe_public_key}`);
 
 export default function Checkout(props: IAppProps) {
   const items = useSelector(selectItems);
-  const total = useSelector(selectTotal);
+  const total = useSelector(selectTotal) as number;
 
+  console.log(total);
   console.log({ checkout: items, total });
+  // console.log(items.price);
 
   const { data: session, status } = useSession();
 
@@ -25,7 +27,8 @@ export default function Checkout(props: IAppProps) {
     const stripe = await stripePromise;
     const checkoutSession = await axios.post("/api/create-checkout-session", {
       items: items,
-      email: session?.user?.email,
+      // email: session?.user?.email,
+      firebaseID: session?.id,
     });
     const result = await stripe!.redirectToCheckout({
       sessionId: checkoutSession.data.id,
@@ -77,7 +80,7 @@ export default function Checkout(props: IAppProps) {
               <h2 className="whitespace-nowrap">
                 Subtotal {items.length} items:{" "}
                 <span className="font-bold">
-                  <Currency quantity={Number(total)} />
+                  <Currency quantity={total} />
                 </span>
               </h2>
 

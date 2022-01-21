@@ -1,8 +1,12 @@
+//@ts-nocheck
+
 import { createSlice } from "@reduxjs/toolkit";
-// import { hasStripe } from "../lib/has-stripe";
+import { useEffect } from "react";
+// import type { total } from "../../../types";
 
 const initialState = {
   items: [],
+  // total: 0,
 };
 
 export const basketSlice = createSlice({
@@ -35,10 +39,27 @@ export const basketSlice = createSlice({
 export const { addToBasket, removeFromBasket } = basketSlice.actions;
 
 export const selectItems = (state: any) => state.basket.items;
+
+// export declare type total = { total: number };
+
+// useEffect(() =>{
+//    const selectTotal = (state: any) =>
+//   state.basket.items.reduce(
+//     (total: number, item: any) =>
+//       Number((total as number) + item.price) as number
+//   );
+
+//   return selectTotal
+// },[])
+
 export const selectTotal = (state: any) =>
-  state.basket.items.reduce((total: any, item: any) => total + item.price);
+  state.basket.items.reduce(
+    (total: number, item: any) =>
+      (Number(total) + Number(item.price)) as number,
+    ""
+  );
 
-// const basketReducer = basketSlice.reducer;
+const basketReducer = basketSlice.reducer;
 
-// export default basketReducer;
-export default basketSlice.reducer;
+export default basketReducer;
+// export default basketSlice.reducer;

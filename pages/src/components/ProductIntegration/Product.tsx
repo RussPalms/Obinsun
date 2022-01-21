@@ -1,14 +1,21 @@
 //@ts-nocheck
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import VariantPicker from "./VariantPicker";
 import useWishlistDispatch from "../../../server/hooks/useWishlistDispatch";
 import useWishlistState from "../../../server/hooks/useWishlistState";
-import { useDispatch } from "react-redux";
-import { addToBasket } from "../../../app/state/slices/basketSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToBasket,
+  selectTotal,
+} from "../../../app/state/slices/basketSlice";
 
 const Product = (product: any) => {
+  // const total = useSelector(selectTotal);
+  // console.log(total);
+  console.log(product);
+
   const dispatch = useDispatch();
 
   const { addItem } = useWishlistDispatch();
@@ -33,7 +40,7 @@ const Product = (product: any) => {
   const formattedPrice = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: activeVariant.currency,
-  }).format(activeVariant.retail_price);
+  }).format(activeVariant.retail_price as number);
 
   const addToWishlist = () => addItem(product);
 
@@ -51,18 +58,34 @@ const Product = (product: any) => {
 
   //   await dispatch(addToBasket(productData));
   // };
+  // const { aid } = activeVariantExternalId;
+  // const { price } = activeVariant.retail_price;
+  // const { url } = `/api/products/${activeVariantExternalId}`;
+  // const { description } = activeVariant.name;
+  // const { image } = activeVariantFile.preview_url;
 
-  const addItemToBasket = async () => {
-    const productData = {
-      id: activeVariantExternalId,
-      price: activeVariant.retail_price,
-      // price: activeVariant.retail_price as number,
-      // price: formatedPrice,
-      url: `/api/products/${activeVariantExternalId}`,
-      description: activeVariant.name,
-      image: activeVariantFile.preview_url,
-      name: name,
-    };
+  // const productData = {
+  //   aid,
+  //   // price: activeVariant.retail_price as number,
+  //   price,
+  //   // price: formattedPrice,
+  //   url,
+  //   description,
+  //   image,
+  //   name,
+  // };
+
+  const addItemToBasket = () => {
+    // const productData = {
+    //   id: activeVariantExternalId,
+    //   // price: activeVariant.retail_price as number,
+    //   price: activeVariant.retail_price as number,
+    //   // price: formattedPrice,
+    //   url: `/api/products/${activeVariantExternalId}`,
+    //   description: activeVariant.name,
+    //   image: activeVariantFile.preview_url,
+    //   name: name,
+    // };
 
     // const productData = [
     //   { id: activeVariantExternalId },
@@ -75,10 +98,27 @@ const Product = (product: any) => {
     //   { name: name },
     // ];
 
-    console.log({ productproduct: productData });
+    // console.log({ productData });
+    // console.log(productData.price);
+    // console.log(total)
 
-    await dispatch(addToBasket(productData));
+    dispatch(
+      addToBasket({
+        id: activeVariantExternalId,
+        // price: activeVariant.retail_price as number,
+        price: activeVariant.retail_price as number,
+        // price: formattedPrice,
+        url: `/api/products/${activeVariantExternalId}`,
+        description: activeVariant.name,
+        image: activeVariantFile.preview_url,
+        name: name,
+      })
+    );
   };
+
+  // useEffect(() => {
+  //   console.log(productData.price);
+  // }, [addItemToBasket]);
 
   return (
     <article className="border border-gray-200 rounded bg-white flex flex-col relative">
@@ -135,12 +175,12 @@ const Product = (product: any) => {
         />
         <button
           className="stripe-add-item w-full md:w-auto transition flex-shrink-0 py-2 px-4 border border-gray-300 hover:border-transparent shadow-sm text-sm font-medium bg-white text-gray-900 focus:text-white hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:outline-none rounded"
-          data-item-id={activeVariantExternalId}
-          data-item-price={activeVariant.retail_price}
-          data-item-url={`/api/products/${activeVariantExternalId}`}
-          data-item-description={activeVariant.name}
-          data-item-image={activeVariantFile.preview_url}
-          data-item-name={name}
+          // data-item-id={activeVariantExternalId}
+          // data-item-price={activeVariant.retail_price}
+          // data-item-url={`/api/products/${activeVariantExternalId}`}
+          // data-item-description={activeVariant.name}
+          // data-item-image={activeVariantFile.preview_url}
+          // data-item-name={name}
           onClick={addItemToBasket}
         >
           Add to Cart

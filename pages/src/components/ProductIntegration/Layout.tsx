@@ -3,13 +3,21 @@ import useWishlistState from "../../../server/hooks/useWishlistState";
 import { getSession, signIn, signOut, useSession } from "next-auth/react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { selectItems } from "../../../app/state/slices/basketSlice";
+import {
+  selectItems,
+  selectTotal,
+} from "../../../app/state/slices/basketSlice";
 
 const Layout = ({ children }: any) => {
   const { data: session, status } = useSession();
   const { hasItems } = useWishlistState();
   const router = useRouter();
   const items = useSelector(selectItems);
+
+  // const total = useSelector(selectTotal) as number;
+  // console.log(total);
+
+  // console.log(session);
 
   return (
     <>

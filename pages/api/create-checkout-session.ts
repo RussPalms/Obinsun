@@ -1,7 +1,11 @@
 const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
 
 export default async (req: any, res: any) => {
-  const { items, email } = req.body;
+  const {
+    items,
+    // email
+    firebaseID,
+  } = req.body;
   const transformedItems = items.map((item: any) => ({
     description: item.description,
     quantity: 1,
@@ -27,7 +31,8 @@ export default async (req: any, res: any) => {
     success_url: `${process.env.NEXTAUTH_URL}/success`,
     cancel_url: `${process.env.NEXTAUTH_URL}/checkout`,
     metadata: {
-      email,
+      // email,
+      firebaseID,
       images: JSON.stringify(items.map((item: any) => item.image)),
     },
   });
