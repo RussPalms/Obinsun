@@ -1,9 +1,9 @@
 import { buffer } from "micro";
 import * as admin from "firebase-admin";
 
-// const serviceAccount = require("../keys/obinsun-merch-eae07f27cfc7.json");
+const serviceAccount = require("../keys/obinsun-merch-firebase-adminsdk-muak1-802398644d.json");
 // const serviceAccount = process.env.GOOGLE_APPLICATION_CREDENTIALS as string;
-const serviceAccount = require(`${process.env.GOOGLE_APPLICATION_CREDENTIALS}`);
+// const serviceAccount = require(`${process.env.GOOGLE_APPLICATION_CREDENTIALS}`);
 
 const app = !admin.apps.length
   ? admin.initializeApp({

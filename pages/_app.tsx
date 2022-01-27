@@ -17,10 +17,10 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
       <Provider store={store}>
         <WishlistProvider>
           <UserProvider>
-            <Layout>
-              <DefaultSeo {...defaultSEO} />
-              <Component {...pageProps} />
-            </Layout>
+            {/* <Layout> */}
+            <DefaultSeo {...defaultSEO} />
+            <Component {...pageProps} />
+            {/* </Layout> */}
           </UserProvider>
         </WishlistProvider>
       </Provider>

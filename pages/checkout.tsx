@@ -31,6 +31,7 @@ export default function Checkout(props: IAppProps) {
       items: items,
       // email: session?.user?.email,
       firebaseID: session?.id,
+      name: session?.user?.email,
     });
     const result = await stripe!.redirectToCheckout({
       sessionId: checkoutSession.data.id,

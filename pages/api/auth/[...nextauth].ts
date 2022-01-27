@@ -161,6 +161,7 @@ export default NextAuth({
       if (userToken) {
         token.id = userToken._id;
         token.role = userToken.role;
+        token.stripeId = userToken.stripeId;
       }
 
       return token;
@@ -168,6 +169,7 @@ export default NextAuth({
     session: async ({ session, token }) => {
       if (token) session.id = token.id;
       session.user.role = token.role;
+      session.user.stripeId = token.stripeId;
 
       const grants = ac.getGrants();
       // expose only the current role permissions

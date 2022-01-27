@@ -14,8 +14,8 @@ export default async (req: any, res: any) => {
       unit_amount: item.price * 100,
       product_data: {
         // name: item.title,
-        name: item.name,
         images: [item.image],
+        name: item.name,
         // url: item.url,
       },
     },
