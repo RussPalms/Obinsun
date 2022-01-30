@@ -1,0 +1,29 @@
+import React, { useEffect } from "react";
+import useStorage from "../../../../server/hooks/useStorage";
+import { motion } from "framer-motion";
+
+// type Props = {};
+
+function ProgressBar({ file, setFile }: any) {
+  const { progress, url } = useStorage(file);
+
+  useEffect(() => {
+    console.log(url);
+
+    if (url) {
+      setFile(null);
+    }
+  }, [url, setFile]);
+
+  return (
+    <motion.div
+      className="progress-bar"
+      initial={{ width: 0 }}
+      animate={{ width: progress + "%" }}
+    ></motion.div>
+
+    // <div className="progress-bar"></div>
+  );
+}
+
+export default ProgressBar;

@@ -62,9 +62,9 @@ export default async (req: any, res: any) => {
 
     // console.log(req);
 
-    //     const events = await stripe.events.list({
-    //       limit: 3,
-    //     });
+    // const events = await stripe.events.list({
+    //   limit: 3,
+    // });
 
     // console.log(events);
 

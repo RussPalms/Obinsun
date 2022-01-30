@@ -8,6 +8,7 @@ import ProfileForm from "./ProfileForm";
 import { useRouter } from "next/router";
 import { DateTime } from "luxon";
 import { useEffect, useRef, useState } from "react";
+import OnboardingForm from "./OnboardingForm";
 
 // const stripePromise = loadStripe(`${process.env.stripe_public_key}`);
 
@@ -22,7 +23,7 @@ function CreatorSetup() {
 
   //creating IP state
   const [ip, setIP] = useState("");
-  const [ts, setTS] = useState();
+  const [ts, setTS] = useState(null);
 
   // const ipRef = useRef();
   // const tsRef = useRef();
@@ -33,6 +34,7 @@ function CreatorSetup() {
     // console.log(res.data);
     setIP(res.data.IPv4);
     // const ts = Math.round(new Date().getTime() / 1000);
+    // UNIX timestamp in milliseconds
     setTS(Math.round(new Date().getTime() / 1000));
   };
 
@@ -57,8 +59,21 @@ function CreatorSetup() {
   //     console.log(data);
   //   }
 
-  const createCustomAccount = async (e) => {
-    e.preventDefault();
+  // async function submitValidationHandler(ValidationData) {
+  //   // const response = await fetch("/api/user/change-password", {
+  //   //   method: "PATCH",
+  //   //   body: JSON.stringify(passwordData),
+  //   //   headers: {
+  //   //     "Content-Type": "application/json",
+  //   //   },
+  //   // });
+  //   // const data = await response.json();
+  //   // console.log(data);
+  // }
+
+  // const createCustomAccount = async (e) => {
+  const submitValidationHandler = async (validationData) => {
+    // e.preventDefault();
 
     // const stripe = await stripePromise;
     const createAccount = await axios.post(
@@ -67,6 +82,7 @@ function CreatorSetup() {
         firebaseID: session?.id,
         date: ts,
         ip: ip,
+        validationData,
       }
     );
     // const result = await stripe!.redirectToCheckout({
@@ -87,6 +103,42 @@ function CreatorSetup() {
     // }
 
     return;
+  };
+
+  const externalAccount = async (e) => {
+    e.preventDefault();
+
+    const externalAccountAddition = await axios.post(
+      "/api/stripe/create-external-account",
+      {
+        firebaseID: session?.id,
+        stripeId: session?.user.stripeId,
+      }
+    );
+  };
+
+  const addingCard = async (e) => {
+    e.preventDefault();
+
+    const externalAccountAddition = await axios.post(
+      "/api/stripe/create-external-account",
+      {
+        firebaseID: session?.id,
+        stripeId: session?.user.stripeId,
+      }
+    );
+  };
+
+  const externalAccount = async (e) => {
+    e.preventDefault();
+
+    const externalAccountAddition = await axios.post(
+      "/api/stripe/create-external-account",
+      {
+        firebaseID: session?.id,
+        stripeId: session?.user.stripeId,
+      }
+    );
   };
 
   const updateCustomAccount = async (e) => {
@@ -170,13 +222,14 @@ function CreatorSetup() {
               Password Form
             </h2>
             {/* <ProfileForm onChangeRegistration={changeRegistrationHandler} /> */}
-            <button onClick={createCustomAccount}>
+            {/* <button onClick={createCustomAccount}>
               Click To Create Custom Account
-            </button>
-            <button onClick={updateCustomAccount}>
-              Click To Update Account
-            </button>
-            {/* <RegistrationForm /> */}
+            </button> */}
+            {/* <button onClick={updateCustomAccount}> */}
+            <button onClick={externalAccount}>Click To Update Account</button>
+            <button onClick={addingCard}>Click To Add Card</button>
+            <OnboardingForm onSubmitValidation={submitValidationHandler} />
+            {/* <ProfileForm /> */}
           </div>
         </div>
       </div>
