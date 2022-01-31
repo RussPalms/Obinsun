@@ -162,6 +162,7 @@ export default NextAuth({
         token.id = userToken._id;
         token.role = userToken.role;
         token.stripeId = userToken.stripeId;
+        token.images = userToken.images;
       }
 
       return token;
@@ -170,13 +171,14 @@ export default NextAuth({
       if (token) session.id = token.id;
       session.user.role = token.role;
       session.user.stripeId = token.stripeId;
+      session.user.images = token.images;
 
       const grants = ac.getGrants();
       // expose only the current role permissions
       session.user.permissions =
         token.role in grants ? { [token.role]: grants[token.role] } : {};
 
-      // console.log(session);
+      console.log(session);
 
       return Promise.resolve(session);
     },

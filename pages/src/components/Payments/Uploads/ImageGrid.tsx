@@ -1,32 +1,64 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import useFirestore from "../../../../server/hooks/useFirestore";
-import { useCollection } from "react-firebase-hooks/firestore";
-// import {
-//     // db
-//     app
-// } from "../../../../server/lib/database/firebaseStorage";
-// import { collection, orderBy, query } from "firebase/firestore";
+import {
+  useSession,
+  //  getSession
+} from "next-auth/react";
+import axios from "axios";
 
-// import { getFirestore } from "firebase/firestore";
+// async function uploadImages(email:any, images:any) {
+//   const response = await fetch("/api/user/images", {
+// 		method: "POST",
+// 		body: JSON.stringify({ email,images }),
+// 		headers: {
+// 			"Content-Type": "application/json",
+// 		},
+// 	});
 
-// const db = getFirestore(app);
+// 	const userImages = await response.json();
+// 	if (!response.ok) {
+// 		throw new Error(userImages.message || "Something went wrong!");
+// 	}
 
-// type Props = {};
+// 	console.log(userImages);
 
-function ImageGrid({ setSelectedImg, res }: any) {
-  console.log("response from firebase storage bucket endpoint", res);
+// 	return userImages;
+// }
 
-  //   const
-  // //   [realtimePosts, loading, error]
-  // {docs}
-  //   = useCollection(
-  //     query(collection(db, "images"), orderBy("createdAt", "desc"))
-  //   );
+function ImageGrid({
+  setSelectedImg,
+}: // , res
+any) {
+  const {
+    data: session,
+    // , status
+  } = useSession();
 
-  const { docs } = useFirestore("images");
+  // console.log(status, session);
 
-  console.log("these are the currently uploaded documents", docs);
+  // console.log("response from firebase storage bucket endpoint", res);
+
+  const userImage = `users/${session?.id}/images`;
+
+  const { docs } = useFirestore(userImage);
+  // const { docs } = useFirestore("users");
+  // const { docs } = useFirestore(`users/${session?.id}/images`);
+
+  // console.log("these are the currently uploaded documents", docs);
+
+  // const uploadImages = async () => {
+  //   await axios.post("/api/user/images", {
+  //     userId: session?.id,
+  //     uploadedImages: docs,
+  //   });
+  // };
+
+  // uploadImages(session?.id, docs)
+
+  useEffect(() => {
+    console.log();
+  });
 
   return (
     <div className="img-grid">
@@ -34,9 +66,11 @@ function ImageGrid({ setSelectedImg, res }: any) {
         docs.map((doc: any) => (
           <motion.div
             className="img-wrap"
+            // key={doc.id}
             key={doc.id}
             layout
             whileHover={{ opacity: 1 }}
+            // onClick={() => setSelectedImg(doc.url)}
             onClick={() => setSelectedImg(doc.url)}
           >
             <motion.img
@@ -47,14 +81,6 @@ function ImageGrid({ setSelectedImg, res }: any) {
               transition={{ delay: 1 }}
             />
           </motion.div>
-
-          // <div
-          //   className="img-wrap"
-          //   key={doc.id}
-          //   onClick={() => setSelectedImg(doc.url)}
-          // >
-          //   <img src={doc.url} alt="uploaded pic" />
-          // </div>
         ))}
     </div>
   );
@@ -62,21 +88,31 @@ function ImageGrid({ setSelectedImg, res }: any) {
 
 export default ImageGrid;
 
-// This function gets called at build time on server-side.
-// It won't be called on client-side, so you can even do
-// direct database queries.
-export async function getStaticProps() {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-  const res = await fetch("gs://obinsun-merch.appspot.com");
-  // const docs = await res.json()
+// // This function gets called at build time on server-side.
+// // It won't be called on client-side, so you can even do
+// // direct database queries.
+// export async function getStaticProps() {
+//   // Call an external API endpoint to get posts.
+//   // You can use any data fetching library
+//   const res = await fetch("gs://obinsun-merch.appspot.com");
+//   // const docs = await res.json()
 
-  // By returning { props: { posts } }, the Blog component
-  // will receive `posts` as a prop at build time
-  return {
-    props: {
-      res,
-      // docs,
-    },
-  };
-}
+//   // By returning { props: { posts } }, the Blog component
+//   // will receive `posts` as a prop at build time
+//   return {
+//     props: {
+//       res,
+//       // docs,
+//     },
+//   };
+// }
+
+// export async function getServerSideProps(context) {
+// 	const session = await getSession(context);
+
+// 	return {
+// 		props: {
+// 			session,
+// 		},
+// 	};
+// }

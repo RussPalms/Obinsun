@@ -12,18 +12,15 @@ function UploadForm({}: Props) {
   const types = ["image/png", "image/jpeg"];
 
   const handleChange = (e: any) => {
-    // e.preventDefault();
-    console.log("event currently taking place", e);
+    // console.log("event currently taking place", e);
 
     let selected = e.target.files[0];
-    // let selected = e.target[0].files[0];
 
     if (selected && types.includes(selected.type)) {
-      //   console.log(selected);
-
       setFile(selected);
 
-      console.log("this is the uploaded file", file);
+      // console.log("this is the uploaded file", file);
+      console.log("this is the selected image", file);
 
       setError("" as any);
     } else {
@@ -32,7 +29,7 @@ function UploadForm({}: Props) {
     }
   };
 
-  console.log("this is the uploaded file", file);
+  // console.log("this is the uploaded file", file);
 
   return (
     <form>

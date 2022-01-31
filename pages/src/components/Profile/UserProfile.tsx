@@ -1,12 +1,12 @@
 //@ts-nocheck
 
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 import ProfileForm from "./ProfileForm";
 
 function UserProfile() {
-  const { data: session, status } = useSession();
-  const loading = status === "loading";
-  console.log(session);
+  // const { data: session, status } = useSession();
+  // const loading = status === "loading";
+  // console.log(session);
 
   async function changePasswordHandler(passwordData) {
     const response = await fetch("/api/user/change-password", {

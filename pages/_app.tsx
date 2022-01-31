@@ -15,16 +15,16 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <>
       <SessionProvider session={session}>
-        {/* <Provider store={store}> */}
-        {/* <WishlistProvider> */}
-        {/* <UserProvider> */}
-        {/* <Layout> */}
-        <DefaultSeo {...defaultSEO} />
-        <Component {...pageProps} />
-        {/* </Layout> */}
-        {/* </UserProvider> */}
-        {/* </WishlistProvider> */}
-        {/* </Provider> */}
+        <Provider store={store}>
+          <WishlistProvider>
+            <UserProvider>
+              <Layout>
+                <DefaultSeo {...defaultSEO} />
+                <Component {...pageProps} />
+              </Layout>
+            </UserProvider>
+          </WishlistProvider>
+        </Provider>
       </SessionProvider>
     </>
   );

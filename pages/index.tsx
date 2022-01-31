@@ -1,97 +1,99 @@
-// //@ts-nocheck
+//@ts-nocheck
 
-// import type { NextPage } from "next";
+import type { NextPage } from "next";
 
-// import { getSession, useSession } from "next-auth/react";
-// import Head from "next/head";
-// import Designs from "./src/components/Designs";
-// import Design from "./src/components/Design";
-// import Entity from "./src/components/EntityCreation/Entity";
-// import Entities from "./src/components/EntityCreation/Entities";
-// import Header from "./src/components/Header";
-// import Headers from "./src/components/Headers";
-// import Heading from "./src/components/Heading";
-// import { useRouter } from "next/router";
-// import { useEffect, useState } from "react";
+import // getSession,
+//  useSession
+"next-auth/react";
+import Head from "next/head";
+import Designs from "./src/components/Designs";
+import Design from "./src/components/Design";
+import Entity from "./src/components/EntityCreation/Entity";
+import Entities from "./src/components/EntityCreation/Entities";
+import Header from "./src/components/Header";
+import Headers from "./src/components/Headers";
+import Heading from "./src/components/Heading";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 // import VerifyDocuments from "./src/components/Payments/VerifyDocuments";
 
-// export default function Home(): NextPage {
-//   // useEffect(async (error) => {
-//   // 	console.log(error);
-//   // console.log(errors);
-//   // window.addEventListener("unhandledrejection", (event) => {
-//   // 	console.warn(`UNHANDLED PROMISE REJECTION: ${event.reason}`);
-//   // });
-//   // window.onunhandledrejection = (event) => {
-//   // 	console.warn(`UNHANDLED PROMISE REJECTION: ${event.reason}`);
-//   // };
-//   // window.addEventListener("unhandledrejection", function (event) {
-//   // 	// ...your code here to handle the unhandled rejection...
-//   // 	// Prevent the default handling (such as outputting the
-//   // 	// error to the console)
-//   // 	event.preventDefault();
-//   // });
-//   // }, []);
+export default function Home(): NextPage {
+  // useEffect(async (error) => {
+  // 	console.log(error);
+  // console.log(errors);
+  // window.addEventListener("unhandledrejection", (event) => {
+  // 	console.warn(`UNHANDLED PROMISE REJECTION: ${event.reason}`);
+  // });
+  // window.onunhandledrejection = (event) => {
+  // 	console.warn(`UNHANDLED PROMISE REJECTION: ${event.reason}`);
+  // };
+  // window.addEventListener("unhandledrejection", function (event) {
+  // 	// ...your code here to handle the unhandled rejection...
+  // 	// Prevent the default handling (such as outputting the
+  // 	// error to the console)
+  // 	event.preventDefault();
+  // });
+  // }, []);
 
-//   const { data: session, status } = useSession();
-//   const loading = status === "loading";
-//   console.log(status);
-//   console.log(session);
+  // const { data: session, status } = useSession();
+  // const loading = status === "loading";
+  // console.log(status);
+  // console.log(session);
 
-//   const [isLoading, setIsLoading] = useState(true);
-//   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
-//   // useEffect(async () => {
-//   // 	await getSession().then((session) => {
-//   // 		if (session) {
-//   // 			router.replace("/");
-//   // 		} else {
-//   // 			setIsLoading(false);
-//   // 		}
-//   // 	});
-//   // },
-//   // [router]
-//   // )
-//   // ;
+  // useEffect(async () => {
+  // 	await getSession().then((session) => {
+  // 		if (session) {
+  // 			router.replace("/");
+  // 		} else {
+  // 			setIsLoading(false);
+  // 		}
+  // 	});
+  // },
+  // [router]
+  // )
+  // ;
 
-//   // if (status == "loading") {
-//   //   return <p>Loading...</p>;
-//   // }
+  // if (status == "loading") {
+  //   return <p>Loading...</p>;
+  // }
 
-//   return (
-//     <>
-//       <Head>
-//         <title>Obinsun</title>
-//         <link rel="icon" href="/Grim2021.svg" />
-//       </Head>
+  return (
+    <>
+      <Head>
+        <title>Obinsun</title>
+        <link rel="icon" href="/Grim2021.svg" />
+      </Head>
 
-//       <main>
-//         {/* <Heading /> */}
-//         {/* home */}
-//         {/* <Headers /> */}
-//         {/* <Header /> */}
-//         {/* <Designs /> */}
-//         {/* <Design /> */}
-//         {/* <Entity /> */}
-//         {/* <Entities /> */}
-//         {/* <Login /> */}
-//         {/* <Log /> */}
+      <main>
+        <Heading />
+        {/* home */}
+        {/* <Headers /> */}
+        {/* <Header /> */}
+        <Designs />
+        {/* <Design /> */}
+        {/* <Entity /> */}
+        {/* <Entities /> */}
+        {/* <Login /> */}
+        {/* <Log /> */}
 
-//         <VerifyDocuments />
-//       </main>
-//     </>
-//   );
+        {/* <VerifyDocuments /> */}
+      </main>
+    </>
+  );
+}
+
+// export async function getServerSideProps(context) {
+//   const session = await getSession(context);
+
+//   return {
+//     props: {
+//       session,
+//     },
+//   };
 // }
-
-// // export async function getServerSideProps(context) {
-// //   const session = await getSession(context);
-
-// //   return {
-// //     props: {
-// //       session,
-// //     },
-// //   };
-// // }
 
 // // import { NextPage } from "next";
 
@@ -161,32 +163,28 @@
 
 // // export default IndexPage;
 
-import React, { useState } from "react";
-import ImageGrid from "./src/components/Payments/Uploads/ImageGrid";
-import Modal from "./src/components/Payments/Uploads/Modal";
-import Title from "./src/components/Payments/Uploads/Title";
-import UploadForm from "./src/components/Payments/Uploads/UploadForm";
-// import ImageGrid from "./Uploads/ImageGrid";
-// import Modal from "./Uploads/Modal";
-// import Title from "./Uploads/Title";
-// import UploadForm from "./Uploads/UploadForm";
+// import React, { useState } from "react";
+// import ImageGrid from "./src/components/Payments/Uploads/ImageGrid";
+// import Modal from "./src/components/Payments/Uploads/Modal";
+// import Title from "./src/components/Payments/Uploads/Title";
+// import UploadForm from "./src/components/Payments/Uploads/UploadForm";
 
-type Props = {};
+// type Props = {};
 
-function VerifyDocuments({}: Props) {
-  const [selectedImg, setSelectedImg] = useState(null);
-  console.log("this is the selected image", selectedImg);
+// function VerifyDocuments({}: Props) {
+//   const [selectedImg, setSelectedImg] = useState(null);
+//   console.log("this is the selected image", selectedImg);
 
-  return (
-    <div className="App">
-      <Title />
-      <UploadForm />
-      <ImageGrid setSelectedImg={setSelectedImg} />
-      {selectedImg && (
-        <Modal selectedImg={selectedImg} setSelectedImg={setSelectedImg} />
-      )}
-    </div>
-  );
-}
+//   return (
+//     <div className="App">
+//       <Title />
+//       <UploadForm />
+//       <ImageGrid setSelectedImg={setSelectedImg} />
+//       {selectedImg && (
+//         <Modal selectedImg={selectedImg} setSelectedImg={setSelectedImg} />
+//       )}
+//     </div>
+//   );
+// }
 
-export default VerifyDocuments;
+// export default VerifyDocuments;

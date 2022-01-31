@@ -1,11 +1,16 @@
 import Link from "next/link";
 import useWishlistState from "../../../server/hooks/useWishlistState";
-import { getSession, signIn, signOut, useSession } from "next-auth/react";
+import {
+  // getSession,
+  signIn,
+  signOut,
+  useSession,
+} from "next-auth/react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import {
   selectItems,
-  selectTotal,
+  // selectTotal,
 } from "../../../app/state/slices/basketSlice";
 
 const Layout = ({ children }: any) => {
@@ -17,7 +22,7 @@ const Layout = ({ children }: any) => {
   // const total = useSelector(selectTotal) as number;
   // console.log(total);
 
-  // console.log(session);
+  console.log(status, session);
 
   return (
     <>
@@ -174,11 +179,11 @@ const Layout = ({ children }: any) => {
 
 export default Layout;
 
-export const getServerSideProps = async (context: any) => {
-  const session = await getSession(context);
-  return {
-    props: {
-      session,
-    },
-  };
-};
+// export const getServerSideProps = async (context: any) => {
+//   const session = await getSession(context);
+//   return {
+//     props: {
+//       session,
+//     },
+//   };
+// };

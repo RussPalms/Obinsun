@@ -8,7 +8,7 @@ function ProgressBar({ file, setFile }: any) {
   const { progress, url } = useStorage(file);
 
   useEffect(() => {
-    console.log(url);
+    // console.log("file url", url);
 
     if (url) {
       setFile(null);
@@ -21,8 +21,6 @@ function ProgressBar({ file, setFile }: any) {
       initial={{ width: 0 }}
       animate={{ width: progress + "%" }}
     ></motion.div>
-
-    // <div className="progress-bar"></div>
   );
 }
 
