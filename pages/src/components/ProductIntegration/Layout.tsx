@@ -69,6 +69,7 @@ const Layout = ({ children }: any) => {
                 </a>
               </Link>
             </div>
+            <Link href="/routes/protected/profile">Profile</Link>
             <div className="md:w-1/3 flex items-center justify-end space-x-3 -mr-2.5">
               <button
                 className="stripe-customer-signin appearance-none px-2 text-gray-800 hover:text-blue-600 rounded-md cursor-pointer focus:outline-none focus:text-blue-600 transition relative"
@@ -83,6 +84,7 @@ const Layout = ({ children }: any) => {
                   </p>
                   <p className="font-extrabold md:text-sm">Account & Lists</p>
                 </div>
+
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"

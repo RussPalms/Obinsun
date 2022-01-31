@@ -1,9 +1,13 @@
 //@ts-nocheck
 
 // import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import ProfileForm from "./ProfileForm";
+import Link from "next/link";
 
 function UserProfile() {
+  const router = useRouter();
+
   // const { data: session, status } = useSession();
   // const loading = status === "loading";
   // console.log(session);
@@ -56,6 +60,12 @@ function UserProfile() {
             <ProfileForm onChangePassword={changePasswordHandler} />
           </div>
         </div>
+        <Link
+          href="/routes/protected/creator/payment-registration"
+          // onClick={router.push("routes/protected/creator/payment-registration")}
+        >
+          Payment Registration
+        </Link>
       </div>
     </section>
   );

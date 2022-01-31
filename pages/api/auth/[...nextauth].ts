@@ -162,6 +162,7 @@ export default NextAuth({
         token.id = userToken._id;
         token.role = userToken.role;
         token.stripeId = userToken.stripeId;
+        token.personId = userToken.personId;
         token.images = userToken.images;
       }
 
@@ -171,6 +172,7 @@ export default NextAuth({
       if (token) session.id = token.id;
       session.user.role = token.role;
       session.user.stripeId = token.stripeId;
+      session.user.personId = token.personId;
       session.user.images = token.images;
 
       const grants = ac.getGrants();
@@ -180,7 +182,8 @@ export default NextAuth({
 
       console.log(session);
 
-      return Promise.resolve(session);
+      // return Promise.resolve(session);
+      return session;
     },
     async redirect({ url, baseUrl }) {
       if (url.startsWith(baseUrl)) return url;

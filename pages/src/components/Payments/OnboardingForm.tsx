@@ -125,20 +125,20 @@ function OnboardingForm(props) {
     // console.log(birthDateSetter);
   };
 
-  useEffect(() => {
-    // setBirthDateSetter((e) => dobRef.current.value);
-    // e.preventDefault();
-    // let birthday = birthDateSetter;
-    // setBirthYear(birthday.getFullYear());
-    // setBirthMonth(birthday.getMonth() + 1);
-    // setBirthDay(birthday.getDate() + 1);
-    console.log(birthYear, birthMonth, birthDay);
-    // console.log(birthDateSetter);
-    // const year = birthday.getFullYear();
-    // const month = birthday.getMonth() + 1;
-    // const day = birthday.getDate();
-    // console.log(birthday);
-  }, [birthdayHandler]);
+  // useEffect(() => {
+  // setBirthDateSetter((e) => dobRef.current.value);
+  // e.preventDefault();
+  // let birthday = birthDateSetter;
+  // setBirthYear(birthday.getFullYear());
+  // setBirthMonth(birthday.getMonth() + 1);
+  // setBirthDay(birthday.getDate() + 1);
+  // console.log(birthYear, birthMonth, birthDay);
+  // console.log(birthDateSetter);
+  // const year = birthday.getFullYear();
+  // const month = birthday.getMonth() + 1;
+  // const day = birthday.getDate();
+  // console.log(birthday);
+  // }, [birthdayHandler]);
 
   // console.log(birthday);
 

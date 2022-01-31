@@ -9,15 +9,16 @@ import { useRouter } from "next/router";
 import { DateTime } from "luxon";
 import { useEffect, useRef, useState } from "react";
 import OnboardingForm from "./OnboardingForm";
+import Link from "next/link";
 
 // const stripePromise = loadStripe(`${process.env.stripe_public_key}`);
 
 // async function createCustomAccount({firebaseID: session.id})
 
-function CreatorSetup() {
+export default function CreatorSetup() {
   const { data: session, status } = useSession();
   const loading = status === "loading";
-  console.log(session);
+  console.log(status, session);
 
   const router = useRouter();
 
@@ -105,40 +106,37 @@ function CreatorSetup() {
     return;
   };
 
-  const externalAccount = async (e) => {
-    e.preventDefault();
+  // const externalAccount = async (e) => {
+  //   e.preventDefault();
 
-    const externalAccountAddition = await axios.post(
-      "/api/stripe/create-external-account",
-      {
-        firebaseID: session?.id,
-        stripeId: session?.user.stripeId,
-      }
-    );
-  };
+  //   const externalAccountAddition = await axios.post(
+  //     "/api/stripe/create-external-account",
+  //     {
+  //       firebaseID: session?.id,
+  //       stripeId: session?.user.stripeId,
+  //     }
+  //   );
+  // };
 
   const addingCard = async (e) => {
     e.preventDefault();
 
-    const externalAccountAddition = await axios.post(
-      "/api/stripe/create-external-account",
-      {
-        firebaseID: session?.id,
-        stripeId: session?.user.stripeId,
-      }
-    );
+    //   const externalAccountAddition = await axios.post(
+    //     "/api/stripe/create-external-account",
+    //     {
+    //       firebaseID: session?.id,
+    //       stripeId: session?.user.stripeId,
+    //     }
+    //   );
   };
 
   const externalAccount = async (e) => {
     e.preventDefault();
 
-    const externalAccountAddition = await axios.post(
-      "/api/stripe/create-external-account",
-      {
-        firebaseID: session?.id,
-        stripeId: session?.user.stripeId,
-      }
-    );
+    await axios.post("/api/stripe/create-external-account", {
+      firebaseID: session?.id,
+      stripeId: session?.user.stripeId,
+    });
   };
 
   const updateCustomAccount = async (e) => {
@@ -188,7 +186,7 @@ function CreatorSetup() {
     console.log(ip);
   }, []);
 
-  console.log(session);
+  // console.log(session);
 
   return (
     <section className="relative flex justify-center align-center w-screen min-h-screen bg-gradient-to-b from-[#f1f4f9] to-[#dff1ff] overflow-hidden">
@@ -232,19 +230,27 @@ function CreatorSetup() {
             {/* <ProfileForm /> */}
           </div>
         </div>
+        <Link
+          href="/routes/protected/creator/document-verification"
+          // onClick={router.push(
+          //   "routes/protected/creator/document-verification"
+          // )}
+        >
+          Click to verify documents
+        </Link>
       </div>
     </section>
   );
 }
 
-export default CreatorSetup;
+// export default CreatorSetup;
 
-export async function getServerSideProps(context: any) {
-  const session = await getSession(context);
+// export async function getServerSideProps(context: any) {
+//   const session = await getSession(context);
 
-  return {
-    props: {
-      session,
-    },
-  };
-}
+//   return {
+//     props: {
+//       session,
+//     },
+//   };
+// }

@@ -16,14 +16,17 @@ const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
 
 const endpointSecret = `${process.env.STRIPE_SIGNING_SECRET}`;
 
-const fulfillAccountCreation = async (account: any) => {
+// const fulfillAccountCreation = async (account: any) => {
+const fulfillAccountCreation = async (stripeAccount: any) => {
   // console.log(account);
 
   // console.log(account.metadata.firebaseID);
 
   // console.log(account.id);
 
-  console.log("Creating custom account", account);
+  const account = await stripe.accounts.retrieve(stripeAccount.account);
+
+  console.log("Creating custom account:", account);
   app
     .firestore()
     .collection("users")
@@ -43,6 +46,7 @@ const fulfillAccountCreation = async (account: any) => {
       // .doc(account.id)
       .update({
         stripeId: account.id,
+        personId: account.individual.id,
       })
       // .update({
       //   stripeId: account.id,
@@ -87,17 +91,38 @@ export default async (req: any, res: any) => {
     // console.log(event);
 
     if (event.type === "capability.updated") {
+      // if (event.type === "capability.person.updated") {
+      // if (
+      // event.type === "capability.updated" &&
+      // event.pending_webhooks === 2
+      // event.pending_webhooks !== 0
+      // )
+      // {
       // const account = event.data.object;
       const accountCreationEvents = event.data.object;
       // console.log(account);
 
-      const account = await stripe.accounts.retrieve(
-        accountCreationEvents.account
-      );
+      const stripeAccount = accountCreationEvents;
+
+      // const account = await stripe.accounts.retrieve(
+      //   accountCreationEvents.account
+      // );
+
+      // console.log("stripe accout event retrieved: ", account);
+
+      // return res.status(206);
+
+      // if (account.requirements.currently_due !== []) {
+      //   // return res.status(201);
+      //   return res.status(206);
+      // }
 
       return (
-        fulfillAccountCreation(account)
-          .then(() => res.status(200).json({ id: account.id }))
+        fulfillAccountCreation(stripeAccount)
+          .then(
+            () => res.status(200)
+            // .json({ id: account.id })
+          )
           // .then(() =>
           //   res.status(201).json({
           //     message: "Custom account created successfully!",
@@ -106,6 +131,10 @@ export default async (req: any, res: any) => {
           // )
           .catch((err) => res.status(400).send(`Webhook Error: ${err.message}`))
       );
+    }
+
+    if (event.pending_webhooks === 0) {
+      return res.status(200);
     }
   }
 };
