@@ -25,19 +25,30 @@ export default function Checkout(props: IAppProps) {
   const { data: session, status } = useSession();
   console.log(session);
 
+  // const createCheckoutSession = async () => {
+  //   const stripe = await stripePromise;
+  //   const checkoutSession = await axios.post("/api/create-checkout-session", {
+  //     items: items,
+  //     // email: session?.user?.email,
+  //     firebaseID: session?.id,
+  //     name: session?.user?.email,
+  //   });
+  //   const result = await stripe!.redirectToCheckout({
+  //     sessionId: checkoutSession.data.id,
+  //   });
+
+  //   if (result.error) alert(result.error.message);
+  // };
+
   const createCheckoutSession = async () => {
-    const stripe = await stripePromise;
-    const checkoutSession = await axios.post("/api/create-checkout-session", {
+    const productSession = await axios.post("/api/create-product-session", {
       items: items,
-      // email: session?.user?.email,
       firebaseID: session?.id,
       name: session?.user?.email,
+      // customerId: session?.user?.customerId,
     });
-    const result = await stripe!.redirectToCheckout({
-      sessionId: checkoutSession.data.id,
-    });
-
-    if (result.error) alert(result.error.message);
+    const result = await productSession;
+    console.log(result);
   };
 
   // const formattedRetailPrice = new Intl.NumberFormat("en-US", {

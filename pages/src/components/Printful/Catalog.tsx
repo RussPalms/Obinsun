@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import VariantPicker from "./VariantPicker";
+// import VariantPicker from "./VariantPicker";
 import useWishlistDispatch from "../../../server/hooks/useWishlistDispatch";
 import useWishlistState from "../../../server/hooks/useWishlistState";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,8 +10,9 @@ import {
   addToBasket,
   selectTotal,
 } from "../../../app/state/slices/basketSlice";
+import VariantPicker from "../ProductIntegration/VariantPicker";
 
-const Product = (product: any) => {
+const Catalog = (product: any) => {
   // const total = useSelector(selectTotal);
   // console.log(total);
   // console.log(product);
@@ -190,4 +191,4 @@ const Product = (product: any) => {
   );
 };
 
-export default Product;
+export default Catalog;

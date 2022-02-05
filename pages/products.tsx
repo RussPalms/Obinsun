@@ -30,9 +30,13 @@ const IndexPage: React.FC<IndexPageProps> = ({ products }) => (
 export const getStaticProps: GetStaticProps = async () => {
   const { result: productIds } = await printful.get("sync/products");
 
+  console.log(productIds);
+
   const allProducts = await Promise.all(
     productIds.map(async ({ id }) => await printful.get(`sync/products/${id}`))
   );
+
+  console.log(allProducts);
 
   const products: PrintfulProduct[] = allProducts.map(
     ({ result: { sync_product, sync_variants } }) => ({
@@ -44,7 +48,7 @@ export const getStaticProps: GetStaticProps = async () => {
     })
   );
 
-  // console.log(products);
+  console.log(products);
   // console.log(products.price);
 
   return {

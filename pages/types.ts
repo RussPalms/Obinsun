@@ -25,7 +25,6 @@ export interface total {
 
 // export declare type total = number;
 
-// export type SnipcartWebhookEvent =
 export type StripeWebhookEvent =
   // | "order.completed"
 
@@ -74,7 +73,6 @@ export type StripeWebhookEvent =
   // | "account.application.authorized"
   | "account.external_account.updated";
 
-// export interface SnipcartWebhookContent {
 export interface StripeWebhookContent {
   discounts: { [key: string]: any };
   items: { [key: string]: any };
@@ -109,7 +107,6 @@ export type StripeShippingRate = {
   userDefinedId?: string;
 };
 
-// export type SnipcartTaxItem = {
 export type StripeTaxItem = {
   name: string;
   amount: number;
@@ -119,18 +116,14 @@ export type StripeTaxItem = {
   appliesOnShipping?: boolean;
 };
 
-// export interface SnipcartRequest extends NextApiRequest {
 export interface StripeRequest extends NextApiRequest {
   headers: {
-    // "x-snipcart-requesttoken"?: string;
     "x-stripe-requesttoken"?: string;
   };
   body: {
-    // eventName: SnipcartWebhookEvent;
     eventName: StripeWebhookEvent;
     mode: string;
     createdOn: string;
-    // content: SnipcartWebhookContent;
     content: StripeWebhookContent;
   };
 }
@@ -144,6 +137,11 @@ export interface ISyncProduct {
 }
 
 export interface PrintfulProduct {
+  id: string;
+  name: string;
+}
+
+export interface PrintfulCatalog {
   id: string;
   name: string;
 }

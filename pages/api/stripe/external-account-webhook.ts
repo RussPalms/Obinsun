@@ -69,6 +69,7 @@ export default async (req: any, res: any) => {
     }
 
     if (event.type === "account.external_account.created") {
+      // if (event.type === "account.updated") {
       const addExternalAccountEvent = event.data.object;
 
       //   console.log(addExternalAccountEvent);

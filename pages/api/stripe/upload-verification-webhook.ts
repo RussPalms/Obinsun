@@ -68,25 +68,34 @@ export default async (req: any, res: any) => {
       return res.status(400).send(`Webhook error: ${err.message}`);
     }
 
-    if (event.type === "person.updated") {
+    console.log(event.account);
+
+    // if (event.type === "person.updated") {
+    if (event.type === "account.updated") {
       const updatePerson = event.data.object;
+      // const updatePerson = event.account;
 
       //   console.log(addExternalAccountEvent);
 
       const updateIndividualPerson =
-        await stripe.accounts.retrieveExternalAccount(
-          event.account,
+        // await stripe.accounts.retrieveExternalAccount(
+        await stripe.accounts.retrieve(
+          // event.account,
           updatePerson.id
         );
 
+      // const individualExternalAccount = await stripe.accounts.retrieveExternalAccount(updatePerson.id, updatePerson.matadata.firebaseID.custom_account.external_account)
+
       //   console.log(addExternalAccount);
 
-      return externalAccount(updateIndividualPerson)
-        .then(
-          () => res.status(200)
-          // .json({ id: addExternalAccount.id })
-        )
-        .catch((err) => res.status(400).send(`Webhook Error: ${err.message}`));
+      console.log(updateIndividualPerson);
+
+      // return externalAccount(updateIndividualPerson)
+      //   .then(
+      //     () => res.status(200)
+      //     // .json({ id: addExternalAccount.id })
+      //   )
+      //   .catch((err) => res.status(400).send(`Webhook Error: ${err.message}`));
     }
   }
 };

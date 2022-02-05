@@ -20,7 +20,6 @@ interface StripeRequest extends NextApiRequest {
 
 type Data = {
   /** An array of tax rates. */
-  // taxes: SnipcartTaxItem[];
   taxes: StripeTaxItem[];
 };
 
@@ -29,7 +28,6 @@ type Error = {
 };
 
 const calculateTaxes = async (
-  // req: SnipcartRequest,
   req: StripeRequest,
   res: NextApiResponse<Data | Error>
 ) => {

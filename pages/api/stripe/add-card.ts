@@ -6,14 +6,17 @@ export default async (req: any, res: any) => {
   const card = await stripe.accounts.createExternalAccount(stripeId, {
     external_account: {
       object: "card",
-      number: "",
-      exp_month: "",
-      exp_year: "",
+      number: "4000000000004202",
+      // token: "4000000000004202",
+      // exp_month: "4",
+      // exp_year: "24",
       // cvc:''
       currency: "usd",
     },
     metadata: { firebaseID },
   });
+
+  console.log(card);
 
   res.status(200);
 };

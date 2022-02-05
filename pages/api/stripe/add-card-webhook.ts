@@ -80,9 +80,9 @@ export default async (req: any, res: any) => {
 
       console.log(addExternalAccount);
 
-      return externalAccount(addExternalAccount)
-        .then(() => res.status(200).json({ id: addExternalAccount.id }))
-        .catch((err) => res.status(400).send(`Webhook Error: ${err.message}`));
+      // return externalAccount(addExternalAccount)
+      //   .then(() => res.status(200).json({ id: addExternalAccount.id }))
+      //   .catch((err) => res.status(400).send(`Webhook Error: ${err.message}`));
     }
   }
 };

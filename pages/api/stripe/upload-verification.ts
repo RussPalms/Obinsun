@@ -70,7 +70,8 @@ export default async (req: any, res: any) => {
   const file = await stripe.files.create(
     //   await stripe.files.create(
     {
-      purpose: "identity_document",
+      // purpose: "identity_document",
+      purpose: "account_requirement",
       file: {
         // data: fs.readFileSync(documenFile),
         data: fs.readFileSync("pages/api/stripe/success.png"),
@@ -88,8 +89,12 @@ export default async (req: any, res: any) => {
 
   console.log(file);
 
-  const person = await stripe.accounts.updatePerson(stripeId, personId, {
-    verification: { document: { front: file.id } },
+  // const person = await stripe.accounts.updatePerson(stripeId, personId, {
+  //   verification: { document: { front: file.id } },
+  // });
+
+  const account = await stripe.accounts.update(stripeId, {
+    company: { verification: { document: { front: file.id } } },
   });
 
   res.status(200);

@@ -133,7 +133,18 @@ export default function CreatorSetup() {
   const externalAccount = async (e) => {
     e.preventDefault();
 
-    await axios.post("/api/stripe/create-external-account", {
+    // await axios.post("/api/stripe/create-external-account", {
+    await axios.post("/api/stripe/add-card", {
+      firebaseID: session?.id,
+      stripeId: session?.user.stripeId,
+    });
+  };
+
+  const shippingRate = async (e) => {
+    e.preventDefault();
+
+    // await axios.post("/api/stripe/create-external-account", {
+    await axios.post("/api/stripe/create-shipping-rate", {
       firebaseID: session?.id,
       stripeId: session?.user.stripeId,
     });
@@ -226,6 +237,7 @@ export default function CreatorSetup() {
             {/* <button onClick={updateCustomAccount}> */}
             <button onClick={externalAccount}>Click To Update Account</button>
             <button onClick={addingCard}>Click To Add Card</button>
+            <button onClick={shippingRate}>Click To Add Shipping Rate</button>
             <OnboardingForm onSubmitValidation={submitValidationHandler} />
             {/* <ProfileForm /> */}
           </div>

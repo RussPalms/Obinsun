@@ -1,66 +1,68 @@
-// import type { NextApiResponse } from "next";
-// import createOrder from "../../server/lib/create-order";
-// import { StripeRequest, StripeWebhookEvent } from "../../types";
+//@ts-nocheck
 
-// // import createOrder from "../../../lib/create-order";
+import type { NextApiResponse } from "next";
+import createOrder from "../../server/lib/create-order";
+import { StripeRequest, StripeWebhookEvent } from "../../types";
 
-// // import type { SnipcartRequest, SnipcartWebhookEvent } from "../../../types";
+// import createOrder from "../../../lib/create-order";
 
-// export default async function handler(
-//   req: StripeRequest,
-//   res: NextApiResponse
-// ) {
-//   const allowedEvents: StripeWebhookEvent[] = [
-//     "order.completed",
-//     "customauth:customer_updated",
-//   ];
+// import type { SnipcartRequest, SnipcartWebhookEvent } from "../../../types";
 
-//   console.log(req.headers);
-//   const token = req.headers["x-stripe-requesttoken"];
-//   console.log(token);
+export default async function handler(
+  req: StripeRequest,
+  res: NextApiResponse
+) {
+  const allowedEvents: StripeWebhookEvent[] = [
+    "order.completed",
+    "customauth:customer_updated",
+  ];
 
-//   const { eventName, content } = req.body;
+  console.log(req.headers);
+  const token = req.headers["x-stripe-requesttoken"];
+  console.log(token);
 
-//   if (req.method !== "POST")
-//     return res.status(405).json({ message: "Method not allowed" });
+  const { eventName, content } = req.body;
 
-//   if (!allowedEvents.includes(eventName))
-//     return res.status(400).json({ message: "This event is not permitted" });
+  if (req.method !== "POST")
+    return res.status(405).json({ message: "Method not allowed" });
 
-//   // if (!token) return res.status(401).json({ message: "Not Authorized" });
+  if (!allowedEvents.includes(eventName))
+    return res.status(400).json({ message: "This event is not permitted" });
 
-//   // try {
-//   //   const verifyToken = await fetch(
-//   //     `https://app.snipcart.com/api/requestvalidation/${token}`
-//   //   );
+  // if (!token) return res.status(401).json({ message: "Not Authorized" });
 
-//   //   if (!verifyToken.ok)
-//   //     return res.status(401).json({ message: "Not Authorization" });
-//   // } catch (err) {
-//   //   console.log(err);
-//   //   return res
-//   //     .status(500)
-//   //     .json({ message: "Unable to verify Snipcart webhook token" });
-//   // }
+  // try {
+  //   const verifyToken = await fetch(
+  //     `https://app.snipcart.com/api/requestvalidation/${token}`
+  //   );
 
-//   try {
-//     switch (eventName) {
-//       case "order.completed":
-//         await createOrder(content);
-//         break;
-//       case "customauth:customer_updated":
-//         return res
-//           .status(200)
-//           .json({ message: "Customer updated - no action taken" });
-//       default:
-//         throw new Error("No such event handler exists");
-//     }
+  //   if (!verifyToken.ok)
+  //     return res.status(401).json({ message: "Not Authorization" });
+  // } catch (err) {
+  //   console.log(err);
+  //   return res
+  //     .status(500)
+  //     .json({ message: "Unable to verify Snipcart webhook token" });
+  // }
 
-//     res.status(200).json({ message: "Done" });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json({ message: "Something went wrong" });
-//   }
-// }
+  try {
+    switch (eventName) {
+      case "order.completed":
+        await createOrder(content);
+        break;
+      case "customauth:customer_updated":
+        return res
+          .status(200)
+          .json({ message: "Customer updated - no action taken" });
+      default:
+        throw new Error("No such event handler exists");
+    }
 
-export {};
+    res.status(200).json({ message: "Done" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+}
+
+// export {};

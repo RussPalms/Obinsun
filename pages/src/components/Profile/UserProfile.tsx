@@ -66,6 +66,12 @@ function UserProfile() {
         >
           Payment Registration
         </Link>
+        <Link
+          href="/routes/protected/customer/shipping-info"
+          // onClick={router.push("routes/protected/creator/payment-registration")}
+        >
+          Shipping Information
+        </Link>
       </div>
     </section>
   );

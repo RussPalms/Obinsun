@@ -21,7 +21,6 @@ interface StripeRequest extends NextApiRequest {
 
 type Data = {
   /** An array of shipping rates. */
-  // rates: SnipcartShippingRate[];
   rates: StripeShippingRate[];
 };
 

@@ -27,6 +27,10 @@ const fulfillAccountCreation = async (stripeAccount: any) => {
   const account = await stripe.accounts.retrieve(stripeAccount.account);
 
   console.log("Creating custom account:", account);
+  app.firestore().collection("accessCodes").doc("Payment").set({
+    obinsunId: account.id,
+  });
+
   app
     .firestore()
     .collection("users")
