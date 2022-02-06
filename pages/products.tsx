@@ -28,15 +28,23 @@ const IndexPage: React.FC<IndexPageProps> = ({ products }) => (
 );
 
 export const getStaticProps: GetStaticProps = async () => {
+  const util = require("util");
+
   const { result: productIds } = await printful.get("sync/products");
 
-  console.log(productIds);
+  // console.log(productIds);
 
   const allProducts = await Promise.all(
     productIds.map(async ({ id }) => await printful.get(`sync/products/${id}`))
   );
 
-  console.log(allProducts);
+  // console.log(allProducts[0].result);
+  // console.log(util.inspect(allProducts[0], { maxArrayLength: null }));
+  console.dir(allProducts, {
+    depth: null,
+    colors: true,
+    maxArrayLength: null,
+  });
 
   const products: PrintfulProduct[] = allProducts.map(
     ({ result: { sync_product, sync_variants } }) => ({
@@ -48,7 +56,7 @@ export const getStaticProps: GetStaticProps = async () => {
     })
   );
 
-  console.log(products);
+  // console.log(products);
   // console.log(products.price);
 
   return {

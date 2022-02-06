@@ -1,132 +1,64 @@
 //@ts-nocheck
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
-// import VariantPicker from "./VariantPicker";
 import useWishlistDispatch from "../../../server/hooks/useWishlistDispatch";
 import useWishlistState from "../../../server/hooks/useWishlistState";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addToBasket,
-  selectTotal,
-} from "../../../app/state/slices/basketSlice";
-import VariantPicker from "../ProductIntegration/VariantPicker";
+import { useDispatch } from "react-redux";
+import { addToBasket } from "../../../app/state/slices/basketSlice";
+import ProductVariantPicker from "./ProductVariantPicker";
 
 const Catalog = (product: any) => {
-  // const total = useSelector(selectTotal);
-  // console.log(total);
-  // console.log(product);
-
   const dispatch = useDispatch();
 
   const { addItem } = useWishlistDispatch();
   const { isSaved } = useWishlistState();
 
-  const { id, name, variants } = product;
-  const [firstVariant] = variants;
-  const oneStyle = variants.length === 1;
+  const { id, type_name, variant_count, currency } = product;
+  const [firstProductVariant] = variant_count;
+  const oneStyle = variant_count.length === 1;
 
-  const [activeVariantExternalId, setActiveVariantExternalId] = useState(
-    firstVariant.external_id
+  const [activeProductVariantId, setActiveProductVariantId] = useState(
+    firstProductVariant.id
   );
 
-  const activeVariant = variants.find(
-    (v: any) => v.external_id === activeVariantExternalId
+  const activeProductVariant = variant_count.find(
+    (v: any) => v.id === activeProductVariantId
   );
 
-  const activeVariantFile = activeVariant.files.find(
-    ({ type }: any) => type === "preview"
-  );
+  // const activeProductVariantFile = activeProductVariant.files.find(
+  //   ({ type }: any) => type === "default"
+  // );
+  const activeProductVariantFile = activeProductVariant;
 
   const formattedPrice = new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: activeVariant.currency,
-  }).format(activeVariant.retail_price as number);
+    currency: currency,
+  }).format(activeProductVariant.price as number);
 
   const addToWishlist = () => addItem(product);
 
   const onWishlist = isSaved(id);
 
-  // const addItemToBasket = async () => {
-  //   const productData = {
-  //     id: activeVariantExternalId,
-  //     price: activeVariant.retail_price as number,
-  //     url: `/api/products/${activeVariantExternalId}`,
-  //     description: activeVariant.name,
-  //     image: activeVariantFile.preview_url,
-  //     name: name,
-  //   };
-
-  //   await dispatch(addToBasket(productData));
+  // const addItemToBasket = () => {
+  //   dispatch(
+  //     addToBasket({
+  //       id: activeVariantExternalId,
+  //       price: activeVariant.retail_price as number,
+  //       url: `/api/products/${activeVariantExternalId}`,
+  //       description: activeVariant.name,
+  //       image: activeVariantFile.preview_url,
+  //       name: name,
+  //     })
+  //   );
   // };
-  // const { aid } = activeVariantExternalId;
-  // const { price } = activeVariant.retail_price;
-  // const { url } = `/api/products/${activeVariantExternalId}`;
-  // const { description } = activeVariant.name;
-  // const { image } = activeVariantFile.preview_url;
-
-  // const productData = {
-  //   aid,
-  //   // price: activeVariant.retail_price as number,
-  //   price,
-  //   // price: formattedPrice,
-  //   url,
-  //   description,
-  //   image,
-  //   name,
-  // };
-
-  const addItemToBasket = () => {
-    // const productData = {
-    //   id: activeVariantExternalId,
-    //   // price: activeVariant.retail_price as number,
-    //   price: activeVariant.retail_price as number,
-    //   // price: formattedPrice,
-    //   url: `/api/products/${activeVariantExternalId}`,
-    //   description: activeVariant.name,
-    //   image: activeVariantFile.preview_url,
-    //   name: name,
-    // };
-
-    // const productData = [
-    //   { id: activeVariantExternalId },
-    //   { price: activeVariant.retail_price },
-    //   // price: activeVariant.retail_price as number,
-    //   // price: formatedPrice,
-    //   { url: `/api/products/${activeVariantExternalId}` },
-    //   { description: activeVariant.name },
-    //   { image: activeVariantFile.preview_url },
-    //   { name: name },
-    // ];
-
-    // console.log({ productData });
-    // console.log(productData.price);
-    // console.log(total)
-
-    dispatch(
-      addToBasket({
-        id: activeVariantExternalId,
-        // price: activeVariant.retail_price as number,
-        price: activeVariant.retail_price as number,
-        // price: formattedPrice,
-        url: `/api/products/${activeVariantExternalId}`,
-        description: activeVariant.name,
-        image: activeVariantFile.preview_url,
-        name: name,
-      })
-    );
-  };
-
-  // useEffect(() => {
-  //   console.log(productData.price);
-  // }, [addItemToBasket]);
 
   return (
     <article className="border border-gray-200 rounded bg-white flex flex-col relative">
       <button
         aria-label="Add to wishlist"
         className="appearance-none absolute top-0 right-0 mt-3 mr-3 text-gray-300 focus:text-gray-500 hover:text-red-500 transition focus:outline-none"
-        onClick={addToWishlist}
+        // onClick={addToWishlist}
       >
         {onWishlist ? (
           <svg
@@ -149,40 +81,34 @@ const Catalog = (product: any) => {
         )}
       </button>
       <div className="flex items-center justify-center flex-1 sm:flex-shrink-0 w-full p-6">
-        {activeVariantFile && (
+        {activeProductVariantFile && (
           <Image
-            src={activeVariantFile.preview_url}
+            src={activeProductVariantFile.image}
             width={250}
             height={250}
-            alt={`${activeVariant.name} ${name}`}
-            title={`${activeVariant.name} ${name}`}
+            alt={`${activeProductVariant.type_name} ${type_name}`}
+            title={`${activeProductVariant.type_name} ${type_name}`}
           />
         )}
       </div>
       <div className="flex-1 p-6 pt-0">
         <div className="text-center">
-          <p className="mb-1 font-semibold text-gray-900">{name}</p>
+          <p className="mb-1 font-semibold text-gray-900">{type_name}</p>
           <p className="text-sm text-gray-500">{formattedPrice}</p>
         </div>
       </div>
       <div className="p-3 flex flex-col sm:flex-row justify-center items-center">
-        <VariantPicker
-          value={activeVariantExternalId}
+        <ProductVariantPicker
+          value={activeProductVariantId}
           onChange={({ target: { value } }: any) =>
-            setActiveVariantExternalId(value)
+            setActiveProductVariantId(value)
           }
-          variants={variants}
+          variant_count={variant_count}
           disabled={oneStyle}
         />
         <button
           className="stripe-add-item w-full md:w-auto transition flex-shrink-0 py-2 px-4 border border-gray-300 hover:border-transparent shadow-sm text-sm font-medium bg-white text-gray-900 focus:text-white hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:outline-none rounded"
-          // data-item-id={activeVariantExternalId}
-          // data-item-price={activeVariant.retail_price}
-          // data-item-url={`/api/products/${activeVariantExternalId}`}
-          // data-item-description={activeVariant.name}
-          // data-item-image={activeVariantFile.preview_url}
-          // data-item-name={name}
-          onClick={addItemToBasket}
+          // onClick={addItemToBasket}
         >
           Add to Cart
         </button>
