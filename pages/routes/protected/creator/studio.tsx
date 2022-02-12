@@ -67,7 +67,7 @@ export const getStaticProps: GetStaticProps = async () => {
   let catalogId: any = [];
   // let catalog: any = {};
   // let catalog: any = [];
-  // let retrieved: any = [];
+  let retrieved: any = [];
 
   const axiosHeaders = {
     headers: {
@@ -87,8 +87,10 @@ export const getStaticProps: GetStaticProps = async () => {
 
       catalogId.push(printfulRateLimit);
 
-      const { result: id } = response.data;
-      id.forEach((item: any) => {
+      const { result } = response.data;
+      retrieved.push(result);
+
+      result.forEach((item: any) => {
         const { id } = item;
         // catalogId["_id"] = id;
         // let retrieved: any = [];
@@ -224,6 +226,12 @@ export const getStaticProps: GetStaticProps = async () => {
 
   // console.log(catalogId);
   // console.log(retrieved);
+  // console.log(util.inspect(retrieved, { maxArrayLength: null }));
+  console.dir(retrieved, {
+    depth: null,
+    colors: true,
+    maxArrayLength: null,
+  });
 
   let catalogList = [];
   // let catalogList = [{ _id: 119 }];
@@ -308,7 +316,7 @@ export const getStaticProps: GetStaticProps = async () => {
             // productCatalog.push(result);
             // return result;
 
-            console.log(result);
+            // console.log(result);
             // console.log(util.inspect(result, { maxArrayLength: null }));
 
             return response.data;
@@ -321,14 +329,73 @@ export const getStaticProps: GetStaticProps = async () => {
     )
   );
 
+  let catalogListingBucket: any = [];
+
+  const catalogListing0 = await Promise.all(
+    slicedRequests[0].slice(0, 3).map(
+      async ({ _id }: any) =>
+        await axios
+          .get(`https://api.printful.com/products/${_id}`, axiosHeaders)
+          .then((response) => {
+            const { result } = response.data;
+            // productCatalog.push(result);
+            // return result;
+
+            // console.log(result);
+            // console.log(util.inspect(result, { maxArrayLength: null }));
+            catalogListingBucket.push(response.data);
+
+            return response.data;
+          })
+          .catch((err) => {
+            // console.error(err);
+            // console.log(err.response.config.url);
+            errorList.push(err.response.config.url);
+          })
+    )
+  );
+
+  // catalogListingBucket.push(catalogListing0);
+
+  const catalogListing1 = await Promise.all(
+    slicedRequests[0].slice(3, 4).map(
+      async ({ _id }: any) =>
+        await axios
+          .get(`https://api.printful.com/products/${_id}`, axiosHeaders)
+          .then((response) => {
+            const { result } = response.data;
+
+            catalogListingBucket.push(response.data);
+
+            // productCatalog.push(result);
+            // return result;
+
+            // console.log(result);
+            // console.log(util.inspect(result, { maxArrayLength: null }));
+
+            return response.data;
+          })
+          .catch((err) => {
+            // console.error(err);
+            // console.log(err.response.config.url);
+            errorList.push(err.response.config.url);
+          })
+    )
+  );
+
+  // catalogListingBucket.push(catalogListing1);
+
+  // console.log(catalogListingBucket);
+  // console.log(errorList);
+
   // console.log(productCatalog.result);
 
   // console.log(catalogListing.result);
-  console.dir(catalogListing, {
-    depth: null,
-    colors: true,
-    maxArrayLength: null,
-  });
+  // console.dir(catalogListing, {
+  //   depth: null,
+  //   colors: true,
+  //   maxArrayLength: null,
+  // });
 
   // console.log(util.inspect(catalogListing[0], { maxArrayLength: null }));
 

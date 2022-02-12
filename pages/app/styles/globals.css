@@ -10,6 +10,12 @@
   --error: #ff4a4a;
 }
 
+/* html {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+} */
+
 html,
 body {
   /* top: 0;

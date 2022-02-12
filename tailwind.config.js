@@ -32,6 +32,8 @@ module.exports = {
       glass3a: "0 5px 15px rgba(0, 0, 0, 0.05)",
       size: "0 2px 10px rgba(0, 0, 0, 0.1)",
       button: "0 15px 35px rgba(0, 0, 0, 0.1)",
+
+      imageCapture: "1px -7px 7px -6px rgba(0, 0, 0, 0.44)",
     },
     screens: {
       "2xl": { max: "1535px" },
@@ -106,11 +108,101 @@ module.exports = {
             transform: "translateY(40px)",
           },
         },
+        breath_1: {
+          "0%, 100%": {
+            transform: "translateY(1rem)",
+          },
+          "50%": {
+            transform: "translateY(2rem)",
+          },
+        },
+        breath_2: {
+          "0%, 100%": {
+            transform: "translateY(-4rem)",
+          },
+          "50%": {
+            transform: "translateX(-2rem)",
+          },
+        },
+        breath_3: {
+          "0%, 100%": {
+            transform: "translateY(-1rem)",
+          },
+          "50%": {
+            transform: "translateX(-1rem)",
+          },
+        },
+        breath_4: {
+          "0%, 100%": {
+            transform: "rotateZ(0deg)",
+          },
+          "50%": {
+            transform: "rotateZ(25deg)",
+          },
+          // "0%": {
+          //   transform: "rotateZ(0deg)",
+          // },
+          // "10%": {
+          //   transform: "rotateZ(5deg)",
+          // },
+          // "20%": {
+          //   transform: "rotateZ(10deg)",
+          // },
+          // "30%": {
+          //   transform: "rotateZ(15deg)",
+          // },
+          // "40%": {
+          //   transform: "rotateZ(20deg)",
+          // },
+          // "50%": {
+          //   transform: "rotateZ(25deg)",
+          // },
+          // "55%": {
+          //   transform: "rotateZ(30deg)",
+          // },
+          // "60%": {
+          //   transform: "rotateZ(25deg)",
+          // },
+          // "70%": {
+          //   transform: "rotateZ(20deg)",
+          // },
+          // "80%": {
+          //   transform: "rotateZ(15deg)",
+          // },
+          // "90%": {
+          //   transform: "rotateZ(5deg)",
+          // },
+          // "100%": {
+          //   transform: "rotateZ(0deg)",
+          // },
+        },
+        breath_5: {
+          "0%, 100%": {
+            transform: "translateY(-1rem)",
+          },
+          "50%": {
+            transform: "translateX(-1rem)",
+          },
+        },
+        breath_6: {
+          "0%, 100%": {
+            transform: "translateY(-2rem)",
+          },
+          "50%": {
+            transform: "translateY(-1rem)",
+          },
+        },
       },
       animation: {
         move: "move 5s linear infinite",
         move1: "move1 5s linear infinite",
         squaremove: "squaremove 10s linear infinite",
+        breath1: "breath_1 7s ease-out infinite",
+        breath2: "breath_2 7s ease-out infinite",
+        breath3: "breath_3 7s ease-out infinite",
+        breath4: "breath_4 7s ease-out infinite",
+        breath5: "breath_5 7s ease-out infinite",
+        breath6: "breath_6 7s ease-out infinite",
       },
     },
   },

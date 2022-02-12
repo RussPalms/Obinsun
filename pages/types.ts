@@ -13,6 +13,7 @@ declare global {
       "stripe-label": any;
       "stripe-input": any;
       // id: any;
+      id: any;
     }
   }
 }
