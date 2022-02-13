@@ -1,4 +1,12 @@
 /** @type {import('next').NextConfig} */
+// const withPlugins = require("next-compose-plugins");
+
+// const withTM = require("next-transpile-modules")([
+//   "three",
+//   "react-three-fiber",
+//   "drei",
+// ]);
+
 const nextConfig = {
   reactStrictMode: true,
   images: {
@@ -17,6 +25,34 @@ const nextConfig = {
     config.experiments.topLevelAwait = true;
     return config;
   },
+  // "next-transpile-modules": ["three", "react-three-fiber", "drei"],
+  // withTM: require("next-transpile-modules")([
+  //   "three",
+  //   "react-three-fiber",
+  //   "drei",
+  // ]),
+  // withTM: withTM(),
 };
 
 module.exports = nextConfig;
+// module.exports = {nextConfig, withTM()}
+// module.exports = withTM({ nextConfig });
+
+// module.exports = withPlugins(
+//   [
+//     withTM(),
+//     // for older versions of Next
+//     //   {
+//     //   webpack(config, options) {
+//     //     config.module.rules.push({
+//     //       test: /\.(glb|gltf)$/,
+//     //       use: {
+//     //         loader: "file-loader",
+//     //       },
+//     //     });
+//     //     return config;
+//     //   },
+//     // }
+//   ],
+//   nextConfig
+// );

@@ -59,11 +59,11 @@ function Landing() {
 
   // const scroll = useScrollPosition(elementRef);
 
-  // if (typeof window !== "undefined") {
-  //   gsap.registerPlugin(ScrollTrigger);
-  //   // gsap.registerPlugin(DrawSVG);
-  //   gsap.registerPlugin(MotionPathPlugin);
-  // }
+  if (typeof window !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+    // gsap.registerPlugin(DrawSVG);
+    gsap.registerPlugin(MotionPathPlugin);
+  }
 
   // gsap.registerPlugin(ScrollTrigger);
 
@@ -141,9 +141,9 @@ function Landing() {
   //     // return;
   //   });
 
-  const updatePath = async (p) => {
-    await setDashOffset(p);
-  };
+  // const updatePath = async (p) => {
+  //   await setDashOffset(p);
+  // };
 
   useEffect(() => {
     const container = ref.current;
@@ -167,6 +167,16 @@ function Landing() {
           e.target.getElementById("landing").scrollTop) /
         (e.target.documentElement.scrollHeight -
           e.target.documentElement.clientHeight);
+
+      // console.log(scrollPercentage);
+
+      // let scrollPercentageX =
+      //   (e.target.documentElement.scrollLeft +
+      //     e.target.getElementById("landing").scrollLeft) /
+      //   (e.target.documentElement.scrollWidth -
+      //     e.target.documentElement.clientWidth);
+
+      // console.log(scrollPercentageX);
 
       // console.log(scrollPercentage);
 
@@ -206,30 +216,66 @@ function Landing() {
   //   const main = gsap.timeline();
   // }, []);
 
-  // useEffect(() => {
-  //   const element = ref.current;
-  //   gsap.fromTo(
-  //     element.querySelector("#dracula-visits-africa"),
-  //     {
-  //       opacity: 0.1,
-  //       scale: 1,
-  //       y: -20,
-  //     },
-  //     {
-  //       opacity: 1,
-  //       y: 0,
-  //       scale: 2,
-  //       duration: 1,
-  //       ease: "none",
-  //       scrollTrigger: {
-  //         trigger: element.querySelector("#featured-designs"),
-  //         start: "top top",
-  //         end: "bottom center",
-  //         scrub: true,
-  //       },
-  //     }
-  //   );
-  // }, []);
+  useEffect(() => {
+    const element = ref.current;
+    gsap.fromTo(
+      element.querySelector("#dracula-visits-africa"),
+      {
+        opacity: 0.1,
+        scale: 1,
+        y: -20,
+        // rotationX: 0,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 3,
+        // rotationX: 90,
+        // rotationY: 90,
+        // rotationZ: 90,
+        // rotateX: 90,
+        // rotateY: 90,
+        // rotateZ: 90,
+        rotation: "1.25rad",
+        skewX: "30deg",
+        duration: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: element.querySelector("#featured-designs"),
+          start: "top top",
+          end: "bottom center",
+          scrub: true,
+        },
+      }
+    );
+  }, []);
+
+  useEffect(() => {
+    const element = ref.current;
+    gsap.fromTo(
+      element.querySelector("#whiskers-and-pipe"),
+      {
+        opacity: 0.1,
+        scale: 1,
+        y: -20,
+        // rotation: 0,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 3,
+        // rotation: 90,
+        duration: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: element.querySelector("#featured-designs"),
+          start: "top top",
+          end: "bottom center",
+          scrub: true,
+        },
+      }
+    );
+  }, []);
 
   return (
     <>
@@ -395,11 +441,17 @@ function Landing() {
 
         <div id="featured-designs">
           {/* <h1>ScrollTrigger</h1> */}
-          <WhiskersAndPipe
-            name=""
+          <div
             id="whiskers-and-pipe"
-            className="design-container border absolute left-[15rem] top-[5rem] animate-breath1"
-          />
+            className="border absolute left-[15rem] top-[5rem] animate-breath1"
+          >
+            <WhiskersAndPipe
+              name=""
+              // id="whiskers-and-pipe"
+              className="design-container"
+            />
+          </div>
+
           <PeaceOnEarth
             name=""
             id="peace-on-earth"
@@ -422,7 +474,7 @@ function Landing() {
           />
           <div
             id="dracula-visits-africa"
-            className="border absolute left-[50%] top-[15rem] "
+            className="border absolute left-[50%] top-[15rem]"
           >
             <DraculaVisitsAfrica
               name=""
