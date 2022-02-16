@@ -329,7 +329,7 @@ function FeaturedDesigns({}: Props) {
 
     gsap.set(design9Ref, { autoAlpha: 1 });
 
-    gsap.defaults({ ease: "none" });
+    gsap.defaults({ ease: "slow" });
     gsap
       .timeline({
         scrollTrigger: {
@@ -349,29 +349,24 @@ function FeaturedDesigns({}: Props) {
 
   useEffect(() => {
     const container: any = ref.current;
-    gsap.fromTo(
-      container.querySelector("#path_container"),
-      {
-        // opacity: 0.1,
-        // scale: 1,
-        // y: 0,
-      },
-      {
-        // opacity: 1,
-        y: 500,
-        // scale: 3,
-        // rotation: "1.25rad",
-        // skewX: "30deg",
-        // duration: 1,
-        ease: "none",
+    let pathContainerRef = container!.querySelector("#path_container");
+
+    gsap.set(pathContainerRef, { autoAlpha: 1 });
+
+    gsap.defaults({ ease: "none" });
+
+    gsap
+      .timeline({
         scrollTrigger: {
           trigger: container.querySelector("#landing"),
-          //   start: "top center",
-          //   end: "bottom center",
           scrub: true,
         },
-      }
-    );
+      })
+      .to(pathContainerRef, {
+        y: 500,
+        duration: 2,
+        ease: "slow",
+      });
   }, []);
 
   return (
@@ -387,7 +382,7 @@ function FeaturedDesigns({}: Props) {
         >
           <div
             id="path_container"
-            className="h-[100vh] w-[100%] grid gap-0 grid-cols-3 grid-rows-3 text-white items-center justify-items-center border border-green-300 absolute top-0"
+            className="h-[100vh] w-[100%] grid gap-0 grid-cols-3 grid-rows-3 text-white items-center justify-items-center border border-green-300 absolute top-0 visible"
           >
             <div
               id="path1Container"
@@ -478,7 +473,7 @@ function FeaturedDesigns({}: Props) {
                   className="h-20 w-20 bg-blue-500 absolute invisible border"
                   id="rad-rex"
                 >
-                  <RadRex id name className />
+                  <RadRex id="" name="" className="" />
                 </div>
               </div>
             </div>
@@ -514,7 +509,7 @@ function FeaturedDesigns({}: Props) {
                   className="h-20 w-20 bg-blue-500 absolute invisible border"
                   id="see-you-in-space"
                 >
-                  <SeeYouInSpace id name className />
+                  <SeeYouInSpace id="" name="" className="" />
                 </div>
               </div>
             </div>
@@ -548,7 +543,7 @@ function FeaturedDesigns({}: Props) {
                   className="h-20 w-20 bg-blue-500 absolute invisible border"
                   id="skull-is-full-of-cats"
                 >
-                  <SkullIsFullOfCats id name className />
+                  <SkullIsFullOfCats id="" name="" className="" />
                 </div>
               </div>
             </div>
