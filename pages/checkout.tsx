@@ -23,7 +23,7 @@ export default function Checkout(props: IAppProps) {
   // [data:session, status] = useSession()
 
   const { data: session, status } = useSession();
-  console.log(session);
+  // console.log(session);
 
   // const createCheckoutSession = async () => {
   //   const stripe = await stripePromise;

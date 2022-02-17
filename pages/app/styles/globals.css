@@ -96,7 +96,9 @@ body {
 
     /* @apply h-[4em] w-[4em] xs:h-[4.857143em] xs:w-[4.857143em] sm:h-[5.714286em] sm:w-[5.714286em] md:h-[6.571429em] md:w-[6.571429em] lg:h-[7.428571em] lg:w-[7.428571em] xl:h-[8.285714em] xl:w-[8.285714em] 2xl:h-[9.142857em] 2xl:w-[9.142857em] 3xl:h-[8.4em] 3xl:w-[8.4em] 4vl:h-[10em] 4vl:w-[10em];*/
 
-    @apply h-[4em] w-[4em] xs:h-[5em] xs:w-[5em] sm:h-[6em] sm:w-[6em] md:h-[7em] md:w-[7em] lg:h-[8em] lg:w-[8em] xl:h-[9em] xl:w-[9em] 2xl:h-[10em] 2xl:w-[10em] 3xl:h-[11em] 3xl:w-[11em] 4vl:h-[12em] 4vl:w-[12em];
+    /*@apply h-[4em] w-[4em] xs:h-[5em] xs:w-[5em] sm:h-[6em] sm:w-[6em] md:h-[7em] md:w-[7em] lg:h-[8em] lg:w-[8em] xl:h-[9em] xl:w-[9em] 2xl:h-[10em] 2xl:w-[10em] 3xl:h-[11em] 3xl:w-[11em] 4vl:h-[12em] 4vl:w-[12em];*/
+
+    @apply h-[4em] w-[4em] xs:h-[4.625em] xs:w-[4.625em] sm:h-[5.25em] sm:w-[5.25em] md:h-[5.875em] md:w-[5.875em] lg:h-[6.5em] lg:w-[6.5em] xl:h-[7.125em] xl:w-[7.125em] 2xl:h-[7.75em] 2xl:w-[7.75em] 3xl:h-[8.375em] 3xl:w-[8.375em] 4vl:h-[9em] 4vl:w-[9em];
   }
 }
 

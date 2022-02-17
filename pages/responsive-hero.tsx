@@ -104,6 +104,10 @@ function ResponsiveHero({}: Props) {
         },
       })
       .to(rect0Ref, {
+        rotate: "360deg",
+        rotationX: "6rad",
+        skewX: "-45deg",
+        scale: 0.1,
         immediateRender: true,
         motionPath: {
           path: path_2,
@@ -150,6 +154,7 @@ function ResponsiveHero({}: Props) {
         },
       })
       .to(rect4Ref, {
+        rotationY: "-180deg",
         immediateRender: true,
         motionPath: {
           path: path_4,
@@ -198,6 +203,7 @@ function ResponsiveHero({}: Props) {
         },
       })
       .to(seeYouInSpaceRef, {
+        rotate: "225deg",
         immediateRender: true,
         motionPath: {
           path: see_you_in_space,
@@ -244,6 +250,8 @@ function ResponsiveHero({}: Props) {
         },
       })
       .to(design9Ref, {
+        rotate: "-45deg",
+        rotationX: "-45deg",
         immediateRender: true,
         motionPath: {
           path: path_9,
@@ -321,26 +329,27 @@ function ResponsiveHero({}: Props) {
       //   featuredRef,
       //   featuredDesignsRef,
       {
-        pinSpacing: false,
+        // pinSpacing: false,
         // pinSpacing: true,
-        // immediateRender: true,
+        immediateRender: true,
         // anticipatePin: 12,
-        pin: true,
+        // pin: true,
       },
       {
-        y: 600,
+        y: 400,
         duration: 1,
         ease: "none",
         scrollTrigger: {
           trigger: landingRef,
-          scrub: 0.5,
-          //   scrub: 0.1,
-          //   scrub: true,
+          // scrub: 0.5,
+          scrub: 0.1,
+          // scrub: true,
           //   start: "top top",
           //   pinSpacing: false,
           //   anticipatePin: 48,
           //   anticipatePin: 100,
           //   anticipatePin: 1000,
+          pinSpacing: false,
           anticipatePin: 1,
           // pin: true,
           refreshPriority: 1,
@@ -366,39 +375,40 @@ function ResponsiveHero({}: Props) {
         <div
           ref={featuredRef}
           id="featured"
-          className="h-[100rem] w-full border border-black border-1 absolute flex justify-center items-center z-10"
+          className="h-[100rem] w-full border border-black border-0 absolute flex justify-center items-center z-10"
         >
           <div
             id="design-bountry"
-            className="h-[100vh] w-[97%] absolute top-0 flex justify-center items-center border border-3 border-purple-900 "
+            className="h-[100vh] w-[97%] absolute top-0 flex justify-center items-center border border-0 border-purple-900 "
           >
             <div
               id="path_container"
-              className="h-[93vh] w-[95%] grid gap-0 grid-cols-3 grid-rows-3 text-white items-center justify-items-center border border-1 border-green-300 relative visible"
+              className="h-[93vh] w-[95%] grid gap-0 grid-cols-3 grid-rows-3 text-white items-center justify-items-center border border-0 border-green-300 relative visible"
             >
               <div
                 id="path1Container"
-                className="h-1/2 w-1/2 relative text-center overflow-visible border border-1 border-red-400 flex justify-center items-center"
+                className="h-1/2 w-1/2 relative text-center overflow-visible border border-0 border-red-400 flex justify-center items-center"
               >
                 <div
-                  className="h-[480%] w-[350%] border border-1 absolute border-blue-300 flex justify-center items-center left-0 top-0"
+                  className="h-[480%] w-[350%] border border-0 absolute border-blue-300 flex justify-center items-center left-0 top-0"
                   id="path_design_container"
                 >
                   <svg
-                    className="h-[100%] w-[100%] border border-1 border-black visible"
-                    viewBox="0 0 808 1783"
+                    className="h-[100%] w-[100%] border border-0 border-black invisible"
+                    viewBox="0 0 961 1080"
                     fill="none"
                     preserveAspectRatio="xMidYMax meet"
                   >
                     <path
                       id="path1"
-                      d="M1 0.667053C1068.47 315.611 849.74 1319.43 606.944 1781.97"
+                      d="M0 0C613.25 30.0929 923.469 743.406 960 1080"
                       stroke="black"
                     />
                   </svg>
+
                   <div className="absolute animate-breath1">
                     <div
-                      className="featured-container bg-blue-500 absolute border border-1"
+                      className="featured-container glass border-top-left-glass absolute border border-0"
                       id="whiskers-and-pipe"
                     >
                       <WhiskersAndPipe id="" name="" className="" />
@@ -407,127 +417,137 @@ function ResponsiveHero({}: Props) {
                 </div>
               </div>
 
-              <div className="content relative h-1/2 w-1/2 text-center border border-1 border-gray-500"></div>
+              <div className="content relative h-1/2 w-1/2 text-center border border-0 border-gray-500"></div>
 
               <div
                 id="path2Container"
-                className="h-1/2 w-1/2 relative text-center overflow-visible border border-1 border-red-400 flex justify-center items-center"
+                className="h-1/2 w-1/2 relative text-center overflow-visible border border-0 border-red-400 flex justify-center items-center"
               >
                 <div
-                  className="h-[480%] w-[350%] border border-1 absolute border-blue-300 flex justify-center items-center right-0 top-0"
+                  className="h-[480%] w-[350%] border border-0 absolute border-blue-300 flex justify-center items-center right-0 top-0"
                   id="path_design0_container"
                 >
                   <svg
-                    className="h-[100%] w-[100%] border border-1 border-black visible"
-                    viewBox="0 0 291 753"
+                    className="h-[100%] w-[100%] border border-0 border-black invisible"
+                    viewBox="0 0 961 1080"
                     fill="none"
                     preserveAspectRatio="xMidYMax meet"
                   >
                     <path
                       id="path2"
-                      d="M290.5 1C194 254.5 189.4 906.9 1 718.5"
+                      d="M954.361 0C1053.91 543.545 1.00007 687.702 1 1080"
                       stroke="black"
                     />
                   </svg>
-                  <div
-                    className="featured-container bg-pink-500 absolute visible border border-1"
-                    id="peace-on-earth"
-                  >
-                    <PeaceOnEarth id="" className="" name="" />
+
+                  <div className="animate-breath2 absolute">
+                    <div
+                      className="featured-container glass border-top-left-glass absolute visible border border-0"
+                      id="peace-on-earth"
+                    >
+                      <PeaceOnEarth id="" className="" name="" />
+                    </div>
                   </div>
                 </div>
               </div>
 
               <div
                 id="path4Container"
-                className="h-1/2 w-1/2 relative text-center overflow-visible border border-1 border-red-400 flex justify-center items-center visible"
+                className="h-1/2 w-1/2 relative text-center overflow-visible border border-0 border-red-400 flex justify-center items-center visible"
               >
                 <div
-                  className="h-[350%] w-[300%] border border-1 absolute border-blue-300 flex justify-center items-center left-0"
+                  className="h-[200%] w-[350%] border border-0 absolute border-blue-300 flex justify-center items-center left-0 top-[50%]"
                   id="path_design4_container"
                 >
                   <svg
-                    className="h-[100%] w-[100%] border border-1 border-black visible"
-                    viewBox="0 0 1060 524"
+                    className="h-[100%] w-[100%] border border-0 border-black invisible"
+                    viewBox="0 0 961 541"
                     fill="none"
                     preserveAspectRatio="xMidYMax meet"
                   >
                     <path
                       id="path4"
-                      d="M1 1.00003C948 44 1193 341 995 523.5"
+                      d="M0 1C533.393 1 960 1.00007 960 541"
                       stroke="black"
                     />
                   </svg>
 
-                  <div
-                    className="featured-container bg-blue-500 absolute visible border border-1"
-                    id="rad-rex"
-                  >
-                    <RadRex id="" name="" className="" />
+                  <div className="animate-breath3 absolute">
+                    <div
+                      className="featured-container glass border-top-left-glass absolute visible border border-0"
+                      id="rad-rex"
+                    >
+                      <RadRex id="" name="" className="" />
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="content relative h-1/2 w-1/2 text-center border border-1 border-gray-500"></div>
-              <div className="content relative h-1/2 w-1/2 text-center border border-1 border-gray-500"></div>
+              <div className="content relative h-1/2 w-1/2 text-center border border-0 border-gray-500"></div>
+              <div className="content relative h-1/2 w-1/2 text-center border border-0 border-gray-500"></div>
 
               <div
                 id="see_you_in_space_Container"
-                className="h-1/2 w-1/2 relative text-center overflow-visible border border-1 border-red-400 flex justify-center items-center"
+                className="h-1/2 w-1/2 relative text-center overflow-visible border border-0 border-red-400 flex justify-center items-center"
               >
                 <div
-                  className="h-[150%] w-[500%] border border-1 absolute border-blue-300 flex justify-center items-center bottom-0 left-0"
+                  className="h-[150%] w-[400%] border border-0 absolute border-blue-300 flex justify-center items-center bottom-0 left-0"
                   id="path_design7_container"
                 >
                   <svg
-                    className="h-[100%] w-[100%] border border-1 border-black visible"
-                    viewBox="0 0 816 718"
+                    className="h-[100%] w-[100%] border border-0 border-black invisible"
+                    viewBox="0 0 961 1080"
                     fill="none"
                     preserveAspectRatio="xMidYMax meet"
                   >
                     <path
                       id="see_you_in_space"
-                      d="M1 717C176.833 444.833 528.5 -41.7 528.5 189.5C528.5 420.7 528.5 160.833 528.5 2L815.5 289"
+                      d="M0 1080C321.776 1013.21 964.258 800.145 959.979 482.172V0V1080"
                       stroke="black"
                     />
                   </svg>
-                  <div
-                    className="featured-container bg-blue-500 absolute visible border border-1"
-                    id="see-you-in-space"
-                  >
-                    <SeeYouInSpace id="" name="" className="" />
+
+                  <div className="animate-breath4 absolute">
+                    <div
+                      className="featured-container glass border-top-left-glass absolute visible border border-0"
+                      id="see-you-in-space"
+                    >
+                      <SeeYouInSpace id="" name="" className="" />
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="content relative h-1/2 w-1/2 text-center border border-1 border-gray-500"></div>
+              <div className="content relative h-1/2 w-1/2 text-center border border-0 border-gray-500"></div>
 
               <div
                 id="skull_is_full_of_cats_Container"
-                className="h-1/2 w-1/2 relative text-center overflow-visible border border-1 border-red-400 flex justify-center items-center"
+                className="h-1/2 w-1/2 relative text-center overflow-visible border border-0 border-red-400 flex justify-center items-center"
               >
                 <div
-                  className="h-[200%] w-[400%] border border-1 absolute border-blue-300 flex justify-center items-center bottom-0 right-0"
+                  className="h-[200%] w-[400%] border border-0 absolute border-blue-300 flex justify-center items-center bottom-0 right-0"
                   id="path_design9_container"
                 >
                   <svg
-                    className="h-[100%] w-[100%] border border-1 border-black visible"
-                    viewBox="0 0 571 647"
+                    className="h-[100%] w-[100%] border border-0 border-black invisible"
+                    viewBox="0 0 961 1080"
                     fill="none"
                     preserveAspectRatio="xMidYMax meet"
                   >
                     <path
                       id="skull_is_full_of_cats"
-                      d="M570 646.5C380.333 559.333 1 323.5 1 77.5C1 -168.5 1 233.333 1 465"
+                      d="M961 1080C641 1057.99 1 955.556 1 721.905C1 488.254 1 143.28 1 0V1080"
                       stroke="black"
                     />
                   </svg>
 
-                  <div
-                    className="featured-container bg-blue-500 absolute visible border border-1"
-                    id="skull-is-full-of-cats"
-                  >
-                    <SkullIsFullOfCats id="" name="" className="" />
+                  <div className="animate-breath5 absolute">
+                    <div
+                      className="featured-container glass border-top-left-glass absolute visible border border-0"
+                      id="skull-is-full-of-cats"
+                    >
+                      <SkullIsFullOfCats id="" name="" className="" />
+                    </div>
                   </div>
                 </div>
               </div>

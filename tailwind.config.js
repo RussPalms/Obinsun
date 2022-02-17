@@ -162,7 +162,7 @@ module.exports = {
             transform: "rotateZ(0deg)",
           },
           "50%": {
-            transform: "rotateZ(25deg)",
+            transform: "rotateZ(10deg)",
           },
           // "0%": {
           //   transform: "rotateZ(0deg)",

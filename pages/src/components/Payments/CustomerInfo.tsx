@@ -31,6 +31,18 @@ export default function CustomerInfo() {
     return;
   };
 
+  const submitSetupHandler = async (setupData) => {
+    const createAccount = await axios.post(
+      "/api/stripe/setup-customer-payment",
+      {
+        firebaseID: session?.id,
+        setupData,
+      }
+    );
+
+    return;
+  };
+
   const addingCard = async (e) => {
     e.preventDefault();
 
@@ -109,6 +121,7 @@ export default function CustomerInfo() {
             <button onClick={externalAccount}>Click To Update Account</button>
             <button onClick={addingCard}>Click To Add Card</button>
             <CustomerShipping onSubmitValidation={submitValidationHandler} />
+            <CustomerPayment onSubmitSetup={submitSetupHandler} />
           </div>
         </div>
       </div>
