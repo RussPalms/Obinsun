@@ -1,9 +1,9 @@
 //@ts-nocheck
 
-import Document, { Html, Head, Main, NextScript } from "next/document";
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 
 class MyDocument extends Document {
-  render() {
+  render(): React.ReactElement {
     return (
       <Html lang="en">
         <Head>
@@ -28,7 +28,7 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
         </Head>
-        <body className="antialiased">
+        <body className="antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
           <Main />
           <NextScript />
           {/* <script

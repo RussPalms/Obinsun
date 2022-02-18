@@ -32,7 +32,18 @@ const nextConfig = {
   //   "drei",
   // ]),
   // withTM: withTM(),
+  i18n: {
+    locales: ["en", "ja"],
+    defaultLocale: "en",
+    localeDetection: false,
+  },
 };
+
+// const i18n = {
+//   locales: ['en', 'ja'],
+//   defaultLocale: 'en',
+//   localeDetection: false,
+// }
 
 module.exports = nextConfig;
 // module.exports = {nextConfig, withTM()}

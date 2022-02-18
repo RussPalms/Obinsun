@@ -1,15 +1,15 @@
 //@ts-nocheck
 
-import { NextPage } from "next";
+import { NextPage } from 'next';
 
-import * as React from "react";
-import { GetStaticProps } from "next";
-import shuffle from "lodash.shuffle";
-import { PrintfulProduct } from "./types";
-import ProductGrid from "./src/components/ProductIntegration/ProductGrid";
-import { formatVariantName } from "./server/lib/format-variant-name";
-import { printful } from "./server/lib/printful-client";
-import { getSession } from "next-auth/react";
+import * as React from 'react';
+import { GetStaticProps } from 'next';
+import shuffle from 'lodash.shuffle';
+import { PrintfulProduct } from './types';
+import ProductGrid from './src/components/ProductIntegration/ProductGrid';
+import { formatVariantName } from './server/lib/format-variant-name';
+import { printful } from './server/lib/printful-client';
+import { getSession } from 'next-auth/react';
 
 type IndexPageProps = {
   products: PrintfulProduct[];
@@ -28,9 +28,9 @@ const IndexPage: React.FC<IndexPageProps> = ({ products }) => (
 );
 
 export const getStaticProps: GetStaticProps = async () => {
-  const util = require("util");
+  const util = require('util');
 
-  const { result: productIds } = await printful.get("sync/products");
+  const { result: productIds } = await printful.get('sync/products');
 
   // console.log(productIds);
 
@@ -40,11 +40,11 @@ export const getStaticProps: GetStaticProps = async () => {
 
   // console.log(allProducts[0].result);
   // console.log(util.inspect(allProducts[0], { maxArrayLength: null }));
-  console.dir(allProducts, {
-    depth: null,
-    colors: true,
-    maxArrayLength: null,
-  });
+  // console.dir(allProducts, {
+  //   depth: null,
+  //   colors: true,
+  //   maxArrayLength: null,
+  // });
 
   const products: PrintfulProduct[] = allProducts.map(
     ({ result: { sync_product, sync_variants } }) => ({
