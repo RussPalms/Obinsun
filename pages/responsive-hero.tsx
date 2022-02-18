@@ -368,7 +368,7 @@ function ResponsiveHero({}: Props) {
   return (
     <>
       <div
-        className="flex bg-gray-600 w-full relative z-0 h-[200vh]"
+        className="flex bg-gray-600 w-full relative z-0 h-[200vh] overflow-hidden"
         ref={ref}
         id="landing"
       >
@@ -379,7 +379,7 @@ function ResponsiveHero({}: Props) {
         >
           <div
             id="design-bountry"
-            className="h-[100vh] w-[97%] absolute top-0 flex justify-center items-center border border-0 border-purple-900 "
+            className="h-[100vh] w-[97%] absolute top-0 flex justify-center items-center border border-0 border-purple-900"
           >
             <div
               id="path_container"
@@ -390,18 +390,19 @@ function ResponsiveHero({}: Props) {
                 className="h-1/2 w-1/2 relative text-center overflow-visible border border-0 border-red-400 flex justify-center items-center"
               >
                 <div
-                  className="h-[480%] w-[350%] border border-0 absolute border-blue-300 flex justify-center items-center left-0 top-0"
+                  className="h-[480%] w-[350%] border border-0 absolute border-blue-300 flex justify-center items-center left-1 top-0"
                   id="path_design_container"
                 >
                   <svg
-                    className="h-[100%] w-[100%] border border-0 border-black invisible"
-                    viewBox="0 0 961 1080"
+                    // className="h-[100%] w-[100%] border border-0 border-black invisible"
+                    className="origin-top-left h-full absolute top-0 left-0 scale-y-[100%] scale-x-[9.25%]"
+                    viewBox="0 0 1920 1080"
                     fill="none"
                     preserveAspectRatio="xMidYMax meet"
                   >
                     <path
                       id="path1"
-                      d="M0 0C613.25 30.0929 923.469 743.406 960 1080"
+                      d="M0 0C1226.5 30.0929 1846.94 743.406 1920 1080"
                       stroke="black"
                     />
                   </svg>
@@ -424,18 +425,18 @@ function ResponsiveHero({}: Props) {
                 className="h-1/2 w-1/2 relative text-center overflow-visible border border-0 border-red-400 flex justify-center items-center"
               >
                 <div
-                  className="h-[480%] w-[350%] border border-0 absolute border-blue-300 flex justify-center items-center right-0 top-0"
+                  className="h-[480%] w-[350%] border border-0 absolute border-blue-300 flex justify-center items-center right-6 top-0"
                   id="path_design0_container"
                 >
                   <svg
-                    className="h-[100%] w-[100%] border border-0 border-black invisible"
-                    viewBox="0 0 961 1080"
+                    className="origin-top-right h-full absolute top-0 right-0 scale-y-[100%] scale-x-[9.25%]"
+                    viewBox="0 0 1920 1080"
                     fill="none"
                     preserveAspectRatio="xMidYMax meet"
                   >
                     <path
                       id="path2"
-                      d="M954.361 0C1053.91 543.545 1.00007 687.702 1 1080"
+                      d="M1906.72 0C2105.83 543.545 0.000142969 687.702 0 1080"
                       stroke="black"
                     />
                   </svg>
@@ -456,18 +457,18 @@ function ResponsiveHero({}: Props) {
                 className="h-1/2 w-1/2 relative text-center overflow-visible border border-0 border-red-400 flex justify-center items-center visible"
               >
                 <div
-                  className="h-[200%] w-[350%] border border-0 absolute border-blue-300 flex justify-center items-center left-0 top-[50%]"
+                  className="h-[200%] w-[350%] border border-0 absolute border-blue-300 flex justify-center items-center left-5 top-[50%]"
                   id="path_design4_container"
                 >
                   <svg
-                    className="h-[100%] w-[100%] border border-0 border-black invisible"
-                    viewBox="0 0 961 541"
+                    className="origin-left h-full absolute left-0 scale-y-[100%] scale-x-[9.25%]"
+                    viewBox="0 0 1920 1080"
                     fill="none"
                     preserveAspectRatio="xMidYMax meet"
                   >
                     <path
                       id="path4"
-                      d="M0 1C533.393 1 960 1.00007 960 541"
+                      d="M0 6.49843e-09C1066.79 0 1920 0.000137329 1920 1080"
                       stroke="black"
                     />
                   </svg>
@@ -491,18 +492,18 @@ function ResponsiveHero({}: Props) {
                 className="h-1/2 w-1/2 relative text-center overflow-visible border border-0 border-red-400 flex justify-center items-center"
               >
                 <div
-                  className="h-[150%] w-[400%] border border-0 absolute border-blue-300 flex justify-center items-center bottom-0 left-0"
+                  className="h-[150%] w-[400%] border border-0 absolute border-blue-300 flex justify-center items-center bottom-0 left-5"
                   id="path_design7_container"
                 >
                   <svg
-                    className="h-[100%] w-[100%] border border-0 border-black invisible"
-                    viewBox="0 0 961 1080"
+                    className="origin-bottom-left h-full absolute bottom-0 left-0 scale-y-[100%] scale-x-[9.25%]"
+                    viewBox="0 0 1920 1080"
                     fill="none"
                     preserveAspectRatio="xMidYMax meet"
                   >
                     <path
                       id="see_you_in_space"
-                      d="M0 1080C321.776 1013.21 964.258 800.145 959.979 482.172V0V1080"
+                      d="M0 1080C643.552 1013.21 1928.52 800.145 1919.96 482.172V0V1080"
                       stroke="black"
                     />
                   </svg>
@@ -529,14 +530,14 @@ function ResponsiveHero({}: Props) {
                   id="path_design9_container"
                 >
                   <svg
-                    className="h-[100%] w-[100%] border border-0 border-black invisible"
-                    viewBox="0 0 961 1080"
+                    className="origin-bottom-right h-full absolute bottom-0 right-3 scale-y-[100%] scale-x-[9.25%]"
+                    viewBox="0 0 1920 1080"
                     fill="none"
                     preserveAspectRatio="xMidYMax meet"
                   >
                     <path
                       id="skull_is_full_of_cats"
-                      d="M961 1080C641 1057.99 1 955.556 1 721.905C1 488.254 1 143.28 1 0V1080"
+                      d="M1920 1080C1280 1057.99 0 955.556 0 721.905C0 488.254 0 143.28 0 0V1080"
                       stroke="black"
                     />
                   </svg>

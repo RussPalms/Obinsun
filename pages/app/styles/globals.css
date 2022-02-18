@@ -100,6 +100,10 @@ body {
 
     @apply h-[4em] w-[4em] xs:h-[4.625em] xs:w-[4.625em] sm:h-[5.25em] sm:w-[5.25em] md:h-[5.875em] md:w-[5.875em] lg:h-[6.5em] lg:w-[6.5em] xl:h-[7.125em] xl:w-[7.125em] 2xl:h-[7.75em] 2xl:w-[7.75em] 3xl:h-[8.375em] 3xl:w-[8.375em] 4vl:h-[9em] 4vl:w-[9em];
   }
+
+  .featured-scale {
+    @apply origin-top-left h-full absolute top-0 left-0 scale-y-[100%] scale-x-[9.25%];
+  }
 }
 
 .border-top-left-glass {
