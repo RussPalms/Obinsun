@@ -1,17 +1,24 @@
-import Link from "next/link";
-import useWishlistState from "../../../server/hooks/useWishlistState";
+import Link from 'next/link';
+import useWishlistState from '../../../server/hooks/useWishlistState';
 import {
   // getSession,
   signIn,
   signOut,
   useSession,
-} from "next-auth/react";
-import { useSelector } from "react-redux";
-import { useRouter } from "next/router";
+} from 'next-auth/react';
+import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 import {
   selectItems,
   // selectTotal,
-} from "../../../app/state/slices/basketSlice";
+} from '../../../app/state/slices/basketSlice';
+import { motion } from 'framer-motion';
+
+const variants = {
+  hidden: { opacity: 0, x: -200, y: 0 },
+  enter: { opacity: 1, x: 0, y: 0 },
+  exit: { opacity: 0, x: 0, y: -100 },
+};
 
 const Layout = ({ children }: any) => {
   const { data: session, status } = useSession();
@@ -80,7 +87,7 @@ const Layout = ({ children }: any) => {
                   className="cursor-pointer link"
                 >
                   <p className="hover:underline">
-                    {session ? `Hello, ${session?.user?.email}` : "Sign In"}
+                    {session ? `Hello, ${session?.user?.email}` : 'Sign In'}
                   </p>
                   <p className="font-extrabold md:text-sm">Account & Lists</p>
                 </div>
@@ -113,7 +120,7 @@ const Layout = ({ children }: any) => {
                 </a>
               </Link>
               <button
-                onClick={() => router.push("/checkout")}
+                onClick={() => router.push('/checkout')}
                 className="stripe-checkout appearance-none px-2 text-gray-800 hover:text-blue-600 rounded-md cursor-pointer focus:outline-none focus:text-blue-600 transition relative"
                 aria-label="Cart"
               >
@@ -135,7 +142,16 @@ const Layout = ({ children }: any) => {
         </div>
       </header>
       <main className="py-6 md:py-12">
-        <div className="max-w-6xl mx-auto px-6">{children}</div>
+        <motion.div
+          initial="hidden"
+          animate="enter"
+          exit="exit"
+          variants={variants}
+          transition={{ type: 'linear' }}
+          className="max-w-6xl mx-auto px-6"
+        >
+          {children}
+        </motion.div>
       </main>
       <footer className="max-w-6xl mx-auto px-6">
         <div className="py-6 border-t border-gray-100 text-center flex flex-col md:flex-row items-center justify-between">
@@ -150,7 +166,7 @@ const Layout = ({ children }: any) => {
             >
               Obinsun Merch
             </a>
-            , Built by{" "}
+            , Built by{' '}
             <a
               href="https://twitter.com/obinsun"
               title="Follow the creator on Twitter"

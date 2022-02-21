@@ -1,86 +1,86 @@
 //@ts-nocheck
 
-import CatsAndSkullsPatternBanner from "../assets/ObinsunVectors/ZBanner/CatsAndSkullsPatternBanner";
-import Grim2021 from "../assets/ObinsunVectors/ZLogo/Grim2021";
+import CatsAndSkullsPatternBanner from '../assets/ObinsunVectors/ZBanner/CatsAndSkullsPatternBanner';
+import Grim2021 from '../assets/ObinsunVectors/ZLogo/Grim2021';
 
 // Monocolor (White) No Text
-import DeathRidesABlackCat from "../assets/ObinsunVectors/DeathRidesABlackCat";
-import YoCult from "../assets/ObinsunVectors/YoCult";
-import NineLives from "../assets/ObinsunVectors/NineLives";
-import DoomCat from "../assets/ObinsunVectors/DoomCat";
-import CatsAndSkullsPattern from "../assets/ObinsunVectors/CatsAndSkullsPattern";
+import DeathRidesABlackCat from '../assets/ObinsunVectors/DeathRidesABlackCat';
+import YoCult from '../assets/ObinsunVectors/YoCult';
+import NineLives from '../assets/ObinsunVectors/NineLives';
+import DoomCat from '../assets/ObinsunVectors/DoomCat';
+import CatsAndSkullsPattern from '../assets/ObinsunVectors/CatsAndSkullsPattern';
 
 // Monocolor Text
-import CatGotYourSoul from "../assets/ObinsunVectors/CatGotYourSoul";
-import GhostOfDisapproval from "../assets/ObinsunVectors/GhostOfDisapproval";
-import CatPerson from "../assets/ObinsunVectors/CatPerson";
-import GhostBoobs from "../assets/ObinsunVectors/GhostBoobs";
-import ThisIsWhyWeCantHaveNiceThings from "../assets/ObinsunVectors/ThisIsWhyWeCantHaveNiceThings";
+import CatGotYourSoul from '../assets/ObinsunVectors/CatGotYourSoul';
+import GhostOfDisapproval from '../assets/ObinsunVectors/GhostOfDisapproval';
+import CatPerson from '../assets/ObinsunVectors/CatPerson';
+import GhostBoobs from '../assets/ObinsunVectors/GhostBoobs';
+import ThisIsWhyWeCantHaveNiceThings from '../assets/ObinsunVectors/ThisIsWhyWeCantHaveNiceThings';
 
 // Monocolor (Not White) Text
-import CatsMetal from "../assets/ObinsunVectors/CatsMetal";
-import RadCat from "../assets/ObinsunVectors/RadCat";
-import UFWhoa from "../assets/ObinsunVectors/UFWhoa";
+import CatsMetal from '../assets/ObinsunVectors/CatsMetal';
+import RadCat from '../assets/ObinsunVectors/RadCat';
+import UFWhoa from '../assets/ObinsunVectors/UFWhoa';
 
 // Duocolor (Black & White) No Text
-import WhiskersAndPipe from "../assets/ObinsunVectors/WhiskersAndPipe";
-import GrimKitty from "../assets/ObinsunVectors/GrimKitty";
-import RadInPeace from "../assets/ObinsunVectors/RadInPeace";
-import MetalCat from "../assets/ObinsunVectors/MetalCat";
-import SpookyCat from "../assets/ObinsunVectors/SpookyCat";
-import ReaperCat from "../assets/ObinsunVectors/ReaperCat";
+import WhiskersAndPipe from '../assets/ObinsunVectors/WhiskersAndPipe';
+import GrimKitty from '../assets/ObinsunVectors/GrimKitty';
+import RadInPeace from '../assets/ObinsunVectors/RadInPeace';
+import MetalCat from '../assets/ObinsunVectors/MetalCat';
+import SpookyCat from '../assets/ObinsunVectors/SpookyCat';
+import ReaperCat from '../assets/ObinsunVectors/ReaperCat';
 
 // Duocolor (Black & White) Text
-import BlackBearMetal from "../assets/ObinsunVectors/BlackBearMetal";
-import Dogtor from "../assets/ObinsunVectors/Dogtor";
+import BlackBearMetal from '../assets/ObinsunVectors/BlackBearMetal';
+import Dogtor from '../assets/ObinsunVectors/Dogtor';
 
 // Duocolor (Not Black & White) No Text
-import DeathIsACatPerson from "../assets/ObinsunVectors/DeathIsACatPerson";
-import DreamingOfDestruction from "../assets/ObinsunVectors/DreamingOfDestruction";
+import DeathIsACatPerson from '../assets/ObinsunVectors/DeathIsACatPerson';
+import DreamingOfDestruction from '../assets/ObinsunVectors/DreamingOfDestruction';
 
 // Duocolor (Not Black & White) Text
-import HotDog from "../assets/ObinsunVectors/HotDog";
-import CutMeSomeSlacks from "../assets/ObinsunVectors/CutMeSomeSlacks";
+import HotDog from '../assets/ObinsunVectors/HotDog';
+import CutMeSomeSlacks from '../assets/ObinsunVectors/CutMeSomeSlacks';
 
 // Tricolor No Text
-import DeathsLittleHelpers from "../assets/ObinsunVectors/DeathsLittleHelpers";
-import PeaceOnEarth from "../assets/ObinsunVectors/PeaceOnEarth";
-import ThunderClap from "../assets/ObinsunVectors/ThunderClap";
+import DeathsLittleHelpers from '../assets/ObinsunVectors/DeathsLittleHelpers';
+import PeaceOnEarth from '../assets/ObinsunVectors/PeaceOnEarth';
+import ThunderClap from '../assets/ObinsunVectors/ThunderClap';
 
 // Tricolor Text
-import HomeBodies from "../assets/ObinsunVectors/HomeBodies";
+import HomeBodies from '../assets/ObinsunVectors/HomeBodies';
 
 // Teracolor No Text
-import DraculaVisitsAfrica from "../assets/ObinsunVectors/DraculaVisitsAfrica";
-import EnlightenedSkull from "../assets/ObinsunVectors/EnlightenedSkull";
+import DraculaVisitsAfrica from '../assets/ObinsunVectors/DraculaVisitsAfrica';
+import EnlightenedSkull from '../assets/ObinsunVectors/EnlightenedSkull';
 
 // Teracolor Text
-import GoodMorningCoffeeWizard from "../assets/ObinsunVectors/GoodMorningCoffeeWizard";
-import LobsterPlusCrab from "../assets/ObinsunVectors/LobsterPlusCrab";
-import WitchCrafts from "../assets/ObinsunVectors/WitchCrafts";
+import GoodMorningCoffeeWizard from '../assets/ObinsunVectors/GoodMorningCoffeeWizard';
+import LobsterPlusCrab from '../assets/ObinsunVectors/LobsterPlusCrab';
+import WitchCrafts from '../assets/ObinsunVectors/WitchCrafts';
 
 // Pentacolor No Text
-import PizzaWizzard from "../assets/ObinsunVectors/PizzaWizzard";
-import StayFresh from "../assets/ObinsunVectors/StayFresh";
+import PizzaWizzard from '../assets/ObinsunVectors/PizzaWizzard';
+import StayFresh from '../assets/ObinsunVectors/StayFresh';
 
 // Multicolor No Text
-import SkullIsFullOfCats from "../assets/ObinsunVectors/SkullIsFullOfCats";
+import SkullIsFullOfCats from '../assets/ObinsunVectors/SkullIsFullOfCats';
 
 // Rainbow No Text
-import Unicorns from "../assets/ObinsunVectors/Unicorns";
-import RadRex from "../assets/ObinsunVectors/RadRex";
-import CoolestCat from "../assets/ObinsunVectors/CoolestCat";
-import SeeYouInSpace from "../assets/ObinsunVectors/SeeYouInSpace";
-import CatStuff from "../assets/ObinsunVectors/CatStuff";
+import Unicorns from '../assets/ObinsunVectors/Unicorns';
+import RadRex from '../assets/ObinsunVectors/RadRex';
+import CoolestCat from '../assets/ObinsunVectors/CoolestCat';
+import SeeYouInSpace from '../assets/ObinsunVectors/SeeYouInSpace';
+import CatStuff from '../assets/ObinsunVectors/CatStuff';
 
 // Rainbow Text
-import RadPals from "../assets/ObinsunVectors/RadPals";
-import SpookyPals from "../assets/ObinsunVectors/SpookyPals";
+import RadPals from '../assets/ObinsunVectors/RadPals';
+import SpookyPals from '../assets/ObinsunVectors/SpookyPals';
 
 function Designs({ id }: any) {
   return (
     <>
-      <div className="bg-gray-500 flex items-center justify-center h-full w-full">
+      <div className="flex items-center justify-center h-full w-full">
         {/* <h1 className="font-grandstander text-9xl absolute top[50%] z-0">
 					Obinsun Designs
 				</h1> */}

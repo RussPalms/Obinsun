@@ -1,21 +1,23 @@
 //@ts-nocheck
 
-import type { NextPage } from "next";
+import type { NextPage } from 'next';
 
 import // getSession,
 //  useSession
-"next-auth/react";
-import Head from "next/head";
-import Designs from "./src/components/Designs";
-import Design from "./src/components/Design";
-import Entity from "./src/components/EntityCreation/Entity";
-import Entities from "./src/components/EntityCreation/Entities";
-import Header from "./src/components/Header";
-import Headers from "./src/components/Headers";
-import Heading from "./src/components/Heading";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+'next-auth/react';
+import Head from 'next/head';
+import Designs from './src/components/Designs';
+import Design from './src/components/Design';
+import Entity from './src/components/EntityCreation/Entity';
+import Entities from './src/components/EntityCreation/Entities';
+import Header from './src/components/Header';
+import Headers from './src/components/Headers';
+import Heading from './src/components/Heading';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 // import VerifyDocuments from "./src/components/Payments/VerifyDocuments";
+
+import Link from 'next/link';
 
 export default function Home(): NextPage {
   // useEffect(async (error) => {
@@ -78,6 +80,8 @@ export default function Home(): NextPage {
         {/* <Entities /> */}
         {/* <Login /> */}
         {/* <Log /> */}
+
+        <Link href="/gradient-testing">Gradient Testing</Link>
 
         {/* <VerifyDocuments /> */}
       </main>

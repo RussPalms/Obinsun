@@ -1,22 +1,22 @@
 //@ts-nocheck
 
-import ZLogo from "../assets/ObinsunVectors/ZLogo";
-import ZBanner from "../assets/ObinsunVectors/ZBanner";
-import CatsAndSkullsPatternBanner from "../assets/ObinsunVectors/ZBanner/CatsAndSkullsPatternBanner";
-import { CgSearch } from "react-icons/cg";
-import { BsBookmark, BsSun, BsMoon } from "react-icons/bs";
-import { MdOutlineBookmarkBorder } from "react-icons/md";
-import { BiCart } from "react-icons/bi";
+import ZLogo from '../assets/ObinsunVectors/ZLogo';
+import ZBanner from '../assets/ObinsunVectors/ZBanner';
+import CatsAndSkullsPatternBanner from '../assets/ObinsunVectors/ZBanner/CatsAndSkullsPatternBanner';
+import { CgSearch } from 'react-icons/cg';
+import { BsBookmark, BsSun, BsMoon } from 'react-icons/bs';
+import { MdOutlineBookmarkBorder } from 'react-icons/md';
+import { BiCart } from 'react-icons/bi';
 // import { signIn, signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 // import { useSelector } from "react-redux";
-import Link from "next/link";
+import Link from 'next/link';
 import {
   useSession,
   signOut,
   //  getSession
-} from "next-auth/react";
-import { useState } from "react";
+} from 'next-auth/react';
+import { useState } from 'react';
 
 function Heading() {
   // const [session, loading] = useSession();
@@ -28,7 +28,7 @@ function Heading() {
 
   function logStateHandler() {
     if (!session) {
-      router.push("/routes/loading/authenticate");
+      router.push('/routes/loading/authenticate');
     } else {
       signOut();
     }
@@ -39,10 +39,10 @@ function Heading() {
   // }
 
   return (
-    <section className="font-grandstander md:py-[50px] md:px-[20px] flex justify-center items-center h-screen bg-gray-600 bg-cover bg-center bg-fixed p-16">
+    <section className="font-grandstander md:py-[50px] md:px-[20px] flex justify-center items-center h-screen p-16 bg-gray-500">
       <div className="md:flex-col md:h-auto md:p-[20px] relative w-full min-h-full bg-white bg-opacity-50 shadow-glass1 rounded-3xl flex justify-between items-center p-[50px]">
         <div className="absolute -top-14 -left-10 rounded-full p-4 h-24 w-24 flex justify-center items-center bg-white bg-opacity-20 shadow-glass border border-solid border-white border-opacity-25 border-t border-t-white border-l border-l-white backdrop-blur-[4px] border-top-left-glass z-50">
-          <ZLogo className="object-contain" onClick={() => router.push("/")} />
+          <ZLogo className="object-contain" onClick={() => router.push('/')} />
         </div>
         <header className="h-20 md:relative md:flex-col md:w-full md:top-[-60px] md:p-[20px] md:right-0 md:left-0 absolute -top-6 right-5 left-5 py-[20px] px-5 flex justify-between items-center shadow-glass1 bg-white/[0.2] border rounded-3xl backdrop-blur-[10px] border-top-left-glass z-40">
           <div className="relative left-6 max-w-full">
@@ -68,7 +68,7 @@ function Heading() {
             >
               {/* <Link> */}
               {/* {!session && !loading ? "Login" : "Logout"} */}
-              {!session ? "Login" : "Logout"}
+              {!session ? 'Login' : 'Logout'}
               {/* </Link> */}
             </h2>
             {/* // )} */}

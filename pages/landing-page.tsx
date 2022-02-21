@@ -1,20 +1,20 @@
-import React, { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { MotionPathPlugin } from "gsap/dist/MotionPathPlugin";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { MotionPathPlugin } from 'gsap/dist/MotionPathPlugin';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
-import DraculaVisitsAfrica from "./src/assets/ObinsunVectors/DraculaVisitsAfrica";
-import PeaceOnEarth from "./src/assets/ObinsunVectors/PeaceOnEarth";
-import RadRex from "./src/assets/ObinsunVectors/RadRex";
-import SeeYouInSpace from "./src/assets/ObinsunVectors/SeeYouInSpace";
-import SkullIsFullOfCats from "./src/assets/ObinsunVectors/SkullIsFullOfCats";
-import WhiskersAndPipe from "./src/assets/ObinsunVectors/WhiskersAndPipe";
-import CatsAndSkullsPattern from "./src/assets/ObinsunVectors/CatsAndSkullsPattern";
+import DraculaVisitsAfrica from './src/assets/ObinsunVectors/DraculaVisitsAfrica';
+import PeaceOnEarth from './src/assets/ObinsunVectors/PeaceOnEarth';
+import RadRex from './src/assets/ObinsunVectors/RadRex';
+import SeeYouInSpace from './src/assets/ObinsunVectors/SeeYouInSpace';
+import SkullIsFullOfCats from './src/assets/ObinsunVectors/SkullIsFullOfCats';
+import WhiskersAndPipe from './src/assets/ObinsunVectors/WhiskersAndPipe';
+import CatsAndSkullsPattern from './src/assets/ObinsunVectors/CatsAndSkullsPattern';
 
 type Props = {};
 
 function ResponsiveHero({}: Props) {
-  if (typeof window !== "undefined") {
+  if (typeof window !== 'undefined') {
     gsap.registerPlugin(MotionPathPlugin);
     gsap.registerPlugin(ScrollTrigger);
   }
@@ -24,21 +24,21 @@ function ResponsiveHero({}: Props) {
   useEffect(() => {
     const container: any = ref.current;
 
-    let path_1 = container!.querySelector("#path1");
+    let path_1 = container!.querySelector('#path1');
     let path_1_length = path_1.getTotalLength();
-    let rectRef = container!.querySelector("#whiskers-and-pipe");
-    let landing = container!.querySelector("#landing");
+    let rectRef = container!.querySelector('#whiskers-and-pipe');
+    let landing = container!.querySelector('#landing');
 
-    path_1.style.strokeDasharray = path_1_length + " " + path_1_length;
+    path_1.style.strokeDasharray = path_1_length + ' ' + path_1_length;
     path_1.style.strokeDashoffset = path_1_length;
 
-    document.addEventListener("scroll", (e) => {
+    document.addEventListener('scroll', (e) => {
       e.preventDefault();
 
       let event: any = e.target;
       let scrollPercentage =
         (event.documentElement.scrollTop +
-          event.getElementById("landing").scrollTop) /
+          event.getElementById('landing').scrollTop) /
         (event.documentElement.scrollHeight -
           event.documentElement.clientHeight);
       let drawLength = path_1_length * scrollPercentage;
@@ -47,7 +47,7 @@ function ResponsiveHero({}: Props) {
 
     gsap.set(rectRef, { autoAlpha: 1 });
 
-    gsap.defaults({ ease: "none" });
+    gsap.defaults({ ease: 'none' });
     gsap
       .timeline({
         scrollTrigger: {
@@ -56,9 +56,9 @@ function ResponsiveHero({}: Props) {
         },
       })
       .to(rectRef, {
-        rotate: "90deg",
-        rotationY: "-3rad",
-        skewY: "10deg",
+        rotate: '90deg',
+        rotationY: '-3rad',
+        skewY: '10deg',
         immediateRender: true,
         motionPath: {
           path: path_1,

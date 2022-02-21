@@ -26,40 +26,46 @@ const ThemeSwitch: React.FC = () => {
   if (!mounted) return null;
 
   return (
-    <Switch
-      onChange={handleChange}
-      checked={checked}
-      aria-label="switch between day and night themes"
-      offColor="#555"
-      onHandleColor="#eee"
-      handleDiameter={20}
-      uncheckedIcon={
-        <div className="flex justify-center items-center h-full">
-          <IconContext.Provider
-            value={{
-              color: 'gold',
-              size: '80%',
-            }}
-          >
-            <FaSun />
-          </IconContext.Provider>
-        </div>
-      }
-      checkedIcon={
-        <div className="flex justify-center items-center h-full">
-          <IconContext.Provider
-            value={{
-              color: 'yellow',
-              size: '80%',
-            }}
-          >
-            <FaMoon />
-          </IconContext.Provider>
-        </div>
-      }
-      height={24}
-      width={48}
-    />
+    <>
+      <Switch
+        onChange={handleChange}
+        checked={checked}
+        aria-label="switch between day and night themes"
+        onColor="#171717"
+        offColor="#7f1d1d"
+        onHandleColor="#1e3a8a"
+        offHandleColor="#fafafa"
+        activeBoxShadow="#93c5fd"
+        handleDiameter={20}
+        uncheckedIcon={
+          <div className="flex justify-center items-center h-full">
+            <IconContext.Provider
+              value={{
+                //   color: 'gold',
+                color: 'gold',
+                size: '80%',
+              }}
+            >
+              <FaSun />
+            </IconContext.Provider>
+          </div>
+        }
+        checkedIcon={
+          <div className="flex justify-center items-center h-full">
+            <IconContext.Provider
+              value={{
+                color: 'yellow',
+                size: '80%',
+              }}
+            >
+              <FaMoon />
+            </IconContext.Provider>
+          </div>
+        }
+        height={24}
+        width={48}
+      />
+    </>
   );
 };
 

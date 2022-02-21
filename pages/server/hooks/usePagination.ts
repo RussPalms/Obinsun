@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, Dispatch, SetStateAction } from 'react';
 
-import { IListing } from '../../../@types/listing';
+import { IListing } from '../types/listing';
 
 type Props = {
   currentData: () => IListing[];

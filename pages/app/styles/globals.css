@@ -4,11 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/*:root {
   --primary: #efb6b2;
   --secondary: #4e4e4e;
   --error: #ff4a4a;
-}
+}*/
 
 /* html {
   padding: 0;
@@ -18,8 +18,9 @@
 
 html,
 body {
-  /* top: 0;
-	left: 0; */
+  /*top: 0;
+  left: 0;
+  position: absolute;*/
   padding: 0;
   margin: 0;
   height: 100%;
@@ -76,7 +77,7 @@ body {
   }
 
   .color {
-    @apply absolute blur-[150px] first:top-[-350px] first:w-[600px] first:h-[600px] first:bg-[#ff359b];
+    @apply absolute blur-[10em] first:top-[-350px] first:w-[600px] first:h-[600px] first:bg-[#ff359b];
   }
   .square {
     /* no adding calculated css variables that reference js */
@@ -104,23 +105,132 @@ body {
   .featured-scale {
     @apply origin-top-left h-full absolute top-0 left-0 scale-y-[100%] scale-x-[9.25%];
   }
+
+  .glass-container {
+    @apply border-top-left-glass border-bottom-right-glass bg-neutral-400 dark:bg-neutral-600 bg-opacity-10 dark:bg-opacity-20 shadow-glass dark:shadow-dark-glass rounded-[1.25em] backdrop-blur-[0.25em];
+  }
+
+  input + label {
+    @apply flex items-center;
+  }
+
+  /* input + label::before {
+    @apply block w-[2em] h-[1em] bg-gray-400 border-radius-[1em] mr-[1rem];
+  } */
+
+  /* input:focus + label::before {
+    @apply ring ring-sky-800 transition-none;
+  }
+
+  input:checked + label::before {
+    @apply transform bg-blue-300 transition;
+  }
+
+  input:checked + label::after {
+    @apply content-['\2713'] text-green-400 transform translate-x-[100%] bg-green-700 transition-transform duration-200 ease-in-out;
+  }
+
+  input:checked + label {
+    @apply text-red-400 relative;
+  } */
+
+  /* input:checked + label {
+    @apply text-red-400;
+  } */
+
+  /*.shape {
+    @apply h-[40vh] dark:bg-blue-700 bg-red-400 blur-[40em] backdrop-blur-3xl z-0;
+  }*/
+
+  .shape {
+    /*@apply p-[1em] bg-red-500 mb-[1em] pb-[1em] text-center;*/
+    @apply h-[50vh] bg-gradient-to-br from-red-400 via-neutral-300 to-blue-900 dark:text-blue-300 text-red-900 bg-size-200 bg-pos-0 dark:bg-pos-100 opacity-70 z-10;
+  }
+
+  .content-container {
+    @apply mt-[-250em] mb-[-250em] xs:mt-[-221.25em] xs:mb-[-221.25em] sm:mt-[-192.5em] sm:mb-[-192.5em] md:mt-[-163.75em] md:mb-[-163.75em] lg:mt-[-135em] lg:mb-[-135em] xl:mt-[-106.25m] xl:mb-[-106.25m] 2xl:mt-[-77.5em] 2xl:mb-[-77.5em] 3xl:mt-[-48.75em] 3xl:mb-[-48.75em] 4vl:mt-[-20em] 4vl:mb-[-20em];
+  }
+
+  /*.shape {
+    @apply p-[1em] bg-red-500 mb-[1em] pb-[1em] text-center;
+    @apply [40vh];
+  }*/
+
+  .initial-page-loaders {
+    @apply absolute whitespace-nowrap leading-[100vh] flex h-full items-center justify-center w-full animate-initial-page-load;
+  }
 }
 
-.border-top-left-glass {
-  border-top: 1px solid rgba(255, 255, 255, 0.5) !important;
-  border-left: 1px solid rgba(255, 255, 255, 0.5) !important;
+/*.border-top-left-glass {
+  border-top: 0.0625em solid rgba(0, 0, 0, 0.5) !important;
+  border-left: 0.0625em solid rgba(0, 0, 0, 0.5) !important;
 }
 
 .border-bottom-right-glass {
-  border-right: 1px solid rgba(255, 255, 255, 0.2) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-right: 0.0625em solid rgba(0, 0, 0, 0.2) !important;
+  border-bottom: 0.0625em solid rgba(0, 0, 0, 0.2) !important;
+}*/
+
+/* -webkit-transition: background 1s ease-out;
+-moz-transition: background 1s ease-out;
+-o-transition: background 1s ease-out;
+transition: background 1s ease-out; */
+
+/* .theme-transition {
+  transition: background 2000ms ease-in-out, color 1000ms ease-in-out !important;
+} */
+
+.clipped-shape-top {
+  /*clip-path: polygon(50% 0%, 100% 0, 100% 65%, 50% 100%, 0 65%, 0 0);*/
+  /*clip-path: polygon(
+    50% 0%,
+    100% 0px,
+    65.62% 218.75%,
+    0.05% 372.5%,
+    0px 65%,
+    0px 0px
+  );*/
+  clip-path: polygon(50% 0%, 100% 0, 100% 50%, 75% 100%, 0 50%, 0 25%);
+}
+
+.clipped-shape-bottom {
+  /*clip-path: polygon(50% 0%, 100% 65%, 100% 100%, 50% 100%, 0 100%, 0 65%);*/
+  /*clip-path: polygon(
+    50% 0%,
+    100% 0px,
+    65.62% 218.75%,
+    0.05% 372.5%,
+    0px 65%,
+    0px 0px
+  );*/
+  clip-path: polygon(25% 0%, 100% 50%, 100% 75%, 50% 100%, 0 100%, 0 50%);
+}
+
+.border-top-left-glass {
+  border-top: 0.0625em solid rgba(255, 255, 255, 0.5) !important;
+  border-left: 0.0625em solid rgba(255, 255, 255, 0.5) !important;
+}
+
+.border-bottom-right-glass {
+  border-right: 0.0625em solid rgba(255, 255, 255, 0.2) !important;
+  border-bottom: 0.0625em solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.dark-border-top-left-glass {
+  border-top: 0.0625em solid rgba(255, 255, 255, 0.5) !important;
+  border-left: 0.0625em solid rgba(255, 255, 255, 0.5) !important;
+}
+
+.dark-border-bottom-right-glass {
+  border-right: 0.0625em solid rgba(255, 255, 255, 0.2) !important;
+  border-bottom: 0.0625em solid rgba(255, 255, 255, 0.2) !important;
 }
 
 .square-delay {
   animation-delay: calc(-1s * var(--i));
 }
 
-.stripe {
+/* .stripe {
   @apply font-grandstander text-base text-gray-800 font-normal;
 }
 
@@ -189,11 +299,11 @@ body {
 
 .stripe-shipping-rates-list-item__price {
   @apply text-gray-900 text-sm leading-5;
-}
+} */
 
 /* base styles & title */
-body {
-  font-family: "Noto Serif";
+/* body {
+  font-family: 'Noto Serif';
   color: var(--secondary);
 }
 .App {
@@ -213,10 +323,10 @@ body {
 .title h2 {
   margin-top: 60px;
   font-size: 2.6rem;
-}
+} */
 
 /* upload form styles */
-form {
+/* form {
   margin: 30px auto 10px;
   text-align: center;
 }
@@ -247,17 +357,17 @@ label:hover {
 }
 .error {
   color: var(--error);
-}
+} */
 
 /* progress bar styles */
-.progress-bar {
+/* .progress-bar {
   height: 5px;
   background: var(--primary);
   margin-top: 20px;
-}
+} */
 
 /* image grid styles */
-.img-grid {
+/* .img-grid {
   margin: 20px auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -266,9 +376,9 @@ label:hover {
 .img-wrap {
   overflow: hidden;
   height: 0;
-  padding: 50% 0;
-  /* padding controls height, will always be perfectly square regardless of width */
-  position: relative;
+  padding: 50% 0; */
+/* padding controls height, will always be perfectly square regardless of width */
+/* position: relative;
   opacity: 0.8;
 }
 .img-wrap img {
@@ -278,10 +388,10 @@ label:hover {
   position: absolute;
   top: 0;
   left: 0;
-}
+} */
 
 /* modal styles */
-.backdrop {
+/* .backdrop {
   position: fixed;
   top: 0;
   left: 0;
@@ -296,7 +406,7 @@ label:hover {
   margin: 60px auto;
   box-shadow: 3px 5px 7px rgba(0, 0, 0, 0.5);
   border: 3px solid white;
-}
+} */
 
 /*
 #root {

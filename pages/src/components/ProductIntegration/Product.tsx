@@ -1,15 +1,15 @@
 //@ts-nocheck
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import VariantPicker from "./VariantPicker";
-import useWishlistDispatch from "../../../server/hooks/useWishlistDispatch";
-import useWishlistState from "../../../server/hooks/useWishlistState";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import VariantPicker from './VariantPicker';
+import useWishlistDispatch from '../../../server/hooks/useWishlistDispatch';
+import useWishlistState from '../../../server/hooks/useWishlistState';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   addToBasket,
   selectTotal,
-} from "../../../app/state/slices/basketSlice";
+} from '../../../app/state/slices/basketSlice';
 
 const Product = (product: any) => {
   // const total = useSelector(selectTotal);
@@ -34,11 +34,11 @@ const Product = (product: any) => {
   );
 
   const activeVariantFile = activeVariant.files.find(
-    ({ type }: any) => type === "preview"
+    ({ type }: any) => type === 'preview'
   );
 
-  const formattedPrice = new Intl.NumberFormat("en-US", {
-    style: "currency",
+  const formattedPrice = new Intl.NumberFormat('en-US', {
+    style: 'currency',
     currency: activeVariant.currency,
   }).format(activeVariant.retail_price as number);
 
@@ -121,7 +121,8 @@ const Product = (product: any) => {
   // }, [addItemToBasket]);
 
   return (
-    <article className="border border-gray-200 rounded bg-white flex flex-col relative">
+    // <article className="border border-gray-200 rounded bg-white flex flex-col relative">
+    <article className="glass-container flex flex-col relative">
       <button
         aria-label="Add to wishlist"
         className="appearance-none absolute top-0 right-0 mt-3 mr-3 text-gray-300 focus:text-gray-500 hover:text-red-500 transition focus:outline-none"

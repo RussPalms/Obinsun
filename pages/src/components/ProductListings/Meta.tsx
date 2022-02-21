@@ -19,8 +19,7 @@ const meta = {
 const Meta: React.FC<Props> = ({ pageTitle }: Props) => {
   const router = useRouter();
   const ogUrl = SITE_URL + router.asPath;
-  const ogType =
-    router.pathname === '/product-listings' ? 'website' : 'article';
+  const ogType = router.pathname === '/' ? 'website' : 'article';
   const ogTitle = pageTitle ? pageTitle : 'Awesome Merchandized Designs';
   const ogImage = SITE_URL + meta.ogImagePath;
 

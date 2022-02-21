@@ -28,7 +28,13 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
         </Head>
-        <body className="antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+        {/* <body className="antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100"> */}
+        {/* <body className="antialiased bg-gradient-to-bl from-red-300 via-neutral-50 to-red-300 text-red-900 dark:bg-gradient-to-bl dark:from-neutral-900 dark:via-blue-900 dark:to-neutral-900 dark:text-blue-300 font-grandstander transition-colors duration-100 ease-linear"> */}
+        {/* <body className="antialiased bg-red-900 dark:bg-blue-300 font-grandstander transition-colors duration-1000 ease-linear"> */}
+        {/* <body className="bg-white dark:bg-gray-800 transition-colors duration-100 ease-linear"> */}
+        {/* <body className="antialiased font-grandstander transition-all duration-500 bg-white dark:bg-black bg-gradient-to-tl from-red-300 via-neutral-300 to-blue-900  text-red-900 dark:text-blue-300 bg-size-200 bg-pos-100 dark:bg-pos-0"> */}
+        <body className="antialiased font-grandstander bg-white dark:bg-black">
+          {/* <div className="h-screen"> */}
           <Main />
           <NextScript />
           {/* <script
@@ -54,6 +60,7 @@ class MyDocument extends Document {
           {/* </div>
             </address-fields>
           </div> */}
+          {/* </div> */}
         </body>
       </Html>
     );

@@ -1,9 +1,9 @@
 // const defaultTheme = require('tailwindcss/defaultTheme');
-// const Nth = require('tailwindcss-nth-child');
+const Nth = require('tailwindcss-nth-child');
 // const plugin = new Nth("<nth-value>");
 // const color2 = new Nth('2')
 // const color3 = new Nth('3')
-// const plugin = new Nth('2');
+const plugin = new Nth('2');
 
 module.exports = {
   mode: 'jit',
@@ -24,7 +24,9 @@ module.exports = {
       '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
       inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
       none: 'none',
-      glass: '0 15px 25px rgba(0, 0, 0, 0.05)',
+      // glass: '0 15px 25px rgba(0, 0, 0, 0.05)',
+      glass: '0 0.9375em 1.5625em rgba(0, 0, 0, 0.05)',
+      'dark-glass': '0 0.9375em 1.5625em rgba(255, 255, 255, 0.1)',
       glass1: '0 15px 35px rgba(0, 0, 0,0.05)',
       glass1a: '0 5px 10px rgba(0, 0, 0, 0.1)',
       glass2: '0 15px 30px rgba(0, 0, 0, 0.1)',
@@ -38,15 +40,26 @@ module.exports = {
     typography: (theme) => ({
       dark: {
         css: {
-          color: theme('colors.gray.300'),
+          // color: theme('colors.gray.300'),
+          // h1: {
+          //   color: theme('colors.gray.100'),
+          // },
+          // h2: {
+          //   color: theme('colors.gray.100'),
+          // },
+          // strong: {
+          //   color: theme('colors.gray.300'),
+          // },
+
+          color: theme('colors.blue.500'),
           h1: {
-            color: theme('colors.gray.100'),
+            color: theme('colors.blue.300'),
           },
           h2: {
-            color: theme('colors.gray.100'),
+            color: theme('colors.blue.300'),
           },
           strong: {
-            color: theme('colors.gray.300'),
+            color: theme('colors.blue.500'),
           },
         },
       },
@@ -116,6 +129,15 @@ module.exports = {
     // },
 
     extend: {
+      backgroundSize: {
+        'size-200': '200% 200%',
+      },
+      backgroundPosition: {
+        'pos-0': '0% 0%',
+        'pos-25': '0% 100%',
+        'pos-75': '100% 0%',
+        'pos-100': '100% 100%',
+      },
       // fontFamily: { grandstander: ["Grandstander", "cursive"] },
       fontFamily: {
         grandstander: [
@@ -125,6 +147,30 @@ module.exports = {
         ],
       },
       keyframes: {
+        initial_page_load: {
+          '0%': {
+            transform: 'translateX(0)',
+          },
+          // '20%': {
+          //   transform: 'translateX(-10%)',
+          // },
+          // '30%': {
+          //   transform: 'translateX(-30%)',
+          // },
+          '50%': {
+            transform: 'translateX(-65%)',
+          },
+
+          // '70%': {
+          //   transform: 'translateX(30%)',
+          // },
+          // '80%': {
+          //   transform: 'translateX(10%)',
+          // },
+          '100%': {
+            transform: 'translateX(0)',
+          },
+        },
         move: {
           '0%, 100%': {
             transform: 'translateY(50px)',
@@ -235,6 +281,7 @@ module.exports = {
         },
       },
       animation: {
+        'initial-page-load': 'initial_page_load 300ms ease-in-out infinite',
         move: 'move 5s linear infinite',
         move1: 'move1 5s linear infinite',
         squaremove: 'squaremove 10s linear infinite',
@@ -244,6 +291,11 @@ module.exports = {
         breath4: 'breath_4 7s ease-out infinite',
         breath5: 'breath_5 7s ease-out infinite',
         breath6: 'breath_6 7s ease-out infinite',
+      },
+      gridTemplateRows: {
+        8: 'repeat(8, minmax(0,1fr)',
+        // 'layout': 200px minmax(900px, 1fr) 100px'
+        layout: '200px minmax(900px, 1fr) 100px',
       },
     },
   },
@@ -261,13 +313,13 @@ module.exports = {
       right: ['nth-child'],
       width: ['nth-child'],
       height: ['nth-child'],
-      backgroundColor: ['checked'],
-
+      backgroundColor: ['checked', 'nth-child'],
+      strokeWidth: ['nth-child', 'first'],
+      strokeColor: ['nth-child', 'first'],
+      fillColor: ['nth-child', 'first'],
+      fill: ['nth-child', 'first'],
       typography: ['dark'],
     },
   },
-  plugins: [
-    // plugin.nthChild(),
-    require('@tailwindcss/typography'),
-  ],
+  plugins: [plugin.nthChild(), require('@tailwindcss/typography')],
 };

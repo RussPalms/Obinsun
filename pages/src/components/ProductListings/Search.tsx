@@ -69,10 +69,7 @@ const Search: React.FC = () => {
               key={slug}
               className="px-4 py-2 text-sm dark:text-gray-100 leading-5 text-left cursor-pointer hover:bg-gray-100 dark:hover:bg-green-500"
             >
-              <NextLink
-                href={`/product-listings/listings/${slug}`}
-                onClick={handleClickInside}
-              >
+              <NextLink href={`/listings/${slug}`} onClick={handleClickInside}>
                 {title}
               </NextLink>
             </li>

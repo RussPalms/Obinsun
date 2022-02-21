@@ -1,11 +1,11 @@
 //@ts-nocheck
 
-import React from "react";
-import PeaceOnEarth from "../assets/ObinsunVectors/PeaceOnEarth";
-import RadRex from "../assets/ObinsunVectors/RadRex";
-import SeeYouInSpace from "../assets/ObinsunVectors/SeeYouInSpace";
-import SkullIsFullOfCats from "../assets/ObinsunVectors/SkullIsFullOfCats";
-import WhiskersAndPipe from "../assets/ObinsunVectors/WhiskersAndPipe";
+import React from 'react';
+import PeaceOnEarth from '../assets/ObinsunVectors/PeaceOnEarth';
+import RadRex from '../assets/ObinsunVectors/RadRex';
+import SeeYouInSpace from '../assets/ObinsunVectors/SeeYouInSpace';
+import SkullIsFullOfCats from '../assets/ObinsunVectors/SkullIsFullOfCats';
+import WhiskersAndPipe from '../assets/ObinsunVectors/WhiskersAndPipe';
 
 type Props = {};
 

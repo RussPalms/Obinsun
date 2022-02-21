@@ -1,13 +1,13 @@
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection } from 'firebase/firestore';
 import {
   ref,
   uploadBytes,
   uploadBytesResumable,
   getDownloadURL,
-} from "firebase/storage";
-import { useSession } from "next-auth/react";
-import { useState, useEffect } from "react";
-import { db, projectStorage, timestamp } from "../lib/database/firebaseStorage";
+} from 'firebase/storage';
+import { useSession } from 'next-auth/react';
+import { useState, useEffect } from 'react';
+import { db, projectStorage, timestamp } from '../lib/database/firebaseStorage';
 
 const useStorage = (file: any) => {
   // console.log(file);
@@ -20,7 +20,7 @@ const useStorage = (file: any) => {
 
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState(null);
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState('');
 
   // const userImage = `users/${session?.id}/images`;
 
@@ -33,7 +33,7 @@ const useStorage = (file: any) => {
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
-      "state_changed",
+      'state_changed',
       (snap) => {
         let percentage = (snap.bytesTransferred / snap.totalBytes) * 100;
         setProgress(percentage);
