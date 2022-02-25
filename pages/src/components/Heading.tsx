@@ -94,10 +94,10 @@ function Heading() {
             <BiCart className=" h-6 w-6 cursor-pointer mx-2" />
           </div>
         </header>
-        <div className="absolute -top-6 -right-2 rounded-full h-11 w-11 flex justify-center items-center bg-white bg-opacity-20 shadow-glass border border-solid border-white border-opacity-25 border-t border-t-white border-l border-l-white backdrop-blur-[4px] border-top-left-glass z-50">
+        {/* <div className="absolute -top-6 -right-2 rounded-full h-11 w-11 flex justify-center items-center bg-white bg-opacity-20 shadow-glass border border-solid border-white border-opacity-25 border-t border-t-white border-l border-l-white backdrop-blur-[4px] border-top-left-glass z-50">
           <BsSun className="h-6 w-6" />
         </div>
-        <div className="md:translate-x-[0px] md:max-w-[100%] md:p-[30px] md:mt-[-40px] transform translate-x-[-90px] max-w-[700px] bg-white/[0.2] rounded-[20px] backdrop-blur-[10px] border border-white border-opacity-[0.25] border-top-left-glass p-[40px] pl-[110px]"></div>
+        <div className="md:translate-x-[0px] md:max-w-[100%] md:p-[30px] md:mt-[-40px] transform translate-x-[-90px] max-w-[700px] bg-white/[0.2] rounded-[20px] backdrop-blur-[10px] border border-white border-opacity-[0.25] border-top-left-glass p-[40px] pl-[110px]"></div> */}
       </div>
     </section>
   );

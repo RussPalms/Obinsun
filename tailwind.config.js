@@ -295,7 +295,7 @@ module.exports = {
       gridTemplateRows: {
         8: 'repeat(8, minmax(0,1fr)',
         // 'layout': 200px minmax(900px, 1fr) 100px'
-        layout: '200px minmax(900px, 1fr) 100px',
+        layout: '15em minmax(60em, 1fr) 20em',
       },
     },
   },

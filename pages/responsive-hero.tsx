@@ -1,20 +1,20 @@
-import React, { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { MotionPathPlugin } from "gsap/dist/MotionPathPlugin";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { MotionPathPlugin } from 'gsap/dist/MotionPathPlugin';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
-import DraculaVisitsAfrica from "./src/assets/ObinsunVectors/DraculaVisitsAfrica";
-import PeaceOnEarth from "./src/assets/ObinsunVectors/PeaceOnEarth";
-import RadRex from "./src/assets/ObinsunVectors/RadRex";
-import SeeYouInSpace from "./src/assets/ObinsunVectors/SeeYouInSpace";
-import SkullIsFullOfCats from "./src/assets/ObinsunVectors/SkullIsFullOfCats";
-import WhiskersAndPipe from "./src/assets/ObinsunVectors/WhiskersAndPipe";
-import CatsAndSkullsPattern from "./src/assets/ObinsunVectors/CatsAndSkullsPattern";
+import DraculaVisitsAfrica from './src/assets/ObinsunVectors/DraculaVisitsAfrica';
+import PeaceOnEarth from './src/assets/ObinsunVectors/PeaceOnEarth';
+import RadRex from './src/assets/ObinsunVectors/RadRex';
+import SeeYouInSpace from './src/assets/ObinsunVectors/SeeYouInSpace';
+import SkullIsFullOfCats from './src/assets/ObinsunVectors/SkullIsFullOfCats';
+import WhiskersAndPipe from './src/assets/ObinsunVectors/WhiskersAndPipe';
+import CatsAndSkullsPattern from './src/assets/ObinsunVectors/CatsAndSkullsPattern';
 
 type Props = {};
 
 function ResponsiveHero({}: Props) {
-  if (typeof window !== "undefined") {
+  if (typeof window !== 'undefined') {
     gsap.registerPlugin(MotionPathPlugin);
     gsap.registerPlugin(ScrollTrigger);
   }
@@ -24,21 +24,21 @@ function ResponsiveHero({}: Props) {
   useEffect(() => {
     const container: any = ref.current;
 
-    let path_1 = container!.querySelector("#path1");
+    let path_1 = container!.querySelector('#path1');
     let path_1_length = path_1.getTotalLength();
-    let rectRef = container!.querySelector("#whiskers-and-pipe");
-    let landing = container!.querySelector("#landing");
+    let rectRef = container!.querySelector('#whiskers-and-pipe');
+    let landing = container!.querySelector('#landing');
 
-    path_1.style.strokeDasharray = path_1_length + " " + path_1_length;
+    path_1.style.strokeDasharray = path_1_length + ' ' + path_1_length;
     path_1.style.strokeDashoffset = path_1_length;
 
-    document.addEventListener("scroll", (e) => {
+    document.addEventListener('scroll', (e) => {
       e.preventDefault();
 
       let event: any = e.target;
       let scrollPercentage =
         (event.documentElement.scrollTop +
-          event.getElementById("landing").scrollTop) /
+          event.getElementById('landing').scrollTop) /
         (event.documentElement.scrollHeight -
           event.documentElement.clientHeight);
       let drawLength = path_1_length * scrollPercentage;
@@ -47,7 +47,7 @@ function ResponsiveHero({}: Props) {
 
     gsap.set(rectRef, { autoAlpha: 1 });
 
-    gsap.defaults({ ease: "none" });
+    gsap.defaults({ ease: 'none' });
     gsap
       .timeline({
         scrollTrigger: {
@@ -56,9 +56,9 @@ function ResponsiveHero({}: Props) {
         },
       })
       .to(rectRef, {
-        rotate: "90deg",
-        rotationY: "-3rad",
-        skewY: "10deg",
+        rotate: '90deg',
+        rotationY: '-3rad',
+        skewY: '10deg',
         immediateRender: true,
         motionPath: {
           path: path_1,
@@ -72,21 +72,21 @@ function ResponsiveHero({}: Props) {
   useEffect(() => {
     const container: any = ref.current;
 
-    let path_2 = container!.querySelector("#path2");
+    let path_2 = container!.querySelector('#path2');
     let path_2_length = path_2.getTotalLength();
-    let rect0Ref = container!.querySelector("#peace-on-earth");
-    let landing = container!.querySelector("#landing");
+    let rect0Ref = container!.querySelector('#peace-on-earth');
+    let landing = container!.querySelector('#landing');
 
-    path_2.style.strokeDasharray = path_2_length + " " + path_2_length;
+    path_2.style.strokeDasharray = path_2_length + ' ' + path_2_length;
     path_2.style.strokeDashoffset = path_2_length;
 
-    document.addEventListener("scroll", (e) => {
+    document.addEventListener('scroll', (e) => {
       e.preventDefault();
 
       let event: any = e.target;
       let scrollPercentage =
         (event.documentElement.scrollTop +
-          event.getElementById("landing").scrollTop) /
+          event.getElementById('landing').scrollTop) /
         (event.documentElement.scrollHeight -
           event.documentElement.clientHeight);
       let drawLength = path_2_length * scrollPercentage;
@@ -95,7 +95,7 @@ function ResponsiveHero({}: Props) {
 
     gsap.set(rect0Ref, { autoAlpha: 1 });
 
-    gsap.defaults({ ease: "none" });
+    gsap.defaults({ ease: 'none' });
     gsap
       .timeline({
         scrollTrigger: {
@@ -104,9 +104,9 @@ function ResponsiveHero({}: Props) {
         },
       })
       .to(rect0Ref, {
-        rotate: "360deg",
-        rotationX: "6rad",
-        skewX: "-45deg",
+        rotate: '360deg',
+        rotationX: '6rad',
+        skewX: '-45deg',
         scale: 0.1,
         immediateRender: true,
         motionPath: {
@@ -120,23 +120,23 @@ function ResponsiveHero({}: Props) {
   useEffect(() => {
     const container: any = ref.current;
 
-    let path_4 = container!.querySelector("#path4");
+    let path_4 = container!.querySelector('#path4');
     let path_4_length = path_4.getTotalLength();
-    let rect4Ref = container!.querySelector("#rad-rex");
-    let landing = container!.querySelector("#landing");
+    let rect4Ref = container!.querySelector('#rad-rex');
+    let landing = container!.querySelector('#landing');
 
     console.log(path_4.pathLength);
 
-    path_4.style.strokeDasharray = path_4_length + " " + path_4_length;
+    path_4.style.strokeDasharray = path_4_length + ' ' + path_4_length;
     path_4.style.strokeDashoffset = path_4_length;
 
-    document.addEventListener("scroll", (e) => {
+    document.addEventListener('scroll', (e) => {
       e.preventDefault();
 
       let event: any = e.target;
       let scrollPercentage =
         (event.documentElement.scrollTop +
-          event.getElementById("landing").scrollTop) /
+          event.getElementById('landing').scrollTop) /
         (event.documentElement.scrollHeight -
           event.documentElement.clientHeight);
       let drawLength = path_4_length * scrollPercentage;
@@ -145,7 +145,7 @@ function ResponsiveHero({}: Props) {
 
     gsap.set(rect4Ref, { autoAlpha: 1 });
 
-    gsap.defaults({ ease: "none" });
+    gsap.defaults({ ease: 'none' });
     gsap
       .timeline({
         scrollTrigger: {
@@ -154,7 +154,7 @@ function ResponsiveHero({}: Props) {
         },
       })
       .to(rect4Ref, {
-        rotationY: "-180deg",
+        rotationY: '-180deg',
         immediateRender: true,
         motionPath: {
           path: path_4,
@@ -167,24 +167,24 @@ function ResponsiveHero({}: Props) {
   useEffect(() => {
     const container: any = ref.current;
 
-    let see_you_in_space = container!.querySelector("#see_you_in_space");
+    let see_you_in_space = container!.querySelector('#see_you_in_space');
     let see_you_in_space_length = see_you_in_space.getTotalLength();
-    let seeYouInSpaceRef = container!.querySelector("#see-you-in-space");
-    let landing = container!.querySelector("#landing");
+    let seeYouInSpaceRef = container!.querySelector('#see-you-in-space');
+    let landing = container!.querySelector('#landing');
 
     console.log(see_you_in_space.pathLength);
 
     see_you_in_space.style.strokeDasharray =
-      see_you_in_space_length + " " + see_you_in_space_length;
+      see_you_in_space_length + ' ' + see_you_in_space_length;
     see_you_in_space.style.strokeDashoffset = see_you_in_space_length;
 
-    document.addEventListener("scroll", (e) => {
+    document.addEventListener('scroll', (e) => {
       e.preventDefault();
 
       let event: any = e.target;
       let scrollPercentage =
         (event.documentElement.scrollTop +
-          event.getElementById("landing").scrollTop) /
+          event.getElementById('landing').scrollTop) /
         (event.documentElement.scrollHeight -
           event.documentElement.clientHeight);
       let drawLength = see_you_in_space_length * scrollPercentage;
@@ -194,7 +194,7 @@ function ResponsiveHero({}: Props) {
 
     gsap.set(seeYouInSpaceRef, { autoAlpha: 1 });
 
-    gsap.defaults({ ease: "none" });
+    gsap.defaults({ ease: 'none' });
     gsap
       .timeline({
         scrollTrigger: {
@@ -203,7 +203,7 @@ function ResponsiveHero({}: Props) {
         },
       })
       .to(seeYouInSpaceRef, {
-        rotate: "225deg",
+        rotate: '225deg',
         immediateRender: true,
         motionPath: {
           path: see_you_in_space,
@@ -216,23 +216,23 @@ function ResponsiveHero({}: Props) {
   useEffect(() => {
     const container: any = ref.current;
 
-    let path_9 = container!.querySelector("#skull_is_full_of_cats");
+    let path_9 = container!.querySelector('#skull_is_full_of_cats');
     let path_9_length = path_9.getTotalLength();
-    let design9Ref = container!.querySelector("#skull-is-full-of-cats");
-    let landing = container!.querySelector("#landing");
+    let design9Ref = container!.querySelector('#skull-is-full-of-cats');
+    let landing = container!.querySelector('#landing');
 
     console.log(path_9.pathLength);
 
-    path_9.style.strokeDasharray = path_9_length + " " + path_9_length;
+    path_9.style.strokeDasharray = path_9_length + ' ' + path_9_length;
     path_9.style.strokeDashoffset = path_9_length;
 
-    document.addEventListener("scroll", (e) => {
+    document.addEventListener('scroll', (e) => {
       e.preventDefault();
 
       let event: any = e.target;
       let scrollPercentage =
         (event.documentElement.scrollTop +
-          event.getElementById("landing").scrollTop) /
+          event.getElementById('landing').scrollTop) /
         (event.documentElement.scrollHeight -
           event.documentElement.clientHeight);
       let drawLength = path_9_length * scrollPercentage;
@@ -241,7 +241,7 @@ function ResponsiveHero({}: Props) {
 
     gsap.set(design9Ref, { autoAlpha: 1 });
 
-    gsap.defaults({ ease: "none" });
+    gsap.defaults({ ease: 'none' });
     gsap
       .timeline({
         scrollTrigger: {
@@ -250,8 +250,8 @@ function ResponsiveHero({}: Props) {
         },
       })
       .to(design9Ref, {
-        rotate: "-45deg",
-        rotationX: "-45deg",
+        rotate: '-45deg',
+        rotationX: '-45deg',
         immediateRender: true,
         motionPath: {
           path: path_9,
@@ -316,10 +316,10 @@ function ResponsiveHero({}: Props) {
   useEffect(() => {
     const container: any = ref.current;
     // const container: any = featuredRef.current;
-    let landingRef = container!.querySelector("#landing");
+    let landingRef = container!.querySelector('#landing');
     // let featuredDesignsRef = container!.querySelector("#featured");
     // let boundryRef = container!.querySelector("#design-boundry");
-    let pathContainerRef = container!.querySelector("#path_container");
+    let pathContainerRef = container!.querySelector('#path_container');
 
     gsap.set(pathContainerRef, { autoAlpha: 1 });
 
@@ -338,7 +338,7 @@ function ResponsiveHero({}: Props) {
       {
         y: 400,
         duration: 1,
-        ease: "none",
+        ease: 'none',
         scrollTrigger: {
           trigger: landingRef,
           // scrub: 0.5,
@@ -395,7 +395,7 @@ function ResponsiveHero({}: Props) {
                 >
                   <svg
                     // className="h-[100%] w-[100%] border border-0 border-black invisible"
-                    className="origin-top-left h-full absolute top-0 left-0 scale-y-[100%] scale-x-[9.25%]"
+                    className="origin-top-left top-0 left-0 featured-scale"
                     viewBox="0 0 1920 1080"
                     fill="none"
                     preserveAspectRatio="xMidYMax meet"
@@ -429,7 +429,7 @@ function ResponsiveHero({}: Props) {
                   id="path_design0_container"
                 >
                   <svg
-                    className="origin-top-right h-full absolute top-0 right-0 scale-y-[100%] scale-x-[9.25%]"
+                    className="origin-top-right top-0 right-0 featured-scale"
                     viewBox="0 0 1920 1080"
                     fill="none"
                     preserveAspectRatio="xMidYMax meet"
@@ -461,7 +461,7 @@ function ResponsiveHero({}: Props) {
                   id="path_design4_container"
                 >
                   <svg
-                    className="origin-left h-full absolute left-0 scale-y-[100%] scale-x-[9.25%]"
+                    className="origin-left left-0 featured-scale-mid"
                     viewBox="0 0 1920 1080"
                     fill="none"
                     preserveAspectRatio="xMidYMax meet"
@@ -496,7 +496,7 @@ function ResponsiveHero({}: Props) {
                   id="path_design7_container"
                 >
                   <svg
-                    className="origin-bottom-left h-full absolute bottom-0 left-0 scale-y-[100%] scale-x-[9.25%]"
+                    className="origin-bottom-left bottom-0 left-0 featured-scale-bottom"
                     viewBox="0 0 1920 1080"
                     fill="none"
                     preserveAspectRatio="xMidYMax meet"
@@ -530,7 +530,7 @@ function ResponsiveHero({}: Props) {
                   id="path_design9_container"
                 >
                   <svg
-                    className="origin-bottom-right h-full absolute bottom-0 right-3 scale-y-[100%] scale-x-[9.25%]"
+                    className="origin-bottom-right bottom-0 right-3 featured-scale-bottom-right"
                     viewBox="0 0 1920 1080"
                     fill="none"
                     preserveAspectRatio="xMidYMax meet"

@@ -103,7 +103,18 @@ body {
   }
 
   .featured-scale {
-    @apply origin-top-left h-full absolute top-0 left-0 scale-y-[100%] scale-x-[9.25%];
+    @apply h-full absolute scale-y-[100%] xs:scale-x-[9.25%] sm:scale-x-[15%] md:scale-x-[25%] md:scale-y-[115%] lg:scale-x-[35%] lg:scale-y-[120%] xl:scale-x-[45%] xl:scale-x-[55%] 2xl:scale-x-[65%] 2xl:scale-x-[75%];
+  }
+  .featured-scale-mid {
+    @apply xs:scale-x-[20%] xs:scale-y-[195%] sm:scale-x-[40%] md:scale-x-[60%] lg:scale-x-[90%] xl:scale-x-[120%] 2xl:scale-x-[150%] 3xl:scale-x-[180%] 4vl:scale-x-[200%];
+  }
+
+  .featured-scale-bottom {
+    @apply xs:scale-x-[25%] xs:scale-y-[178%] sm:scale-x-[50%] sm:scale-y-[181%] md:scale-x-[85%] md:scale-y-[183%] lg:scale-x-[110%] lg:scale-y-[185%] xl:scale-x-[140%] xl:scale-y-[187%] 2xl:scale-x-[170%] 2xl:scale-y-[187.3%] 3xl:scale-x-[215%] 3xl:scale-y-[187.7%] 4vl:scale-x-[250%] 4vl:scale-y-[188%];
+  }
+
+  .featured-scale-bottom-right {
+    @apply xs:scale-x-[15%] xs:scale-y-[178%] sm:scale-x-[50%] sm:scale-y-[160%] md:scale-x-[58%] md:scale-y-[161%] lg:scale-x-[90%] lg:scale-y-[140%] xl:scale-x-[120%] xl:scale-y-[135%] 2xl:scale-x-[140%] 2xl:scale-y-[125%] 3xl:scale-x-[160%] 3xl:scale-y-[125.03%] 4vl:scale-x-[180%] 4vl:scale-y-[112%];
   }
 
   .glass-container {
@@ -142,9 +153,17 @@ body {
     @apply h-[40vh] dark:bg-blue-700 bg-red-400 blur-[40em] backdrop-blur-3xl z-0;
   }*/
 
-  .shape {
+  /*.shape-top {
+    @apply h-[50vh] bg-gradient-to-br dark:bg-gradient-to-br from-red-400 via-fuchsia-300 to-blue-900 dark:text-blue-300 text-red-900 bg-size-200 bg-pos-0 dark:bg-pos-100 opacity-70 z-40 relative blur-[10em] border rounded-3xl;
+  }*/
+
+  .shape-top {
+    @apply h-[50vh] bg-red-500 dark:bg-blue-900 dark:text-blue-300 text-red-900  z-40 relative blur-[0em];
+  }
+
+  .shape-bottom {
     /*@apply p-[1em] bg-red-500 mb-[1em] pb-[1em] text-center;*/
-    @apply h-[50vh] bg-gradient-to-br from-red-400 via-neutral-300 to-blue-900 dark:text-blue-300 text-red-900 bg-size-200 bg-pos-0 dark:bg-pos-100 opacity-70 z-10;
+    @apply h-[50vh] bg-gradient-to-br dark:bg-gradient-to-tl from-red-400 via-fuchsia-300 to-blue-900 dark:text-blue-300 text-red-900 bg-size-200 bg-pos-0 dark:bg-pos-0 opacity-70 z-40 relative blur-[10em];
   }
 
   .content-container {
@@ -190,7 +209,91 @@ transition: background 1s ease-out; */
     0px 65%,
     0px 0px
   );*/
-  clip-path: polygon(50% 0%, 100% 0, 100% 50%, 75% 100%, 0 50%, 0 25%);
+  clip-path: polygon(50% 0%, 100% 50%, 75% 100%, 0 50%, 0 25%);
+}
+
+/* Top Left */
+.clipped-top-left-edge {
+  clip-path: polygon(0 0, 25% 0%, 0 25%);
+}
+.clipped-top-left-strip {
+  clip-path: polygon(25% 0, 50% 0%, 0 50%, 0 25%);
+}
+.clipped-top-left-center {
+  clip-path: polygon(50% 0, 50% 50%, 0 50%);
+}
+.clipped-top-left-pent {
+  clip-path: polygon(
+    6.25% 6.25%,
+    25% 12.5%,
+    37.5% 12.5%,
+    43.75% 25%,
+    25% 25%,
+    25% 43.75%
+  );
+}
+
+/*Top Right*/
+.clipped-top-right-edge {
+  clip-path: polygon(100% 0, 75% 0%, 100% 25%);
+}
+.clipped-top-right-strip {
+  clip-path: polygon(100% 25%, 100% 50%, 50% 0, 75% 0);
+}
+.clipped-top-right-center {
+  clip-path: polygon(100% 50%, 50% 50%, 50% 0);
+}
+.clipped-top-right-pent {
+  clip-path: polygon(
+    93.75% 6.25%,
+    75% 43.75%,
+    75% 25%,
+    56.25% 25%,
+    62.5% 12.5%,
+    75% 12.25%
+  );
+}
+
+/*Bottom Right*/
+.clipped-bottom-right-edge {
+  clip-path: polygon(100% 100%, 75% 100%, 100% 75%);
+}
+.clipped-bottom-right-strip {
+  clip-path: polygon(75% 100%, 50% 100%, 100% 50%, 100% 75%);
+}
+.clipped-bottom-right-center {
+  clip-path: polygon(100% 50%, 50% 100%, 50% 50%);
+}
+.clipped-bottom-right-pent {
+  clip-path: polygon(
+    95.75% 95.75%,
+    75% 87.75%,
+    62.5% 87.75%,
+    56.25% 75%,
+    75% 75%,
+    75% 56.25%
+  );
+}
+
+/*Bottom Left*/
+.clipped-bottom-left-edge {
+  clip-path: polygon(0 100%, 0 75%, 25% 100%);
+}
+.clipped-bottom-left-strip {
+  clip-path: polygon(0 75%, 0 50%, 50% 100%, 25% 100%);
+}
+.clipped-bottom-left-center {
+  clip-path: polygon(0 50%, 50% 50%, 50% 100%);
+}
+.clipped-bottom-left-pent {
+  clip-path: polygon(
+    6.25% 95.75%,
+    25% 62.5%,
+    25% 75%,
+    43.75% 75%,
+    37.25% 87.75%,
+    25% 87.75%
+  );
 }
 
 .clipped-shape-bottom {
@@ -545,3 +648,28 @@ spinner/processing state, errors
   }
 }
 */
+
+/*.all-blur {
+  -webkit-filter: blur(3px);
+  -moz-filter: blur(3px);
+  -ms-filter: blur(3px);
+  -o-filter: blur(3px);
+  filter: blur(3px);
+  filter: url(#blur);
+  filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='3');
+}*/
+
+/*.all-blur {
+  -webkit-filter: blur(4em);
+  -moz-filter: blur(4em);
+  -ms-filter: blur(4em);
+  -o-filter: blur(4em);
+  filter: blur(4em);
+  filter: url(#blur);
+  filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='3');
+}*/
+
+.moz-blur {
+  -moz-filter: blur(6em);
+  filter: blur(6em);
+}
