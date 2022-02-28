@@ -82,7 +82,7 @@ export const Preload = ({}: Props) => {
   return (
     <>
       <section
-        className="h-screen flex overflow-hidden relative first:bg-gray-500 nth-child:bg-gray-700"
+        className="h-screen flex overflow-hidden relative first:bg-gray-300 nth-child:bg-gray-800"
         ref={ref}
       >
         <div className="w-1/2 relative overflow-hidden first:stroke-[0.125em] first:stroke-black first:fill-transparent">

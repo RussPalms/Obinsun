@@ -375,7 +375,7 @@ function ResponsiveHero({}: Props) {
         <div
           ref={featuredRef}
           id="featured"
-          className="h-[100rem] w-full border border-black border-0 absolute flex justify-center items-center z-10"
+          className="h-[100rem] w-full border border-black border-0 fixed flex justify-center items-center z-10"
         >
           <div
             id="design-bountry"

@@ -339,7 +339,7 @@ const Featured = (props: Props) => {
         ref={ref}
         id="landing"
         // id="design-bountry"
-        className="h-[100%] w-[100%] relative flex justify-center items-center border border-0 border-purple-900"
+        className="h-[100%] w-[100%] relative flex justify-center items-center border border-1 border-purple-900"
       >
         <div
           id="path_container"

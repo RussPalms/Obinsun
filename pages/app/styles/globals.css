@@ -35,12 +35,49 @@ body {
 } */
 
 @layer components {
+  /*.asset-placement {
+    @apply justify-self-start place-self-end lg:justify-self-start lg:place-self-end;
+  }
+
+  .asset-placement-0 {
+    @apply place-self-start justify-self-end lg:justify-self-end lg:place-self-start;
+  }
+
+  .asset-placement-1 {
+    @apply place-self-end justify-self-start lg:justify-self-end lg:place-self-start;
+  }
+
+  .asset-placement-2 {
+    @apply place-self-start justify-self-end lg:justify-self-end lg:place-self-start;
+  }*/
+
+  /*.asset-placement {
+    @apply animate-breath1;
+  }
+
+  .asset-placement-0 {
+    @apply animate-breath2;
+  }
+
+  .asset-placement-1 {
+    @apply animate-breath3;
+  }
+
+  .asset-placement-2 {
+    @apply animate-breath4;
+  }*/
+
+  /*.grid-space {
+    @apply col-span-1 sm:row-span-1 sm:col-span-1;
+  }*/
+
   .glass {
     @apply bg-white bg-opacity-20 shadow-glass border border-solid border-white border-opacity-25 rounded-[20px] backdrop-blur-[4px];
   }
   .design-container {
-    @apply list-none w-[100px] h-[100px] my-[10px] flex justify-center items-center;
+    @apply list-none w-[6.25em] h-[6.25em] my-[0.625em] flex justify-center items-center;
   }
+  /*took out my-[0.625em]*/
 
   /*
   .design-container {
@@ -53,7 +90,7 @@ body {
     @apply list-none w-[30px] h-[30px] bg-white text-[#1e6b7b] flex justify-center items-center m-[5px] border rounded-[4px] font-bold cursor-pointer transition duration-[0.25s] transform hover:translate-y-[-10px] shadow-size;
   }
   .asset {
-    @apply h-14 w-14 object-fill;
+    @apply blur-[0.2em] h-[2.714286em] w-[2.714286em] xs:h-[3em] xs:w-[3em] sm:h-[3.2857143em] sm:w-[3.2857143em] md:h-[3.571429em] md:w-[3.571429em] lg:h-[3.857143em] lg:w-[3.857143em] xl:h-[4.142857em] xl:w-[4.142857em]  2xl:h-[4.428571em] 2xl:w-[4.428571em] 3xl:h-[4.714286em] 3xl:w-[4.714286em] 4vl:h-[5em] 4vl:w-[5em];
   }
 
   .glass-header-item-container {
@@ -103,7 +140,7 @@ body {
   }
 
   .featured-scale {
-    @apply h-full absolute scale-y-[100%] xs:scale-x-[9.25%] sm:scale-x-[15%] md:scale-x-[25%] md:scale-y-[115%] lg:scale-x-[35%] lg:scale-y-[120%] xl:scale-x-[45%] xl:scale-x-[55%] 2xl:scale-x-[65%] 2xl:scale-x-[75%];
+    @apply h-full absolute scale-y-[100%] xs:scale-x-[9.25%] sm:scale-x-[15%] md:scale-x-[25%] md:scale-y-[115%] lg:scale-x-[35%] lg:scale-y-[120%] xl:scale-x-[45%] 2xl:scale-x-[55%] 3xl:scale-x-[65%] 4vl:scale-x-[75%];
   }
   .featured-scale-mid {
     @apply xs:scale-x-[20%] xs:scale-y-[195%] sm:scale-x-[40%] md:scale-x-[60%] lg:scale-x-[90%] xl:scale-x-[120%] 2xl:scale-x-[150%] 3xl:scale-x-[180%] 4vl:scale-x-[200%];
@@ -118,7 +155,35 @@ body {
   }
 
   .glass-container {
-    @apply border-top-left-glass border-bottom-right-glass bg-neutral-400 dark:bg-neutral-600 bg-opacity-10 dark:bg-opacity-20 shadow-glass dark:shadow-dark-glass rounded-[1.25em] backdrop-blur-[0.25em];
+    @apply border-top-left-glass border-bottom-right-glass bg-gray-300/50 dark:bg-gray-800/50  shadow-glass dark:shadow-dark-glass rounded-[1.25em] backdrop-blur-[0.25em];
+  }
+
+  .menu-toggle:before {
+    @apply content-[''] absolute h-[0.125em] w-[1.875em] bg-gray-900 dark:bg-[#4C8EFF] transform transition-all duration-500;
+  }
+
+  .menu-toggle:after {
+    @apply content-[''] absolute h-[0.125em] w-[1.875em] bg-gray-900 dark:bg-[#4C8EFF] transform transition-all duration-500 shadow-menu dark:shadow-dark-menu;
+  }
+
+  .filter-container {
+    @apply border border-transparent rounded-[1.25em];
+  }
+
+  .filter-icon-list-container {
+    @apply flex items-center justify-center gap-[1.5em];
+  }
+
+  .filter-icon-glass-container {
+    @apply hover:bg-gray-300/50 dark:hover:bg-gray-800/50 border border-gray-800/20 dark:border-gray-300/20 bg-gray-800/10 dark:bg-gray-300/10 shadow-glass dark:shadow-dark-glass rounded-[1.25em] h-[2.5rem] min-w-[2.5rem] flex items-center justify-center;
+  }
+
+  .filter-icon-size {
+    @apply h-[1.5em] w-[1.5em];
+  }
+
+  .filter-text-container {
+    @apply min-w-[10rem] flex justify-start;
   }
 
   input + label {
@@ -178,6 +243,59 @@ body {
   .initial-page-loaders {
     @apply absolute whitespace-nowrap leading-[100vh] flex h-full items-center justify-center w-full animate-initial-page-load;
   }
+
+  .custom-clip-container {
+    @apply blur-[1em] absolute top-0 left-0 z-40 flex justify-center items-center w-full h-full flex-1 grow;
+  } /*max blur is 7em*/
+
+  .custom-clips {
+    @apply flex-1 grow absolute top-0 left-0 h-full w-full before:content-[''];
+  }
+
+  .clip-color-1 {
+    @apply bg-gray-50 dark:bg-gray-900;
+  }
+
+  .clip-color-2 {
+    @apply bg-gray-50 dark:bg-gray-900;
+  }
+
+  .clip-color-3 {
+    @apply bg-gray-50 dark:bg-gray-900;
+  }
+
+  .clip-color-4 {
+    @apply bg-red-400 dark:bg-blue-900;
+  }
+}
+
+#background {
+  background-image: url('https://blog.mozilla.org/wp-content/blogs.dir/278/files/2021/02/ff_blog_header_ff_1400x770.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+.card {
+  background-color: hsla(0, 0%, 97%, 0.2);
+  border: 1px solid hsla(0, 0%, 97%, 0.4);
+  height: 66%;
+  width: 66%;
+}
+
+.glassmorphism {
+  position: relative;
+}
+.glassmorphism::before {
+  background-attachment: fixed;
+  background-image: -moz-element(#background);
+  content: '';
+  filter: blur(10px); /* ADDED */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
 }
 
 /*.border-top-left-glass {
@@ -233,6 +351,27 @@ transition: background 1s ease-out; */
   );
 }
 
+/* Top Left Half */
+.clipped-top-left-edge-0 {
+  clip-path: polygon(6.25% 6.25%, 25% 0%, 0 25%);
+}
+.clipped-top-left-strip-0 {
+  clip-path: polygon(25% 0, 50% 0%, 0 50%, 0 25%);
+}
+.clipped-top-left-center-0 {
+  clip-path: polygon(50% 0, 50% 50%, 0 50%);
+}
+.clipped-top-left-pent-0 {
+  clip-path: polygon(
+    6.25% 6.25%,
+    25% 12.5%,
+    37.5% 12.5%,
+    43.75% 25%,
+    25% 25%,
+    25% 43.75%
+  );
+}
+
 /*Top Right*/
 .clipped-top-right-edge {
   clip-path: polygon(100% 0, 75% 0%, 100% 25%);
@@ -266,7 +405,7 @@ transition: background 1s ease-out; */
 }
 .clipped-bottom-right-pent {
   clip-path: polygon(
-    95.75% 95.75%,
+    93.75% 93.75%,
     75% 87.75%,
     62.5% 87.75%,
     56.25% 75%,
@@ -287,8 +426,8 @@ transition: background 1s ease-out; */
 }
 .clipped-bottom-left-pent {
   clip-path: polygon(
-    6.25% 95.75%,
-    25% 62.5%,
+    6.25% 93.75%,
+    25% 56.25%,
     25% 75%,
     43.75% 75%,
     37.25% 87.75%,
@@ -307,6 +446,10 @@ transition: background 1s ease-out; */
     0px 0px
   );*/
   clip-path: polygon(25% 0%, 100% 50%, 100% 75%, 50% 100%, 0 100%, 0 50%);
+}
+
+.triangle-page {
+  clip-path: polygon(0 0, 100% 0, 0 100%);
 }
 
 .border-top-left-glass {

@@ -45,7 +45,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   });
 
   useEffect(() => {
-    setTimeout(() => setLoading(!loading), 600);
+    setTimeout(() => setLoading(!loading), 1000);
   }, []);
 
   useEffect(() => {

@@ -18,6 +18,11 @@ import { useEffect, useState } from 'react';
 // import VerifyDocuments from "./src/components/Payments/VerifyDocuments";
 
 import Link from 'next/link';
+import LandingDesigns from './src/components/LandingDesigns';
+import DesignMix from './src/components/DesignMix';
+import DarkModeToggle from './src/components/DarkModeToggle';
+import Hero from './src/components/Hero';
+import Shop from './src/components/Shop';
 
 export default function Home(): NextPage {
   // useEffect(async (error) => {
@@ -69,19 +74,29 @@ export default function Home(): NextPage {
         <link rel="icon" href="/Grim2021.svg" />
       </Head>
 
-      <main>
-        <Heading />
+      <main className="relative h-full">
+        {/* <DarkModeToggle /> */}
+        {/* <Heading /> */}
         {/* home */}
         {/* <Headers /> */}
         {/* <Header /> */}
-        <Designs />
+        {/* <Designs /> */}
+        {/* <LandingDesigns /> */}
+        <div className="relative">
+          <DesignMix />
+          {/* <Hero /> */}
+          {/* <Shop /> */}
+        </div>
+        <div className="relative">
+          <Shop />
+        </div>
         {/* <Design /> */}
         {/* <Entity /> */}
         {/* <Entities /> */}
         {/* <Login /> */}
         {/* <Log /> */}
 
-        <Link href="/gradient-testing">Gradient Testing</Link>
+        {/* <Link href="/gradient-testing">Gradient Testing</Link> */}
 
         {/* <VerifyDocuments /> */}
       </main>

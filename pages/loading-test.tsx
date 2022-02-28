@@ -111,7 +111,7 @@ function LoadingTest({}: Props) {
     <>
       {/* <div className="h-full w-screen absolute top-0 left-0"> */}
       <section
-        className="h-screen flex overflow-hidden relative first:bg-gray-500 nth-child:bg-gray-700"
+        className="h-screen flex overflow-hidden relative first:bg-gray-300 nth-child:bg-gray-800"
         ref={ref}
       >
         {/* <div className="h-screen w-1/2 relative overflow-hidden first:stroke-[0.125em] first:stroke-black first:fill-transparent first:left-[100%] first:relative first:w-[50%] first:bg-cover first:overflow-hidden "> */}
