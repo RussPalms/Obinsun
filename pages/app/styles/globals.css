@@ -167,11 +167,11 @@ body {
   }
 
   .filter-container {
-    @apply border border-transparent rounded-[1.25em];
+    @apply border border-transparent rounded-[1.25em] laptop-l:w-full flex-1;
   }
 
   .filter-icon-list-container {
-    @apply flex items-center justify-center gap-[1.5em];
+    @apply flex items-center justify-center gap-[1.5em] laptop-l:gap-[1em] laptop-l:max-w-full flex-1;
   }
 
   .filter-icon-glass-container {
@@ -183,7 +183,7 @@ body {
   }
 
   .filter-text-container {
-    @apply min-w-[10rem] flex justify-start;
+    @apply min-w-[10rem] flex justify-start laptop-l:max-w-full flex-1;
   }
 
   input + label {

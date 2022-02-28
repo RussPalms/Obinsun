@@ -100,11 +100,19 @@ module.exports = {
       // // xs: { max: "320px" },
       // xs: { max: "20em" },
 
-      '0vs': { min: '0em' },
-      xs: { min: '20em' },
+      vs: { min: '20em' }, //  Smallest  @ 320px * 787px
+      xs: { min: '23.4375em' }, //  iPhone SE @ 375px * 667px
+      '0xs': { min: '24.375em' }, //  iPhone 12 Pro @ 390px * 884px
+      '1xs': { min: '24.5625em' }, //  Pixel 5 @ 393px * 851px
+      '2xs': { min: '25.875em' }, //  iPhone XR @ 414px * 896px
+      'mobile-l': { min: '26.5625em' }, //  MobileL @425px * 787px
       sm: { min: '40em' },
+      tablet: { min: '48em' }, //  Tablet / iPadMini
+      'tablet-l': { min: '51.25em' }, //  Tablet L / iPadAir
       md: { min: '60em' },
+      laptop: { min: '64em' }, //  Laptop
       lg: { min: '80em' },
+      'laptop-l': { min: '90em' }, //  Laptop L
       xl: { min: '100em' },
       '2xl': { min: '120em' },
       '3xl': { min: '140em' },
