@@ -26,6 +26,7 @@ module.exports = {
       none: 'none',
       // glass: '0 15px 25px rgba(0, 0, 0, 0.05)',
       glass: '0 0.9375em 1.5625em rgba(0, 0, 0, 0.05)',
+      'social-glass': '0 5px 45px rgba(0, 0, 0, 0.1)',
       'dark-glass': '0 0.9375em 1.5625em rgba(255, 255, 255, 0.1)',
       menu: '0 -0.5em 0 #111827',
       'active-menu': '0 0 0 #111827',
@@ -159,6 +160,28 @@ module.exports = {
         ],
       },
       keyframes: {
+        // 'social_glass'{
+        //   '0.5s' : top,
+        //   '0s': z-index,
+        //   '0.5s': transform
+        // },
+        // social_glass0: {
+        //   transition: 'top 0.5s, z-index 0s, transform 0.5s',
+        //   'transition-delay': 'transition-delay: 0.5s, 0.5s, 0s',
+        // },
+        // social_glass1: {
+        //   transition: 'top 0.5s, z-index 0s, transform 0.5s',
+        //   'transition-delay': 'transition-delay: 0.5s, 0.5s, 0s',
+        // },
+        // },
+        social_glass: {
+          '0% 100%': { transform: 'skewX(45deg)' },
+          '50%': { transform: 'translateX(9.375em)' },
+        },
+        social_glass0: {
+          '0% 100%': { transform: 'skewX(45deg)' },
+          '50%': { transform: 'translateX(-9.375em)' },
+        },
         initial_page_load: {
           '0%': {
             transform: 'translateX(0)',
@@ -637,6 +660,9 @@ module.exports = {
         },
       },
       animation: {
+        // socialglass: 'social_glass 0.5s 0.5s 0.5s',
+        'social-glass': 'social_glass 0.5s',
+        'social-glass0': 'social_glass0',
         'initial-page-load': 'initial_page_load 1000ms ease-in-out infinite',
         move: 'move 5s linear infinite',
         move1: 'move1 5s linear infinite',

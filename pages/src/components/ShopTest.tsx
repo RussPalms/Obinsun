@@ -15,12 +15,14 @@ import { MdFilterFrames, MdKeyboardArrowRight } from 'react-icons/md';
 
 import { CgSearch, CgProfile } from 'react-icons/cg';
 import { BsBookmark } from 'react-icons/bs';
-// import { MdOutlineBookmarkBorder } from 'react-icons/md';
 import { BiCart, BiBook } from 'react-icons/bi';
 import { VscSettingsGear } from 'react-icons/vsc';
 import { useSession } from 'next-auth/react';
+import SocialMedia from './SocialMedia';
+import Socials from './Socials';
+import Link from 'next/link';
 
-const Shop = () => {
+const ShopTest = ({ children }) => {
   const { data: session, status } = useSession();
 
   const [filterOpen, setFilterOpen] = useState(false);
@@ -36,8 +38,7 @@ const Shop = () => {
   return (
     <>
       <div className="relative top-0 h-full w-full z-40 flex flex-col items-center justify-center text-center text-xs xs:text-sm mobile-l:text-base laptop-l:text-lg">
-        <div
-          // use laptop-l:flex-1 to fill height for header container
+        <header
           className={`transition-all duration-200 ease-in-out glass-container sticky mb-[0%] ${
             menuOpen
               ? 'h-[100vh] w-[100%] top-[0%] grow'
@@ -57,11 +58,9 @@ const Shop = () => {
                 <DarkModeToggle />
               </div>
 
-              {/* <div className="flex"> */}
               <div className="flex vs:flex-col laptop:flex-col laptop-l:flex-col relative w-full items-center justify-evenly gap-[1em] laptop-l:gap-0 px-4 -mt-2  laptop-l:py-2 laptop-l:flex-1">
-                {/* <div className="flex relative laptop-l:h-full laptop-l:w-full laptop-l:items-center laptop-l:justify-center  laptop-l:gap-[1em]"> */}
                 <div className="flex relative vs:h-full vs:w-full vs:items-center vs:justify-center vs:gap-[1em] laptop:h-full laptop:w-full laptop:items-center laptop:justify-center laptop:gap-[1em] laptop-l:h-full laptop-l:w-full laptop-l:items-center laptop-l:justify-center laptop-l:gap-[1em] laptop-l:flex-1">
-                  <div className="relative flex items-center p-2 rounded-[1.25em] w-full bg-gray-800/10 dark:bg-gray-300/10 flex-1">
+                  <div className="relative flex items-center p-2 rounded-[1.25em] w-full bg-gray-800/20 dark:bg-gray-300/20 flex-1">
                     <input
                       className="w-full select-none border-none rounded-[1.25em] bg-gray-800/0 dark:bg-gray-300/0 outline-none p-1 placeholder-gray-800 dark:placeholder-[#4C8EFF]"
                       placeholder="Search For Merch"
@@ -90,20 +89,6 @@ const Shop = () => {
                     />
                   </div>
                 </div>
-                {/* </div>
-            </div> */}
-
-                {/* <div className="relative flex self-center items-center p-2 rounded-full w-full mx-3 bg-gray-800/10 dark:bg-gray-300/10">
-              <input
-                className="w-full select-none border-none rounded-full bg-gray-800/0 dark:bg-gray-300/0 outline-none p-1 placeholder-gray-800 dark:placeholder-[#4C8EFF]"
-                placeholder="Search For Merch"
-                type="text"
-              />
-              <CgSearch
-                className="rounded-full cursor-pointer h-6 w-6"
-                type="submit"
-              />
-            </div> */}
 
                 <div className="p-3 laptop-l:p-2 relative flex items-center laptop-l:content-evenly laptop-l:h-full laptop-l:w-full laptop-l:justify-evenly laptop-l:flex-1">
                   <ul className="flex flex-col laptop-l:flex-row justify-center items-start laptop-l:items-center gap-[1em] relative ml-[0%] laptop-l:flex-1">
@@ -177,15 +162,14 @@ const Shop = () => {
                 </div>
               </div>
             </div>
-            {/* </div> */}
           </div>
-        </div>
+        </header>
         <div
           className={`border-top-left-glass border-bottom-right-glass bg-gray-300/50 dark:bg-gray-800/50 shadow-glass dark:shadow-dark-glass rounded-[1.25em] backdrop-blur-[0.25em] sticky top-[20%] xs:top-[25%] mobile-l:top-[26%] tablet:top-[27%] md:top-[26%] laptop:top-[26%] laptop-l:top-[30%] xl:top-[] left-0 h-[35%] laptop-l:h-[] transition-all duration-150 ease-in-out ${
             filterOpen
               ? 'w-[70%] xs:w-[60%] mobile-l:w-[59%] tablet:w-[33%] laptop:w-[25%]'
               : 'w-[6.5em] xs:w-[6em] mobile-l:w-[5.5em] tablet:w-[5.3em] laptop-l:w-[16%] 2xl:w-[13%] 3xl:w-[11%] 4vl:w-[10%]'
-          } z-40 overflow-hidden translate-x-[0%] -mb-[43em] xs:-mb-[40em] mobile-l:-mb-[37em] md:-mb-[40em] laptop-l:-mb-[32em] xl:-mb-[30em] 4vl:-mb-[32em] px-[1.5em] laptop-l:px-[0.5em] py-[3%] laptop-l:py-[1%] text-center flex flex-row items-center justify-start hover:translate-x-[0%] self-start ml-[3%] laptop-l:ml-[0.5%] 2xl:ml-[2%]`}
+          } z-40 overflow-hidden translate-x-[0%] -mb-[43em] xs:-mb-[40em] mobile-l:-mb-[37em] md:-mb-[40em] laptop-l:-mb-[32em] xl:-mb-[30em] 4vl:-mb-[33em] px-[1.5em] laptop-l:px-[0.5em] py-[3%] laptop-l:py-[1%] text-center flex flex-row items-center justify-start hover:translate-x-[0%] self-start ml-[3%] laptop-l:ml-[0.5%] 2xl:ml-[2%]`}
         >
           <ul className="flex flex-col justify-center items-start gap-[1em] relative ml-[0%]">
             <li className="laptop-l:hidden">
@@ -276,18 +260,53 @@ const Shop = () => {
           </ul>
         </div>
 
+        <div className="sticky top-[30em] w-[27em] mobile-l:w-[27em] tablet:w-[45em] laptop:w-[58.5em] laptop-l:w-[72.5em] xl:w-[80em] 2xl:w-[95em] 3xl:w-[110em] 4vl:w-[124.5em] justify-end flex items-center z-40 -mb-[22em] 4vl:-mb-[19em] mobile-l:top-[20em] 4vl:top-[33em] overflow-x-clip">
+          <Socials />
+        </div>
+
         <div className="relative max-w-[85%] flex items-center justify-center flex-col text-center overflow-hidden rounded-3xl">
           <div className="border border-gray-800/0 dark:border-gray-800/0 bg-gray-800/20 dark:bg-gray-300/20 p-32 xl:px-48 4vl:p-32">
-            <TestContent />
-            <TestContent />
+            {children}
           </div>
         </div>
-        <div className="relative">
-          <h2>Footer</h2>
-        </div>
+
+        <footer className="max-w-6xl mx-auto px-6">
+          <div className="py-6 border-t border-gray-800 dark:border-[#4C8EFF] text-center flex flex-col md:flex-row items-center justify-between">
+            <p className="text-sm">
+              Powered by
+              <a
+                href="http://localhost:3000"
+                title="Learn more about how this site was made"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-0.5"
+              >
+                Obinsun Merch
+              </a>
+              , Built by{' '}
+              <a
+                href="https://twitter.com/obinsun"
+                title="Follow the creator on Twitter"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-0.5"
+              >
+                @obinsun
+              </a>
+            </p>
+            <nav className="flex items-center justify-end space-x-3 md:space-x-6">
+              <Link href="/about">
+                <a className="p-1 transition text-sm">FAQS</a>
+              </Link>
+              <Link href="/terms-of-sale">
+                <a className="p-1 transition text-sm">Terms of Sale</a>
+              </Link>
+            </nav>
+          </div>
+        </footer>
       </div>
     </>
   );
 };
 
-export default Shop;
+export default ShopTest;

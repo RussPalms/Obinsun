@@ -22,7 +22,8 @@ import LandingDesigns from './src/components/LandingDesigns';
 import DesignMix from './src/components/DesignMix';
 import DarkModeToggle from './src/components/DarkModeToggle';
 import Hero from './src/components/Hero';
-import Shop from './src/components/Shop';
+import Shop from './src/components/ShopTest';
+import ShopTest from './src/components/ShopTest';
 
 export default function Home(): NextPage {
   // useEffect(async (error) => {
@@ -88,7 +89,7 @@ export default function Home(): NextPage {
           {/* <Shop /> */}
         </div>
         <div className="relative">
-          <Shop />
+          <ShopTest />
         </div>
         {/* <Design /> */}
         {/* <Entity /> */}
