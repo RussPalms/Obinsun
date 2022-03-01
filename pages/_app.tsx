@@ -1,6 +1,8 @@
 import './app/styles/globals.css';
 //  import "tailwindcss/tailwind.css";
 
+import Head from 'next/head';
+
 import type { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
 import { UserProvider } from './app/features';
@@ -21,15 +23,34 @@ import { Progress, Preload } from './src/components/Progress';
 import { useProgressStore } from './app/state/progressing';
 
 import { AnimatePresence } from 'framer-motion';
+import Obinsun from 'Production/Layout/Obinsun';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare const window: any;
+
+// export function reportWebVitals({ id, name, label, value }: NextWebVitalsMetric): void {
+//   window.gtag('event', name, {
+//       event_category: label === 'web-vital' ? 'Web Vitals' : 'Next.js custom metric',
+//       value: Math.round(name === 'CLS' ? value * 1000 : value), // values must be integers
+//       event_label: id, // id unique to current page load
+//       non_interaction: true, // avoids affecting bounce rate.
+//   })
+// }
 
 // import {Preload} from '.src/components/Progress'
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+function MyApp({
+  Component,
+  router,
+  pageProps: { session, ...pageProps },
+}: AppProps): JSX.Element {
+  const url = `http://localhost:3000${router.route}`;
+
   const [loading, setLoading] = useState(false);
 
   const setIsAnimating = useProgressStore((state: any) => state.setIsAnimating);
   const isAnimating = useProgressStore((state: any) => state.isAnimating);
-  const router = useRouter();
+  const loadingRouter = useRouter();
 
   useEffect(() => {
     // On page load or when changing themes, best to add inline in `head` to avoid FOUC
@@ -56,24 +77,39 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
       setIsAnimating(false);
     };
 
-    router.events.on('routeChangeStart', handleStart);
-    router.events.on('routeChangeComplete', handleStop);
-    router.events.on('routeChangeError', handleStop);
+    loadingRouter.events.on('routeChangeStart', handleStart);
+    loadingRouter.events.on('routeChangeComplete', handleStop);
+    loadingRouter.events.on('routeChangeError', handleStop);
 
-    console.log(router.events);
-    // console.log(isAnimating);
+    console.log(loadingRouter.events);
 
     return () => {
-      router.events.off('routeChangeStart', handleStart);
-      router.events.off('routeChangeComplete', handleStop);
-      router.events.off('routeChangeError', handleStop);
+      loadingRouter.events.off('routeChangeStart', handleStart);
+      loadingRouter.events.off('routeChangeComplete', handleStop);
+      loadingRouter.events.off('routeChangeError', handleStop);
 
-      console.log(router.events);
+      console.log(loadingRouter.events);
     };
-  }, [router]);
+  }, [loadingRouter]);
 
   return (
     <>
+      <Head>
+        <link rel="icon" href="/Grim2021.svg" type="image/svg>" />
+      </Head>
+      <DefaultSeo
+        titleTemplate="%s - Obinsun"
+        openGraph={{
+          type: 'website',
+          locale: 'en_IE',
+          url,
+          description:
+            'The personal website for Joel Robinson, graphic artist.',
+          site_name: 'Joel Robinson | obinsun.com',
+          images: [],
+        }}
+        canonical={url}
+      />
       <AnimatePresence
         exitBeforeEnter
         initial={false}
@@ -88,16 +124,14 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
                 <Provider store={store}>
                   <WishlistProvider>
                     <UserProvider>
-                      {/* <Layout> */}
                       {/* <AnimatePresence
                         exitBeforeEnter
                         initial={false}
                         onExitComplete={() => window.scrollTo(0, 0)}
                       > */}
-                      <DefaultSeo {...defaultSEO} />
+                      {/* <DefaultSeo {...defaultSEO} /> */}
                       <Component {...pageProps} />
                       {/* </AnimatePresence> */}
-                      {/* </Layout> */}
                     </UserProvider>
                   </WishlistProvider>
                 </Provider>
@@ -114,22 +148,3 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 }
 
 export default MyApp;
-
-// import "./app/styles/globals.css";
-// //  import "tailwindcss/tailwind.css";
-
-// import type { AppProps } from "next/app";
-// import { SessionProvider } from "next-auth/react";
-// import { UserProvider } from "./app/features";
-// import { DefaultSeo } from "next-seo";
-// import { WishlistProvider } from "./app/context/wishlist";
-// import { defaultSEO } from "../next-seo.config";
-// import Layout from "./src/components/ProductIntegration/Layout";
-// import { Provider } from "react-redux";
-// import { store } from "./app/state/store";
-
-// function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
-//   return <Component {...pageProps} />;
-// }
-
-// export default MyApp;
