@@ -25,57 +25,48 @@ import {
 
 const Socials = () => {
   return (
-    <>
-      {/* <div className="overflow-hidden"> */}
-      {/* <section className="socials-container"> */}
-      {/* <div className="color"></div>
-          <div className="color"></div>
-          <div className="color"></div> */}
-      <ul className="socials-list-container">
-        <li className="socials-icon-list-container">
-          <a
-            className="socials-icon-transition social-glass-transition-delay"
-            href="#"
-          >
-            <FaFacebook aria-hidden="true" />
-          </a>
-        </li>
-        <li className="socials-icon-list-container">
-          <a
-            className="socials-icon-transition social-glass-transition-delay"
-            href="#"
-          >
-            <FaTwitter aria-hidden="true" />
-          </a>
-        </li>
-        <li className="socials-icon-list-container">
-          <a
-            className="socials-icon-transition social-glass-transition-delay"
-            href="#"
-          >
-            <FaLinkedin aria-hidden="true" />
-          </a>
-        </li>
-        <li className="socials-icon-list-container">
-          <a
-            className="socials-icon-transition social-glass-transition-delay"
-            href="#"
-          >
-            <BsInstagram aria-hidden="true" />
-          </a>
-        </li>
-        <li className="socials-icon-list-container">
-          <a
-            className="socials-icon-transition social-glass-transition-delay"
-            href="#"
-          >
-            <BsSnapchat aria-hidden="true" />
-          </a>
-        </li>
-      </ul>
-      {/* </section> */}
-      {/* </div> */}
-    </>
+    <ul className="socials-list-container ">
+      <li className="socials-icon-list-container">
+        <a
+          className="socials-icon-transition social-glass-transition-delay"
+          href="#"
+        >
+          <FaFacebook aria-hidden="true" />
+        </a>
+      </li>
+      <li className="socials-icon-list-container">
+        <a
+          className="socials-icon-transition social-glass-transition-delay"
+          href="#"
+        >
+          <FaTwitter aria-hidden="true" />
+        </a>
+      </li>
+      <li className="socials-icon-list-container">
+        <a
+          className="socials-icon-transition social-glass-transition-delay"
+          href="#"
+        >
+          <FaLinkedin aria-hidden="true" />
+        </a>
+      </li>
+      <li className="socials-icon-list-container">
+        <a
+          className="socials-icon-transition social-glass-transition-delay"
+          href="#"
+        >
+          <BsInstagram aria-hidden="true" />
+        </a>
+      </li>
+      <li className="socials-icon-list-container">
+        <a
+          className="socials-icon-transition social-glass-transition-delay"
+          href="#"
+        >
+          <BsSnapchat aria-hidden="true" />
+        </a>
+      </li>
+    </ul>
   );
 };
 

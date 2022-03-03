@@ -1,19 +1,20 @@
-import { getSession, useSession } from "next-auth/react";
-import moment from "moment";
-import { db } from "./server/lib/database/firebaseFirestore";
+import { getSession, useSession } from 'next-auth/react';
+import moment from 'moment';
+import { db } from './server/lib/database/firebaseFirestore';
 
-import * as React from "react";
-import Order from "./src/components/StripeCheckout/Order";
+import * as React from 'react';
+import Order from './src/components/StripeCheckout/Order';
+import Content from './Production/Layout/Content';
 
 // export interface IAppProps {
 // }
 
-export default function Orders({ orders }: any) {
+export default function OrdersPage({ orders }: any) {
   const { data: session, status } = useSession();
   //   console.log(orders);
 
   return (
-    <div>
+    <Content>
       <main className="max-w-screen-lg mx-auto p-10">
         <h1 className="text-3xl border-b mb-2 pb-1 border-yellow-400">
           Your Orders
@@ -40,12 +41,12 @@ export default function Orders({ orders }: any) {
           )}
         </div>
       </main>
-    </div>
+    </Content>
   );
 }
 
 export async function getServerSideProps(context: any) {
-  const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
+  const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`);
 
   const session = await getSession(context);
 
@@ -56,12 +57,12 @@ export async function getServerSideProps(context: any) {
   }
 
   const stripeOrders = await db
-    .collection("users")
+    .collection('users')
     // .doc(session.user.email)
     .doc(session.id as any)
     // .where("email", "==", session?.user?.email)
-    .collection("orders")
-    .orderBy("timestamp", "desc")
+    .collection('orders')
+    .orderBy('timestamp', 'desc')
     .get();
 
   const orders = await Promise.all(

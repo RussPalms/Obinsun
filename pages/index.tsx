@@ -1,26 +1,35 @@
 import { GetStaticProps } from 'next';
-import { getSession } from 'next-auth/react';
+// import { getSession } from 'next-auth/react';
 
-import Obinsun from 'Production/Layout/Obinsun';
+import Obinsun from 'pages/Production/Layout/Obinsun';
+// import MerchLayout from './src/components/ShopTest';
 // import ArticleCard from '../components/ArticleCard'
 // import Layout from '../components/Layout'
 // import PageTitle from '../components/PageTitle'
 // import Section from '../components/Section'
-// import IHomePageArticles from '../interfaces/IHomePageArticles'
 // import { getHomePageArticles } from '../lib/devto'
 import shuffle from 'lodash.shuffle';
 import { PrintfulProduct } from './types';
 import { formatVariantName } from './server/lib/format-variant-name';
 import { printful } from './server/lib/printful-client';
 import ProductGrid from './src/components/ProductIntegration/ProductGrid';
+import IHomePageDesigns from 'pages/Production/interfaces/IHomePageDesigns';
+import Content from './Production/Layout/Content';
+// import DesignMix from './src/components/DesignMix';
+// import Header from 'pages/Production/Layout/Header';
+// import Sidebar from 'pages/Production/Layout/Sidebar';
+// import Externals from 'pages/Production/Layout/Externals';
+// import Content from 'pages/Production/Layout/Content';
+// import Footer from 'pages/Production/Layout/Footer';
 
-type IndexPageProps = {
-  products: PrintfulProduct[];
-};
+// type IndexPageProps = {
+//   products: PrintfulProduct[];
+// };
 
-// interface IProps {
-//     homePageArticles: IHomePageArticles
-// }
+interface IProps {
+  // homePageDesigns: IHomePageDesigns
+  products: IHomePageDesigns;
+}
 
 const title = 'Welcome, this is Obinsun 👋';
 const subtitle =
@@ -37,16 +46,32 @@ const IndexPage = ({
 IProps): JSX.Element => {
   // const projects = featuredPortfolio || [latestPortfolio];
   return (
-    <Obinsun title="Home" description={`${title} - ${subtitle}`}>
-      <div className="text-center pb-6 md:pb-12">
+    <>
+      {/* <DesignMix /> */}
+      {/* <MerchLayout /> */}
+      {/* <div className="relative top-0 h-full w-full z-40 flex flex-col items-center justify-center text-center text-xs xs:text-sm mobile-l:text-base laptop-l:text-lg">
+        <Header />
+        <Sidebar />
+        <Externals />
+        <Content />
+        <Footer />
+      </div> */}
+
+      {/* // <main className="relative"> */}
+      <Content title="Home" description={`${title} - ${subtitle}`}>
+        {/* <div className="text-center pb-6 md:pb-12">
         <h1 className="text-xl md:text-3xl lg:text-5xl font-bold">
           All Products
         </h1>
-      </div>
+      </div> */}
 
-      <ProductGrid products={products} />
-      {/* <PageTitle title={title} subtitle={subtitle} /> */}
-      {/* <Section linebreak>
+        <ProductGrid products={products} />
+        {/* <ProductGrid products={products} />
+        <ProductGrid products={products} />
+        <ProductGrid products={products} />
+        <ProductGrid products={products} /> */}
+        {/* <PageTitle title={title} subtitle={subtitle} /> */}
+        {/* <Section linebreak>
                 <h2 className="text-3xl md:text-4xl mb-4 text-black dark:text-white">About</h2>
                 <p className="my-2">
                     I spend most of my time as a frontend developer on Ostmodern&apos;s Skylark CMS
@@ -103,7 +128,9 @@ IProps): JSX.Element => {
                     />
                 ))}
             </Section> */}
-    </Obinsun>
+      </Content>
+      {/* // </main> */}
+    </>
   );
 };
 
@@ -113,15 +140,17 @@ IProps): JSX.Element => {
 // }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const util = require('util');
-  const { result: productIds } = await printful.get('sync/products');
+  // const util = require('util');
+  const { result: productIds } = await printful.get('sync/products', '');
   const allProducts = await Promise.all(
-    productIds.map(async ({ id }) => await printful.get(`sync/products/${id}`))
+    productIds.map(
+      async ({ id }: any) => await printful.get(`sync/products/${id}`, '')
+    )
   );
   const products: PrintfulProduct[] = allProducts.map(
     ({ result: { sync_product, sync_variants } }) => ({
       ...sync_product,
-      variants: sync_variants.map(({ name, ...variant }) => ({
+      variants: sync_variants.map(({ name, ...variant }: any) => ({
         name: formatVariantName(name),
         ...variant,
       })),

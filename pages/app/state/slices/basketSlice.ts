@@ -1,7 +1,4 @@
-//@ts-nocheck
-
-import { createSlice } from "@reduxjs/toolkit";
-import { useEffect } from "react";
+import { createSlice } from '@reduxjs/toolkit';
 // import type { total } from "../../../types";
 
 const initialState = {
@@ -10,7 +7,7 @@ const initialState = {
 };
 
 export const basketSlice = createSlice({
-  name: "basket",
+  name: 'basket',
   initialState,
   reducers: {
     addToBasket: (state, action) => {
@@ -56,7 +53,7 @@ export const selectTotal = (state: any) =>
   state.basket.items.reduce(
     (total: number, item: any) =>
       (Number(total) + Number(item.price)) as number,
-    ""
+    ''
   );
 
 const basketReducer = basketSlice.reducer;

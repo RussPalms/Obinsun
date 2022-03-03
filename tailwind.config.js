@@ -6,6 +6,7 @@ const Nth = require('tailwindcss-nth-child');
 const plugin = new Nth('2');
 
 module.exports = {
+  important: true,
   mode: 'jit',
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
@@ -32,6 +33,8 @@ module.exports = {
       'active-menu': '0 0 0 #111827',
       'dark-menu': '0 -0.5em 0 #4C8EFF',
       'active-dark-menu': '0 0 0 #4C8EFF',
+      'login-modal': '0 0 10px rgba(0,0,0,0.25)',
+      'login-modal-dark': '0 0 10px rgba(255,255,255,0.25)',
       glass1: '0 15px 35px rgba(0, 0, 0,0.05)',
       glass1a: '0 5px 10px rgba(0, 0, 0, 0.1)',
       glass2: '0 15px 30px rgba(0, 0, 0, 0.1)',
@@ -755,6 +758,9 @@ module.exports = {
       fillColor: ['nth-child', 'first'],
       fill: ['nth-child', 'first'],
       typography: ['dark'],
+      padding: {
+        xs: '6em',
+      },
     },
   },
   plugins: [plugin.nthChild(), require('@tailwindcss/typography')],

@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import ZLogo from '../assets/ObinsunVectors/ZLogo';
 import DarkModeToggle from './DarkModeToggle';
-import TestContent from './TestContent';
+
 import {
   IoIosMan,
   IoIosWoman,
@@ -12,18 +12,17 @@ import { FaChild, FaTshirt } from 'react-icons/fa';
 import { GiArmoredPants } from 'react-icons/gi';
 import { SiRedhat } from 'react-icons/si';
 import { MdFilterFrames, MdKeyboardArrowRight } from 'react-icons/md';
-
 import { CgSearch, CgProfile } from 'react-icons/cg';
 import { BsBookmark } from 'react-icons/bs';
 import { BiCart, BiBook } from 'react-icons/bi';
 import { VscSettingsGear } from 'react-icons/vsc';
 import { useSession } from 'next-auth/react';
-import SocialMedia from './SocialMedia';
 import Socials from './Socials';
 import Link from 'next/link';
+import TestContent from './TestContent';
 
-const ShopTest = ({ children }) => {
-  const { data: session, status } = useSession();
+const MerchLayout = () => {
+  const { data: session } = useSession();
 
   const [filterOpen, setFilterOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -37,12 +36,12 @@ const ShopTest = ({ children }) => {
 
   return (
     <>
-      <div className="relative top-0 h-full w-full z-40 flex flex-col items-center justify-center text-center text-xs xs:text-sm mobile-l:text-base laptop-l:text-lg">
+      <div className="relative z-40 flex flex-col items-center justify-center text-xs xs:text-sm mobile-l:text-base laptop-l:text-lg">
         <header
-          className={`transition-all duration-200 ease-in-out glass-container sticky mb-[0%] ${
+          className={`transition-all duration-200 ease-in-out glass-container sticky ${
             menuOpen
               ? 'h-[100vh] w-[100%] top-[0%] grow'
-              : 'h-[10.5em] mobile-l:h-[] tablet:h-[] laptop:h-[11em] w-[80%] top-[3%] laptop-l:h-[9em]'
+              : 'h-[10.3em] laptop:h-[11em] w-[80%] top-[3%] laptop-l:h-[9em]'
           } z-50 overflow-hidden tablet:px-4`}
         >
           <div className="relative flex vs:flex-col laptop-l:flex-row flex-col items-evenly p-3 flex-1 h-full w-full laptop-l:h-[10em]">
@@ -169,7 +168,7 @@ const ShopTest = ({ children }) => {
             filterOpen
               ? 'w-[70%] xs:w-[60%] mobile-l:w-[59%] tablet:w-[33%] laptop:w-[25%]'
               : 'w-[6.5em] xs:w-[6em] mobile-l:w-[5.5em] tablet:w-[5.3em] laptop-l:w-[16%] 2xl:w-[13%] 3xl:w-[11%] 4vl:w-[10%]'
-          } z-40 overflow-hidden translate-x-[0%] -mb-[43em] xs:-mb-[40em] mobile-l:-mb-[37em] md:-mb-[40em] laptop-l:-mb-[32em] xl:-mb-[30em] 4vl:-mb-[33em] px-[1.5em] laptop-l:px-[0.5em] py-[3%] laptop-l:py-[1%] text-center flex flex-row items-center justify-start hover:translate-x-[0%] self-start ml-[3%] laptop-l:ml-[0.5%] 2xl:ml-[2%]`}
+          } z-40 overflow-hidden translate-x-[0%] -mb-[43em] xs:-mb-[40em] mobile-l:-mb-[37em] md:-mb-[40em] laptop-l:-mb-[32em] xl:-mb-[30em] 4vl:-mb-[33em] px-[1.5em] laptop-l:px-[0.5em] py-[1%] laptop-l:py-[1%] text-center flex flex-row items-center justify-start hover:translate-x-[0%] self-start ml-[3%] laptop-l:ml-[0.5%] 2xl:ml-[2%]`}
         >
           <ul className="flex flex-col justify-center items-start gap-[1em] relative ml-[0%]">
             <li className="laptop-l:hidden">
@@ -260,13 +259,13 @@ const ShopTest = ({ children }) => {
           </ul>
         </div>
 
-        <div className="sticky top-[30em] w-[27em] mobile-l:w-[27em] tablet:w-[45em] laptop:w-[58.5em] laptop-l:w-[72.5em] xl:w-[80em] 2xl:w-[95em] 3xl:w-[110em] 4vl:w-[124.5em] justify-end flex items-center z-40 -mb-[22em] 4vl:-mb-[19em] mobile-l:top-[20em] 4vl:top-[33em] overflow-x-clip">
+        <div className="sticky top-[28em] w-[25em] mobile-l:w-[27em] tablet:w-[45em] laptop:w-[58.5em] laptop-l:w-[72.5em] xl:w-[80em] 2xl:w-[95em] 3xl:w-[110em] 4vl:w-[124.5em] justify-end flex items-center z-40 -mb-[22em] 4vl:-mb-[19em] mobile-l:top-[20em] 4vl:top-[33em] overflow-x-clip">
           <Socials />
         </div>
 
-        <div className="relative max-w-[85%] flex items-center justify-center flex-col text-center overflow-hidden rounded-3xl">
-          <div className="border border-gray-800/0 dark:border-gray-800/0 bg-gray-800/20 dark:bg-gray-300/20 p-32 xl:px-48 4vl:p-32">
-            {children}
+        <div className="relative max-w-[85%] h-full flex items-center justify-center flex-col text-center overflow-hidden rounded-3xl">
+          <div className="border border-gray-800/0 dark:border-gray-800/0 bg-gray-800/20 dark:bg-gray-300/20 pl-[6em] pt-[12em] pr-[2em] pb-[1em] xl:px-48 4vl:p-32">
+            <TestContent />
           </div>
         </div>
 
@@ -309,4 +308,26 @@ const ShopTest = ({ children }) => {
   );
 };
 
-export default ShopTest;
+export default MerchLayout;
+
+// import Header from 'Production/Layout/Header';
+// import Sidebar from 'Production/Layout/Sidebar';
+// import Footer from 'Production/Layout/Footer';
+// import Content from 'Production/Layout/Content';
+// import Socials from './Socials';
+
+// const MerchLayout = ({ children }) => {
+//   return (
+//     <>
+//       <div className="relative z-40 flex flex-col items-center justify-center text-xs xs:text-sm mobile-l:text-base laptop-l:text-lg">
+//         <Header />
+//         <Sidebar />
+//         <Socials />
+//         <Content />
+//         <Footer />
+//       </div>
+//     </>
+//   );
+// };
+
+// export default MerchLayout;

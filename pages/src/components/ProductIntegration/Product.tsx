@@ -125,7 +125,7 @@ const Product = (product: any) => {
     <article className="glass-container flex flex-col relative">
       <button
         aria-label="Add to wishlist"
-        className="appearance-none absolute top-0 right-0 mt-3 mr-3 text-gray-300 focus:text-gray-500 hover:text-red-500 transition focus:outline-none"
+        className="appearance-none absolute top-0 right-0 mt-3 mr-3 text-gray-300 dark:text-gray-800 focus:text-gray-900 darkfocus:text-[#4C8EFF] hover:text-red-500 transition focus:outline-none"
         onClick={addToWishlist}
       >
         {onWishlist ? (
@@ -148,7 +148,7 @@ const Product = (product: any) => {
           </svg>
         )}
       </button>
-      <div className="flex items-center justify-center flex-1 sm:flex-shrink-0 w-full p-6">
+      <div className="flex items-center justify-center flex-1 sm:flex-shrink-0 w-full p-8">
         {activeVariantFile && (
           <Image
             src={activeVariantFile.preview_url}
@@ -156,13 +156,16 @@ const Product = (product: any) => {
             height={250}
             alt={`${activeVariant.name} ${name}`}
             title={`${activeVariant.name} ${name}`}
+            className="border border-transparent rounded-[0.625em]"
           />
         )}
       </div>
       <div className="flex-1 p-6 pt-0">
         <div className="text-center">
-          <p className="mb-1 font-semibold text-gray-900">{name}</p>
-          <p className="text-sm text-gray-500">{formattedPrice}</p>
+          <p className="mb-1 font-semibold">{name}</p>
+          <p className="text-sm text-gray-900 dark:text-gray-300">
+            {formattedPrice}
+          </p>
         </div>
       </div>
       <div className="p-3 flex flex-col sm:flex-row justify-center items-center">
@@ -175,7 +178,7 @@ const Product = (product: any) => {
           disabled={oneStyle}
         />
         <button
-          className="stripe-add-item w-full md:w-auto transition flex-shrink-0 py-2 px-4 border border-gray-300 hover:border-transparent shadow-sm text-sm font-medium bg-white text-gray-900 focus:text-white hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:outline-none rounded"
+          className="w-full md:w-auto transition flex-shrink-0 py-2 px-4 border border-gray-300 dark:border-gray-800 hover:border-transparent shadow-sm text-sm font-medium bg-white dark:bg-gray-900 focus:text-gray-300 hover:bg-gray-800 dark:hover:bg-[#4C8EFF] hover:text-gray-300 dark:hover:text-gray-900 focus:bg-#4C8EFF focus:outline-none rounded-[0.625em]"
           // data-item-id={activeVariantExternalId}
           // data-item-price={activeVariant.retail_price}
           // data-item-url={`/api/products/${activeVariantExternalId}`}

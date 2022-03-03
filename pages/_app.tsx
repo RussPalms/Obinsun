@@ -8,12 +8,14 @@ import { SessionProvider } from 'next-auth/react';
 import { UserProvider } from './app/features';
 import { DefaultSeo } from 'next-seo';
 import { WishlistProvider } from './app/context/wishlist';
-import { defaultSEO } from '../next-seo.config';
-import Layout from './src/components/ProductIntegration/Layout';
+// import { defaultSEO } from '../next-seo.config';
+// import Layout from './src/components/ProductIntegration/Layout';
 import { Provider } from 'react-redux';
 import { store } from './app/state/store';
+// import { stores } from './app/state/stores/store';
+// import { store } from './app/state/stores/store';
 
-import { ThemeProvider } from 'next-themes';
+// import { ThemeProvider } from 'next-themes';
 import { MdxComponentsProvider } from './app/context/MdxComponents';
 
 import { useEffect, useState } from 'react';
@@ -23,7 +25,10 @@ import { Progress, Preload } from './src/components/Progress';
 import { useProgressStore } from './app/state/progressing';
 
 import { AnimatePresence } from 'framer-motion';
-import Obinsun from 'Production/Layout/Obinsun';
+import Obinsun from 'pages/Production/Layout/Obinsun';
+// import Header from 'pages/Production/Layout/Header';
+// import Sidebar from 'pages/Production/Layout/Sidebar';
+// import Footer from 'pages/Production/Layout/Footer';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const window: any;
@@ -81,14 +86,14 @@ function MyApp({
     loadingRouter.events.on('routeChangeComplete', handleStop);
     loadingRouter.events.on('routeChangeError', handleStop);
 
-    console.log(loadingRouter.events);
+    // console.log(loadingRouter.events);
 
     return () => {
       loadingRouter.events.off('routeChangeStart', handleStart);
       loadingRouter.events.off('routeChangeComplete', handleStop);
       loadingRouter.events.off('routeChangeError', handleStop);
 
-      console.log(loadingRouter.events);
+      // console.log(loadingRouter.events);
     };
   }, [loadingRouter]);
 
@@ -130,7 +135,12 @@ function MyApp({
                         onExitComplete={() => window.scrollTo(0, 0)}
                       > */}
                       {/* <DefaultSeo {...defaultSEO} /> */}
-                      <Component {...pageProps} />
+                      {/* <Header /> */}
+                      {/* <Sidebar /> */}
+                      <Obinsun>
+                        <Component {...pageProps} />
+                      </Obinsun>
+                      {/* <Footer /> */}
                       {/* </AnimatePresence> */}
                     </UserProvider>
                   </WishlistProvider>

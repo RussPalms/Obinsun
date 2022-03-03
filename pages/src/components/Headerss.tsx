@@ -8,7 +8,7 @@ import { BsBookmark } from 'react-icons/bs';
 import { MdOutlineBookmarkBorder } from 'react-icons/md';
 import { BiCart } from 'react-icons/bi';
 
-function Header() {
+function Headerss() {
   return (
     <header
       className="font-grandstander w-full bg-gray-600 flex flex-col 
@@ -54,4 +54,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default Headerss;

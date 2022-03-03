@@ -33,10 +33,11 @@ class MyDocument extends Document {
         {/* <body className="antialiased bg-red-900 dark:bg-blue-300 font-grandstander transition-colors duration-1000 ease-linear"> */}
         {/* <body className="bg-white dark:bg-gray-800 transition-colors duration-100 ease-linear"> */}
         {/* <body className="antialiased font-grandstander transition-all duration-500 bg-white dark:bg-black bg-gradient-to-tl from-red-300 via-neutral-300 to-blue-900  text-red-900 dark:text-blue-300 bg-size-200 bg-pos-100 dark:bg-pos-0"> */}
-        <body className="antialiased font-grandstander bg-gray-300 dark:bg-gray-800 dark:text-[#4C8EFF] transition-colors duration-200">
+        <body className="antialiased font-grandstander bg-gray-300 dark:bg-gray-800 text-black dark:text-[#4C8EFF] transition-colors duration-200">
           {/* <div className="h-screen"> */}
           <Main />
           <NextScript />
+          <div id="modal-root"></div>
           {/* <script
             async
             src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"
