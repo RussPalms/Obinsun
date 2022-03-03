@@ -26,15 +26,16 @@ const Content = ({ children, title, description }: Props): JSX.Element => {
       />
       <div
         key="content"
-        className="z-[30] relative max-w-[85%] flex items-center justify-center flex-col text-center overflow-hidden rounded-[0.625]em"
+        className="z-[49] relative w-[85%] flex items-center justify-center flex-col text-center overflow-hidden rounded-[0.625]em"
       >
-        <div className="relative rounded-[0.625em] h-full w-full border border-gray-300/0 dark:border-gray-800/0 bg-gray-800/20 dark:bg-gray-300/20 pl-[6em] pt-[12em] pr-[2em] pb-[1em] xl:px-48 4vl:p-32">
+        <div className="relative min-h-[45em] rounded-[0.625em] h-full w-full border border-gray-300/0 dark:border-gray-800/0 bg-gray-800/20 dark:bg-gray-300/20 pl-[6em] pt-[12em] pr-[2em] pb-[1em] xl:px-48 4vl:p-32">
           <motion.div
             initial="hidden"
             animate="enter"
             exit="exit"
             variants={variants}
             transition={{ type: 'linear' }}
+            className="w-full h-full flex flex-col items-center justify-center z-[60]"
           >
             {children}
           </motion.div>

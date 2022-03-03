@@ -1,16 +1,16 @@
 //@ts-nocheck
 
-import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import EmailProvider from "next-auth/providers/email";
-import nodemailer from "nodemailer";
-import { html, text } from "../emails/email-create";
+import NextAuth from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import EmailProvider from 'next-auth/providers/email';
+import nodemailer from 'nodemailer';
+import { html, text } from '../emails/email-create';
 import {
   adapterInstance,
   // connectToFirebase,
   // firestore,
   firestoreConnect,
-} from "../../server/lib/database/firebaseFirestore";
+} from '../../server/lib/database/firebaseFirestore';
 import {
   runTransaction,
   collection,
@@ -26,9 +26,9 @@ import {
   Firestore,
   FirestoreDataConverter,
   getFirestore,
-} from "firebase/firestore";
-import { verifyPassword } from "../../server/lib/password-auth";
-import { ac } from "../../server/services";
+} from 'firebase/firestore';
+import { verifyPassword } from '../../server/lib/password-auth';
+import { ac } from '../../server/services';
 
 const THIRTY_DAYS = 30 * 24 * 60 * 60;
 const THIRTY_MINUTES = 30 * 60;
@@ -42,7 +42,7 @@ export default NextAuth({
   // },
   secret: process.env.NEXTAUTH_SECRET,
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
     maxAge: THIRTY_DAYS,
     updateAge: THIRTY_MINUTES,
   },
@@ -54,14 +54,14 @@ export default NextAuth({
         // const db = firestoreConnect;
 
         const AuthenticationQuery = query(
-          collection(db, "users"),
-          where("email", "==", credentials?.email)
+          collection(db, 'users'),
+          where('email', '==', credentials?.email)
         );
         const authSnapshot = await getDocs(AuthenticationQuery);
         const userCollection = {};
         authSnapshot.forEach((doc) => {
           let a = doc.data();
-          a["_id"] = doc.id;
+          a['_id'] = doc.id;
           userCollection[doc.id] = a;
         });
         const user = Object.values(userCollection)[0];
@@ -70,7 +70,7 @@ export default NextAuth({
           user.password
         );
         if (!isValid) {
-          throw new Error("Could not log you in!");
+          throw new Error('Could not log you in!');
         }
         console.log(user);
         return { email: user.email, role: user.role };
@@ -142,8 +142,8 @@ export default NextAuth({
       // const db = await connectToFirebase();
 
       const authTokenQuery = query(
-        collection(db, "users"),
-        where("email", "==", token.email)
+        collection(db, 'users'),
+        where('email', '==', token.email)
       );
 
       const authTokenSnapshot = await getDocs(authTokenQuery);
@@ -152,7 +152,7 @@ export default NextAuth({
 
       await authTokenSnapshot.forEach((doc) => {
         let a = doc.data();
-        a["_id"] = doc.id;
+        a['_id'] = doc.id;
         userCollection[doc.id] = a;
       });
 
@@ -192,7 +192,7 @@ export default NextAuth({
     async redirect({ url, baseUrl }) {
       if (url.startsWith(baseUrl)) return url;
       // Allows relative callback URLs
-      else if (url.startsWith("/")) return new URL(url, baseUrl).toString();
+      else if (url.startsWith('/')) return new URL(url, baseUrl).toString();
       return baseUrl;
     },
   },

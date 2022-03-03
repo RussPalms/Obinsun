@@ -9,12 +9,16 @@ import Content from './Production/Layout/Content';
 // export interface IAppProps {
 // }
 
+const title = 'Welcome, this is Obinsun 👋';
+const subtitle =
+  'You will fins a plethora of custom graphic designs attatched to high quality merchandise.';
+
 export default function OrdersPage({ orders }: any) {
   const { data: session, status } = useSession();
   //   console.log(orders);
 
   return (
-    <Content>
+    <Content title="Profile" description={`${title} - ${subtitle}`}>
       <main className="max-w-screen-lg mx-auto p-10">
         <h1 className="text-3xl border-b mb-2 pb-1 border-yellow-400">
           Your Orders

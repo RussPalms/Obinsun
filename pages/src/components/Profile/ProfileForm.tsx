@@ -1,58 +1,59 @@
 //@ts-nocheck
 
-import { useRef } from "react";
+import { useRef } from 'react';
 
 function ProfileForm(props) {
-	const oldPasswordRef = useRef();
-	const newPasswordRef = useRef();
+  const oldPasswordRef = useRef();
+  const newPasswordRef = useRef();
 
-	function submitHandler(event) {
-		event.preventDefault();
+  function submitHandler(event) {
+    event.preventDefault();
 
-		const enteredOldPassword = oldPasswordRef.current.value;
-		const enteredNewPassword = newPasswordRef.current.value;
+    const enteredOldPassword = oldPasswordRef.current.value;
+    const enteredNewPassword = newPasswordRef.current.value;
 
-		// optional: Add validation
+    // optional: Add validation
 
-		props.onChangePassword({
-			oldPassword: enteredOldPassword,
-			newPassword: enteredNewPassword,
-		});
-	}
+    props.onChangePassword({
+      oldPassword: enteredOldPassword,
+      newPassword: enteredNewPassword,
+    });
+  }
 
-	return (
-		<form onSubmit={submitHandler}>
-			<div className="inputBox">
-				{/* <label htmlFor='email'>Your Email</label> */}
-				<input
-					className="input border-bottom-right-glass"
-					type="password"
-					placeholder="new password"
-					id="new-password"
-					required
-					ref={newPasswordRef}
-				/>
-			</div>
-			<div className="inputBox">
-				{/* <label htmlFor='password'>Your Password</label> */}
-				<input
-					className="input border-bottom-right-glass"
-					type="password"
-					placeholder="old password"
-					id="old-password"
-					required
-					ref={oldPasswordRef}
-				/>
-			</div>
-			<div className="inputBox">
-				<input
-					className="input border-bottom-right-glass text-[#666] bg-white max-w-[100px] cursor-pointer mb-[20px] font-semibold"
-					type="submit"
-					value="Change Password"
-				/>
-			</div>
-		</form>
-	);
+  return (
+    <form className="relative h-full w-full" onSubmit={submitHandler}>
+      <div className="inputBox">
+        {/* <label htmlFor='email'>Your Email</label> */}
+        <p>{props.passwordResponse.message}</p>
+        <input
+          className="input input-glass-container"
+          type="password"
+          placeholder="new password"
+          id="new-password"
+          required
+          ref={newPasswordRef}
+        />
+      </div>
+      <div className="inputBox">
+        {/* <label htmlFor='password'>Your Password</label> */}
+        <input
+          className="input input-glass-container"
+          type="password"
+          placeholder="old password"
+          id="old-password"
+          required
+          ref={oldPasswordRef}
+        />
+      </div>
+      <div className="inputBox">
+        <input
+          className="input input-glass-container text-black dark:text-[#4C8EFF] bg-gray-800/90 dark:bg-gray-300/90 max-w-[12.25em] cursor-pointer mb-[1.25em] font-semibold"
+          type="submit"
+          value="Change Password"
+        />
+      </div>
+    </form>
+  );
 }
 
 export default ProfileForm;

@@ -1,4 +1,4 @@
-import { useSession } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link';
 // import { showModal } from 'pages/app/state/actions';
 import ZLogo from 'pages/src/assets/ObinsunVectors/ZLogo';
@@ -36,10 +36,18 @@ import { VscSettingsGear } from 'react-icons/vsc';
 // type modalOpener = MouseEventHandler<HTMLButtonElement> | undefined;
 
 // const Header = (openModal: modalOpener) => {
-const Header = ({ openModal, passHref }: any) => {
-  // const { dispatchShowModal } = props;
-
+const Header = ({ openModal }: any) => {
   const { data: session } = useSession();
+
+  const handleLogMode = () => {
+    if (!session) {
+      openModal();
+    } else {
+      signOut();
+    }
+  };
+
+  // const { dispatchShowModal } = props;
 
   //   const [showModal, setShowModal] = useState(false);
 
@@ -108,7 +116,7 @@ const Header = ({ openModal, passHref }: any) => {
                   //     },
                   //   });
                   // }}
-                  onClick={openModal}
+                  onClick={handleLogMode}
                 >
                   <h2 className="relative z-50 h-full w-full">
                     {session ? 'Logout' : 'Login'}
