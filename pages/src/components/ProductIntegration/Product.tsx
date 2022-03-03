@@ -122,7 +122,7 @@ const Product = (product: any) => {
 
   return (
     // <article className="border border-gray-200 rounded bg-white flex flex-col relative">
-    <article className="glass-container flex flex-col relative">
+    <article className="glass-container h-full w-full flex flex-col relative">
       <button
         aria-label="Add to wishlist"
         className="appearance-none absolute top-0 right-0 mt-3 mr-3 text-gray-300 dark:text-gray-800 focus:text-gray-900 darkfocus:text-[#4C8EFF] hover:text-red-500 transition focus:outline-none"
@@ -148,7 +148,7 @@ const Product = (product: any) => {
           </svg>
         )}
       </button>
-      <div className="flex items-center justify-center flex-1 sm:flex-shrink-0 w-full p-8">
+      <div className="flex items-center justify-center flex-1  w-full p-8">
         {activeVariantFile && (
           <Image
             src={activeVariantFile.preview_url}
@@ -168,7 +168,7 @@ const Product = (product: any) => {
           </p>
         </div>
       </div>
-      <div className="p-3 flex flex-col sm:flex-row justify-center items-center">
+      <div className="p-3 flex flex-col justify-center items-center gap-1">
         <VariantPicker
           value={activeVariantExternalId}
           onChange={({ target: { value } }: any) =>
