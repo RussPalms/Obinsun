@@ -25,7 +25,8 @@ import * as admin from 'firebase-admin';
 import axios from 'axios';
 import { useState } from 'react';
 
-const serviceAccount =  const serviceAccount = require('../keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6'); as string;
+const serviceAccount =
+  require('../keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6') as string;
 
 const clientId = process.env.PRINTFUL_CLIENT_ID;
 
