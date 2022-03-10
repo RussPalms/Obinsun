@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "type-check": "tsc --noEmit",
-    "lint": "next lint",
+    "lint": "eslint . --ext .ts,.tsx",
     "cache-listings": "ts-node scripts/cacheListings.ts",
     "prepare": "husky install"
   },
