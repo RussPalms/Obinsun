@@ -1,9 +1,6 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 // app/features/UserContext.jsx
 // ----------------------------------------
-import AccessControl from 'accesscontrol';
+import { AccessControl } from 'accesscontrol';
 import { useSession } from 'next-auth/react';
 import react, {
   createContext,
@@ -26,8 +23,8 @@ export const UserContext = createContext({
 export const useUserContext = () => useContext(UserContext);
 
 // export pre-configured provider
-export const UserProvider = (props) => {
-  const { data: session, status } = useSession();
+export const UserProvider = (props: any) => {
+  const { data: session, status } = useSession() as any;
   const loading = status === 'loading';
 
   // update permissions from session data
@@ -68,7 +65,7 @@ export const UserProvider = (props) => {
   };
 
   return (
-    <UserContext.Provider value={context}>
+    <UserContext.Provider value={context as any}>
       {props.children}
     </UserContext.Provider>
   );

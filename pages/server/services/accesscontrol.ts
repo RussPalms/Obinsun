@@ -1,9 +1,6 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 // server/services/accesscontrol.js
 // ----------------------------------------
-import AccessControl from 'accesscontrol';
+import { AccessControl } from 'accesscontrol';
 
 // unique back-end instance of AccessControl
 export const ac = new AccessControl();

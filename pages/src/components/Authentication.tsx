@@ -1,12 +1,9 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 import { useState, useRef } from 'react';
 import { signIn, useSession, getCsrfToken } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import DarkModeToggle from './DarkModeToggle';
 
-async function createUser(email, password, role) {
+async function createUser(email: any, password: any, role: any) {
   const response = await fetch('/api/auth/register', {
     method: 'POST',
     body: JSON.stringify({ email, password, role }),
@@ -32,7 +29,7 @@ async function createUser(email, password, role) {
   return userData;
 }
 
-async function createEmail(email) {
+async function createEmail(email: any) {
   const response = await fetch('/api/auth/email-auth', {
     method: 'POST',
     body: JSON.stringify({ email }),
@@ -52,16 +49,16 @@ async function createEmail(email) {
   return tokenData;
 }
 
-function Authentication({ csrfToken, userData }) {
+function Authentication({ csrfToken, userData }: any) {
   // const baseUrl = process.env.NEXTAUTH_URL;
 
   const { data: session, status } = useSession();
   const loading = status === 'loading';
   console.log(session);
 
-  const emailInputRef = useRef();
-  const passwordInputRef = useRef();
-  const roleInputRef = useRef();
+  const emailInputRef = useRef() as any;
+  const passwordInputRef = useRef() as any;
+  const roleInputRef = useRef() as any;
 
   const [isLogin, setIsLogin] = useState(true);
   // const [sendEmail, setSendEmail] = useState(true);
@@ -75,7 +72,7 @@ function Authentication({ csrfToken, userData }) {
   // 	setSendEmail((prevState) => !prevState);
   // }
 
-  async function submitHandler(e) {
+  async function submitHandler(e: any) {
     e.preventDefault();
 
     // try {
@@ -87,12 +84,12 @@ function Authentication({ csrfToken, userData }) {
     if (isLogin) {
       // const enteredPassword = passwordInputRef.current.value;
 
-      const result = await signIn('credentials', {
+      const result = (await signIn('credentials', {
         redirect: false,
         email: enteredEmail,
         password: enteredPassword,
         // callbackUrl: `${window.location.origin}`,
-      });
+      })) as any;
 
       // const result = await signIn("email", {
       // 	redirect: false,
@@ -100,7 +97,7 @@ function Authentication({ csrfToken, userData }) {
       // 	// callbackUrl: `${window.location.origin}`,
       // });
 
-      if (!result.error) {
+      if (!result?.error) {
         router.replace('/routes/protected/profile');
       }
     } else {
@@ -174,23 +171,23 @@ function Authentication({ csrfToken, userData }) {
       <div className="absolute top-[50%] left-[50%] transform translate-x-[-50%] translate-y-[-50%]">
         <div
           className="square border-bottom-right-glass square-delay"
-          style={{ '--i': '0' }}
+          style={{ '--i': '0' } as any}
         />
         <div
           className="square border-bottom-right-glass top-[150px] left-[-100px] w-[120px] h-[120px] z-20 square-delay"
-          style={{ '--i': '1' }}
+          style={{ '--i': '1' } as any}
         />
         <div
           className="square border-bottom-right-glass bottom-[50px] right-[-60px] w-[80px] h-[80px] z-20 square-delay"
-          style={{ '--i': '2' }}
+          style={{ '--i': '2' } as any}
         />
         <div
           className="square border-bottom-right-glass bottom-[-80px] left-[100px] w-[50px] h-[50px] square-delay"
-          style={{ '--i': '3' }}
+          style={{ '--i': '3' } as any}
         />
         <div
           className="square border-bottom-right-glass top-[-80px] left-[140px] w-[60px] h-[60px] delay-[-7000ms] square-delay"
-          style={{ '--i': '4' }}
+          style={{ '--i': '4' } as any}
         />
         <div className="relative top-0 left-0 w-[400px] min-h-[400px] bg-white/10 border rounded-[10px] flex justify-center align-center backdrop-blur-[5px] shadow-glass3 border-bottom-right-glass border-white/50">
           <div className="relative w-full h-full p-[40px]">

@@ -1,6 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 import React from 'react';
 // import { Canvas } from "react-three-fiber";
 import { Canvas } from '@react-three/fiber';
@@ -15,7 +12,10 @@ function ThreeFiberTesting({}: Props) {
   return (
     <>
       <div className="h-screen bg-gray-400">
-        <Canvas colorManagement camera={{ position: [0, 0, 300] }}>
+        <Canvas
+          // colorManagement
+          camera={{ position: [0, 0, 300] }}
+        >
           <Lights />
           <Model />
         </Canvas>

@@ -1,6 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`);
 
 const fs = require('fs');
@@ -20,11 +17,11 @@ export default async (req: any, res: any) => {
       //   responseType: "octed-stream",
     }).then(
       (response: any) =>
-        new Promise((resolve, reject) => {
+        new Promise((resolve: any, reject) => {
           response.data
             .pipe(fs.createWriteStream(image_path))
             .on('finish', () => resolve())
-            .on('error', (e) => reject(e));
+            .on('error', (e: any) => reject(e));
         })
     );
 

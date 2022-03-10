@@ -1,6 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react';
@@ -12,14 +9,14 @@ import UploadForm from './Uploads/UploadForm';
 type Props = {};
 
 function VerifyDocuments({}: Props) {
-  const { data: session, status } = useSession();
+  const { data: session, status } = useSession() as any;
   const [selectedImg, setSelectedImg] = useState(null);
   // console.log(selectedImg);
   console.log(session);
 
   console.log('this is the selected image url:', selectedImg);
 
-  const uploadingDocuments = async (e) => {
+  const uploadingDocuments = async () => {
     // e.preventDefault();
     try {
       await axios.post('/api/stripe/upload-verification', {

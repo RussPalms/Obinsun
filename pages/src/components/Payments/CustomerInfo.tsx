@@ -1,6 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
 import { getSession, useSession } from 'next-auth/react';
@@ -14,11 +11,11 @@ import CustomerShipping from './CustomerShipping';
 // async function createCustomAccount({firebaseID: session.id})
 
 export default function CustomerInfo() {
-  const { data: session, status } = useSession();
+  const { data: session, status } = useSession() as any;
   const loading = status === 'loading';
   console.log(status, session);
 
-  const submitValidationHandler = async (validationData) => {
+  const submitValidationHandler = async (validationData: any) => {
     // e.preventDefault();
 
     // const stripe = await stripePromise;
@@ -32,7 +29,7 @@ export default function CustomerInfo() {
     return;
   };
 
-  const submitSetupHandler = async (setupData) => {
+  const submitSetupHandler = async (setupData: any) => {
     const createAccount = await axios.post(
       '/api/stripe/setup-customer-payment',
       {
@@ -44,7 +41,7 @@ export default function CustomerInfo() {
     return;
   };
 
-  const addingCard = async (e) => {
+  const addingCard = async (e: any) => {
     e.preventDefault();
 
     //   const externalAccountAddition = await axios.post(
@@ -56,17 +53,17 @@ export default function CustomerInfo() {
     //   );
   };
 
-  const externalAccount = async (e) => {
+  const externalAccount = async (e: any) => {
     e.preventDefault();
 
     // await axios.post("/api/stripe/create-external-account", {
     await axios.post('/api/stripe/add-card', {
       firebaseID: session?.id,
-      stripeId: session?.user.stripeId,
+      stripeId: session?.user?.stripeId,
     });
   };
 
-  const updateCustomAccount = async (e) => {
+  const updateCustomAccount = async (e: any) => {
     e.preventDefault();
     const updateAccount = await axios.post(
       '/api/stripe/create-custom-account',
@@ -96,23 +93,23 @@ export default function CustomerInfo() {
       <div className="absolute top-[50%] left-[50%] transform translate-x-[-50%] translate-y-[-50%]">
         <div
           className="square border-bottom-right-glass square-delay"
-          style={{ '--i': '0' }}
+          style={{ '--i': '0' } as any}
         />
         <div
           className="square border-bottom-right-glass top-[150px] left-[-100px] w-[120px] h-[120px] z-20 square-delay"
-          style={{ '--i': '1' }}
+          style={{ '--i': '1' } as any}
         />
         <div
           className="square border-bottom-right-glass bottom-[50px] right-[-60px] w-[80px] h-[80px] z-20 square-delay"
-          style={{ '--i': '2' }}
+          style={{ '--i': '2' } as any}
         />
         <div
           className="square border-bottom-right-glass bottom-[-80px] left-[100px] w-[50px] h-[50px] square-delay"
-          style={{ '--i': '3' }}
+          style={{ '--i': '3' } as any}
         />
         <div
           className="square border-bottom-right-glass top-[-80px] left-[140px] w-[60px] h-[60px] delay-[-7000ms] square-delay"
-          style={{ '--i': '4' }}
+          style={{ '--i': '4' } as any}
         />
         <div className="relative top-0 left-0 w-[400px] min-h-[400px] bg-white/10 border rounded-[10px] flex justify-center align-center backdrop-blur-[5px] shadow-glass3 border-bottom-right-glass border-white/50">
           <div className="relative w-full h-full p-[40px]">
@@ -122,7 +119,7 @@ export default function CustomerInfo() {
             <button onClick={externalAccount}>Click To Update Account</button>
             <button onClick={addingCard}>Click To Add Card</button>
             <CustomerShipping onSubmitValidation={submitValidationHandler} />
-            <CustomerPayment onSubmitSetup={submitSetupHandler} />
+            {/* <CustomerPayment onSubmitSetup={submitSetupHandler} /> */}
           </div>
         </div>
       </div>

@@ -1,6 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 import React, { useEffect, useRef, useState } from 'react';
 // import { useFrame } from "react-three-fiber";
 import { useFrame } from '@react-three/fiber';
@@ -32,15 +29,15 @@ type Props = {};
 
 const Model = () => {
   // Refs
-  const group: group = useRef();
-  const actions: actions = useRef();
+  const group: group = useRef() as any;
+  const actions: actions = useRef() as any;
 
   // State
   const [model, setModel] = useState<Object3D | null>(null);
   const [animation, setAnimation] = useState<AnimationClip[] | null>(null);
 
   // Mixer
-  const [mixer] = useState(() => new THREE.AnimationMixer(null));
+  const [mixer] = useState(() => new THREE.AnimationMixer(null as any));
 
   // Load Model
   useEffect(() => {

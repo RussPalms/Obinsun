@@ -1,6 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 import { useEffect } from 'react';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import dynamic from 'next/dynamic';
@@ -84,7 +81,7 @@ const ListingPage: React.FC<Props> = ({ source, frontMatter }: Props) => {
 
         <p>{frontMatter.description}</p>
 
-        <MDXRemote {...source} components={components} />
+        <MDXRemote {...source} components={components as any} />
       </article>
     </ListingLayout>
   );

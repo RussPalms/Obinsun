@@ -1,6 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 import React, { createContext, useReducer, useEffect } from 'react';
 import useLocalStorage from '../../server/hooks/useLocalStorage';
 import { PrintfulProduct } from '../../types';
@@ -51,7 +48,10 @@ export const WishlistProvider: React.FC<{ children?: React.ReactNode }> = ({
     'items-wishlist',
     JSON.stringify(initialState)
   );
-  const [state, dispatch] = useReducer(reducer, JSON.parse(savedWishlist));
+  const [state, dispatch]: any = useReducer(
+    reducer as any,
+    JSON.parse(savedWishlist)
+  );
 
   useEffect(() => {
     saveWishlist(JSON.stringify(state));
@@ -79,7 +79,7 @@ export const WishlistProvider: React.FC<{ children?: React.ReactNode }> = ({
   const hasItems = state.items.length > 0;
 
   return (
-    <WishlistDispatchContext.Provider value={{ addItem, removeItem }}>
+    <WishlistDispatchContext.Provider value={{ addItem, removeItem } as any}>
       <WishlistStateContext.Provider value={{ ...state, isSaved, hasItems }}>
         {children}
       </WishlistStateContext.Provider>
