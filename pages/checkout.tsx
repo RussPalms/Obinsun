@@ -10,7 +10,7 @@ import axios from 'axios';
 import Content from './Production/Layout/Content';
 import { useAppDispatch, useAppSelector } from './server/hooks/reduxHooks';
 import {
-  checkoutCart,
+  // checkoutCart,
   getTotalPrice,
   removeFromCart,
   updateQuantity,

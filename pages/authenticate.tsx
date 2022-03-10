@@ -21,6 +21,30 @@ export default function AuthenticatePage() {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
+  // useEffect(async () => {
+  //   await getSession().then((session) => {
+  //     if (session) {
+  //       router.replace('/');
+  //     } else {
+  //       setIsLoading(false);
+  //     }
+  //   });
+  // }, [router]);
+
+  // useEffect(() => {
+  //   getSession().then((session) => {
+  //     if (session) {
+  //       router.replace('/');
+  //     } else {
+  //       setIsLoading(false);
+  //     }
+  //   });
+  // }, [router]);
+
+  // if (isLoading) {
+  //   return <Preload />;
+  // }
+
   async () => {
     await getSession().then((session) => {
       if (session) {
