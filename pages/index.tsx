@@ -11,7 +11,7 @@ import Obinsun from 'pages/Production/Layout/Obinsun';
 import shuffle from 'lodash.shuffle';
 import { PrintfulProduct } from './types';
 import { formatVariantName } from './server/lib/format-variant-name';
-// import { printful } from './server/lib/printful-client';
+import { printful } from './server/lib/printful-client';
 import ProductGrid from './src/components/ProductIntegration/ProductGrid';
 import IHomePageDesigns from 'pages/Production/interfaces/IHomePageDesigns';
 import Content from './Production/Layout/Content';
@@ -19,7 +19,7 @@ import { useAppDispatch, useAppSelector } from './server/hooks/reduxHooks';
 import { ISyncProduct } from './api/products';
 import { receivedProducts } from './app/state/slices/productsSlice';
 import { useEffect } from 'react';
-import { getProducts } from 'getSyncedProducts';
+// import { getProducts } from 'getSyncedProducts';
 // import DesignMix from './src/components/DesignMix';
 // import Header from 'pages/Production/Layout/Header';
 // import Sidebar from 'pages/Production/Layout/Sidebar';
@@ -127,7 +127,7 @@ IProps): JSX.Element => {
           </h1>
         </div>
 
-        {/* <ProductGrid products={products} /> */}
+        <ProductGrid products={products} />
         {/* <ProductGrid products={products} />
         <ProductGrid products={products} />
         <ProductGrid products={products} />
@@ -201,48 +201,48 @@ IProps): JSX.Element => {
 //     return { props: { homePageArticles } }
 // }
 
-// export const getStaticProps: GetStaticProps = async () => {
-//   // const util = require('util');
-//   const { result: productIds } = await printful.get('sync/products', '');
-//   const allProducts = await Promise.all(
-//     productIds.map(
-//       async ({ id }: any) => await printful.get(`sync/products/${id}`, '')
-//     )
-//   );
-//   const products: PrintfulProduct[] = allProducts.map(
-//     ({ result: { sync_product, sync_variants } }) => ({
-//       ...sync_product,
-//       variants: sync_variants.map(({ name, ...variant }: any) => ({
-//         name: formatVariantName(name),
-//         ...variant,
-//       })),
-//     })
-//   );
+export const getStaticProps: GetStaticProps = async () => {
+  // const util = require('util');
+  const { result: productIds } = await printful.get('sync/products', '');
+  const allProducts = await Promise.all(
+    productIds.map(
+      async ({ id }: any) => await printful.get(`sync/products/${id}`, '')
+    )
+  );
+  const products: PrintfulProduct[] = allProducts.map(
+    ({ result: { sync_product, sync_variants } }) => ({
+      ...sync_product,
+      variants: sync_variants.map(({ name, ...variant }: any) => ({
+        name: formatVariantName(name),
+        ...variant,
+      })),
+    })
+  );
 
-//   // console.log(products[2].variants[0]);
-//   console.log(products);
+  // console.log(products[2].variants[0]);
+  console.log(products);
 
-//   // const retrieveProducts = () => {
-//   //   const dispatch = useAppDispatch();
+  // const retrieveProducts = () => {
+  //   const dispatch = useAppDispatch();
 
-//   //   const products = useAppSelector((state) => state.products.products);
-//   //   useEffect(() => {
-//   //     getProducts().then((products) => {
-//   //       dispatch(receivedProducts(products));
-//   //     });
-//   //   }, []);
-//   //   return products;
-//   // };
+  //   const products = useAppSelector((state) => state.products.products);
+  //   useEffect(() => {
+  //     getProducts().then((products) => {
+  //       dispatch(receivedProducts(products));
+  //     });
+  //   }, []);
+  //   return products;
+  // };
 
-//   // const products = retrieveProducts();
+  // const products = retrieveProducts();
 
-//   // console.log(products);
+  // console.log(products);
 
-//   return {
-//     props: {
-//       products: shuffle(products),
-//     },
-//   };
-// };
+  return {
+    props: {
+      products: shuffle(products),
+    },
+  };
+};
 
 export default IndexPage;
