@@ -12,11 +12,11 @@ const videoConstraints = {
   //   width: 250,
   //   height: 400,
   facingMode: 'user',
-};
+} as any;
 
 export default function WebcamCapture({}: Props) {
-  const webcamRef = useRef(null);
-  const dispatch = useDispatch();
+  const webcamRef = useRef(null) as any;
+  const dispatch = useDispatch() as any;
   const router = useRouter();
 
   const capture = useCallback(() => {

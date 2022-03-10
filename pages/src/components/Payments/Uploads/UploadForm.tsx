@@ -4,8 +4,8 @@ import ProgressBar from './ProgressBar';
 type Props = {};
 
 function UploadForm({}: Props) {
-  const [file, setFile] = useState(null);
-  const [error, setError] = useState(null);
+  const [file, setFile] = useState(null) as any;
+  const [error, setError] = useState(null) as any;
 
   const types = ['image/png', 'image/jpeg'];
 
