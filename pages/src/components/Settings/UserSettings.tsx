@@ -4,7 +4,7 @@ import PrintfulSignin from './PrintfulSignin';
 import SettingsForm from './SettingsForm';
 
 const UserSettings = () => {
-  const { data: session } = useSession();
+  const { data: session } = useSession() as any;
   // console.log(session.user.stripeId);
 
   return (

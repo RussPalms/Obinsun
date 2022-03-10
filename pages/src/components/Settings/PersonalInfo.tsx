@@ -69,8 +69,8 @@ const PersonalInfo = ({ formData, setFormData }: any) => {
               onChange={(e) => {
                 setFormData({ ...formData, ssnLast4: e.target.value });
               }}
-              maxLength="4"
-              minLength="4"
+              maxLength={4}
+              minLength={4}
             />
             <span className="glass-form-text">Last 4 Digits of SSN</span>
             <span className="glass-form-line line"></span>

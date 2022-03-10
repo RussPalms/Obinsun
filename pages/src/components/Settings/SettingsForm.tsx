@@ -6,7 +6,7 @@ import BusinessInfo from './BusinessInfo';
 import PaymentInfo from './PaymentInfo';
 import BillingInfo from './BillingInfo';
 import StripeAgreement from './StripeAgreement';
-import PrintfulSigin from './PrintfulSigin';
+// import PrintfulSigin from './PrintfulSigin';
 import Router from 'next/router';
 
 const SettingsForm = () => {
@@ -14,11 +14,11 @@ const SettingsForm = () => {
   const clientId = process.env.PRINTFUL_CLIENT_ID;
   const printfulLogin = `https://www.printful.com/oauth/authorize?grant_type=authorize&client_id=${clientId}&state={stateValue}&redirect_url=${redirectUrl}`;
 
-  const { data: session, status } = useSession();
+  const { data: session, status } = useSession() as any;
   const loading = status === 'loading';
 
-  const [ip, setIP] = useState('');
-  const [ts, setTS] = useState(null);
+  const [ip, setIP] = useState('') as any;
+  const [ts, setTS] = useState(null) as any;
 
   const getData = async () => {
     const res = await axios.get('https://geolocation-db.com/json/');
@@ -45,19 +45,19 @@ const SettingsForm = () => {
     state: '',
   });
 
-  const typeRef = useRef();
-  const mccRef = useRef();
-  const urlRef = useRef();
-  const firstNameRef = useRef();
-  const lastNameRef = useRef();
-  const dobRef = useRef();
-  const line1Ref = useRef();
-  const postalCodeRef = useRef();
-  const cityRef = useRef();
-  const stateRef = useRef();
-  const emailRef = useRef();
-  const phoneRef = useRef();
-  const ssnLast4Ref = useRef();
+  const typeRef = useRef() as any;
+  const mccRef = useRef() as any;
+  const urlRef = useRef() as any;
+  const firstNameRef = useRef() as any;
+  const lastNameRef = useRef() as any;
+  const dobRef = useRef() as any;
+  const line1Ref = useRef() as any;
+  const postalCodeRef = useRef() as any;
+  const cityRef = useRef() as any;
+  const stateRef = useRef() as any;
+  const emailRef = useRef() as any;
+  const phoneRef = useRef() as any;
+  const ssnLast4Ref = useRef() as any;
 
   // const formDataRef = useRef();
 
@@ -76,11 +76,11 @@ const SettingsForm = () => {
     } else if (page === 2) {
       return <BillingInfo formData={formData} setFormData={setFormData} />;
     } else {
-      return <StripeAgreement formData={formData} setFormData={setFormData} />;
+      return <StripeAgreement />;
     }
   };
 
-  const submitInformation = async ({ formdata }) => {
+  const submitInformation = async ({ formdata }: any) => {
     const createAccount = await axios.post(
       '/api/stripe/create-custom-account',
       {
@@ -104,18 +104,20 @@ const SettingsForm = () => {
         <div className="glass-progress-bar-container">
           <div
             className="glass-progress-bar"
-            style={{
-              width:
-                page === 0
-                  ? '25%'
-                  : page === 1
-                  ? '50%'
-                  : page === 2
-                  ? '75%'
-                  : page === 3
-                  ? '100%'
-                  : page == 4,
-            }}
+            style={
+              {
+                width:
+                  page === 0
+                    ? '25%'
+                    : page === 1
+                    ? '50%'
+                    : page === 2
+                    ? '75%'
+                    : page === 3
+                    ? '100%'
+                    : page == 4,
+              } as any
+            }
           ></div>
         </div>
         <h2 className="glass-form-header">{FormTitles[page]}</h2>
