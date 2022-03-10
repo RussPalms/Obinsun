@@ -10,7 +10,7 @@ function LayoutTest({}: Props) {
       <div className="relative grid grid-row-1 place-content-stretch">
         <div className="flex-1 grow relative min-h-[100vh] w-full z-40 flex items-stretch justify-center place-self-stretch place-items-stretch place-content-stretch justify-self-stretch justify-items-stretch">
           background
-          <div className="blur-none z-50">
+          {/* <div className="blur-none z-50">
             CONTENT Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
             do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
             enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
@@ -213,7 +213,7 @@ function LayoutTest({}: Props) {
             reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
             culpa qui officia deserunt mollit anim id est laborum.
-          </div>
+          </div> */}
           {/* Top Left */}
           <section className="custom-clip-container ">
             <div className="custom-clips bg-red-500 clipped-top-left-edge" />

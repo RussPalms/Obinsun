@@ -1,6 +1,6 @@
 //@ts-nocheck
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import VariantPicker from './VariantPicker';
 import useWishlistDispatch from '../../../server/hooks/useWishlistDispatch';
@@ -10,8 +10,17 @@ import {
   addToBasket,
   selectTotal,
 } from '../../../app/state/slices/basketSlice';
+import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
+import { RiHeartLine, RiHeartFill } from 'react-icons/ri';
+import {
+  selectItems,
+  selectMultiples,
+  selectBasket,
+} from 'pages/app/state/slices/basketSlice';
 
 const Product = (product: any) => {
+  const countRef = useRef(null);
+
   // const total = useSelector(selectTotal);
   // console.log(total);
   // console.log(product);
@@ -112,9 +121,18 @@ const Product = (product: any) => {
         description: activeVariant.name,
         image: activeVariantFile.preview_url,
         name: name,
+        // count: countRef.current.value
       })
     );
   };
+
+  const items = useSelector(selectItems);
+  const basket = useSelector(selectBasket);
+  // console.log(items.map((item: any) => item.id));
+
+  // console.log(items);
+  // console.log(basket);
+  // console.log(basket.map((basketItem: any) => basketItem.id));
 
   // useEffect(() => {
   //   console.log(productData.price);
@@ -125,30 +143,20 @@ const Product = (product: any) => {
     <article className="glass-container h-full w-full flex flex-col relative">
       <button
         aria-label="Add to wishlist"
-        className="appearance-none absolute top-0 right-0 mt-3 mr-3 text-gray-300 dark:text-gray-800 focus:text-gray-900 darkfocus:text-[#4C8EFF] hover:text-red-500 transition focus:outline-none"
+        className="appearance-none absolute top-0 right-0 mt-3 mr-3 text-gray-300 dark:text-gray-800 focus:text-gray-900 darkfocus:text-[#4C8EFF] hover:text-gray-800 dark:hover-text-gray-300 transition focus:outline-none"
         onClick={addToWishlist}
       >
         {onWishlist ? (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            className="w-6 h-6 fill-current text-red-500"
-          >
-            <path fill="none" d="M0 0H24V24H0z" />
-            <path d="M12.001 4.529c2.349-2.109 5.979-2.039 8.242.228 2.262 2.268 2.34 5.88.236 8.236l-8.48 8.492-8.478-8.492c-2.104-2.356-2.025-5.974.236-8.236 2.265-2.264 5.888-2.34 8.244-.228z" />
-          </svg>
+          <div className="w-6 h-6 fill-current text-black dark:text-[#4C8EFF]">
+            <RiHeartFill />
+          </div>
         ) : (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            className="w-6 h-6 fill-current"
-          >
-            <path fill="none" d="M0 0H24V24H0z" />
-            <path d="M12.001 4.529c2.349-2.109 5.979-2.039 8.242.228 2.262 2.268 2.34 5.88.236 8.236l-8.48 8.492-8.478-8.492c-2.104-2.356-2.025-5.974.236-8.236 2.265-2.264 5.888-2.34 8.244-.228zm6.826 1.641c-1.5-1.502-3.92-1.563-5.49-.153l-1.335 1.198-1.336-1.197c-1.575-1.412-3.99-1.35-5.494.154-1.49 1.49-1.565 3.875-.192 5.451L12 18.654l7.02-7.03c1.374-1.577 1.299-3.959-.193-5.454z" />
-          </svg>
+          <div className="w-6 h-6 fill-current text-gray-800 dark:text-gray-300">
+            <RiHeartLine />
+          </div>
         )}
       </button>
-      <div className="flex items-center justify-center flex-1  w-full p-8">
+      <div className="flex items-center justify-center flex-1 w-full p-8">
         {activeVariantFile && (
           <Image
             src={activeVariantFile.preview_url}
@@ -187,6 +195,7 @@ const Product = (product: any) => {
           // data-item-name={name}
           onClick={addItemToBasket}
         >
+          {/* <input type="number" ref={countRef} /> */}
           Add to Cart
         </button>
       </div>

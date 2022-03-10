@@ -1,4 +1,4 @@
-import type { NextApiRequest } from "next";
+import type { NextApiRequest } from 'next';
 
 declare global {
   interface Window {
@@ -7,11 +7,11 @@ declare global {
   }
   namespace JSX {
     interface IntrinsicElements {
-      "address-fields": any;
+      'address-fields': any;
       // "snipcart-label": any;
       // "snipcart-input": any;
-      "stripe-label": any;
-      "stripe-input": any;
+      'stripe-label': any;
+      'stripe-input': any;
       // id: any;
       id: any;
     }
@@ -31,48 +31,48 @@ export type StripeWebhookEvent =
 
   // | 'order.payment_succeeded'
   // | 'checkout.session.completed'
-  | "payment_intent.succeeded"
+  | 'payment_intent.succeeded'
 
   // | "order.status.changed"
-  | "order.updated"
+  | 'order.updated'
 
   // | "order.paymentStatus.changed"
-  | "payment_method.updated"
+  | 'payment_method.updated'
 
   // | "order.trackingNumber.changed"
 
   // | "order.refund.created"
   // | 'charge.refunded'
-  | "order_return.created"
+  | 'order_return.created'
 
   // | "order.notification.created"
-  | "order.created"
+  | 'order.created'
 
   // | "subscription.created"
-  | "customer.subscription.created"
+  | 'customer.subscription.created'
 
   // | "subscription.cancelled"
-  | "customer.subscription.deleted"
+  | 'customer.subscription.deleted'
 
   // | "subscription.paused"
-  | "customer.subscription.pending_update_applied"
+  | 'customer.subscription.pending_update_applied'
 
   // | "subscription.resumed"
-  | "customer.subscription.updated"
+  | 'customer.subscription.updated'
 
   // | "subscription.invoice.created"
-  | "invoice.created"
+  | 'invoice.created'
 
   // | "shippingrates.fetch"
 
   // | "taxes.calculate"
   // | 'tax_rate.created'
-  | "tax_rate.updated"
+  | 'tax_rate.updated'
 
   // | "customauth:customer_updated";
   // | 'account.updated'
   // | "account.application.authorized"
-  | "account.external_account.updated";
+  | 'account.external_account.updated';
 
 export interface StripeWebhookContent {
   discounts: { [key: string]: any };
@@ -119,7 +119,7 @@ export type StripeTaxItem = {
 
 export interface StripeRequest extends NextApiRequest {
   headers: {
-    "x-stripe-requesttoken"?: string;
+    'x-stripe-requesttoken'?: string;
   };
   body: {
     eventName: StripeWebhookEvent;
@@ -129,12 +129,23 @@ export interface StripeRequest extends NextApiRequest {
   };
 }
 
-export interface ISyncProduct {
+// export interface ISyncProduct {
+//   id: string;
+//   external_id: string;
+//   name: string;
+//   variants: [];
+//   synced: number;
+//   thumbnail_url: string;
+//   is_ignored: boolean;
+// }
+
+export interface CartProduct extends ISyncProduct {
   id: string;
-  external_id: string;
+  price: number;
+  url: string;
+  description: string;
+  image: string;
   name: string;
-  variants: number;
-  synced: number;
 }
 
 export interface PrintfulProduct {

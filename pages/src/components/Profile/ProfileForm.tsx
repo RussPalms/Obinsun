@@ -21,7 +21,7 @@ function ProfileForm(props) {
   }
 
   return (
-    <form className="relative h-full w-full" onSubmit={submitHandler}>
+    <form className="relative h-full max-w-[40%]" onSubmit={submitHandler}>
       <div className="inputBox">
         {/* <label htmlFor='email'>Your Email</label> */}
         <p>{props.passwordResponse.message}</p>

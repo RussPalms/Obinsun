@@ -1,7 +1,5 @@
-//@ts-nocheck
-
-import type { NextApiRequest, NextApiResponse } from "next";
-import { printful } from "../../server/lib/printful-client";
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { printful } from '../../server/lib/printful-client';
 
 type Data = {
   id: string;
@@ -20,9 +18,9 @@ export default async function handler(
   const { id } = req.query;
 
   try {
-    const { result } = await printful.get(`store/variants/@${id}`);
+    const { result } = await printful.get(`store/variants/@${id}`, '');
 
-    res.setHeader("Cache-Control", "s-maxage=3600, stale-while-revalidate");
+    res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate');
 
     res.status(200).json({
       id: id as string,

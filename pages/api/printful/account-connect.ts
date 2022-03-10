@@ -13,17 +13,17 @@ import {
   Firestore,
   FirestoreDataConverter,
   getFirestore,
-} from "firebase/firestore";
+} from 'firebase/firestore';
 import {
   // connectToFirebase,
   firestoreConnect,
-} from "../../server/lib/database/firebaseFirestore";
-import { hashPassword } from "../../server/lib/password-auth";
-import { buffer } from "micro";
+} from '../../server/lib/database/firebaseFirestore';
+import { hashPassword } from '../../server/lib/password-auth';
+import { buffer } from 'micro';
 
-import * as admin from "firebase-admin";
-import axios from "axios";
-import { useState } from "react";
+import * as admin from 'firebase-admin';
+import axios from 'axios';
+import { useState } from 'react';
 
 const serviceAccount = process.env.GOOGLE_APPLICATION_CREDENTIALS as string;
 
@@ -40,8 +40,8 @@ const app = !admin.apps.length
 const createAccessCode = async (printfulTokenData: any) => {
   return app
     .firestore()
-    .collection("accessCodes")
-    .doc("Authorization")
+    .collection('accessCodes')
+    .doc('Authorization')
     .set({
       access_token: printfulTokenData.access_token,
       expires_at: printfulTokenData.expires_at,
@@ -56,7 +56,7 @@ const createAccessCode = async (printfulTokenData: any) => {
 };
 
 async function handler(req: any, res: any) {
-  if (req.method === "GET") {
+  if (req.method === 'GET') {
     // console.log(req);
     // console.log(req.body);
     console.log(req.client.body);
@@ -76,9 +76,9 @@ async function handler(req: any, res: any) {
     // );
 
     const getPrintfulToken = await axios.post(
-      "https://www.printful.com/oauth/token",
+      'https://www.printful.com/oauth/token',
       {
-        grant_type: "access_token",
+        grant_type: 'access_token',
         client_id: clientId,
         client_secret: clientSecret,
         code: printfulAccess,
@@ -96,12 +96,7 @@ async function handler(req: any, res: any) {
     console.log(printfulTokenData);
 
     return createAccessCode(printfulTokenData)
-      .then(() =>
-        res.redirect(
-          307,
-          "http://localhost:3000/routes/protected/creator/printful-connect"
-        )
-      )
+      .then(() => res.redirect(307, 'http://localhost:3000/settings'))
       .catch((err) => res.status(400).send(`Error: ${err.message}`));
   }
 }

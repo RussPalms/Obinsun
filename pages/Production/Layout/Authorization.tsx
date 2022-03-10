@@ -107,7 +107,7 @@ const Authorization = ({ closeModal }: any) => {
       });
 
       // setUserResponse(JSON.stringify(result.error));
-      if (result.error && result.status == 200) {
+      if (result?.error && result.status == 200) {
         setUserResponse('User Does Not Exist!');
       }
       // setUserResponse(result.error);
@@ -155,11 +155,11 @@ const Authorization = ({ closeModal }: any) => {
       className="relative top-[0%] left-0 flex justify-center align-center"
     >
       <div className="absolute top-[50%] left-[50%] transform translate-x-[-50%] translate-y-[-50%]">
-        <div className="floating-square-0" style={{ '--i': '0' }} />
-        <div className="floating-square-1" style={{ '--i': '1' }} />
-        <div className="floating-square-2" style={{ '--i': '2' }} />
-        <div className="floating-square-3" style={{ '--i': '3' }} />
-        <div className="floating-square-4" style={{ '--i': '4' }} />
+        <div className="floating-square-0" style={{ '--i': '0' } as any} />
+        <div className="floating-square-1" style={{ '--i': '1' } as any} />
+        <div className="floating-square-2" style={{ '--i': '2' } as any} />
+        <div className="floating-square-3" style={{ '--i': '3' } as any} />
+        <div className="floating-square-4" style={{ '--i': '4' } as any} />
         <div className="form-container relative top-0 left-0 vs:w-[15em] xs:w-[20em] mobile-l:w-[21em] tablet:w-[22em] laptop:-w-[23em] laptop-l:w-[24em] 2xl:w-[25em min-h-[25em] bg-gray-300/90 dark:bg-gray-800/90 border rounded-[0.625em] flex justify-center align-center backdrop-blur-[5px] shadow-glass3 glass-container border-white/50">
           <div className="form-body">
             {/* <Link href="/"> */}

@@ -6,8 +6,11 @@ import ProfileForm from './ProfileForm';
 import Link from 'next/link';
 import DarkModeToggle from '../DarkModeToggle';
 import { useState } from 'react';
+import { useSession } from 'next-auth/react';
 
 function UserProfile() {
+  // const { data: session } = useSession();
+  // console.log(session.user.stripeId);
   const router = useRouter();
 
   // const { data: session, status } = useSession();
@@ -37,7 +40,7 @@ function UserProfile() {
   // console.log(passwordResponse);
 
   return (
-    <div className="relative min-h-[50%] w-[85%] flex items-center justify-center">
+    <div className="relative h-full w-[85%] flex items-center justify-center">
       <ProfileForm
         passwordResponse={passwordResponse}
         onChangePassword={changePasswordHandler}

@@ -15,6 +15,11 @@ import { printful } from './server/lib/printful-client';
 import ProductGrid from './src/components/ProductIntegration/ProductGrid';
 import IHomePageDesigns from 'pages/Production/interfaces/IHomePageDesigns';
 import Content from './Production/Layout/Content';
+import { useAppDispatch, useAppSelector } from './server/hooks/reduxHooks';
+import { ISyncProduct } from './api/products';
+import { receivedProducts } from './app/state/slices/productsSlice';
+import { useEffect } from 'react';
+import { getProducts } from 'getSyncedProducts';
 // import DesignMix from './src/components/DesignMix';
 // import Header from 'pages/Production/Layout/Header';
 // import Sidebar from 'pages/Production/Layout/Sidebar';
@@ -22,13 +27,14 @@ import Content from './Production/Layout/Content';
 // import Content from 'pages/Production/Layout/Content';
 // import Footer from 'pages/Production/Layout/Footer';
 
-// type IndexPageProps = {
-//   products: PrintfulProduct[];
-// };
+type IndexPageProps = {
+  synced_products: ISyncProduct[];
+};
 
 interface IProps {
   // homePageDesigns: IHomePageDesigns
-  products: IHomePageDesigns;
+  designs: IHomePageDesigns;
+  products: IndexPageProps;
 }
 
 const title = 'Welcome, this is Obinsun 👋';
@@ -44,6 +50,62 @@ const IndexPage = ({
 //   featuredPortfolio,
 // },
 IProps): JSX.Element => {
+  const retrieveProducts = async () => {
+    // const url = `/api/checkout-success`;
+    const url = `/api/products/61e844c86224c7`;
+
+    const response = await fetch(url, {
+      // method: 'POST',
+      method: 'GET',
+    });
+    const data = await response.json();
+    if (!data.success) {
+      throw new Error(data.error);
+    }
+
+    console.log(data);
+    // return data;
+  };
+
+  // console.log(retrieveProducts());
+  useEffect(() => {
+    retrieveProducts();
+  }, []);
+  // retrieveProducts();
+  // console.log(retrieveProducts());
+
+  // async function getProducts(): Promise<PrintfulProduct[]> {
+  //   const { result: productIds } = await printful.get('sync/products', '');
+  //   const allProducts = await Promise.all(
+  //     productIds.map(
+  //       async ({ id }: any) => await printful.get(`sync/products/${id}`, '')
+  //     )
+  //   );
+  //   const products: PrintfulProduct[] = allProducts.map(
+  //     ({ result: { sync_product, sync_variants } }) => ({
+  //       ...sync_product,
+  //       variants: sync_variants.map(({ name, ...variant }: any) => ({
+  //         name: formatVariantName(name),
+  //         ...variant,
+  //       })),
+  //     })
+  //   );
+
+  //   return products;
+  // }
+
+  // const dispatch = useAppDispatch();
+
+  // const synced_products = useAppSelector((state) => state.products.products);
+  // useEffect(() => {
+  //   getProducts().then((products) => {
+  //     dispatch(receivedProducts(products));
+  //   });
+  // }, []);
+
+  // console.log(synced_products);
+  // console.log(getProducts());
+
   // const projects = featuredPortfolio || [latestPortfolio];
   return (
     <>
@@ -156,6 +218,26 @@ export const getStaticProps: GetStaticProps = async () => {
       })),
     })
   );
+
+  // console.log(products[2].variants[0]);
+  console.log(products);
+
+  // const retrieveProducts = () => {
+  //   const dispatch = useAppDispatch();
+
+  //   const products = useAppSelector((state) => state.products.products);
+  //   useEffect(() => {
+  //     getProducts().then((products) => {
+  //       dispatch(receivedProducts(products));
+  //     });
+  //   }, []);
+  //   return products;
+  // };
+
+  // const products = retrieveProducts();
+
+  // console.log(products);
+
   return {
     props: {
       products: shuffle(products),

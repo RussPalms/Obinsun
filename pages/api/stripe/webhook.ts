@@ -1,6 +1,6 @@
-import { buffer } from "micro";
-import * as admin from "firebase-admin";
-import axios from "axios";
+import { buffer } from 'micro';
+import * as admin from 'firebase-admin';
+// import axios from 'axios';
 
 // const serviceAccount = require("../keys/obinsun-merch-eae07f27cfc7.json");
 const serviceAccount = process.env.GOOGLE_APPLICATION_CREDENTIALS as string;
@@ -12,7 +12,7 @@ const app = !admin.apps.length
     })
   : admin.app();
 
-const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
+const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`);
 
 const endpointSecret = `${process.env.STRIPE_SIGNING_SECRET}`;
 
@@ -26,16 +26,17 @@ const fulfillAccountCreation = async (stripeAccount: any) => {
 
   const account = await stripe.accounts.retrieve(stripeAccount.account);
 
-  console.log("Creating custom account:", account);
-  app.firestore().collection("accessCodes").doc("Payment").set({
+  // console.log('Creating custom account:', account);
+  console.log('neccessary actions:', account.requirements.currently_due[0]);
+  app.firestore().collection('accessCodes').doc('Payment').set({
     obinsunId: account.id,
   });
 
   app
     .firestore()
-    .collection("users")
+    .collection('users')
     .doc(account.metadata.firebaseID)
-    .collection("custom_account")
+    .collection('custom_account')
     .doc(account.id)
     .set({
       last_time_updated: admin.firestore.FieldValue.serverTimestamp(),
@@ -44,7 +45,7 @@ const fulfillAccountCreation = async (stripeAccount: any) => {
   return (
     app
       .firestore()
-      .collection("users")
+      .collection('users')
       .doc(account.metadata.firebaseID)
       // .collection("custom_account")
       // .doc(account.id)
@@ -63,10 +64,10 @@ const fulfillAccountCreation = async (stripeAccount: any) => {
 };
 
 export default async (req: any, res: any) => {
-  if (req.method === "POST") {
+  if (req.method === 'POST') {
     const requestBuffer = await buffer(req);
     const payload = requestBuffer.toString();
-    const sig = req.headers["stripe-signature"];
+    const sig = req.headers['stripe-signature'];
 
     // console.log(req);
 
@@ -82,7 +83,7 @@ export default async (req: any, res: any) => {
       event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
       // console.log(event);
     } catch (err: any) {
-      console.log("ERROR", err.message);
+      console.log('ERROR', err.message);
       return res.status(400).send(`Webhook error: ${err.message}`);
     }
 
@@ -92,20 +93,15 @@ export default async (req: any, res: any) => {
 
     // console.log(eventList);
 
-    // console.log(event);
+    console.log(event);
 
-    if (event.type === "capability.updated") {
-      // if (event.type === "capability.person.updated") {
-      // if (
-      // event.type === "capability.updated" &&
-      // event.pending_webhooks === 2
-      // event.pending_webhooks !== 0
-      // )
-      // {
-      // const account = event.data.object;
+    if (
+      event.type === 'capability.updated'
+      // event.type === 'capability.updated' &&
+      // event.pending_webhooks === 0
+      // || "person.created" | 'account.updated' | 'person.updated'
+    ) {
       const accountCreationEvents = event.data.object;
-      // console.log(account);
-
       const stripeAccount = accountCreationEvents;
 
       // const account = await stripe.accounts.retrieve(
@@ -124,7 +120,7 @@ export default async (req: any, res: any) => {
       return (
         fulfillAccountCreation(stripeAccount)
           .then(
-            () => res.status(200)
+            () => res.status(200).send('account successfully updated')
             // .json({ id: account.id })
           )
           // .then(() =>
@@ -135,6 +131,22 @@ export default async (req: any, res: any) => {
           // )
           .catch((err) => res.status(400).send(`Webhook Error: ${err.message}`))
       );
+    }
+
+    // if (event.type === 'capability.updated') {
+    //   return res.status(200).send('capability.updated');
+    // }
+
+    if (event.type === 'person.created') {
+      return res.status(200).send('person created');
+    }
+
+    if (event.type === 'person.updated') {
+      return res.status(200).send('person updated');
+    }
+
+    if (event.type === 'account.updated') {
+      return res.status(200).send('account updated');
     }
 
     if (event.pending_webhooks === 0) {
