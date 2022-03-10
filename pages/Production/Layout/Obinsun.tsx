@@ -61,11 +61,11 @@ import Authorization from './Authorization';
 
 // const connector = connect(undefined, mapDispatchToProps);
 
-const Obinsun = ({ children }) => {
+const Obinsun = ({ children }: any) => {
   // const [modalOpen, setModalOpen] = useState(false)
 
-  const obinsunRef = useRef();
-  const modalRef = useRef();
+  const obinsunRef = useRef() as any;
+  const modalRef = useRef() as any;
 
   const openModal = () => {
     modalRef.current?.openModal();
@@ -91,11 +91,20 @@ const Obinsun = ({ children }) => {
           transition={{ type: 'linear' }} */}
       <div className="relative top-0 h-full w-full z-40 flex flex-col items-center justify-center text-center text-xs xs:text-sm mobile-l:text-base laptop-l:text-lg">
         <Header key="header" openModal={openModal} passHref />
-        <Sidebar key="sidebar" passHref />
-        <Externals key="externals" passHref />
+        <Sidebar
+          key="sidebar"
+          //  passHref
+        />
+        <Externals
+          key="externals"
+          // passHref
+        />
         {/* <Content children={children} /> */}
         {children}
-        <Footer key="footer" passHref />
+        <Footer
+          key="footer"
+          // passHref
+        />
         {/* </motion.div> */}
       </div>
     </main>
