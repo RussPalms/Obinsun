@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import {
   addToBasket,
   removeFromBasket,
-  addExtra,
+  // addExtra,
 } from '../../../app/state/slices/basketSlice';
 import { getSession } from 'next-auth/react';
 // import { useEffect } from 'react';
@@ -44,9 +44,9 @@ export default function CheckoutProduct({
     dispatch(removeFromBasket({ id }));
   };
 
-  const addExtraItem = () => {
-    dispatch(addExtra({ id }));
-  };
+  // const addExtraItem = () => {
+  //   dispatch(addExtra({ id }));
+  // };
 
   const items = useSelector(selectItems);
   console.log(items.map((item: any) => item.id));
