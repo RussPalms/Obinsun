@@ -20,15 +20,18 @@ const nextConfig = {
   //   return config;
   // },
   // target: 'experimental-serverless-trace',
-  webpack: (config, { isServer }) => {
+  webpack: (
+    config
+    // , {isServer}
+  ) => {
     config.experiments = config.experiments || {};
     config.experiments.topLevelAwait = true;
 
-    if (!isServer) {
-      config.node = {
-        fs: 'empty',
-      };
-    }
+    // if (!isServer) {
+    //   config.node = {
+    //     fs: 'empty'
+    //   }
+    // }
     return config;
   },
 
