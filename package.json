@@ -90,6 +90,7 @@
     "zustand": "^3.7.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.5",
     "@types/next": "^9.0.0",
     "@types/node": "17.0.9",
     "@types/react": "17.0.38",
