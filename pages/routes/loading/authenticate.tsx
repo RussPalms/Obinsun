@@ -9,7 +9,8 @@ export default function Authenticate() {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
-  useEffect(async () => {
+  // useEffect(
+  async () => {
     await getSession().then((session) => {
       if (session) {
         router.replace('/');
@@ -17,7 +18,8 @@ export default function Authenticate() {
         setIsLoading(false);
       }
     });
-  }, [router]);
+  };
+  // , [router]);
 
   if (isLoading) {
     return <Preload />;
