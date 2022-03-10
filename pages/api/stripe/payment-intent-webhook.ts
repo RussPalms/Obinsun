@@ -2,7 +2,7 @@ import { buffer } from 'micro';
 import * as admin from 'firebase-admin';
 
 const serviceAccount =
-  require('../keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6') as string;
+  require('/pages/api/keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6') as string;
 
 const app = !admin.apps.length
   ? admin.initializeApp({

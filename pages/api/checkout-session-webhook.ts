@@ -2,8 +2,8 @@ import { buffer } from 'micro';
 import * as admin from 'firebase-admin';
 
 // const serviceAccount = require('../keys/obinsun-merch-firebase-adminsdk-muak1-802398644d.json');
-const serviceAccount = require('../keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6');
-// const serviceAccount =  const serviceAccount = require('../keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6'); as string;
+const serviceAccount =
+  require('/pages/api/keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6') as string; // const serviceAccount =  const serviceAccount = require('../keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6'); as string;
 // const serviceAccount = require(`${ const serviceAccount = require('../keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6');}`);
 
 const app = !admin.apps.length

@@ -3,7 +3,7 @@ import * as admin from 'firebase-admin';
 
 // const serviceAccount = require("../keys/obinsun-merch-eae07f27cfc7.json");
 const serviceAccount =
-  require('../keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6') as string;
+  require('/pages/api/keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6') as string;
 // const serviceAccount = require(`${ const serviceAccount = require('../keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6');}`);
 
 const app = !admin.apps.length

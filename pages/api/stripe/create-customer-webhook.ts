@@ -3,7 +3,7 @@ import * as admin from 'firebase-admin';
 import axios from 'axios';
 
 const serviceAccount =
-  require('../keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6') as string;
+  require('/pages/api/keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6') as string;
 
 const app = !admin.apps.length
   ? admin.initializeApp({
