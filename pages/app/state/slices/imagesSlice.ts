@@ -1,9 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getSession } from 'next-auth/react';
 // import { useEffect } from "react";
 // import type { total } from "../../../types";
 
 const initialState = {
   images: [],
+  items: [],
 };
 
 export const imagesSlice = createSlice({
@@ -41,7 +43,7 @@ const imagesReducer = imagesSlice.reducer;
 
 export default imagesReducer;
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: any) {
   const session = await getSession(context);
 
   return {
