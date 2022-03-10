@@ -1,11 +1,12 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import React from "react";
+import React from 'react';
 // import { Canvas } from "react-three-fiber";
-import { Canvas } from "@react-three/fiber";
-import Lights from "./src/components/Three/Lights";
+import { Canvas } from '@react-three/fiber';
+import Lights from './src/components/Three/Lights';
 // import Lights from "@/components/Three/Lights";
-import Model from "./src/components/Three/Model";
+import Model from './src/components/Three/Model';
 // import Model from "@/components/Three/Model";
 
 type Props = {};

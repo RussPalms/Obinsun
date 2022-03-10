@@ -1,12 +1,13 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import axios from "axios";
-import { useSession } from "next-auth/react";
-import React, { useEffect, useState } from "react";
-import ImageGrid from "./Uploads/ImageGrid";
-import Modal from "./Uploads/Modal";
-import Title from "./Uploads/Title";
-import UploadForm from "./Uploads/UploadForm";
+import axios from 'axios';
+import { useSession } from 'next-auth/react';
+import React, { useEffect, useState } from 'react';
+import ImageGrid from './Uploads/ImageGrid';
+import Modal from './Uploads/Modal';
+import Title from './Uploads/Title';
+import UploadForm from './Uploads/UploadForm';
 
 type Props = {};
 
@@ -16,12 +17,12 @@ function VerifyDocuments({}: Props) {
   // console.log(selectedImg);
   console.log(session);
 
-  console.log("this is the selected image url:", selectedImg);
+  console.log('this is the selected image url:', selectedImg);
 
   const uploadingDocuments = async (e) => {
     // e.preventDefault();
     try {
-      await axios.post("/api/stripe/upload-verification", {
+      await axios.post('/api/stripe/upload-verification', {
         firebaseID: session?.id,
         stripeId: session?.user?.stripeId,
         personId: session?.user?.personId,
@@ -49,7 +50,7 @@ function VerifyDocuments({}: Props) {
     //   documentUpload: selectedImg,
     // });
     // } else return;
-    console.log("selecting image: ", selectedImg);
+    console.log('selecting image: ', selectedImg);
   }, [selectedImg]);
 
   return (

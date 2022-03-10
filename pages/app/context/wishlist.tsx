@@ -1,8 +1,9 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import React, { createContext, useReducer, useEffect } from "react";
-import useLocalStorage from "../../server/hooks/useLocalStorage";
-import { PrintfulProduct } from "../../types";
+import React, { createContext, useReducer, useEffect } from 'react';
+import useLocalStorage from '../../server/hooks/useLocalStorage';
+import { PrintfulProduct } from '../../types';
 
 interface InitialState {
   items: [];
@@ -10,17 +11,17 @@ interface InitialState {
 
 interface WishlistProviderState extends InitialState {
   addItem: (item: PrintfulProduct) => void;
-  removeItem: (id: PrintfulProduct["id"]) => void;
-  isSaved: (id: PrintfulProduct["id"]) => boolean;
+  removeItem: (id: PrintfulProduct['id']) => void;
+  isSaved: (id: PrintfulProduct['id']) => boolean;
   hasItems: boolean;
 }
 
-const ADD_PRODUCT = "ADD_PRODUCT";
-const REMOVE_PRODUCT = "REMOVE_PRODUCT";
+const ADD_PRODUCT = 'ADD_PRODUCT';
+const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 
 type Actions =
   | { type: typeof ADD_PRODUCT; payload: PrintfulProduct }
-  | { type: typeof REMOVE_PRODUCT; payload: PrintfulProduct["id"] };
+  | { type: typeof REMOVE_PRODUCT; payload: PrintfulProduct['id'] };
 
 export const WishlistStateContext = createContext(null);
 export const WishlistDispatchContext = createContext(null);
@@ -47,7 +48,7 @@ export const WishlistProvider: React.FC<{ children?: React.ReactNode }> = ({
   children,
 }) => {
   const [savedWishlist, saveWishlist] = useLocalStorage(
-    "items-wishlist",
+    'items-wishlist',
     JSON.stringify(initialState)
   );
   const [state, dispatch] = useReducer(reducer, JSON.parse(savedWishlist));
@@ -66,13 +67,13 @@ export const WishlistProvider: React.FC<{ children?: React.ReactNode }> = ({
     dispatch({ type: ADD_PRODUCT, payload: item });
   };
 
-  const removeItem = (id: PrintfulProduct["id"]) => {
+  const removeItem = (id: PrintfulProduct['id']) => {
     if (!id) return;
 
     dispatch({ type: REMOVE_PRODUCT, payload: id });
   };
 
-  const isSaved = (id: PrintfulProduct["id"]) =>
+  const isSaved = (id: PrintfulProduct['id']) =>
     state.items.some((i: PrintfulProduct) => i.id === id);
 
   const hasItems = state.items.length > 0;

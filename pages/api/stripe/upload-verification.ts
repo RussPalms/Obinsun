@@ -1,9 +1,10 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
+const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`);
 
-const fs = require("fs");
-const axios = require("axios");
+const fs = require('fs');
+const axios = require('axios');
 
 // const fs = require("file-system");
 // import fs from 'file-system'
@@ -15,15 +16,15 @@ export default async (req: any, res: any) => {
   const download_image = (url: any, image_path: any) =>
     axios({
       url,
-      responseType: "stream",
+      responseType: 'stream',
       //   responseType: "octed-stream",
     }).then(
       (response: any) =>
         new Promise((resolve, reject) => {
           response.data
             .pipe(fs.createWriteStream(image_path))
-            .on("finish", () => resolve())
-            .on("error", (e) => reject(e));
+            .on('finish', () => resolve())
+            .on('error', (e) => reject(e));
         })
     );
 
@@ -71,14 +72,14 @@ export default async (req: any, res: any) => {
     //   await stripe.files.create(
     {
       // purpose: "identity_document",
-      purpose: "account_requirement",
+      purpose: 'account_requirement',
       file: {
         // data: fs.readFileSync(documenFile),
-        data: fs.readFileSync("pages/api/stripe/success.png"),
+        data: fs.readFileSync('pages/api/stripe/success.png'),
         // data: fs.readFileSync(`${documentUploadUrl}`),
         // data: documentUpload,
-        name: "success.png",
-        type: "application/octed-stream",
+        name: 'success.png',
+        type: 'application/octed-stream',
       },
       //   metadata: { firebaseID },
     },

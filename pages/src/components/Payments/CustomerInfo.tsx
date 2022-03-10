@@ -1,12 +1,13 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import { loadStripe } from "@stripe/stripe-js";
-import axios from "axios";
-import { getSession, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import { DateTime } from "luxon";
-import { useEffect, useRef, useState } from "react";
-import CustomerShipping from "./CustomerShipping";
+import { loadStripe } from '@stripe/stripe-js';
+import axios from 'axios';
+import { getSession, useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import { DateTime } from 'luxon';
+import { useEffect, useRef, useState } from 'react';
+import CustomerShipping from './CustomerShipping';
 
 // const stripePromise = loadStripe(`${process.env.stripe_public_key}`);
 
@@ -14,14 +15,14 @@ import CustomerShipping from "./CustomerShipping";
 
 export default function CustomerInfo() {
   const { data: session, status } = useSession();
-  const loading = status === "loading";
+  const loading = status === 'loading';
   console.log(status, session);
 
   const submitValidationHandler = async (validationData) => {
     // e.preventDefault();
 
     // const stripe = await stripePromise;
-    const createAccount = await axios.post("/api/stripe/create-customer", {
+    const createAccount = await axios.post('/api/stripe/create-customer', {
       firebaseID: session?.id,
       // date: ts,
       // ip: ip,
@@ -33,7 +34,7 @@ export default function CustomerInfo() {
 
   const submitSetupHandler = async (setupData) => {
     const createAccount = await axios.post(
-      "/api/stripe/setup-customer-payment",
+      '/api/stripe/setup-customer-payment',
       {
         firebaseID: session?.id,
         setupData,
@@ -59,7 +60,7 @@ export default function CustomerInfo() {
     e.preventDefault();
 
     // await axios.post("/api/stripe/create-external-account", {
-    await axios.post("/api/stripe/add-card", {
+    await axios.post('/api/stripe/add-card', {
       firebaseID: session?.id,
       stripeId: session?.user.stripeId,
     });
@@ -68,7 +69,7 @@ export default function CustomerInfo() {
   const updateCustomAccount = async (e) => {
     e.preventDefault();
     const updateAccount = await axios.post(
-      "/api/stripe/create-custom-account",
+      '/api/stripe/create-custom-account',
       {
         firebaseID: session?.id,
         stripeId: session?.stripeId,
@@ -95,23 +96,23 @@ export default function CustomerInfo() {
       <div className="absolute top-[50%] left-[50%] transform translate-x-[-50%] translate-y-[-50%]">
         <div
           className="square border-bottom-right-glass square-delay"
-          style={{ "--i": "0" }}
+          style={{ '--i': '0' }}
         />
         <div
           className="square border-bottom-right-glass top-[150px] left-[-100px] w-[120px] h-[120px] z-20 square-delay"
-          style={{ "--i": "1" }}
+          style={{ '--i': '1' }}
         />
         <div
           className="square border-bottom-right-glass bottom-[50px] right-[-60px] w-[80px] h-[80px] z-20 square-delay"
-          style={{ "--i": "2" }}
+          style={{ '--i': '2' }}
         />
         <div
           className="square border-bottom-right-glass bottom-[-80px] left-[100px] w-[50px] h-[50px] square-delay"
-          style={{ "--i": "3" }}
+          style={{ '--i': '3' }}
         />
         <div
           className="square border-bottom-right-glass top-[-80px] left-[140px] w-[60px] h-[60px] delay-[-7000ms] square-delay"
-          style={{ "--i": "4" }}
+          style={{ '--i': '4' }}
         />
         <div className="relative top-0 left-0 w-[400px] min-h-[400px] bg-white/10 border rounded-[10px] flex justify-center align-center backdrop-blur-[5px] shadow-glass3 border-bottom-right-glass border-white/50">
           <div className="relative w-full h-full p-[40px]">
