@@ -6,12 +6,11 @@ interface IProps {
   center?: boolean;
   icons?: boolean;
 }
-const PageTitle = ({
-  title,
-  subtitle = '',
-  center = false,
-  icons = true,
-}: IProps): JSX.Element => {
+const PageTitle = ({}: // title,
+// subtitle = '',
+// center = false,
+// icons = true,
+IProps): JSX.Element => {
   return <div>PageTitle</div>;
 };
 

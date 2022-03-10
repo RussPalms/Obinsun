@@ -1,7 +1,7 @@
 import * as React from 'react';
 // import Image from 'next/image';
 import { useSelector } from 'react-redux';
-// import { selectItems, selectTotal } from './app/state/slices/basketSlice';
+import { selectItems, selectTotal } from './app/state/slices/basketSlice';
 import CheckoutProduct from './src/components/StripeCheckout/CheckoutProduct';
 import Currency from 'react-currency-formatter';
 import { getSession, useSession } from 'next-auth/react';
@@ -26,25 +26,25 @@ const subtitle =
   'You will fins a plethora of custom graphic designs attatched to high quality merchandise.';
 
 export default function CheckoutPage() {
-  const dispatch = useAppDispatch();
-  const products = useAppSelector((state) => state.products.products);
-  const items = useAppSelector((state) => state.cart.items);
-  const totalPrice = useAppSelector(getTotalPrice);
-  const checkoutState = useAppSelector((state) => state.cart.checkoutState);
-  const errorMessage = useAppSelector((state) => state.cart.errorMessage);
+  // const dispatch = useAppDispatch();
+  // const products = useAppSelector((state) => state.products.products);
+  // const items = useAppSelector((state) => state.cart.items);
+  // const totalPrice = useAppSelector(getTotalPrice);
+  // const checkoutState = useAppSelector((state) => state.cart.checkoutState);
+  // const errorMessage = useAppSelector((state) => state.cart.errorMessage);
 
-  function onQuantityChanged(
-    e: React.FocusEvent<HTMLInputElement>,
-    id: string
-  ) {
-    const quantity = Number(e.target.value) || 0;
-    dispatch(updateQuantity({ id, quantity }));
-  }
+  // function onQuantityChanged(
+  //   e: React.FocusEvent<HTMLInputElement>,
+  //   id: string
+  // ) {
+  //   const quantity = Number(e.target.value) || 0;
+  //   dispatch(updateQuantity({ id, quantity }));
+  // }
 
-  function onCheckout(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    dispatch(checkoutCart());
-  }
+  // function onCheckout(e: React.FormEvent<HTMLFormElement>) {
+  //   e.preventDefault();
+  //   dispatch(checkoutCart());
+  // }
 
   // const tableClasses = classNames({
   // 	[styles.table]: true,
@@ -52,8 +52,8 @@ export default function CheckoutPage() {
   // 	[styles.checkoutLoading]: checkoutState === "LOADING",
   // });
 
-  // const items = useSelector(selectItems);
-  // const total = useSelector(selectTotal) as number;
+  const items = useSelector(selectItems);
+  const total = useSelector(selectTotal) as number;
 
   // console.log(total);
   // console.log({ checkout: items, total });
@@ -79,7 +79,7 @@ export default function CheckoutPage() {
               {items.length === 0 ? 'Your Obincart is empty.' : 'Obincart'}
             </h1>
 
-            {/* {items.map((item: any, i: any) => (
+            {items.map((item: any, i: any) => (
               <CheckoutProduct
                 key={i}
                 id={item.id}
@@ -89,9 +89,9 @@ export default function CheckoutPage() {
                 image={item.image}
                 name={item.name}
               />
-            ))} */}
+            ))}
 
-            {Object.entries(items).map(([id, quantity]) => (
+            {/* {Object.entries(items).map(([id, quantity]) => (
               <tr key={id}>
                 <td>{products[id].name}</td>
                 <td>
@@ -112,7 +112,7 @@ export default function CheckoutPage() {
                   </button>
                 </td>
               </tr>
-            ))}
+            ))} */}
           </div>
         </div>
 
@@ -123,7 +123,8 @@ export default function CheckoutPage() {
                 Subtotal {items.length} items:{' '}
                 <span className="font-bold">
                   {' '}
-                  <Currency quantity={Number(totalPrice)} />
+                  {/* <Currency quantity={Number(totalPrice)} /> */}
+                  <Currency quantity={Number(total)} />
                 </span>
               </h2>
 

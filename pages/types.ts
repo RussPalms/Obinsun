@@ -139,7 +139,7 @@ export interface StripeRequest extends NextApiRequest {
 //   is_ignored: boolean;
 // }
 
-export interface CartProduct extends ISyncProduct {
+export interface CartProduct {
   id: string;
   price: number;
   url: string;
