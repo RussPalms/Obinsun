@@ -31,6 +31,20 @@ export default function AuthenticatePage() {
   //   });
   // }, [router]);
 
+  // useEffect(() => {
+  //   getSession().then((session) => {
+  //     if (session) {
+  //       router.replace('/');
+  //     } else {
+  //       setIsLoading(false);
+  //     }
+  //   });
+  // }, [router]);
+
+  // if (isLoading) {
+  //   return <Preload />;
+  // }
+
   useEffect(() => {
     getSession().then((session) => {
       if (session) {
@@ -38,7 +52,7 @@ export default function AuthenticatePage() {
       } else {
         setIsLoading(false);
       }
-    });
+    }) as any;
   }, [router]);
 
   if (isLoading) {
