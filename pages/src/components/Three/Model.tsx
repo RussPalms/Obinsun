@@ -1,14 +1,14 @@
 // @ts-nocheck
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 // import { useFrame } from "react-three-fiber";
-import { useFrame } from "@react-three/fiber";
-import * as THREE from "three";
+import { useFrame } from '@react-three/fiber';
+import * as THREE from 'three';
 // import { Html } from "drei";
-import { Html } from "@react-three/drei";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { Object3D } from "three/src/core/Object3D"; // Object 3D types
-import { AnimationClip } from "three/src/animation/AnimationClip"; // Animation types
+import { Html } from '@react-three/drei';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { Object3D } from 'three/src/core/Object3D'; // Object 3D types
+import { AnimationClip } from 'three/src/animation/AnimationClip'; // Animation types
 
 interface group {
   current: {
@@ -29,7 +29,7 @@ interface actions {
 
 type Props = {};
 
-const Model = (props: Props) => {
+const Model = () => {
   // Refs
   const group: group = useRef();
   const actions: actions = useRef();
@@ -44,10 +44,10 @@ const Model = (props: Props) => {
   // Load Model
   useEffect(() => {
     const loader = new GLTFLoader();
-    loader.load("models/mech_drone/scene.gltf", async (gltf) => {
+    loader.load('models/mech_drone/scene.gltf', async (gltf) => {
       // loader.load("models/t-_shirt/scene.gltf", async (gltf) => {
-      const nodes = await gltf.parser.getDependencies("node");
-      const animations = await gltf.parser.getDependencies("animation");
+      const nodes = await gltf.parser.getDependencies('node');
+      const animations = await gltf.parser.getDependencies('animation');
       setModel(nodes[0]);
       setAnimation(animations);
     });
@@ -55,7 +55,7 @@ const Model = (props: Props) => {
 
   // Set Animation
   useEffect(() => {
-    if (animation && typeof group.current != "undefined") {
+    if (animation && typeof group.current != 'undefined') {
       actions.current = {
         idle: mixer.clipAction(animation[0], group.current as Object3D),
       };
@@ -68,7 +68,7 @@ const Model = (props: Props) => {
   useFrame((_, delta) => mixer.update(delta));
   // Rotation
   useFrame(() => {
-    if (typeof group.current != "undefined")
+    if (typeof group.current != 'undefined')
       return (group.current.rotation.y += 0.01);
   });
 

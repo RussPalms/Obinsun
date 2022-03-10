@@ -1,19 +1,19 @@
 //@ts-nocheck
 
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { db } from "../../../server/lib/database/firebaseStorage";
-import { useSession } from "next-auth/react";
-import { resetCameraImage } from "../../../app/state/slices/cameraSlice";
-import CapturedDocuments from "../../../src/components/Payments/Uploads/CapturedDocuments";
-import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { db } from '../../../server/lib/database/firebaseStorage';
+import { useSession } from 'next-auth/react';
+import { resetCameraImage } from '../../../app/state/slices/cameraSlice';
+import CapturedDocuments from '../../../src/components/Payments/Uploads/CapturedDocuments';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 
 type Props = {};
 
-const Documents = (props: Props) => {
+const Documents = () => {
   const { data: session } = useSession();
 
   const [documents, setDocuments] = useState([]);
@@ -27,7 +27,7 @@ const Documents = (props: Props) => {
   const imageRefrence = collection(db, capturedDocument);
 
   useEffect(() => {
-    const documentQuery = query(imageRefrence, orderBy("createdAt", "desc"));
+    const documentQuery = query(imageRefrence, orderBy('createdAt', 'desc'));
 
     // console.log(documentQuery);
 
@@ -70,7 +70,7 @@ const Documents = (props: Props) => {
 
   const takeSnap = () => {
     dispatch(resetCameraImage());
-    router.push("/routes/protected/creator/webcam-capture");
+    router.push('/routes/protected/creator/webcam-capture');
   };
 
   return (

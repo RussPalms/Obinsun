@@ -1,30 +1,30 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import CloseIcon from "@material-ui/icons/Close";
-import SendIcon from "@material-ui/icons/Send";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import CloseIcon from '@material-ui/icons/Close';
+import SendIcon from '@material-ui/icons/Send';
 import {
   resetCameraImage,
   selectCameraImage,
-} from "../../../app/state/slices/cameraSlice";
-import { useRouter } from "next/router";
-import { useSession } from "next-auth/react";
+} from '../../../app/state/slices/cameraSlice';
+import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 import {
   db,
   projectStorage,
   timestamp,
-} from "../../../server/lib/database/firebaseStorage";
+} from '../../../server/lib/database/firebaseStorage';
 import {
   getDownloadURL,
   ref,
   uploadBytesResumable,
   uploadString,
-} from "firebase/storage";
-import { addDoc, collection } from "firebase/firestore";
-import { v4 as uuid } from "uuid";
+} from 'firebase/storage';
+import { addDoc, collection } from 'firebase/firestore';
+import { v4 as uuid } from 'uuid';
 
 type Props = {};
 
-const Preview = (props: Props) => {
+const Preview = () => {
   const id = uuid();
 
   const { data: session } = useSession();
@@ -38,7 +38,7 @@ const Preview = (props: Props) => {
 
   useEffect(() => {
     if (!cameraImage) {
-      router.replace("/routes/protected/creator/webcam-capture");
+      router.replace('/routes/protected/creator/webcam-capture');
     }
   }, [cameraImage, router]);
 
@@ -53,7 +53,7 @@ const Preview = (props: Props) => {
 
     const capturedImageRef = collection(db, capturedImage);
 
-    uploadString(imageRef, cameraImage, "data_url").then((snapshot) => {
+    uploadString(imageRef, cameraImage, 'data_url').then((snapshot) => {
       const getUrl = async () => {
         const imageUrl = await getDownloadURL(snapshot.ref);
         const createdAt = timestamp;
@@ -66,7 +66,7 @@ const Preview = (props: Props) => {
       };
 
       getUrl();
-      router.replace("/routes/protected/creator/documents");
+      router.replace('/routes/protected/creator/documents');
     });
   };
   return (

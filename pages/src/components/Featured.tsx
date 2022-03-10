@@ -11,7 +11,7 @@ import SkullIsFullOfCats from '../assets/ObinsunVectors/SkullIsFullOfCats';
 import WhiskersAndPipe from '../assets/ObinsunVectors/WhiskersAndPipe';
 import CatsAndSkullsPattern from '../assets/ObinsunVectors/CatsAndSkullsPattern';
 
-const Featured = (props: Props) => {
+const Featured = () => {
   if (typeof window !== 'undefined') {
     gsap.registerPlugin(MotionPathPlugin);
     gsap.registerPlugin(ScrollTrigger);

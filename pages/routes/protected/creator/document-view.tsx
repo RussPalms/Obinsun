@@ -1,14 +1,14 @@
 //@ts-nocheck
 
-import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { selectCameraImage } from "../../../app/state/slices/cameraSlice";
-import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { selectCameraImage } from '../../../app/state/slices/cameraSlice';
+import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 
 type Props = {};
 
-const DocumentView = (props: Props) => {
+const DocumentView = () => {
   const selectedImage = useSelector(selectCameraImage);
   // const history = useHistory();
   const router = useRouter();
@@ -20,7 +20,7 @@ const DocumentView = (props: Props) => {
   }, [selectedImage]);
 
   const exit = () => {
-    router.replace("/routes/protected/creator/documents");
+    router.replace('/routes/protected/creator/documents');
   };
 
   return (
@@ -33,9 +33,9 @@ const DocumentView = (props: Props) => {
           strokeWidth={6}
           size={50}
           colors={[
-            ["#004777", 0.33],
-            ["#F7B801", 0.33],
-            ["#A30000", 0.33],
+            ['#004777', 0.33],
+            ['#F7B801', 0.33],
+            ['#A30000', 0.33],
           ]}
         >
           {({ remainingTime }) => {
