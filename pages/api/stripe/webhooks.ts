@@ -11,8 +11,8 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const allowedEvents: StripeWebhookEvent[] = [
-    'order.completed',
-    'customauth:customer_updated',
+    'order.completed' as any,
+    'customauth:customer_updated' as any,
   ];
 
   console.log(req.headers);
@@ -45,10 +45,10 @@ export default async function handler(
 
   try {
     switch (eventName) {
-      case 'order.completed':
+      case 'order.completed' as any:
         await createOrder(content);
         break;
-      case 'customauth:customer_updated':
+      case 'customauth:customer_updated' as any:
         return res
           .status(200)
           .json({ message: 'Customer updated - no action taken' });
