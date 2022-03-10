@@ -5,12 +5,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useUserContext } from '../features';
 
-const MainNav = (props) => {
+const MainNav = (props: any) => {
   const { data: session, status } = useSession();
   console.log(session);
 
   const router = useRouter();
-  const { access } = useUserContext();
+  const { access } = useUserContext() as any;
 
   return (
     <ul>
