@@ -1,10 +1,10 @@
 import { useRef } from 'react';
 
-function ProfileForm(props) {
-  const oldPasswordRef = useRef();
-  const newPasswordRef = useRef();
+function ProfileForm(props: any) {
+  const oldPasswordRef = useRef() as any;
+  const newPasswordRef = useRef() as any;
 
-  function submitHandler(event) {
+  function submitHandler(event: any) {
     event.preventDefault();
 
     const enteredOldPassword = oldPasswordRef.current.value;

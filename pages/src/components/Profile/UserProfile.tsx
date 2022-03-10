@@ -17,7 +17,7 @@ function UserProfile() {
 
   const [passwordResponse, setPasswordResponse] = useState('');
 
-  async function changePasswordHandler(passwordData) {
+  async function changePasswordHandler(passwordData: any) {
     const response = await fetch('/api/user/change-password', {
       method: 'PATCH',
       body: JSON.stringify(passwordData),
