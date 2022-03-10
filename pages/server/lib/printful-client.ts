@@ -9,7 +9,7 @@ import rateLimit from 'axios-rate-limit';
 
 // const serviceAccount = process.env.GOOGLE_APPLICATION_CREDENTIALS as string;
 const serviceAccount =
-  require('/pages/api/keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6') as string;
+  require('pages/api/keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6') as string;
 
 const clientId = process.env.PRINTFUL_CLIENT_ID;
 
@@ -107,20 +107,20 @@ const getRefreshedCode = async (current_refresh_token: any) => {
 // var access_code = await getAccessCode();
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-// const access_code = await getAccessCode();
+const access_code = await getAccessCode();
 
 // const access_code = getAccessCode();
 // console.log(code);
 
 // const access_code = Promise.resolve(getAccessCode());
 // const accessCodeGet = async () => {
-//   const access_code = await getAccessCode();
+// const access_code = await getAccessCode();
 //   return access_code;
 // };
 
-// export const printful = new PrintfulClient(access_code);
-export const printful = new PrintfulClient(
-  'qrRWnZjMiNBYUCUQV9ZnK9rCMIdM7QP1SRSXWmud'
-);
+export const printful = new PrintfulClient(access_code);
+// export const printful = new PrintfulClient(
+//   'qrRWnZjMiNBYUCUQV9ZnK9rCMIdM7QP1SRSXWmud'
+// );
 // export const printful = new PrintfulClient(accessCodeGet());
 // export const printful = new PrintfulClient(getAccessCode());
