@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
+//@ts-nocheck
+
+import React, { useState, useEffect } from 'react';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 
 // import "./App.css";
-import CheckoutForm from "./src/components/Payments/CheckoutForm";
-import { GetStaticProps } from "next";
-import axios from "axios";
+import CheckoutForm from './src/components/Payments/CheckoutForm';
+import { GetStaticProps } from 'next';
+import axios from 'axios';
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
@@ -16,14 +18,14 @@ import axios from "axios";
 const stripePromise = loadStripe(`${process.env.stripe_public_key}`);
 
 export default function Payments() {
-  const [clientSecret, setClientSecret] = useState("");
+  const [clientSecret, setClientSecret] = useState('');
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch("/api/stripe/create-payment-intent", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
+    fetch('/api/stripe/create-payment-intent', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: [{ id: 'xl-tshirt' }] }),
     })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
@@ -32,7 +34,7 @@ export default function Payments() {
   //   console.log(clientSecret);
 
   const appearance = {
-    theme: "stripe",
+    theme: 'stripe',
   };
   const options = {
     clientSecret,
