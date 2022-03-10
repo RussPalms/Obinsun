@@ -1,8 +1,6 @@
-//@ts-nocheck
-
-import type { NextApiRequest, NextApiResponse } from "next";
-import { printful } from "../../server/lib/printful-client";
-import { PrintfulShippingItem, StripeShippingRate } from "../../types";
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { printful } from '../../server/lib/printful-client';
+import { PrintfulShippingItem, StripeShippingRate } from '../../types';
 
 interface StripeRequest extends NextApiRequest {
   body: {
@@ -28,7 +26,7 @@ export default async function handler(
 ) {
   const { eventName, content } = req.body;
 
-  if (eventName !== "shippingrates.fetch") return res.status(200).end();
+  if (eventName !== 'shippingrates.fetch') return res.status(200).end();
   if (content.items.length === 0) return res.status(200).end();
 
   const {
@@ -60,7 +58,7 @@ export default async function handler(
   );
 
   try {
-    const { result } = await printful.post("shipping/rates", {
+    const { result } = await printful.post('shipping/rates', {
       recipient,
       items,
     });

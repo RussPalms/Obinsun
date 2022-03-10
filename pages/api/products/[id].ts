@@ -1,5 +1,3 @@
-//@ts-nocheck
-
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { printful } from '../../server/lib/printful-client';
 
