@@ -9,8 +9,8 @@ import ProductVariantPicker from './ProductVariantPicker';
 const Catalog = (product: any) => {
   const dispatch = useDispatch();
 
-  const { addItem } = useWishlistDispatch();
-  const { isSaved } = useWishlistState();
+  const { addItem } = useWishlistDispatch() as any;
+  const { isSaved } = useWishlistState() as any;
 
   const { id, type_name, variant_count, currency } = product;
   const [firstProductVariant] = variant_count;
