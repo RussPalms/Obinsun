@@ -15,7 +15,7 @@ function Headerss() {
       <div className="flex items-center w-full bg-gray-500 h-24">
         <div className="flex justify-center w-1/3 items-center">
           <div className="bg-gray-400 rounded-full p-2 h-20 w-20">
-            <ZLogo className="object-contain" />
+            <ZLogo className="object-contain" id="" />
           </div>
           <h1 className="text-7xl mx-2 select-none">Obinsun</h1>
         </div>
@@ -36,17 +36,40 @@ function Headerss() {
           <h2 className="rounded-full bg-gray-100 text-black p-2 cursor-pointer whitespace-nowrap select-none">
             Sign In
           </h2>
-          <MdOutlineBookmarkBorder className="h-6 w-6 cursor-pointer" />
-          <BiCart className=" h-6 w-6 cursor-pointer" />
+          <MdOutlineBookmarkBorder className="h-6 w-6 cursor-pointer" id="" />
+          <BiCart className=" h-6 w-6 cursor-pointer" id="" />
         </div>
       </div>
       <div className="h-full w-full flex justify-center items-center">
-        <CatsAndSkullsPatternBanner className="xs:full object-contain" />
-        <CatsAndSkullsPatternBanner className="xs:w-0 sm:w-full object-contain" />
-        <CatsAndSkullsPatternBanner className="xs:w-0 sm:w-0 md:w-full object-contain" />
-        <CatsAndSkullsPatternBanner className="xs:w-0 sm:w-0 md:w-0 lg:w-full object-contain" />
-        <CatsAndSkullsPatternBanner className="xs:w-0 sm:w-0 md:w-0 lg:w-0 xl:w-full object-contain" />
-        <CatsAndSkullsPatternBanner className="xs:w-0 sm:w-0 md:w-0 lg:w-0 xl:w-0 2xl:w-full object-contain" />
+        <CatsAndSkullsPatternBanner
+          className="xs:full object-contain"
+          id=""
+          name=""
+        />
+        <CatsAndSkullsPatternBanner
+          className="xs:w-0 sm:w-full object-contain"
+          id=""
+        />
+        <CatsAndSkullsPatternBanner
+          className="xs:w-0 sm:w-0 md:w-full object-contain"
+          id=""
+          name=""
+        />
+        <CatsAndSkullsPatternBanner
+          className="xs:w-0 sm:w-0 md:w-0 lg:w-full object-contain"
+          id=""
+          name=""
+        />
+        <CatsAndSkullsPatternBanner
+          className="xs:w-0 sm:w-0 md:w-0 lg:w-0 xl:w-full object-contain"
+          id=""
+          name=""
+        />
+        <CatsAndSkullsPatternBanner
+          className="xs:w-0 sm:w-0 md:w-0 lg:w-0 xl:w-0 2xl:w-full object-contain"
+          id=""
+          name=""
+        />
       </div>
     </header>
   );
