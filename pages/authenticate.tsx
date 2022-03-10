@@ -45,15 +45,17 @@ export default function AuthenticatePage() {
   //   return <Preload />;
   // }
 
-  useEffect(() => {
-    getSession().then((session) => {
+  // useEffect(
+  async () => {
+    await getSession().then((session) => {
       if (session) {
         router.replace('/');
       } else {
         setIsLoading(false);
       }
-    }) as any;
-  }, [router]);
+    });
+    // }, [router]);
+  };
 
   if (isLoading) {
     return <Preload />;
