@@ -1,7 +1,8 @@
-const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
-import * as admin from "firebase-admin";
+const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`);
+import * as admin from 'firebase-admin';
 
-const serviceAccount =  const serviceAccount = require('../keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6'); as string;
+const serviceAccount =
+  require('../keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6') as string;
 
 const app = !admin.apps.length
   ? admin.initializeApp({
@@ -16,8 +17,8 @@ export default async (req: any, res: any) => {
 
   const paymentId = await app
     .firestore()
-    .collection("accessCodes")
-    .doc("Payment")
+    .collection('accessCodes')
+    .doc('Payment')
     .get()
     .then((snapshot) => {
       snapshot.data()?.obinsunId;
@@ -25,9 +26,9 @@ export default async (req: any, res: any) => {
 
   const paymentIntent = await stripe.paymentIntents.create(
     {
-      payment_method_types: ["card"],
+      payment_method_types: ['card'],
       amount: 1000,
-      currency: "usd",
+      currency: 'usd',
       application_fee_amount: 123,
     },
     {
