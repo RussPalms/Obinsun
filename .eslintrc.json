@@ -39,7 +39,13 @@
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/no-empty-interface": "off",
     "@typescript-eslint/no-var-requires": "off",
-    "prefer-const": "off"
+    "prefer-const": "off",
+    "no-empty-pattern": "off",
+    "@next/next/link-passhref": "off",
+    "react/display-name": "off",
+    "import/no-anonymous-default-export": "off",
+    "@next/next/no-img-element": "off",
+    "@typescript-eslint/no-namespace": "off"
   },
   "settings": {
     "react": {
