@@ -21,7 +21,7 @@ function Heading() {
   const { data: session, status } = useSession();
   // const [isLoading, setIsLoading] = useState(true);
   // const loading = status === "loading";
-  const router = useRouter();
+  const router = useRouter() as any;
   // const users = useSelector(selectUsers);
 
   function logStateHandler() {
@@ -40,7 +40,7 @@ function Heading() {
     <section className="font-grandstander md:py-[50px] md:px-[20px] flex justify-center items-center h-screen p-16 bg-gray-500">
       <div className="md:flex-col md:h-auto md:p-[20px] relative w-full min-h-full bg-white bg-opacity-50 shadow-glass1 rounded-3xl flex justify-between items-center p-[50px]">
         <div className="absolute -top-14 -left-10 rounded-full p-4 h-24 w-24 flex justify-center items-center bg-white bg-opacity-20 shadow-glass border border-solid border-white border-opacity-25 border-t border-t-white border-l border-l-white backdrop-blur-[4px] border-top-left-glass z-50">
-          <ZLogo className="object-contain" onClick={() => router.push('/')} />
+          {/* <ZLogo className="object-contain" onClick={() => router.push('/')} /> */}
         </div>
         <header className="h-20 md:relative md:flex-col md:w-full md:top-[-60px] md:p-[20px] md:right-0 md:left-0 absolute -top-6 right-5 left-5 py-[20px] px-5 flex justify-between items-center shadow-glass1 bg-white/[0.2] border rounded-3xl backdrop-blur-[10px] border-top-left-glass z-40">
           <div className="relative left-6 max-w-full">

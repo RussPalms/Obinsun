@@ -1,4 +1,4 @@
-function DesignCard({ entity }) {
+function DesignCard({ entity }: any) {
   return <div></div>;
 }
 
