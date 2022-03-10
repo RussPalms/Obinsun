@@ -1,6 +1,4 @@
-//@ts-nocheck
-
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 // import { useEffect } from "react";
 // import type { total } from "../../../types";
 
@@ -9,7 +7,7 @@ const initialState = {
 };
 
 export const imagesSlice = createSlice({
-  name: "images",
+  name: 'images',
   initialState,
   reducers: {
     addToimages: (state, action) => {

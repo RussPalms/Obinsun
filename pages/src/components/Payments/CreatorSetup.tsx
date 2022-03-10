@@ -1,15 +1,13 @@
-//@ts-nocheck
-
-import { loadStripe } from "@stripe/stripe-js";
-import axios from "axios";
-import { getSession, useSession } from "next-auth/react";
-import Router from "next/router";
-import ProfileForm from "./ProfileForm";
-import { useRouter } from "next/router";
-import { DateTime } from "luxon";
-import { useEffect, useRef, useState } from "react";
-import OnboardingForm from "./OnboardingForm";
-import Link from "next/link";
+import { loadStripe } from '@stripe/stripe-js';
+import axios from 'axios';
+import { getSession, useSession } from 'next-auth/react';
+import Router from 'next/router';
+import ProfileForm from './ProfileForm';
+import { useRouter } from 'next/router';
+import { DateTime } from 'luxon';
+import { useEffect, useRef, useState } from 'react';
+import OnboardingForm from './OnboardingForm';
+import Link from 'next/link';
 
 // const stripePromise = loadStripe(`${process.env.stripe_public_key}`);
 
@@ -17,13 +15,13 @@ import Link from "next/link";
 
 export default function CreatorSetup() {
   const { data: session, status } = useSession();
-  const loading = status === "loading";
+  const loading = status === 'loading';
   console.log(status, session);
 
   const router = useRouter();
 
   //creating IP state
-  const [ip, setIP] = useState("");
+  const [ip, setIP] = useState('');
   const [ts, setTS] = useState(null);
 
   // const ipRef = useRef();
@@ -31,7 +29,7 @@ export default function CreatorSetup() {
 
   //creating function to load ip address from the API
   const getData = async () => {
-    const res = await axios.get("https://geolocation-db.com/json/");
+    const res = await axios.get('https://geolocation-db.com/json/');
     // console.log(res.data);
     setIP(res.data.IPv4);
     // const ts = Math.round(new Date().getTime() / 1000);
@@ -78,7 +76,7 @@ export default function CreatorSetup() {
 
     // const stripe = await stripePromise;
     const createAccount = await axios.post(
-      "/api/stripe/create-custom-account",
+      '/api/stripe/create-custom-account',
       {
         firebaseID: session?.id,
         date: ts,
@@ -134,7 +132,7 @@ export default function CreatorSetup() {
     e.preventDefault();
 
     // await axios.post("/api/stripe/create-external-account", {
-    await axios.post("/api/stripe/add-card", {
+    await axios.post('/api/stripe/add-card', {
       firebaseID: session?.id,
       stripeId: session?.user.stripeId,
     });
@@ -144,7 +142,7 @@ export default function CreatorSetup() {
     e.preventDefault();
 
     // await axios.post("/api/stripe/create-external-account", {
-    await axios.post("/api/stripe/create-shipping-rate", {
+    await axios.post('/api/stripe/create-shipping-rate', {
       firebaseID: session?.id,
       stripeId: session?.user.stripeId,
     });
@@ -174,7 +172,7 @@ export default function CreatorSetup() {
     // console.log(date);
     // console.log(ts);
     const updateAccount = await axios.post(
-      "/api/stripe/create-custom-account",
+      '/api/stripe/create-custom-account',
       {
         firebaseID: session?.id,
         stripeId: session?.stripeId,
@@ -207,23 +205,23 @@ export default function CreatorSetup() {
       <div className="absolute top-[50%] left-[50%] transform translate-x-[-50%] translate-y-[-50%]">
         <div
           className="square border-bottom-right-glass square-delay"
-          style={{ "--i": "0" }}
+          style={{ '--i': '0' }}
         />
         <div
           className="square border-bottom-right-glass top-[150px] left-[-100px] w-[120px] h-[120px] z-20 square-delay"
-          style={{ "--i": "1" }}
+          style={{ '--i': '1' }}
         />
         <div
           className="square border-bottom-right-glass bottom-[50px] right-[-60px] w-[80px] h-[80px] z-20 square-delay"
-          style={{ "--i": "2" }}
+          style={{ '--i': '2' }}
         />
         <div
           className="square border-bottom-right-glass bottom-[-80px] left-[100px] w-[50px] h-[50px] square-delay"
-          style={{ "--i": "3" }}
+          style={{ '--i': '3' }}
         />
         <div
           className="square border-bottom-right-glass top-[-80px] left-[140px] w-[60px] h-[60px] delay-[-7000ms] square-delay"
-          style={{ "--i": "4" }}
+          style={{ '--i': '4' }}
         />
         <div className="relative top-0 left-0 w-[400px] min-h-[400px] bg-white/10 border rounded-[10px] flex justify-center align-center backdrop-blur-[5px] shadow-glass3 border-bottom-right-glass border-white/50">
           <div className="relative w-full h-full p-[40px]">

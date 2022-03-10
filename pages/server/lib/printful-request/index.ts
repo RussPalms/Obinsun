@@ -1,22 +1,20 @@
-//@ts-nocheck
-
-import "cross-fetch/polyfill";
+import 'cross-fetch/polyfill';
 
 export class PrintfulClient {
   constructor(printfulToken: any, options = {}) {
-    if (!printfulToken) throw new Error("Printful token not provided");
+    if (!printfulToken) throw new Error('Printful token not provided');
 
     const { headers } = options as any;
 
     this.printfulToken = printfulToken;
 
     this.options = {
-      baseUrl: "https://api.printful.com",
+      baseUrl: 'https://api.printful.com',
       ...options,
     };
 
     this.headers = {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       // Authorization: `Bearer ${Buffer.from(printfulToken).toString("base64")}`,
       Authorization: `Bearer ${printfulToken}`,
       ...headers,
@@ -32,8 +30,8 @@ export class PrintfulClient {
           .map(
             (k) => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`
           )
-          .join("&")}`
-      : "";
+          .join('&')}`
+      : '';
 
     const url = `${baseUrl}/${endpoint}${queryString}`;
 
@@ -55,15 +53,15 @@ export class PrintfulClient {
   }
 
   post(endpoint: any, data: any) {
-    return this.request({ method: "POST", endpoint, data });
+    return this.request({ method: 'POST', endpoint, data });
   }
 
   put(endpoint: any, data: any) {
-    return this.request({ method: "PUT", endpoint, data });
+    return this.request({ method: 'PUT', endpoint, data });
   }
 
   delete(endpoint: any) {
-    return this.request({ method: "DELETE", endpoint });
+    return this.request({ method: 'DELETE', endpoint });
   }
 }
 

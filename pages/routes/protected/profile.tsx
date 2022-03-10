@@ -1,5 +1,3 @@
-//@ts-nocheck
-
 import { getSession } from 'next-auth/react';
 import UserProfile from '../../src/components/Profile/UserProfile';
 

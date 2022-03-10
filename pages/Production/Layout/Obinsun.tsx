@@ -1,4 +1,3 @@
-//@ts-nocheck
 import React, { ReactNode, useRef, useState } from 'react';
 // import { useSession } from 'next-auth/react';
 import { NextSeo } from 'next-seo';

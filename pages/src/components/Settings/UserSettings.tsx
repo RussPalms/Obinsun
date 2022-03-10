@@ -1,5 +1,3 @@
-//@ts-nocheck
-
 import Settings from './Settings';
 import { useSession } from 'next-auth/react';
 import PrintfulSignin from './PrintfulSignin';

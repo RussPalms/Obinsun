@@ -1,7 +1,5 @@
-//@ts-nocheck
-
-import { useReducer, useEffect } from "react";
-import { hasStripe } from "../lib/has-stripe";
+import { useReducer, useEffect } from 'react';
+import { hasStripe } from '../lib/has-stripe';
 
 const initialState = {
   cart: {
@@ -14,7 +12,7 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "SET":
+    case 'SET':
       return {
         ...state,
         ...action.payload,

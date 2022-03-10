@@ -1,23 +1,21 @@
-//@ts-nocheck
+import DraculaVisitsAfrica from './src/assets/ObinsunVectors/DraculaVisitsAfrica';
+import PeaceOnEarth from './src/assets/ObinsunVectors/PeaceOnEarth';
+import RadRex from './src/assets/ObinsunVectors/RadRex';
+import SeeYouInSpace from './src/assets/ObinsunVectors/SeeYouInSpace';
+import SkullIsFullOfCats from './src/assets/ObinsunVectors/SkullIsFullOfCats';
+import WhiskersAndPipe from './src/assets/ObinsunVectors/WhiskersAndPipe';
+import CatsAndSkullsPattern from './src/assets/ObinsunVectors/CatsAndSkullsPattern';
+import DesignFeature from './src/components/DesignFeature';
+import Designs from './src/components/Designs';
+import Hero from './src/components/Hero';
 
-import DraculaVisitsAfrica from "./src/assets/ObinsunVectors/DraculaVisitsAfrica";
-import PeaceOnEarth from "./src/assets/ObinsunVectors/PeaceOnEarth";
-import RadRex from "./src/assets/ObinsunVectors/RadRex";
-import SeeYouInSpace from "./src/assets/ObinsunVectors/SeeYouInSpace";
-import SkullIsFullOfCats from "./src/assets/ObinsunVectors/SkullIsFullOfCats";
-import WhiskersAndPipe from "./src/assets/ObinsunVectors/WhiskersAndPipe";
-import CatsAndSkullsPattern from "./src/assets/ObinsunVectors/CatsAndSkullsPattern";
-import DesignFeature from "./src/components/DesignFeature";
-import Designs from "./src/components/Designs";
-import Hero from "./src/components/Hero";
-
-import { gsap } from "gsap";
+import { gsap } from 'gsap';
 // import { gsap, ScrollTrigger, Draggable, MotionPathPlugin } from "gsap/all";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 // import { DrawSVG } from "gsap/dist/DrawSVG";
-import { MotionPathPlugin } from "gsap/dist/MotionPathPlugin";
+import { MotionPathPlugin } from 'gsap/dist/MotionPathPlugin';
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
 type Props = {};
 
@@ -59,7 +57,7 @@ function Landing() {
 
   // const scroll = useScrollPosition(elementRef);
 
-  if (typeof window !== "undefined") {
+  if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
     // gsap.registerPlugin(DrawSVG);
     gsap.registerPlugin(MotionPathPlugin);
@@ -146,25 +144,25 @@ function Landing() {
   // };
 
   useEffect(() => {
-    const container = ref.current;
+    const container = ref.current as any;
 
     if (container == null || ref == null) return;
 
-    let path_1 = container.querySelector("#path1");
-    let path_1_container = container.querySelector("#path1Container");
+    let path_1 = container.querySelector('#path1');
+    let path_1_container = container.querySelector('#path1Container');
     let path_1_length = path_1.getTotalLength();
 
-    path_1.style.strokeDasharray = path_1_length + " " + path_1_length;
+    path_1.style.strokeDasharray = path_1_length + ' ' + path_1_length;
     path_1.style.strokeDashoffset = path_1_length;
 
-    document.addEventListener("scroll", (e) => {
+    document.addEventListener('scroll', (e: any) => {
       if (container == null) return;
       // console.log(e);
 
       // console.log(e.target);
       let scrollPercentage =
         (e.target.documentElement.scrollTop +
-          e.target.getElementById("landing").scrollTop) /
+          e.target.getElementById('landing').scrollTop) /
         (e.target.documentElement.scrollHeight -
           e.target.documentElement.clientHeight);
 
@@ -217,9 +215,9 @@ function Landing() {
   // }, []);
 
   useEffect(() => {
-    const element = ref.current;
+    const element = ref.current as any;
     gsap.fromTo(
-      element.querySelector("#dracula-visits-africa"),
+      element.querySelector('#dracula-visits-africa'),
       {
         opacity: 0.1,
         scale: 1,
@@ -236,14 +234,14 @@ function Landing() {
         // rotateX: 90,
         // rotateY: 90,
         // rotateZ: 90,
-        rotation: "1.25rad",
-        skewX: "30deg",
+        rotation: '1.25rad',
+        skewX: '30deg',
         duration: 1,
-        ease: "none",
+        ease: 'none',
         scrollTrigger: {
-          trigger: element.querySelector("#featured-designs"),
-          start: "top top",
-          end: "bottom center",
+          trigger: element.querySelector('#featured-designs'),
+          start: 'top top',
+          end: 'bottom center',
           scrub: true,
         },
       }
@@ -251,9 +249,9 @@ function Landing() {
   }, []);
 
   useEffect(() => {
-    const element = ref.current;
+    const element = ref.current as any;
     gsap.fromTo(
-      element.querySelector("#whiskers-and-pipe"),
+      element.querySelector('#whiskers-and-pipe'),
       {
         opacity: 0.1,
         scale: 1,
@@ -266,11 +264,11 @@ function Landing() {
         scale: 3,
         // rotation: 90,
         duration: 1,
-        ease: "none",
+        ease: 'none',
         scrollTrigger: {
-          trigger: element.querySelector("#featured-designs"),
-          start: "top top",
-          end: "bottom center",
+          trigger: element.querySelector('#featured-designs'),
+          start: 'top top',
+          end: 'bottom center',
           scrub: true,
         },
       }
@@ -447,7 +445,7 @@ function Landing() {
           >
             <WhiskersAndPipe
               name=""
-              // id="whiskers-and-pipe"
+              id="whiskers-and-pipe"
               className="design-container"
             />
           </div>
@@ -477,6 +475,7 @@ function Landing() {
             className="border absolute left-[50%] top-[15rem]"
           >
             <DraculaVisitsAfrica
+              id=""
               name=""
               className="design-container h-[20rem] animate-breath6"
             />

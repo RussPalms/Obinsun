@@ -1,5 +1,3 @@
-//@ts-nocheck
-
 import { useRouter } from 'next/router';
 import { getSession, useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';

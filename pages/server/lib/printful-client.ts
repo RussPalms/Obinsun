@@ -1,9 +1,7 @@
-//@ts-nocheck
+import { PrintfulClient } from './printful-request';
 
-import { PrintfulClient } from "./printful-request";
-
-import * as admin from "firebase-admin";
-import axios from "axios";
+import * as admin from 'firebase-admin';
+import axios from 'axios';
 // import axios from "axios";
 // import { useEffect, useState } from "react";
 
@@ -22,8 +20,8 @@ const app = !admin.apps.length
 export const getAccessCode = async () => {
   const accessCode = await app
     .firestore()
-    .collection("accessCodes")
-    .doc("Authorization")
+    .collection('accessCodes')
+    .doc('Authorization')
     .get()
     .then((snapshot) => {
       const current_access_token = snapshot.data()?.access_token;
@@ -31,7 +29,7 @@ export const getAccessCode = async () => {
       const current_refresh_token = snapshot.data()?.refresh_token;
       if (Date.now() < current_expires_at) {
         console.log(Date.now());
-        console.log("Using current access token", current_access_token);
+        console.log('Using current access token', current_access_token);
         return current_access_token;
       } else {
         return getRefreshedCode(current_refresh_token);
@@ -42,8 +40,8 @@ export const getAccessCode = async () => {
 };
 
 const getRefreshedCode = async (current_refresh_token) => {
-  const getRefreshedToken = axios.post("https://www.printful.com/oauth/token", {
-    grant_type: "refresh_token",
+  const getRefreshedToken = axios.post('https://www.printful.com/oauth/token', {
+    grant_type: 'refresh_token',
     client_id: clientId,
     client_secret: clientSecret,
     refresh_token: current_refresh_token,
@@ -53,13 +51,13 @@ const getRefreshedCode = async (current_refresh_token) => {
   let new_access_token = refreshedToken.access_token;
   let new_expires_at = refreshedToken.expires_at;
   let new_refresh_token = refreshedToken.refresh_token;
-  app.firestore().collection("accessCodes").doc("Authorization").set({
+  app.firestore().collection('accessCodes').doc('Authorization').set({
     access_token: new_access_token,
     expires_at: new_expires_at,
     refresh_token: new_refresh_token,
   });
   // const new_access_token = refreshedToken.access_token;
-  console.log("Using refreshed access token", new_access_token);
+  console.log('Using refreshed access token', new_access_token);
   return new_access_token;
 };
 

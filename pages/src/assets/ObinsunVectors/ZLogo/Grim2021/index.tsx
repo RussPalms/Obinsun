@@ -1,6 +1,5 @@
-//@ts-nocheck
 
-const Grim2021 = ({ id, name, className }) => {
+const Grim2021 = ({ id, name, className }:any) => {
 	return (
 		<>
 			<svg

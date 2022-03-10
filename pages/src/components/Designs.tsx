@@ -1,5 +1,3 @@
-//@ts-nocheck
-
 import CatsAndSkullsPatternBanner from '../assets/ObinsunVectors/ZBanner/CatsAndSkullsPatternBanner';
 import Grim2021 from '../assets/ObinsunVectors/ZLogo/Grim2021';
 

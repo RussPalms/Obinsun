@@ -1,6 +1,4 @@
-//@ts-nocheck
-
-const WhiskersAndPipe = ({ id, name, className }) => {
+const WhiskersAndPipe = ({ id, name, className }: any) => {
   return (
     <>
       <svg

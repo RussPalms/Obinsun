@@ -1,5 +1,3 @@
-//@ts-nocheck
-
 import { NextPage } from 'next';
 
 import * as React from 'react';
@@ -30,12 +28,14 @@ const IndexPage: React.FC<IndexPageProps> = ({ products }) => (
 export const getStaticProps: GetStaticProps = async () => {
   const util = require('util');
 
-  const { result: productIds } = await printful.get('sync/products');
+  const { result: productIds } = await printful.get('sync/products', '');
 
   // console.log(productIds);
 
   const allProducts = await Promise.all(
-    productIds.map(async ({ id }) => await printful.get(`sync/products/${id}`))
+    productIds.map(
+      async ({ id }: any) => await printful.get(`sync/products/${id}`, '')
+    )
   );
 
   // console.log(allProducts[0].result);
@@ -49,7 +49,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const products: PrintfulProduct[] = allProducts.map(
     ({ result: { sync_product, sync_variants } }) => ({
       ...sync_product,
-      variants: sync_variants.map(({ name, ...variant }) => ({
+      variants: sync_variants.map(({ name, ...variant }: any) => ({
         name: formatVariantName(name),
         ...variant,
       })),

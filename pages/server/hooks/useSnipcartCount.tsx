@@ -1,4 +1,4 @@
-// //@ts-nocheck
+//
 
 // import { useReducer, useEffect } from "react";
 // import { hasSnipcart } from "../lib/has-snipcart";

@@ -1,7 +1,5 @@
-//@ts-nocheck
-
-import React, { useState } from "react";
-import ProgressBar from "./ProgressBar";
+import React, { useState } from 'react';
+import ProgressBar from './ProgressBar';
 
 type Props = {};
 
@@ -9,7 +7,7 @@ function UploadForm({}: Props) {
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
 
-  const types = ["image/png", "image/jpeg"];
+  const types = ['image/png', 'image/jpeg'];
 
   const handleChange = (e: any) => {
     // console.log("event currently taking place", e);
@@ -20,12 +18,12 @@ function UploadForm({}: Props) {
       setFile(selected);
 
       // console.log("this is the uploaded file", file);
-      console.log("this is the selected image", file);
+      console.log('this is the selected image', file);
 
-      setError("" as any);
+      setError('' as any);
     } else {
       setFile(null);
-      setError("Please select an image file (png or jpg)" as any);
+      setError('Please select an image file (png or jpg)' as any);
     }
   };
 

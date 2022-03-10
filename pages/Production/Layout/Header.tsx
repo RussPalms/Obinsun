@@ -1,5 +1,3 @@
-//@ts-nocheck
-
 import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { selectItems } from 'pages/app/state/slices/basketSlice';

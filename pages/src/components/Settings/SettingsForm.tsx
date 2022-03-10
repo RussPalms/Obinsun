@@ -1,5 +1,3 @@
-//@ts-nocheck
-
 import axios from 'axios';
 import { getSession, useSession } from 'next-auth/react';
 import { useEffect, useRef, useState } from 'react';

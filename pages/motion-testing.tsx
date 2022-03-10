@@ -1,5 +1,3 @@
-// //@ts-nocheck
-
 // import React, { useEffect, useRef } from 'react';
 // import { gsap } from 'gsap';
 // import { MotionPathPlugin } from 'gsap/dist/MotionPathPlugin';

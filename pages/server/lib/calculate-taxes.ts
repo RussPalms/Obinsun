@@ -1,12 +1,10 @@
-//@ts-nocheck
-
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from 'next';
 import {
   PrintfulShippingItem,
   // SnipcartTaxItem
   StripeTaxItem,
-} from "../../types";
-import { printful } from "./printful-client";
+} from '../../types';
+import { printful } from './printful-client';
 
 // interface SnipcartRequest extends NextApiRequest {
 interface StripeRequest extends NextApiRequest {
@@ -37,8 +35,8 @@ const calculateTaxes = async (
     return res.status(200).json({
       errors: [
         {
-          key: "no_items",
-          message: "No items in cart to calculate taxes.",
+          key: 'no_items',
+          message: 'No items in cart to calculate taxes.',
         },
       ],
     });
@@ -53,8 +51,8 @@ const calculateTaxes = async (
     return res.status(200).json({
       errors: [
         {
-          key: "no_address",
-          message: "No address to calculate taxes.",
+          key: 'no_address',
+          message: 'No address to calculate taxes.',
         },
       ],
     });
@@ -80,7 +78,7 @@ const calculateTaxes = async (
   );
 
   try {
-    const { result } = await printful.post("orders/estimate-costs", {
+    const { result } = await printful.post('orders/estimate-costs', {
       shipping: shippingRateUserDefinedId,
       recipient,
       items,
@@ -89,7 +87,7 @@ const calculateTaxes = async (
     res.status(200).json({
       taxes: [
         {
-          name: "VAT",
+          name: 'VAT',
           amount: result.costs.vat,
           rate: 0,
         },

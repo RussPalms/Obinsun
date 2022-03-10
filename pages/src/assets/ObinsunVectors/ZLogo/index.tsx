@@ -1,5 +1,3 @@
-//@ts-nocheck
-
 const ZLogo = ({ className, id }) => {
   return (
     <>

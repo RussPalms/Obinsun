@@ -1,5 +1,3 @@
-//@ts-nocheck
-
 import { useRouter } from 'next/router';
 import { getSession, useSession } from 'next-auth/react';
 import { useEffect, useRef, useState } from 'react';
@@ -10,7 +8,7 @@ import LoginModal from './Production/Layout/LoginModal';
 import Content from './Production/Layout/Content';
 
 export default function AuthenticatePage() {
-  const modalRef = useRef();
+  const modalRef = useRef() as any;
 
   const openModal = () => {
     modalRef.current?.openModal();
@@ -23,8 +21,18 @@ export default function AuthenticatePage() {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
-  useEffect(async () => {
-    await getSession().then((session) => {
+  // useEffect(async () => {
+  //   await getSession().then((session) => {
+  //     if (session) {
+  //       router.replace('/');
+  //     } else {
+  //       setIsLoading(false);
+  //     }
+  //   });
+  // }, [router]);
+
+  useEffect(() => {
+    getSession().then((session) => {
       if (session) {
         router.replace('/');
       } else {
@@ -43,7 +51,9 @@ export default function AuthenticatePage() {
   //     </LoginModal>
   //   );
 
-  return {
-    redirect,
-  };
+  // return {
+  //   redirect,
+  // };
+
+  return;
 }

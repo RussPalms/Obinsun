@@ -1,5 +1,3 @@
-//@ts-nocheck
-
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import EmailProvider from 'next-auth/providers/email';
@@ -49,7 +47,7 @@ export default NextAuth({
   adapter: adapterInstance,
   providers: [
     CredentialsProvider({
-      authorize: async (credentials) => {
+      authorize: async (credentials: any) => {
         // const db = await connectToFirebase();
         // const db = firestoreConnect;
 
@@ -58,13 +56,13 @@ export default NextAuth({
           where('email', '==', credentials?.email)
         );
         const authSnapshot = await getDocs(AuthenticationQuery);
-        const userCollection = {};
+        const userCollection: any = {};
         authSnapshot.forEach((doc) => {
           let a = doc.data();
           a['_id'] = doc.id;
           userCollection[doc.id] = a;
         });
-        const user = Object.values(userCollection)[0];
+        const user: any = Object.values(userCollection)[0];
         const isValid = await verifyPassword(
           credentials.password,
           user.password
@@ -88,7 +86,7 @@ export default NextAuth({
         //   },
         // });
       },
-    }),
+    } as any),
     EmailProvider({
       server: {
         host: process.env.SMTP_HOST,
@@ -148,7 +146,7 @@ export default NextAuth({
 
       const authTokenSnapshot = await getDocs(authTokenQuery);
 
-      const userCollection = {};
+      const userCollection: any = {};
 
       await authTokenSnapshot.forEach((doc) => {
         let a = doc.data();
@@ -156,7 +154,7 @@ export default NextAuth({
         userCollection[doc.id] = a;
       });
 
-      const userToken = Object.values(userCollection)[0];
+      const userToken: any = Object.values(userCollection)[0];
 
       if (userToken) {
         token.id = userToken._id;
@@ -170,7 +168,7 @@ export default NextAuth({
 
       return token;
     },
-    session: async ({ session, token }) => {
+    session: async ({ session, token }: any) => {
       if (token) session.id = token.id;
       session.user.role = token.role;
       session.user.stripeId = token.stripeId;

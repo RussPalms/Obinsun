@@ -1,12 +1,10 @@
-//@ts-nocheck
-
-import { useState } from "react";
-import Image from "next/image";
-import useWishlistDispatch from "../../../server/hooks/useWishlistDispatch";
-import useWishlistState from "../../../server/hooks/useWishlistState";
-import { useDispatch } from "react-redux";
-import { addToBasket } from "../../../app/state/slices/basketSlice";
-import ProductVariantPicker from "./ProductVariantPicker";
+import { useState } from 'react';
+import Image from 'next/image';
+import useWishlistDispatch from '../../../server/hooks/useWishlistDispatch';
+import useWishlistState from '../../../server/hooks/useWishlistState';
+import { useDispatch } from 'react-redux';
+import { addToBasket } from '../../../app/state/slices/basketSlice';
+import ProductVariantPicker from './ProductVariantPicker';
 
 const Catalog = (product: any) => {
   const dispatch = useDispatch();
@@ -31,8 +29,8 @@ const Catalog = (product: any) => {
   // );
   const activeProductVariantFile = activeProductVariant;
 
-  const formattedPrice = new Intl.NumberFormat("en-US", {
-    style: "currency",
+  const formattedPrice = new Intl.NumberFormat('en-US', {
+    style: 'currency',
     currency: currency,
   }).format(activeProductVariant.price as number);
 

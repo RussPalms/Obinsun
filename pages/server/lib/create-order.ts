@@ -1,11 +1,9 @@
-//@ts-nocheck
-
 import {
   PrintfulShippingItem,
   // SnipcartWebhookContent
   StripeWebhookContent,
-} from "../../types";
-import { printful } from "./printful-client";
+} from '../../types';
+import { printful } from './printful-client';
 
 // import type { SnipcartWebhookContent, PrintfulShippingItem } from "../types";
 
@@ -38,7 +36,7 @@ StripeWebhookContent) => {
     })
   );
 
-  const { result } = await printful.post("orders", {
+  const { result } = await printful.post('orders', {
     external_id: invoiceNumber,
     recipient,
     items: printfulItems,

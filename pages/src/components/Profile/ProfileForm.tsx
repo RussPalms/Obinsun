@@ -1,5 +1,3 @@
-//@ts-nocheck
-
 import { useRef } from 'react';
 
 function ProfileForm(props) {

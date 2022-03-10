@@ -1,5 +1,3 @@
-//@ts-nocheck
-
 import React, { useState, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
@@ -44,7 +42,7 @@ export default function Payments() {
   return (
     <div className="App">
       {clientSecret && (
-        <Elements options={options} stripe={stripePromise}>
+        <Elements options={options as any} stripe={stripePromise}>
           <CheckoutForm />
         </Elements>
       )}

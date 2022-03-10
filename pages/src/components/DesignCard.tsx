@@ -1,7 +1,5 @@
-//@ts-nocheck
-
 function DesignCard({ entity }) {
-	return <div></div>;
+  return <div></div>;
 }
 
 export default DesignCard;

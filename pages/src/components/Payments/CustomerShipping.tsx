@@ -1,6 +1,4 @@
-//@ts-nocheck
-
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
 function CustomerShipping(props) {
   // INDIVIDUAL

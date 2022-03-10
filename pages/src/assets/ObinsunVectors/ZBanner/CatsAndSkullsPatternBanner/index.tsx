@@ -1,5 +1,4 @@
-//@ts-nocheck
-const CatsAndSkullsPatternBanner = ({ id, name, className }) => {
+const CatsAndSkullsPatternBanner = ({ id, name, className }: any) => {
   return (
     <>
       <svg

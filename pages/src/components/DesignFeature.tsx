@@ -1,5 +1,3 @@
-//@ts-nocheck
-
 import React from 'react';
 import PeaceOnEarth from '../assets/ObinsunVectors/PeaceOnEarth';
 import RadRex from '../assets/ObinsunVectors/RadRex';

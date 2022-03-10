@@ -1,5 +1,3 @@
-//@ts-nocheck
-
 // import { useSession } from "next-auth/react";
 import { useRouter } from 'next/router';
 import ProfileForm from './ProfileForm';

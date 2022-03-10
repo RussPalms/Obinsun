@@ -1,19 +1,17 @@
-//@ts-nocheck
-
-import React, { useCallback, useRef } from "react";
-import { useDispatch } from "react-redux";
-import Webcam from "react-webcam";
-import { useNavigate } from "react-router-dom";
-import { setCameraImage } from "../../../../app/state/slices/cameraSlice";
-import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
-import { useRouter } from "next/router";
+import React, { useCallback, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import Webcam from 'react-webcam';
+import { useNavigate } from 'react-router-dom';
+import { setCameraImage } from '../../../../app/state/slices/cameraSlice';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+import { useRouter } from 'next/router';
 
 type Props = {};
 
 const videoConstraints = {
   //   width: 250,
   //   height: 400,
-  facingMode: "user",
+  facingMode: 'user',
 };
 
 export default function WebcamCapture({}: Props) {
@@ -24,7 +22,7 @@ export default function WebcamCapture({}: Props) {
   const capture = useCallback(() => {
     const imageSrc = webcamRef.current!.getScreenshot();
     dispatch(setCameraImage(imageSrc));
-    router.replace("/routes/protected/creator/preview");
+    router.replace('/routes/protected/creator/preview');
   }, [webcamRef]);
 
   return (
