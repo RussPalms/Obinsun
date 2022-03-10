@@ -2,6 +2,8 @@ import { PrintfulClient } from './printful-request';
 
 import * as admin from 'firebase-admin';
 import axios from 'axios';
+import rateLimit from 'axios-rate-limit';
+
 // import axios from "axios";
 // import { useEffect, useState } from "react";
 
@@ -18,6 +20,8 @@ const app = !admin.apps.length
       credential: admin.credential.cert(serviceAccount),
     })
   : admin.app();
+
+const code: any = {};
 
 export const getAccessCode = async () => {
   const accessCode = await app
@@ -60,18 +64,63 @@ const getRefreshedCode = async (current_refresh_token: any) => {
   });
   // const new_access_token = refreshedToken.access_token;
   console.log('Using refreshed access token', new_access_token);
+  // async () => {
+  //   // await
+  //   let c = await new_access_token;
+  //   code['code'] = c;
+  //   // code.push(new_access_token);
+  // };
+
+  // const getPrintfulCatalogId = rateLimit(axios.create(), {
+  //   maxRequests: 120,
+  //   perMilliseconds: 2000,
+  //   maxRPS: 2,
+  // });
+  // let catalogId: any = [];
+  // let retrieved: any = [];
+  // const axiosHeaders = {
+  //   headers: {
+  //     token_type: "Bearer",
+  //     access_token: new_access_token,
+  //   },
+  // };
+  // await getPrintfulCatalogId
+  //   // .get("https://api.printful.com/products", axiosHeaders)
+  //   .get("https://api.printful.com/sync/products", axiosHeaders)
+  //   .then((response) => {
+  //     const printfulRateLimit = Number(response.headers["x-ratelimit-limit"]);
+  //     catalogId.push(printfulRateLimit);
+  //     const { result } = response.data;
+  //     retrieved.push(result);
+  //     result.forEach((item: any) => {
+  //       const { id } = item;
+  //       catalogId["_id"] = id;
+  //     });
+  //   });
+
   return new_access_token;
 };
+
+// console.log(getAccessCode());
+// getAccessCode();
 
 // var access_code = await getAccessCode();
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-const access_code = await getAccessCode();
+// const access_code = await getAccessCode();
+
+// const access_code = getAccessCode();
+// console.log(code);
+
 // const access_code = Promise.resolve(getAccessCode());
 // const accessCodeGet = async () => {
 //   const access_code = await getAccessCode();
 //   return access_code;
 // };
 
-export const printful = new PrintfulClient(access_code);
+// export const printful = new PrintfulClient(access_code);
+export const printful = new PrintfulClient(
+  'qrRWnZjMiNBYUCUQV9ZnK9rCMIdM7QP1SRSXWmud'
+);
 // export const printful = new PrintfulClient(accessCodeGet());
+// export const printful = new PrintfulClient(getAccessCode());

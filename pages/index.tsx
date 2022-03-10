@@ -51,8 +51,8 @@ const IndexPage = ({
 // },
 IProps): JSX.Element => {
   const retrieveProducts = async () => {
-    // const url = `/api/checkout-success`;
-    const url = `/api/products/61e844c86224c7`;
+    const url = `/api/checkout-success`;
+    // const url = `/api/products/61e844c86224c7`;
 
     const response = await fetch(url, {
       // method: 'POST',
@@ -63,7 +63,7 @@ IProps): JSX.Element => {
     //   throw new Error(data.error);
     // }
 
-    console.log(data);
+    // console.log(data);
     // return data;
   };
 
