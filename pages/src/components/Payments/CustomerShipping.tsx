@@ -1,31 +1,31 @@
 import { useEffect, useRef, useState } from 'react';
 
-function CustomerShipping(props) {
+function CustomerShipping(props: any) {
   // INDIVIDUAL
   // individual
   // Name
   // first name
-  const firstNameRef = useRef();
+  const firstNameRef = useRef() as any;
   // last name
-  const lastNameRef = useRef();
+  const lastNameRef = useRef() as any;
   // address
   // Address
   // line1
-  const line1Ref = useRef();
+  const line1Ref = useRef() as any;
   // postal_code
-  const postalCodeRef = useRef();
+  const postalCodeRef = useRef() as any;
   // city
-  const cityRef = useRef();
+  const cityRef = useRef() as any;
   // state
-  const stateRef = useRef();
+  const stateRef = useRef() as any;
   // email
   // Email
-  const emailRef = useRef();
+  const emailRef = useRef() as any;
   // phone
   // Phone
-  const phoneRef = useRef();
+  const phoneRef = useRef() as any;
 
-  function submitHandler(event) {
+  function submitHandler(event: any) {
     event.preventDefault();
     const enteredFirstName = firstNameRef.current.value;
     const enteredLastName = lastNameRef.current.value;

@@ -2,11 +2,11 @@ import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
 import { getSession, useSession } from 'next-auth/react';
 import Router from 'next/router';
-import ProfileForm from './ProfileForm';
+// import ProfileForm from './ProfileForm';
 import { useRouter } from 'next/router';
 import { DateTime } from 'luxon';
 import { useEffect, useRef, useState } from 'react';
-import OnboardingForm from './OnboardingForm';
+// import OnboardingForm from './OnboardingForm';
 import Link from 'next/link';
 
 // const stripePromise = loadStripe(`${process.env.stripe_public_key}`);
@@ -14,7 +14,7 @@ import Link from 'next/link';
 // async function createCustomAccount({firebaseID: session.id})
 
 export default function CreatorSetup() {
-  const { data: session, status } = useSession();
+  const { data: session, status } = useSession() as any;
   const loading = status === 'loading';
   console.log(status, session);
 
@@ -34,7 +34,7 @@ export default function CreatorSetup() {
     setIP(res.data.IPv4);
     // const ts = Math.round(new Date().getTime() / 1000);
     // UNIX timestamp in milliseconds
-    setTS(Math.round(new Date().getTime() / 1000));
+    // setTS(Math.round(new Date().getTime() / 1000));
   };
 
   // useEffect(() => {
@@ -70,8 +70,8 @@ export default function CreatorSetup() {
   //   // console.log(data);
   // }
 
-  // const createCustomAccount = async (e) => {
-  const submitValidationHandler = async (validationData) => {
+  // const createCustomAccount = async (e:any) => {
+  const submitValidationHandler = async (validationData: any) => {
     // e.preventDefault();
 
     // const stripe = await stripePromise;
@@ -104,7 +104,7 @@ export default function CreatorSetup() {
     return;
   };
 
-  // const externalAccount = async (e) => {
+  // const externalAccount = async (e:any) => {
   //   e.preventDefault();
 
   //   const externalAccountAddition = await axios.post(
@@ -116,7 +116,7 @@ export default function CreatorSetup() {
   //   );
   // };
 
-  const addingCard = async (e) => {
+  const addingCard = async (e: any) => {
     e.preventDefault();
 
     //   const externalAccountAddition = await axios.post(
@@ -128,7 +128,7 @@ export default function CreatorSetup() {
     //   );
   };
 
-  const externalAccount = async (e) => {
+  const externalAccount = async (e: any) => {
     e.preventDefault();
 
     // await axios.post("/api/stripe/create-external-account", {
@@ -138,7 +138,7 @@ export default function CreatorSetup() {
     });
   };
 
-  const shippingRate = async (e) => {
+  const shippingRate = async (e: any) => {
     e.preventDefault();
 
     // await axios.post("/api/stripe/create-external-account", {
@@ -148,7 +148,7 @@ export default function CreatorSetup() {
     });
   };
 
-  const updateCustomAccount = async (e) => {
+  const updateCustomAccount = async (e: any) => {
     e.preventDefault();
     // const enteredIP = ipInputRef.current.value;
     // const enteredTS = tsInputRef.current.value;
@@ -205,23 +205,23 @@ export default function CreatorSetup() {
       <div className="absolute top-[50%] left-[50%] transform translate-x-[-50%] translate-y-[-50%]">
         <div
           className="square border-bottom-right-glass square-delay"
-          style={{ '--i': '0' }}
+          style={{ '--i': '0' } as any}
         />
         <div
           className="square border-bottom-right-glass top-[150px] left-[-100px] w-[120px] h-[120px] z-20 square-delay"
-          style={{ '--i': '1' }}
+          style={{ '--i': '1' } as any}
         />
         <div
           className="square border-bottom-right-glass bottom-[50px] right-[-60px] w-[80px] h-[80px] z-20 square-delay"
-          style={{ '--i': '2' }}
+          style={{ '--i': '2' } as any}
         />
         <div
           className="square border-bottom-right-glass bottom-[-80px] left-[100px] w-[50px] h-[50px] square-delay"
-          style={{ '--i': '3' }}
+          style={{ '--i': '3' } as any}
         />
         <div
           className="square border-bottom-right-glass top-[-80px] left-[140px] w-[60px] h-[60px] delay-[-7000ms] square-delay"
-          style={{ '--i': '4' }}
+          style={{ '--i': '4' } as any}
         />
         <div className="relative top-0 left-0 w-[400px] min-h-[400px] bg-white/10 border rounded-[10px] flex justify-center align-center backdrop-blur-[5px] shadow-glass3 border-bottom-right-glass border-white/50">
           <div className="relative w-full h-full p-[40px]">
@@ -236,7 +236,7 @@ export default function CreatorSetup() {
             <button onClick={externalAccount}>Click To Update Account</button>
             <button onClick={addingCard}>Click To Add Card</button>
             <button onClick={shippingRate}>Click To Add Shipping Rate</button>
-            <OnboardingForm onSubmitValidation={submitValidationHandler} />
+            {/* <OnboardingForm onSubmitValidation={submitValidationHandler} /> */}
             {/* <ProfileForm /> */}
           </div>
         </div>
