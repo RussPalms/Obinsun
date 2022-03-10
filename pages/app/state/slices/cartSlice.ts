@@ -4,7 +4,7 @@ import {
   createSelector,
   PayloadAction,
 } from '@reduxjs/toolkit';
-import { checkout } from 'pages/api/products';
+// import { checkout } from 'pages/api/products';
 import { RootState } from '../store';
 
 type CheckoutState = 'LOADING' | 'READY' | 'ERROR';
@@ -21,17 +21,17 @@ const initialState: CartState = {
 };
 
 // export const checkoutCart = createAsyncThunk(
-export const checkoutCart = createAsyncThunk<
-  { success: boolean },
-  undefined,
-  { state: RootState }
->('cart/checkout', async (_, thunkAPI) => {
-  // const state = thunkAPI.getState() as RootState;
-  const state = thunkAPI.getState();
-  const items = state.cart.items;
-  const response = await checkout(items);
-  return response;
-});
+// export const checkoutCart = createAsyncThunk<
+//   { success: boolean },
+//   undefined,
+//   { state: RootState }
+// >('cart/checkout', async (_, thunkAPI) => {
+//   // const state = thunkAPI.getState() as RootState;
+//   const state = thunkAPI.getState();
+//   const items = state.cart.items;
+//   const response = await checkout(items);
+//   return response;
+// });
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -55,27 +55,27 @@ const cartSlice = createSlice({
       state.items[id] = quantity;
     },
   },
-  extraReducers: (builder) => {
-    builder.addCase(checkoutCart.pending, (state) => {
-      state.checkoutState = 'LOADING';
-    });
-    builder.addCase(
-      checkoutCart.fulfilled,
-      (state, action: PayloadAction<{ success: boolean }>) => {
-        const { success } = action.payload;
-        if (success) {
-          state.checkoutState = 'READY';
-          state.items = {};
-        } else {
-          state.checkoutState = 'ERROR';
-        }
-      }
-    );
-    builder.addCase(checkoutCart.rejected, (state, action) => {
-      state.checkoutState = 'ERROR';
-      state.errorMessage = action.error.message || '';
-    });
-  },
+  // extraReducers: (builder) => {
+  //   builder.addCase(checkoutCart.pending, (state) => {
+  //     state.checkoutState = 'LOADING';
+  //   });
+  //   builder.addCase(
+  //     checkoutCart.fulfilled,
+  //     (state, action: PayloadAction<{ success: boolean }>) => {
+  //       const { success } = action.payload;
+  //       if (success) {
+  //         state.checkoutState = 'READY';
+  //         state.items = {};
+  //       } else {
+  //         state.checkoutState = 'ERROR';
+  //       }
+  //     }
+  //   );
+  //   builder.addCase(checkoutCart.rejected, (state, action) => {
+  //     state.checkoutState = 'ERROR';
+  //     state.errorMessage = action.error.message || '';
+  //   });
+  // },
 });
 
 export const { addToCart, removeFromCart, updateQuantity } = cartSlice.actions;

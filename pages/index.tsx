@@ -59,9 +59,9 @@ IProps): JSX.Element => {
       method: 'GET',
     });
     const data = await response.json();
-    if (!data.success) {
-      throw new Error(data.error);
-    }
+    // if (!data.success) {
+    //   throw new Error(data.error);
+    // }
 
     console.log(data);
     // return data;

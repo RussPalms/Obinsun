@@ -39,7 +39,7 @@ export const getAccessCode = async () => {
   return accessCode;
 };
 
-const getRefreshedCode = async (current_refresh_token) => {
+const getRefreshedCode = async (current_refresh_token: any) => {
   const getRefreshedToken = axios.post('https://www.printful.com/oauth/token', {
     grant_type: 'refresh_token',
     client_id: clientId,
@@ -62,6 +62,14 @@ const getRefreshedCode = async (current_refresh_token) => {
 };
 
 // var access_code = await getAccessCode();
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 const access_code = await getAccessCode();
+// const access_code = Promise.resolve(getAccessCode());
+// const accessCodeGet = async () => {
+//   const access_code = await getAccessCode();
+//   return access_code;
+// };
 
 export const printful = new PrintfulClient(access_code);
+// export const printful = new PrintfulClient(accessCodeGet());

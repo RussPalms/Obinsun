@@ -88,20 +88,22 @@ export async function getProducts(): Promise<ISyncProduct[]> {
 export type CartItems = { [productID: string]: number };
 export type CheckoutResponse = { success: boolean; error?: string };
 
-export async function checkout(items: CartItems): Promise<CheckoutResponse> {
-  const modifier = Object.keys(items).length > 0 ? 'success' : 'error';
-  const url = `${process.env.NEXTAUTH_URL}/pages/api/checkout-${modifier}.json`;
-  await sleep(500);
-  const response = await fetch(url, {
-    method: 'POST',
-    body: JSON.stringify(items),
-  });
-  const data = await response.json();
-  if (!data.success) {
-    throw new Error(data.error);
-  }
-  return data as CheckoutResponse;
-}
+// export async function checkout(items: CartItems): Promise<CheckoutResponse> {
+//   const modifier = Object.keys(items).length > 0 ? 'success' : 'error';
+//   // const url = `${process.env.NEXTAUTH_URL}/pages/api/checkout-${modifier}.json`;
+//   // const url = `/api/checkout-${modifier}`;
+//   const url = `${process.env.NEXTAUTH_URL}/pages/api/checkout-${modifier}`;
+//   await sleep(500);
+//   const response = await fetch(url, {
+//     method: 'POST',
+//     body: JSON.stringify(items),
+//   });
+//   const data = await response.json();
+//   if (!data.success) {
+//     throw new Error(data.error);
+//   }
+//   return data as CheckoutResponse;
+// }
 
 // utility function to simulate slowness in an API call
 const sleep = (time: number) => new Promise((res) => setTimeout(res, time));
