@@ -77,7 +77,7 @@ import HomeBodies from '../../assets/ObinsunVectors/HomeBodies';
 import DraculaVisitsAfrica from '../../assets/ObinsunVectors/DraculaVisitsAfrica';
 import EnlightenedSkull from '../../assets/ObinsunVectors/EnlightenedSkull';
 import GoodMorningCoffeeWizard from '../../assets/ObinsunVectors/GoodMorningCoffeeWizard';
-import LobsterPlusCrab from '../../assets/ObinsunVectors/LobsterPlusCrab/index.tsx';
+import LobsterPlusCrab from '../../assets/ObinsunVectors/LobsterPlusCrab';
 import WitchCrafts from '../../assets/ObinsunVectors/WitchCrafts';
 import PizzaWizzard from '../../assets/ObinsunVectors/PizzaWizzard';
 import StayFresh from '../../assets/ObinsunVectors/StayFresh';
