@@ -74,8 +74,8 @@ const Authorization = ({ closeModal }: any) => {
 
   // console.log(userResponse);
 
-  const emailInputRef = useRef();
-  const passwordInputRef = useRef();
+  const emailInputRef = useRef() as any;
+  const passwordInputRef = useRef() as any;
 
   const [isLogin, setIsLogin] = useState(true);
   const router = useRouter();
@@ -100,7 +100,7 @@ const Authorization = ({ closeModal }: any) => {
 
       // console.log(isLogin);
 
-      const result = await signIn('credentials', {
+      const result: any = await signIn('credentials', {
         redirect: false,
         email: enteredEmail,
         password: enteredPassword,
