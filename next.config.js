@@ -10,7 +10,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["files.cdn.printful.com"],
+    domains: ['files.cdn.printful.com'],
   },
   env: {
     stripe_public_key: process.env.STRIPE_PUBLIC_KEY,
@@ -20,11 +20,28 @@ const nextConfig = {
   //   return config;
   // },
   // target: 'experimental-serverless-trace',
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
     config.experiments = config.experiments || {};
     config.experiments.topLevelAwait = true;
+
+    if (!isServer) {
+      config.node = {
+        fs: 'empty',
+      };
+    }
     return config;
   },
+
+  // webpack: (config, { isServer }) => {
+  //   // Fixes npm packages that depend on `fs` module
+  //   if (!isServer) {
+  //     config.node = {
+  //       fs: 'empty'
+  //     }
+  //   }
+
+  //   return config
+  // },
   // "next-transpile-modules": ["three", "react-three-fiber", "drei"],
   // withTM: require("next-transpile-modules")([
   //   "three",
@@ -33,8 +50,8 @@ const nextConfig = {
   // ]),
   // withTM: withTM(),
   i18n: {
-    locales: ["en", "ja"],
-    defaultLocale: "en",
+    locales: ['en', 'ja'],
+    defaultLocale: 'en',
     localeDetection: false,
   },
 };
