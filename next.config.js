@@ -20,20 +20,71 @@ const nextConfig = {
   //   return config;
   // },
   // target: 'experimental-serverless-trace',
+  // webpack5: true,
+  // future: {
+  //   webpack5: true, // by default, if you customize webpack config, they switch back to version 4.
+  //   // Looks like backward compatibility approach.
+  // },
   webpack: (
     config
-    // , {isServer}
-  ) => {
-    config.experiments = config.experiments || {};
-    config.experiments.topLevelAwait = true;
+    // , { isServer }
+  ) =>
+    // options
+    {
+      config.experiments = config.experiments || {};
+      config.experiments.topLevelAwait = true;
 
-    // if (!isServer) {
-    //   config.node = {
-    //     fs: 'empty'
-    //   }
-    // }
-    return config;
-  },
+      // config.resolve.fallback = {
+      //   fs: false,
+      //   path: false,
+      //   stream: false,
+      //   constants: false,
+      // };
+
+      // config.resolve.fallback = { fs: false };
+
+      // if (!isServer) {
+      //   config.node = {
+      //     fs: 'empty'
+      //   }
+      // }
+
+      // config.node = {
+      //   fs: 'empty',
+      // };
+
+      // if (!isServer) {
+      //   config.resolve.fallback = {
+      //     fs: false,
+      //   };
+      // }
+
+      return config;
+    },
+
+  // webpack5: true,
+  // webpack: (config) => {
+  //   config.resolve.fallback = { fs: false };
+
+  //   return config;
+  // },
+
+  // webpack: (config, { isServer }) => {
+  //   // Fixes npm packages that depend on `fs` module
+  //   if (!isServer) {
+  //     config.resolve.fallback = {
+  //       fs: false,
+  //     };
+  //   }
+
+  //   return config;
+  // },
+
+  //   webpack: (config, options) => {
+  //     config.node = {
+  //       fs: 'empty'
+  //     }
+  // }
 
   // webpack: (config, { isServer }) => {
   //   // Fixes npm packages that depend on `fs` module
