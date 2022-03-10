@@ -50,7 +50,7 @@ const Header = ({ openModal }: any) => {
 
   // const items = useSelector(selectItems);
 
-  const { access } = useUserContext();
+  const { access } = useUserContext() as any;
 
   const handleLogMode = () => {
     if (!session) {
