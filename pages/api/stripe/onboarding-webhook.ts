@@ -2,7 +2,7 @@
 // import * as admin from "firebase-admin";
 // import axios from "axios";
 
-// const serviceAccount = process.env.GOOGLE_APPLICATION_CREDENTIALS as string;
+// const serviceAccount =  const serviceAccount = require('../keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6'); as string;
 
 // const app = !admin.apps.length
 //   ? admin.initializeApp({

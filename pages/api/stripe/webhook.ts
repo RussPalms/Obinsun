@@ -4,8 +4,8 @@ import * as admin from 'firebase-admin';
 
 // const serviceAccount = require("../keys/obinsun-merch-eae07f27cfc7.json");
 const serviceAccount = require('../keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6');
-// const serviceAccount = process.env.GOOGLE_APPLICATION_CREDENTIALS as string;
-// const serviceAccount = require(`${process.env.GOOGLE_APPLICATION_CREDENTIALS}`);
+// const serviceAccount =  const serviceAccount = require('../keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6'); as string;
+// const serviceAccount = require(`${ const serviceAccount = require('../keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6');}`);
 
 const app = !admin.apps.length
   ? admin.initializeApp({

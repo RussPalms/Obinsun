@@ -1,6 +1,6 @@
 // // // import * as firebase from "firebase/app";
 
-import { firebaseConfig } from "../../../api/keys/firebase";
+import { firebaseConfig } from '../../../api/keys/firebase';
 // // // import { getStorage } from "firebase/storage";
 // import "firebase/storage";
 // // // import "@google-cloud/storage";
@@ -9,7 +9,7 @@ import { firebaseConfig } from "../../../api/keys/firebase";
 
 // import * as firebase from "firebase-admin";
 
-import firebase from "firebase/compat/app";
+import firebase from 'firebase/compat/app';
 // // import "firebase/compat/storage";
 // // import "firebase/compat/firestore";
 // // import "firebase/compat/getStorage";
@@ -19,7 +19,7 @@ import firebase from "firebase/compat/app";
 
 // import * as admin from "firebase-admin";
 
-// // const serviceAccount = process.env.GOOGLE_APPLICATION_CREDENTIALS as string;
+// // const serviceAccount =  const serviceAccount = require('../keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6'); as string;
 
 // // // const application = !admin.apps.length
 // // //   ? admin.initializeApp({
@@ -87,9 +87,9 @@ import firebase from "firebase/compat/app";
 // // import { getStorage} from 'firebase-admin/storage';
 // // import { getFirestore } from 'firebase-admin/firestore';
 
-import { initializeApp } from "firebase/app";
-import { getStorage } from "firebase/storage";
-import { getFirestore, serverTimestamp } from "firebase/firestore";
+import { initializeApp } from 'firebase/app';
+import { getStorage } from 'firebase/storage';
+import { getFirestore, serverTimestamp } from 'firebase/firestore';
 
 // import serviceAccount from './path/to/serviceAccountKey.json';
 

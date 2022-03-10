@@ -5,7 +5,9 @@ import axios from 'axios';
 // import axios from "axios";
 // import { useEffect, useState } from "react";
 
-const serviceAccount = process.env.GOOGLE_APPLICATION_CREDENTIALS as string;
+// const serviceAccount = process.env.GOOGLE_APPLICATION_CREDENTIALS as string;
+const serviceAccount =
+  require('../keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6') as string;
 
 const clientId = process.env.PRINTFUL_CLIENT_ID;
 

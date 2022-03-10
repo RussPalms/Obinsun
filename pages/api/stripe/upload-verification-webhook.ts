@@ -1,9 +1,10 @@
-import { buffer } from "micro";
-import * as admin from "firebase-admin";
+import { buffer } from 'micro';
+import * as admin from 'firebase-admin';
 
 // const serviceAccount = require("../keys/obinsun-merch-eae07f27cfc7.json");
-const serviceAccount = process.env.GOOGLE_APPLICATION_CREDENTIALS as string;
-// const serviceAccount = require(`${process.env.GOOGLE_APPLICATION_CREDENTIALS}`);
+const serviceAccount =
+  require('../keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6') as string;
+// const serviceAccount = require(`${ const serviceAccount = require('../keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6');}`);
 
 const app = !admin.apps.length
   ? admin.initializeApp({
@@ -11,20 +12,20 @@ const app = !admin.apps.length
     })
   : admin.app();
 
-const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
+const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`);
 
 const endpointSecret = `${process.env.STRIPE_SIGNING_SECRET}`;
 
 const externalAccount = async (updateIndividualPerson: any) => {
-  console.log("Updating individual person", updateIndividualPerson);
+  console.log('Updating individual person', updateIndividualPerson);
 
   app
     .firestore()
-    .collection("users")
+    .collection('users')
     .doc(updateIndividualPerson.metadata.firebaseID)
-    .collection("custom_account")
+    .collection('custom_account')
     .doc(updateIndividualPerson.account)
-    .collection("individual")
+    .collection('individual')
     .doc(updateIndividualPerson.id)
     .set({
       last_time_updated: admin.firestore.FieldValue.serverTimestamp(),
@@ -33,7 +34,7 @@ const externalAccount = async (updateIndividualPerson: any) => {
   return (
     app
       .firestore()
-      .collection("users")
+      .collection('users')
       .doc(updateIndividualPerson.metadata.firebaseID)
       // .collection("custom_account")
       // .doc(updateIndividualPerson.id)
@@ -53,10 +54,10 @@ const externalAccount = async (updateIndividualPerson: any) => {
 };
 
 export default async (req: any, res: any) => {
-  if (req.method === "POST") {
+  if (req.method === 'POST') {
     const requestBuffer = await buffer(req);
     const payload = requestBuffer.toString();
-    const sig = req.headers["stripe-signature"];
+    const sig = req.headers['stripe-signature'];
 
     let event;
 
@@ -64,14 +65,14 @@ export default async (req: any, res: any) => {
       event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
       console.log(event);
     } catch (err: any) {
-      console.log("ERROR", err.message);
+      console.log('ERROR', err.message);
       return res.status(400).send(`Webhook error: ${err.message}`);
     }
 
     console.log(event.account);
 
     // if (event.type === "person.updated") {
-    if (event.type === "account.updated") {
+    if (event.type === 'account.updated') {
       const updatePerson = event.data.object;
       // const updatePerson = event.account;
 

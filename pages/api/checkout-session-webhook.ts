@@ -1,9 +1,9 @@
-import { buffer } from "micro";
-import * as admin from "firebase-admin";
+import { buffer } from 'micro';
+import * as admin from 'firebase-admin';
 
-const serviceAccount = require("../keys/obinsun-merch-firebase-adminsdk-muak1-802398644d.json");
-// const serviceAccount = process.env.GOOGLE_APPLICATION_CREDENTIALS as string;
-// const serviceAccount = require(`${process.env.GOOGLE_APPLICATION_CREDENTIALS}`);
+const serviceAccount = require('../keys/obinsun-merch-firebase-adminsdk-muak1-802398644d.json');
+// const serviceAccount =  const serviceAccount = require('../keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6'); as string;
+// const serviceAccount = require(`${ const serviceAccount = require('../keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6');}`);
 
 const app = !admin.apps.length
   ? admin.initializeApp({
@@ -11,20 +11,20 @@ const app = !admin.apps.length
     })
   : admin.app();
 
-const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
+const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`);
 
 const endpointSecret = `${process.env.STRIPE_SIGNING_SECRET}`;
 
 const fulfillOrder = async (session: any) => {
-  console.log("Fulfilling order", session);
+  console.log('Fulfilling order', session);
 
   return (
     app
       .firestore()
-      .collection("users")
+      .collection('users')
       // .doc(session.metadata.email)
       .doc(session.metadata.firebaseID)
-      .collection("orders")
+      .collection('orders')
       .doc(session.id)
       .set({
         amount: session.amount_total / 100,
@@ -39,21 +39,21 @@ const fulfillOrder = async (session: any) => {
 };
 
 export default async (req: any, res: any) => {
-  if (req.method === "POST") {
+  if (req.method === 'POST') {
     const requestBuffer = await buffer(req);
     const payload = requestBuffer.toString();
-    const sig = req.headers["stripe-signature"];
+    const sig = req.headers['stripe-signature'];
 
     let event;
 
     try {
       event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
     } catch (err: any) {
-      console.log("ERROR", err.message);
+      console.log('ERROR', err.message);
       return res.status(400).send(`Webhook error: ${err.message}`);
     }
 
-    if (event.type === "checkout.session.completed") {
+    if (event.type === 'checkout.session.completed') {
       const session = event.data.object;
 
       return fulfillOrder(session)

@@ -1,9 +1,9 @@
 // import * as firebase from "firebase/app";
 
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { firebaseConfig } from "../../../api/keys/firebase";
-import { FirebaseAdapter } from "./firebase-adapter";
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { firebaseConfig } from '../../../api/keys/firebase';
+import { FirebaseAdapter } from './firebase-adapter';
 // import { getStorage } from "firebase/storage";
 
 // import "firebase/storage";
@@ -17,7 +17,7 @@ import { FirebaseAdapter } from "./firebase-adapter";
 
 // import * as admin from "firebase-admin";
 
-// const serviceAccount = process.env.GOOGLE_APPLICATION_CREDENTIALS as string;
+// const serviceAccount =  const serviceAccount = require('../keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6'); as string;
 
 // const app = !admin.apps.length
 //   ? admin.initializeApp({

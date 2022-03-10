@@ -1,7 +1,8 @@
-import { buffer } from "micro";
-import * as admin from "firebase-admin";
+import { buffer } from 'micro';
+import * as admin from 'firebase-admin';
 
-const serviceAccount = process.env.GOOGLE_APPLICATION_CREDENTIALS as string;
+const serviceAccount =
+  require('../keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6') as string;
 
 const app = !admin.apps.length
   ? admin.initializeApp({
@@ -9,7 +10,7 @@ const app = !admin.apps.length
     })
   : admin.app();
 
-const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
+const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`);
 
 const endpointSecret = `${process.env.STRIPE_SIGNING_SECRET}`;
 
@@ -43,10 +44,10 @@ const endpointSecret = `${process.env.STRIPE_SIGNING_SECRET}`;
 // };
 
 export default async (req: any, res: any) => {
-  if (req.method === "POST") {
+  if (req.method === 'POST') {
     const requestBuffer = await buffer(req);
     const payload = requestBuffer.toString();
-    const sig = req.headers["stripe-signature"];
+    const sig = req.headers['stripe-signature'];
 
     let event;
 
@@ -54,11 +55,11 @@ export default async (req: any, res: any) => {
       event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
       console.log(event);
     } catch (err: any) {
-      console.log("ERROR", err.message);
+      console.log('ERROR', err.message);
       return res.status(400).send(`Webhook error: ${err.message}`);
     }
 
-    if (event.type === "payment_intent.created") {
+    if (event.type === 'payment_intent.created') {
       const addPaymentIntentEvent = event.data.object;
 
       console.log(addPaymentIntentEvent);
