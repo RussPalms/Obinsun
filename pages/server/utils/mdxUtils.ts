@@ -1,6 +1,8 @@
-import fs from 'fs';
+// import fs from 'fs';
 import { join } from 'path';
 import matter from 'gray-matter';
+
+const fs = require('fs');
 
 type Items = {
   [key: string]: string;
