@@ -9,12 +9,12 @@ import { getSession, useSession } from 'next-auth/react';
 import axios from 'axios';
 import Content from './Production/Layout/Content';
 import { useAppDispatch, useAppSelector } from './server/hooks/reduxHooks';
-import {
-  // checkoutCart,
-  getTotalPrice,
-  removeFromCart,
-  updateQuantity,
-} from './app/state/slices/cartSlice';
+// import {
+//   // checkoutCart,
+//   getTotalPrice,
+//   removeFromCart,
+//   updateQuantity,
+// } from './app/state/slices/cartSlice';
 import classNames from 'classnames';
 
 export interface IAppProps {}

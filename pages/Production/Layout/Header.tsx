@@ -23,7 +23,7 @@ import { CgGitFork } from 'react-icons/cg';
 import { useSelector } from 'react-redux';
 import { useUserContext } from 'pages/app/features';
 import { useAppSelector } from 'pages/server/hooks/reduxHooks';
-import { getMemoizedNumItems } from 'pages/app/state/slices/cartSlice';
+// import { getMemoizedNumItems } from 'pages/app/state/slices/cartSlice';
 // import { selectItems } from "../slices/basketSlice";
 
 // const mapDispatchToProps = {
