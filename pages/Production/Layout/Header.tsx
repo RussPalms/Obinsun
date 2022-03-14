@@ -48,7 +48,7 @@ const Header = ({ openModal }: any) => {
 
   const { data: session } = useSession();
 
-  // const items = useSelector(selectItems);
+  const items = useSelector(selectItems);
 
   const { access } = useUserContext() as any;
 
@@ -151,7 +151,7 @@ const Header = ({ openModal }: any) => {
                         {/* <span className="relative filter-icon-glass-container"> */}
                         <BiCart className="relative h-[2.5em] w-[2.5em] cursor-pointer" />
                         <span className="z-50 pt-[0.125em] mobile-l:pt-[0.15em] pl-[0.05em] absolute flex items-center justify-center top-[0.1em] xs:top-[-0.025em] mobile-l:top-[0.2em] right-[-0.25em] vs:h-[1em] xs:h-[1.25em] vs:w-[1em] xs:w-[1.25em]  bg-gray-300/70 dark:bg-gray-800/70 text-center border-black dark:border-[#4C8EFF] border-[0.025em] rounded-full text-gray-800 dark:text-gray-300 text-xs mobile-l:text-sm font-bold">
-                          {/* {items.length} */}
+                          {items.length}
                           {/* 🛒&nbsp;&nbsp;{numItems ? numItems : "Cart"} */}
                           {/* {numItems} */}
                         </span>
