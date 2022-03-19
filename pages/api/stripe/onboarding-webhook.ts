@@ -77,4 +77,4 @@
 //   },
 // };
 
-export {};
+export default {};

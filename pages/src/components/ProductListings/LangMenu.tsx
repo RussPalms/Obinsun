@@ -39,4 +39,4 @@
 
 // export default LangMenu;
 
-export {};
+export default {};

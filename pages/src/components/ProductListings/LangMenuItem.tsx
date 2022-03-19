@@ -66,4 +66,4 @@
 
 // export default LangMenuItem;
 
-export {};
+export default {};

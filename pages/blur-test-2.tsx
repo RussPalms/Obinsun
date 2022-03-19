@@ -438,4 +438,4 @@
 
 // export default LayoutTest;
 
-export {};
+export default {};

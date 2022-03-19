@@ -369,4 +369,4 @@
 
 // export default OnboardingForm;
 
-export {};
+export default {};

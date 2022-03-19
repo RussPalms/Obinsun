@@ -10,4 +10,4 @@
 // 	res.sen(JSON.stringify(token, undefined, 2));
 // };
 
-export {};
+export default {};

@@ -223,4 +223,4 @@
 
 // export default IndexTest;
 
-export {};
+export default {};

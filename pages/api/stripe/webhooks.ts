@@ -63,6 +63,6 @@
 //   }
 // }
 
-// // export {};
+// // export default {};
 
-export {};
+export default {};

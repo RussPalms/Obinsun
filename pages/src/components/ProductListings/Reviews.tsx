@@ -17,4 +17,4 @@
 
 // export default Reviews;
 
-export {};
+export default {};

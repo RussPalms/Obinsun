@@ -31,4 +31,4 @@
 
 // export default Thumbnail;
 
-export {};
+export default {};

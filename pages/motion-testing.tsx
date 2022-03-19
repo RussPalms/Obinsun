@@ -454,4 +454,4 @@
 
 // export default MotionTesting;
 
-export {};
+export default {};

@@ -34,4 +34,4 @@
 
 // export default ProductHeader;
 
-export {};
+export default {};

@@ -86,4 +86,4 @@
 //   request,
 // };
 
-export {};
+export default {};

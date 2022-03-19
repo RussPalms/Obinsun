@@ -22,4 +22,4 @@
 //   return products;
 // }
 
-export {};
+export default {};

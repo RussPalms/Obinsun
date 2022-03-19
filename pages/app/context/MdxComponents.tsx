@@ -53,4 +53,4 @@
 //   return useContext(MdxComponentsContext);
 // }
 
-export {};
+export default {};

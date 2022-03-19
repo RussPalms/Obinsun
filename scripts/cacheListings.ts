@@ -36,4 +36,4 @@
 //   console.log('Japanese listings cached.');
 // });
 
-export {};
+export default {};

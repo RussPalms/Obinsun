@@ -245,4 +245,4 @@
 
 // export default IndexPage;
 
-export {};
+export default {};

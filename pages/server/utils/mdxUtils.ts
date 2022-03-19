@@ -80,4 +80,4 @@
 //   return listings;
 // }
 
-export {};
+export default {};

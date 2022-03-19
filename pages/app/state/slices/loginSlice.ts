@@ -28,4 +28,4 @@
 
 // export default loginReducer;
 
-export {};
+export default {};

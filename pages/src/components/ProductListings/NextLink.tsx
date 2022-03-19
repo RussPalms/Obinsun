@@ -24,4 +24,4 @@
 
 // export default NextLink;
 
-export {};
+export default {};

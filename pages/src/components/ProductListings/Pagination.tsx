@@ -22,4 +22,4 @@
 
 // export default Pagination;
 
-export {};
+export default {};

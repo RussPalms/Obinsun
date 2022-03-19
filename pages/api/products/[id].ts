@@ -40,4 +40,4 @@
 //   }
 // }
 
-export {};
+export default {};

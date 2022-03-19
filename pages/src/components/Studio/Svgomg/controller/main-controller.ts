@@ -320,4 +320,4 @@
 //   }
 // }
 
-export {};
+export default {};

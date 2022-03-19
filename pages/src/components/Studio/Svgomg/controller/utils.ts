@@ -118,4 +118,4 @@
 //   );
 // }
 
-export {};
+export default {};

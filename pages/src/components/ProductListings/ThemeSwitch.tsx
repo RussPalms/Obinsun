@@ -71,4 +71,4 @@
 
 // export default ThemeSwitch;
 
-export {};
+export default {};

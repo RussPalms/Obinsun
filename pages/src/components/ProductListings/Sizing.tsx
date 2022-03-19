@@ -17,4 +17,4 @@
 
 // export default Sizing;
 
-export {};
+export default {};

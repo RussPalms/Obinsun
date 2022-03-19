@@ -17,4 +17,4 @@
 
 // export default Colors;
 
-export {};
+export default {};

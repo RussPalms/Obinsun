@@ -21,4 +21,4 @@
 
 // export default Layout;
 
-export {};
+export default {};

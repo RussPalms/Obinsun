@@ -84,4 +84,4 @@
 //   }
 // }
 
-export {};
+export default {};

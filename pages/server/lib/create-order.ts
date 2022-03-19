@@ -48,4 +48,4 @@
 
 // export default createOrder;
 
-export {};
+export default {};

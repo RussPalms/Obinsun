@@ -101,4 +101,4 @@
 
 // export default Documents;
 
-export {};
+export default {};

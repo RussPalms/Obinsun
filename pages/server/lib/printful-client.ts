@@ -126,4 +126,4 @@
 // // export const printful = new PrintfulClient(accessCodeGet());
 // // export const printful = new PrintfulClient(getAccessCode());
 
-export {};
+export default {};

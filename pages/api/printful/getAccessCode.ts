@@ -27,4 +27,4 @@
 //   // console.log(await getAccessCode());
 
 //   console.log(await getAccessCode());
-export {};
+export default {};

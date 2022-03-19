@@ -76,4 +76,4 @@
 
 // export default emailHandler;
 
-export {};
+export default {};

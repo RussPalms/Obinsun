@@ -26,4 +26,4 @@
 
 // export default LangMenuItems;
 
-export {};
+export default {};

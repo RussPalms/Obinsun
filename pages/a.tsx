@@ -66,4 +66,4 @@
 
 // export default a;
 
-export {};
+export default {};
