@@ -4,7 +4,7 @@ import * as React from 'react';
 import { GetStaticProps } from 'next';
 import shuffle from 'lodash.shuffle';
 import { getSession } from 'next-auth/react';
-import { access_code, printful } from '../../../server/lib/printful-client';
+import { access_code } from '../../../server/lib/printful-client';
 import CatalogGrid from '../../../src/components/Printful/CatalogGrid';
 import { formatVariantName } from '../../../server/lib/format-variant-name';
 import { PrintfulCatalog, PrintfulProduct } from '../../../types';

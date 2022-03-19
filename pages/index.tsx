@@ -3,7 +3,7 @@ import Obinsun from 'pages/Production/Layout/Obinsun';
 import shuffle from 'lodash.shuffle';
 import { PrintfulProduct } from './types';
 import { formatVariantName } from './server/lib/format-variant-name';
-import { access_code, printful } from './server/lib/printful-client';
+import { access_code } from './server/lib/printful-client';
 import ProductGrid from './src/components/ProductIntegration/ProductGrid';
 import IHomePageDesigns from 'pages/Production/interfaces/IHomePageDesigns';
 import Content from './Production/Layout/Content';
