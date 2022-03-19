@@ -3,13 +3,14 @@ import Obinsun from 'pages/Production/Layout/Obinsun';
 import shuffle from 'lodash.shuffle';
 import { PrintfulProduct } from './types';
 import { formatVariantName } from './server/lib/format-variant-name';
-import { printful } from './server/lib/printful-client';
+import { access_code, printful } from './server/lib/printful-client';
 import ProductGrid from './src/components/ProductIntegration/ProductGrid';
 import IHomePageDesigns from 'pages/Production/interfaces/IHomePageDesigns';
 import Content from './Production/Layout/Content';
 import { useAppDispatch, useAppSelector } from './server/hooks/reduxHooks';
 import { ISyncProduct } from './api/products';
 import { useEffect } from 'react';
+import axios from 'axios';
 
 type IndexPageProps = {
   synced_products: ISyncProduct[];
@@ -52,13 +53,55 @@ const IndexPage = ({ products }: IProps): JSX.Element => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { result: productIds } = await printful.get('sync/products', '');
-  const allProducts = await Promise.all(
+  // const { result: productIds } = await printful.get('sync/products', '');
+  // console.log(productIds);
+  // const allProducts = await Promise.all(
+  //   productIds.map(
+  //     async ({ id }: any) => await printful.get(`sync/products/${id}`, '')
+  //   )
+  // );
+  // console.log(allProducts);
+  // const products: PrintfulProduct[] = allProducts.map(
+  //   ({ result: { sync_product, sync_variants } }) => ({
+  //     ...sync_product,
+  //     variants: sync_variants.map(({ name, ...variant }: any) => ({
+  //       name: formatVariantName(name),
+  //       ...variant,
+  //     })),
+  //   })
+  // );
+
+  // retrievePrintful();
+
+  const getProducts = await axios.get(
+    'https://api.printful.com/store/products',
+    {
+      headers: {
+        Authorization: `Bearer ${access_code}`,
+      },
+    }
+  );
+  const { result: productIds } = getProducts.data;
+
+  const synced_products = await Promise.all(
     productIds.map(
-      async ({ id }: any) => await printful.get(`sync/products/${id}`, '')
+      async ({ id }: any) =>
+        await axios
+          .get(`https://api.printful.com/store/products/${id}`, {
+            headers: {
+              Authorization: `Bearer ${access_code}`,
+            },
+          })
+          .then((response) => {
+            const { data } = response;
+            return data;
+          })
     )
   );
-  const products: PrintfulProduct[] = allProducts.map(
+
+  // console.log(synced_products);
+
+  const products = synced_products.map(
     ({ result: { sync_product, sync_variants } }) => ({
       ...sync_product,
       variants: sync_variants.map(({ name, ...variant }: any) => ({
@@ -67,6 +110,8 @@ export const getStaticProps: GetStaticProps = async () => {
       })),
     })
   );
+
+  // console.log(products);
 
   return {
     props: {
