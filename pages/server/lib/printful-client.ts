@@ -107,7 +107,7 @@ const getRefreshedCode = async (current_refresh_token: any) => {
 // var access_code = await getAccessCode();
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-const access_code = await getAccessCode();
+export const access_code = await getAccessCode();
 
 // const access_code = getAccessCode();
 // console.log(code);
