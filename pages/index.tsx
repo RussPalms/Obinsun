@@ -3,7 +3,7 @@ import Obinsun from 'pages/Production/Layout/Obinsun';
 import shuffle from 'lodash.shuffle';
 import { PrintfulProduct } from './types';
 import { formatVariantName } from './server/lib/format-variant-name';
-import { access_code } from './server/lib/printful-client';
+// import { access_code } from './server/lib/printful-client';
 import ProductGrid from './src/components/ProductIntegration/ProductGrid';
 import IHomePageDesigns from 'pages/Production/interfaces/IHomePageDesigns';
 import Content from './Production/Layout/Content';
@@ -11,6 +11,8 @@ import { useAppDispatch, useAppSelector } from './server/hooks/reduxHooks';
 import { ISyncProduct } from './api/products';
 import { useEffect } from 'react';
 import axios from 'axios';
+import * as admin from 'firebase-admin';
+import rateLimit from 'axios-rate-limit';
 
 type IndexPageProps = {
   synced_products: ISyncProduct[];
@@ -53,6 +55,68 @@ const IndexPage = ({ products }: IProps): JSX.Element => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
+  const serviceAccount =
+    require('pages/api/keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6') as string;
+
+  const clientId = process.env.PRINTFUL_CLIENT_ID;
+
+  const clientSecret = process.env.PRINTFUL_SECRET_KEY;
+
+  const app = !admin.apps.length
+    ? admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount),
+      })
+    : admin.app();
+
+  const code: any = {};
+
+  const getAccessCode = async () => {
+    const accessCode = await app
+      .firestore()
+      .collection('accessCodes')
+      .doc('Authorization')
+      .get()
+      .then((snapshot) => {
+        const current_access_token = snapshot.data()?.access_token;
+        const current_expires_at = snapshot.data()?.expires_at;
+        const current_refresh_token = snapshot.data()?.refresh_token;
+        if (Date.now() < current_expires_at) {
+          console.log(Date.now());
+          console.log('Using current access token', current_access_token);
+          return current_access_token;
+        } else {
+          return getRefreshedCode(current_refresh_token);
+        }
+      });
+    return accessCode;
+  };
+
+  const getRefreshedCode = async (current_refresh_token: any) => {
+    const getRefreshedToken = axios.post(
+      'https://www.printful.com/oauth/token',
+      {
+        grant_type: 'refresh_token',
+        client_id: clientId,
+        client_secret: clientSecret,
+        refresh_token: current_refresh_token,
+      }
+    );
+    const response = await getRefreshedToken;
+    const refreshedToken = response.data;
+    let new_access_token = refreshedToken.access_token;
+    let new_expires_at = refreshedToken.expires_at;
+    let new_refresh_token = refreshedToken.refresh_token;
+    app.firestore().collection('accessCodes').doc('Authorization').set({
+      access_token: new_access_token,
+      expires_at: new_expires_at,
+      refresh_token: new_refresh_token,
+    });
+    console.log('Using refreshed access token', new_access_token);
+
+    return new_access_token;
+  };
+  const access_code = await getAccessCode();
+
   // const { result: productIds } = await printful.get('sync/products', '');
   // console.log(productIds);
   // const allProducts = await Promise.all(
