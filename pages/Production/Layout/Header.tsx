@@ -1,48 +1,23 @@
 import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { selectItems } from 'pages/app/state/slices/basketSlice';
-// import { showModal } from 'pages/app/state/actions';
 import ZLogo from 'pages/src/assets/ObinsunVectors/ZLogo';
 import DarkModeToggle from 'pages/src/components/DarkModeToggle';
-import React, {
-  //  MouseEventHandler,
-  useState,
-} from 'react';
+import React, { useState } from 'react';
 import { BiBook, BiCart } from 'react-icons/bi';
-// import { BsBookmark } from 'react-icons/bs';
 import { RiHeartFill } from 'react-icons/ri';
 import { CgProfile, CgSearch } from 'react-icons/cg';
-import { IoIosHome } from 'react-icons/io';
+import { IoIosHome, IoIosColorPalette } from 'react-icons/io';
 import { VscSettingsGear } from 'react-icons/vsc';
 import { CgGitFork } from 'react-icons/cg';
 
 // import { connect, ConnectedProps } from 'react-redux';
-
-// import Modal from './Modal';
 
 import { useSelector } from 'react-redux';
 import { useUserContext } from 'pages/app/features';
 import { useAppSelector } from 'pages/server/hooks/reduxHooks';
 // import { getMemoizedNumItems } from 'pages/app/state/slices/cartSlice';
 // import { selectItems } from "../slices/basketSlice";
-
-// const mapDispatchToProps = {
-//   dispatchShowModal: showModal,
-// };
-
-// const connector = connect(undefined, mapDispatchToProps);
-
-// dispatchShowModal={undefined}
-
-// type AppProps = {} & ConnectedProps<typeof connector>;
-
-// const Header = (props: AppProps) => {
-
-// type openModal = (event: MouseEvent<HTMLButtonElement, MouseEvent>)=> void
-
-// type modalOpener = MouseEventHandler<HTMLButtonElement> | undefined;
-
-// const Header = (openModal: modalOpener) => {
 const Header = ({ openModal }: any) => {
   // const numItems = useAppSelector(getMemoizedNumItems);
 
@@ -60,10 +35,6 @@ const Header = ({ openModal }: any) => {
     }
   };
 
-  // const { dispatchShowModal } = props;
-
-  //   const [showModal, setShowModal] = useState(false);
-
   const [menuOpen, setMenuOpen] = useState(false);
   const [closeMenu, setCloseMenu] = useState(false);
 
@@ -78,15 +49,10 @@ const Header = ({ openModal }: any) => {
     } else return;
   };
 
-  // const openModal = () => {
-  //   console.log('open modal');
-  // };
-
   return (
     <>
-      {/* <Modal /> */}
       <header
-        className={`px-1 transition-all duration-1000 ease-in-out glass-container sticky ${
+        className={`px-1 transition-all ease-in-out glass-container sticky ${
           menuOpen
             ? 'h-[100vh] w-[100%] top-[0%] grow'
             : 'h-[10.3em] laptop:h-[11em] w-[80%] top-[3%] laptop-l:h-[9em]'
@@ -101,13 +67,11 @@ const Header = ({ openModal }: any) => {
                     id="logo"
                     className="relative h-[5em] w-[5em] laptop:h-[6em] laptop:w-[6em] cursor-pointer flex items-center justify-center"
                   />
-                  {/* <Link href="/" passHref> */}
                   <h1 className="text-[3em] xs:text-[3.3em] mobile-l:text-[3.5em] tablet:text-[4.5em] laptop-l:text-[5.5em] flex items-center justify-center tracking-tight h-full w-full cursor-pointer">
                     Obinsun
                   </h1>
                 </a>
               </Link>
-              {/* </Link> */}
               <DarkModeToggle />
             </div>
 
@@ -127,16 +91,6 @@ const Header = ({ openModal }: any) => {
                 <button
                   className="flex-1 py-3 px-6 relative border border-gray-800/20 dark:border-gray-300/20 rounded-[0.625em] flex-2 hover:bg-gray-800 hover:text-gray-300 dark:hover:bg-[#4C8EFF] dark:hover:text-gray-300"
                   type="button"
-                  // onClick={() => setShowModal(true)}
-                  // onClick={() => {
-                  //   dispatchShowModal({
-                  //     title: 'A new title.',
-                  //     description: 'And a new description too.',
-                  //     onButtonClick: (event: React.MouseEvent) => {
-                  //       alert('You clicked that button!');
-                  //     },
-                  //   });
-                  // }}
                   onClick={handleLogMode}
                 >
                   <h2 className="relative z-50 h-full w-full">
@@ -148,35 +102,22 @@ const Header = ({ openModal }: any) => {
                   <Link href="/checkout">
                     <li className="relative filter-container">
                       <a className="relative filter-icon-list-container">
-                        {/* <span className="relative filter-icon-glass-container"> */}
                         <BiCart className="relative h-[2.5em] w-[2.5em] cursor-pointer" />
                         <span className="z-50 pt-[0.125em] mobile-l:pt-[0.15em] pl-[0.05em] absolute flex items-center justify-center top-[0.1em] xs:top-[-0.025em] mobile-l:top-[0.2em] right-[-0.25em] vs:h-[1em] xs:h-[1.25em] vs:w-[1em] xs:w-[1.25em]  bg-gray-300/70 dark:bg-gray-800/70 text-center border-black dark:border-[#4C8EFF] border-[0.025em] rounded-full text-gray-800 dark:text-gray-300 text-xs mobile-l:text-sm font-bold">
                           {items.length}
                           {/* 🛒&nbsp;&nbsp;{numItems ? numItems : "Cart"} */}
                           {/* {numItems} */}
                         </span>
-                        {/* </span> */}
-                        {/* <span className="relative filter-text-container laptop-l:hidden">
-                          Checkout
-                        </span> */}
                       </a>
                     </li>
                   </Link>
                 </div>
 
-                {/* <button
-                className="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button"
-                onClick={() => setShowModal(true)}
-              >
-                Open regular modal
-              </button> */}
                 <div className="relative flex-1 h-full w-full flex items-center justify-center">
                   <div
                     className="relative cursor-pointer transform h-[2em] w-[2em] flex items-center justify-center z-50"
                     onClick={handleMenu}
                   >
-                    {/* <div className="relative h-full w-full flex-1 flex items-center justify-center"> */}
                     <div
                       className={`flex-1 transform duration-3000 translate-y-[1em] absolute top-0 left-0 menu-toggle ${
                         menuOpen
@@ -184,7 +125,6 @@ const Header = ({ openModal }: any) => {
                           : 'before:translate-y-[-0.5em] before:rotate-0 after:translate-y-[0.5em] after:rotate-0'
                       }`}
                     />
-                    {/* </div> */}
                   </div>
                 </div>
               </div>
@@ -257,6 +197,24 @@ const Header = ({ openModal }: any) => {
                   {access('users', 'read:any').granted && (
                     <li className="filter-container flex-1">
                       <a className="filter-icon-list-container">
+                        <Link href="/studio">
+                          <span className="filter-icon-glass-container">
+                            <IoIosColorPalette
+                              onClick={handleRoute}
+                              className="filter-icon-size"
+                            />
+                          </span>
+                        </Link>
+                        <span className="filter-text-container laptop-l:hidden">
+                          Studio
+                        </span>
+                      </a>
+                    </li>
+                  )}
+
+                  {access('users', 'read:any').granted && (
+                    <li className="filter-container flex-1">
+                      <a className="filter-icon-list-container">
                         <Link href="/settings">
                           <span className="filter-icon-glass-container">
                             <VscSettingsGear
@@ -284,7 +242,7 @@ const Header = ({ openModal }: any) => {
                           </span>
                         </Link>
                         <span className="filter-text-container laptop-l:hidden">
-                          Settings
+                          Dev
                         </span>
                       </a>
                     </li>

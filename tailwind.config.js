@@ -1,8 +1,4 @@
-// const defaultTheme = require('tailwindcss/defaultTheme');
 const Nth = require('tailwindcss-nth-child');
-// const plugin = new Nth("<nth-value>");
-// const color2 = new Nth('2')
-// const color3 = new Nth('3')
 const plugin = new Nth('2');
 
 module.exports = {
@@ -25,7 +21,6 @@ module.exports = {
       '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
       inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
       none: 'none',
-      // glass: '0 15px 25px rgba(0, 0, 0, 0.05)',
       glass: '0 0.9375em 1.5625em rgba(0, 0, 0, 0.05)',
       'social-glass': '0 5px 45px rgba(0, 0, 0, 0.1)',
       'dark-glass': '0 0.9375em 1.5625em rgba(255, 255, 255, 0.1)',
@@ -44,23 +39,14 @@ module.exports = {
       glass3a: '0 5px 15px rgba(0, 0, 0, 0.05)',
       size: '0 2px 10px rgba(0, 0, 0, 0.1)',
       button: '0 15px 35px rgba(0, 0, 0, 0.1)',
+      svg_display: '0.1875em 0.3125em 0.4375em rgba(0, 0, 0, 0.5)',
+      svg_display_dark: '0.1875em 0.3125em 0.4375em rgba(255, 255, 255, 0.5)',
 
       imageCapture: '1px -7px 7px -6px rgba(0, 0, 0, 0.44)',
     },
     typography: (theme) => ({
       dark: {
         css: {
-          // color: theme('colors.gray.300'),
-          // h1: {
-          //   color: theme('colors.gray.100'),
-          // },
-          // h2: {
-          //   color: theme('colors.gray.100'),
-          // },
-          // strong: {
-          //   color: theme('colors.gray.300'),
-          // },
-
           color: theme('colors.blue.500'),
           h1: {
             color: theme('colors.blue.300'),
@@ -75,37 +61,6 @@ module.exports = {
       },
     }),
     screens: {
-      // "3xl": { max: "140em" },
-      // // "3xl": { max: "156.25em" }, // 22.708333
-      // // "2xl": { max: "1535px" },
-      // // "2xl": { max: "137.5em" },
-      // "2xl": { max: "120em" },
-      // // "2xl": { max: "134.58333em" },
-      // // => @media (max-width: 1535px) { ... }
-
-      // // xl: { max: "1279px" },
-      // // xl: { max: "75em" },
-      // // xl: { max: "111.666666em" },
-      // xl: { max: "100em" },
-      // // => @media (max-width: 1279px) { ... }
-
-      // // lg: { max: "1023px" },
-      // // lg: { max: "88.750000em" },
-      // lg: { max: "80em" },
-      // // => @media (max-width: 1023px) { ... }
-
-      // // md: { max: "767px" },
-      // // md: { max: "65.833333em" },
-      // md: { max: "60em" },
-      // // => @media (max-width: 767px) { ... }
-
-      // // sm: { max: "639px" },
-      // // sm: { max: "42.916666em" },
-      // sm: { max: "40em" },
-      // // => @media (max-width: 639px) { ... }42.916666
-      // // xs: { max: "320px" },
-      // xs: { max: "20em" },
-
       vs: { min: '20em' }, //  Smallest  @ 320px * 787px
       xs: { min: '23.4375em' }, //  iPhone SE @ 375px * 667px
       '0xs': { min: '24.375em' }, //  iPhone 12 Pro @ 390px * 884px
@@ -124,27 +79,6 @@ module.exports = {
       '3xl': { min: '140em' },
       '4vl': { min: '160em' },
     },
-    // screens: { xs: "320px", ...defaultTheme.screens },
-    // fontSize: {
-    // 	xs: ".75rem",
-    // 	sm: ".875rem",
-    // 	tiny: ".875rem",
-    // 	base: "1rem",
-    // 	lg: "1.125rem",
-    // 	xl: "1.25rem",
-    // 	"2xl": "1.5rem",
-    // 	"3xl": "1.875rem",
-    // 	"4xl": "2.25rem",
-    // 	"5xl": "3rem",
-    // 	"6xl": "4rem",
-    // 	"7xl": "5rem",
-    // 	logo: [
-    // 		"10rem",
-    // 		{
-    // 			lineHeight: 1,
-    // 		},
-    // 	],
-    // },
 
     extend: {
       backgroundSize: {
@@ -156,29 +90,10 @@ module.exports = {
         'pos-75': '100% 0%',
         'pos-100': '100% 100%',
       },
-      // fontFamily: { grandstander: ["Grandstander", "cursive"] },
       fontFamily: {
-        grandstander: [
-          'Grandstander',
-          // ,
-          // ...defaultTheme.fontFamily.grandstander,
-        ],
+        grandstander: ['Grandstander'],
       },
       keyframes: {
-        // 'social_glass'{
-        //   '0.5s' : top,
-        //   '0s': z-index,
-        //   '0.5s': transform
-        // },
-        // social_glass0: {
-        //   transition: 'top 0.5s, z-index 0s, transform 0.5s',
-        //   'transition-delay': 'transition-delay: 0.5s, 0.5s, 0s',
-        // },
-        // social_glass1: {
-        //   transition: 'top 0.5s, z-index 0s, transform 0.5s',
-        //   'transition-delay': 'transition-delay: 0.5s, 0.5s, 0s',
-        // },
-        // },
         social_glass: {
           '0% 100%': { transform: 'skewX(45deg)' },
           '50%': { transform: 'translateX(9.375em)' },
@@ -191,22 +106,9 @@ module.exports = {
           '0%': {
             transform: 'translateX(0)',
           },
-          // '20%': {
-          //   transform: 'translateX(-10%)',
-          // },
-          // '30%': {
-          //   transform: 'translateX(-30%)',
-          // },
           '50%': {
             transform: 'translateX(-65%)',
           },
-
-          // '70%': {
-          //   transform: 'translateX(30%)',
-          // },
-          // '80%': {
-          //   transform: 'translateX(10%)',
-          // },
           '100%': {
             transform: 'translateX(0)',
           },
@@ -275,42 +177,6 @@ module.exports = {
             transform: 'translateY(-1rem)',
           },
         },
-        // "0%": {
-        //   transform: "rotateZ(0deg)",
-        // },
-        // "10%": {
-        //   transform: "rotateZ(5deg)",
-        // },
-        // "20%": {
-        //   transform: "rotateZ(10deg)",
-        // },
-        // "30%": {
-        //   transform: "rotateZ(15deg)",
-        // },
-        // "40%": {
-        //   transform: "rotateZ(20deg)",
-        // },
-        // "50%": {
-        //   transform: "rotateZ(25deg)",
-        // },
-        // "55%": {
-        //   transform: "rotateZ(30deg)",
-        // },
-        // "60%": {
-        //   transform: "rotateZ(25deg)",
-        // },
-        // "70%": {
-        //   transform: "rotateZ(20deg)",
-        // },
-        // "80%": {
-        //   transform: "rotateZ(15deg)",
-        // },
-        // "90%": {
-        //   transform: "rotateZ(5deg)",
-        // },
-        // "100%": {
-        //   transform: "rotateZ(0deg)",
-        // },
         asset_1: {
           '0%, 100%': {
             transform: 'translateY(1rem)',
@@ -665,7 +531,6 @@ module.exports = {
         },
       },
       animation: {
-        // socialglass: 'social_glass 0.5s 0.5s 0.5s',
         'social-glass': 'social_glass 0.5s',
         'social-glass0': 'social_glass0',
         'initial-page-load': 'initial_page_load 1000ms ease-in-out infinite',
@@ -725,20 +590,16 @@ module.exports = {
       },
       gridTemplateRows: {
         8: 'repeat(8, minmax(0,1fr))',
-        // 'layout': 200px minmax(900px, 1fr) 100px'
         layout: '15em minmax(60em, 1fr) 20em',
-        // designMixRows: 'repeat(11, minmax(0, 1fr))',
-        // designMixColumns: 'repeat(4, minmax(0, 1fr))',
         designMixHorizontal: 'repeat(11, minmax(0, 1fr))',
-        // mobile_medium: 'repeat(7, 1fr)',
       },
       gridTemplateColumns: {
-        // designMixHorizontal: 'repeat(4, minmax(0, 1fr))',
         mobile: 'repeat(4, minmax(0, 1fr))',
         mobile_medium: 'repeat(6, minmax(0, 1fr))',
         desktop: 'repeat(11, minmax(0, 1fr))',
         onboarding_form: 'repeat(auto-fit, minmax(10em, 1fr))',
         onboarding_form_bigger: 'repeat(auto-fit, minmax(15.625em, 1fr))',
+        svg_grid: 'repeat(3, 1fr)',
       },
     },
   },

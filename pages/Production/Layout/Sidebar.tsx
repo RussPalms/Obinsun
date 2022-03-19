@@ -101,7 +101,7 @@ const Sidebar = () => {
             <span className="filter-icon-glass-container">
               <MdFilterFrames className="filter-icon-size" />
             </span>
-            <span className="filter-text-container">Home & Living</span>
+            <span className="filter-text-container">Stationary</span>
           </a>
         </li>
       </ul>

@@ -1,5 +1,3 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Fuzzy+Bubbles:wght@400;700&display=swap"); */
-/* @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Fuzzy+Bubbles:wght@400;700&family=Grandstander:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"); */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -481,6 +479,66 @@ body {
   .information-footing {
     @apply flex items-center justify-center pt-[2em];
   }
+
+  .firebase-progress {
+    @apply h-[0.3125em] bg-black dark:bg-[#4C8EFF] mt-[1.25em];
+  }
+
+  .svg-grid {
+    @apply m-[1.25em] h-full w-full grid grid-cols-svg_grid gap-[2.5em];
+  }
+
+  .svg-wrap {
+    @apply overflow-hidden h-0 py-[50%] relative opacity-[80%];
+  }
+
+  .svgs {
+    @apply h-full w-full absolute top-0 left-0;
+  }
+
+  .svg-container {
+    @apply max-w-[80em] mx-auto;
+  }
+
+  .svg-backdrop {
+    @apply fixed top-0 left-0 w-full h-full bg-gray-800/50 dark:bg-gray-300/50 z-[100];
+  }
+
+  .svg-display {
+    @apply block max-w-[60%] max-h-[80%] my-[3.75em] mx-auto shadow-svg_display dark:shadow-svg_display_dark glass-container;
+  }
+
+  .svg-form-container {
+    @apply mt-[1.875em] mr-auto mb-[0.625em] text-center;
+  }
+
+  .title-container {
+    @apply flex flex-col items-center justify-center text-center;
+  }
+
+  .svg-label-input {
+    @apply block w-[1.875em] h-[1.875em] leading-[1.875em] glass-container font-bold text-[1.5em] my-[0.625em] mx-auto hover:bg-gray-800 hover:text-gray-300 dark:hover:bg-gray-300 dark:hover:text-gray-800 cursor-pointer;
+  }
+
+  .svg-input {
+    @apply h-0 w-0 opacity-0;
+  }
+
+  .svg-output-container {
+    @apply h-[3.75em] text-[0.8em];
+  }
+
+  .svg-input-error {
+    @apply text-red-500;
+  }
+
+  .first-header {
+    @apply text-[2.6em] tracking-[0.125em] font-normal;
+  }
+
+  .second-header {
+    @apply text-[1.2em] mt-[3.75em];
+  }
 }
 
 section .color {
@@ -828,11 +886,11 @@ body {
 }
 
 /* upload form styles */
-form {
+/*form {
   margin: 30px auto 10px;
   text-align: center;
-}
-label input {
+}*/
+/*label input {
   height: 0;
   width: 0;
   opacity: 0;
@@ -859,7 +917,7 @@ label:hover {
 }
 .error {
   color: var(--error);
-}
+}*/
 
 /* progress bar styles */
 .progress-bar {
@@ -896,24 +954,24 @@ label:hover {
 /* modal styles */
 .backdrop {
   position: fixed;
-  top: 0;
+  /*top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5);*/
 }
-.backdrop img {
+/*.backdrop img {
   display: block;
   max-width: 60%;
   max-height: 80%;
   margin: 60px auto;
   box-shadow: 3px 5px 7px rgba(0, 0, 0, 0.5);
   border: 3px solid white;
-}
-#root {
+}*/
+/* #root {
   display: flex;
   align-items: center;
-}
+} */
 
 /*
 body {

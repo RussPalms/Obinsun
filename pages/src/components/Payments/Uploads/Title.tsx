@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
 type Props = {};
 
 function Title({}: Props) {
   return (
-    <div className="title">
-      <h1>FireGram</h1>
-      <h2>Your Pictures</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    <div className="title-container">
+      <h1 className="first-header">Studio</h1>
+      <h2 className="second-heading">Your Designs</h2>
+      <p>Here you can make quick edits and upload to printful.</p>
     </div>
   );
 }

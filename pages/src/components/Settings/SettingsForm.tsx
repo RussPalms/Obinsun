@@ -1,21 +1,21 @@
 import axios from 'axios';
-import { getSession, useSession } from 'next-auth/react';
-import { useEffect, useRef, useState } from 'react';
+import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 import PersonalInfo from './PersonalInfo';
 import BusinessInfo from './BusinessInfo';
-import PaymentInfo from './PaymentInfo';
 import BillingInfo from './BillingInfo';
 import StripeAgreement from './StripeAgreement';
-// import PrintfulSigin from './PrintfulSigin';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 
 const SettingsForm = () => {
+  const router = useRouter();
+
   const redirectUrl = `${process.env.NEXTAUTH_URL}/api/printful/account-connect`;
   const clientId = process.env.PRINTFUL_CLIENT_ID;
   const printfulLogin = `https://www.printful.com/oauth/authorize?grant_type=authorize&client_id=${clientId}&state={stateValue}&redirect_url=${redirectUrl}`;
 
   const { data: session, status } = useSession() as any;
-  const loading = status === 'loading';
+  // const loading = status === 'loading';
 
   const [ip, setIP] = useState('') as any;
   const [ts, setTS] = useState(null) as any;
@@ -44,22 +44,6 @@ const SettingsForm = () => {
     city: '',
     state: '',
   });
-
-  const typeRef = useRef() as any;
-  const mccRef = useRef() as any;
-  const urlRef = useRef() as any;
-  const firstNameRef = useRef() as any;
-  const lastNameRef = useRef() as any;
-  const dobRef = useRef() as any;
-  const line1Ref = useRef() as any;
-  const postalCodeRef = useRef() as any;
-  const cityRef = useRef() as any;
-  const stateRef = useRef() as any;
-  const emailRef = useRef() as any;
-  const phoneRef = useRef() as any;
-  const ssnLast4Ref = useRef() as any;
-
-  // const formDataRef = useRef();
 
   const FormTitles = [
     'Business Information',
@@ -149,6 +133,7 @@ const SettingsForm = () => {
                   e.preventDefault();
                   if (page === FormTitles.length - 1) {
                     submitInformation({ ...formData });
+                    router.push(printfulLogin);
                     // alert('FORM SUBMITTED');
                     // console.log(formData);
                   } else if (page === FormTitles.length) {

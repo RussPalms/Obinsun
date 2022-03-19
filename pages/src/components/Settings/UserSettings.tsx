@@ -9,7 +9,7 @@ const UserSettings = () => {
 
   return (
     <div className="relative h-[100%] w-[100%] flex items-center justify-center">
-      {!session.user.stripeId ? <SettingsForm /> : <Settings />}
+      {session.user.stripeId ? <SettingsForm /> : <Settings />}
       {/* <SettingsForm /> */}
     </div>
   );

@@ -1,29 +1,5 @@
-import {
-  runTransaction,
-  collection,
-  query,
-  getDocs,
-  where,
-  limit,
-  doc,
-  getDoc,
-  addDoc,
-  updateDoc,
-  deleteDoc,
-  Firestore,
-  FirestoreDataConverter,
-  getFirestore,
-} from 'firebase/firestore';
-import {
-  // connectToFirebase,
-  firestoreConnect,
-} from '../../server/lib/database/firebaseFirestore';
-import { hashPassword } from '../../server/lib/password-auth';
-import { buffer } from 'micro';
-
 import * as admin from 'firebase-admin';
 import axios from 'axios';
-import { useState } from 'react';
 
 const serviceAccount =
   require('/pages/api/keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6') as string;
@@ -58,23 +34,9 @@ const createAccessCode = async (printfulTokenData: any) => {
 
 async function handler(req: any, res: any) {
   if (req.method === 'GET') {
-    // console.log(req);
-    // console.log(req.body);
     console.log(req.client.body);
 
     const printfulAccess = req.query.code;
-
-    // const getPrintfulToken = axios.get(
-    //   "https://firestore.googleapis.com/v1/projects/photo-gallery-upload/databases/(default)/collections/accessCodes/documents/fields/printful_access_code"
-    // );
-
-    // const getPrintfulTokenPath = await axios.get(
-    //   "https://firestore.googleapis.com/v1/projects/photo-gallery-upload/databases/(default)/collectionGroups/accessCodes/fields/printful_access_token"
-    // );
-
-    // const getPrintfulTokenPath = await fetch(
-    //   "https://firestore.googleapis.com/v1/projects/photo-gallery-upload/databases/(default)/collectionGroups/accessCodes/fields/printful_access_token"
-    // );
 
     const getPrintfulToken = await axios.post(
       'https://www.printful.com/oauth/token',
@@ -87,12 +49,6 @@ async function handler(req: any, res: any) {
     );
 
     const response = await getPrintfulToken;
-
-    // const { body } = req;
-    // console.log(body);
-
-    // console.log(response.body);
-
     const printfulTokenData = response.data;
     console.log(printfulTokenData);
 

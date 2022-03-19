@@ -1,4 +1,3 @@
-// import TestContent from 'pages/src/components/TestContent';
 import { motion } from 'framer-motion';
 import { NextSeo } from 'next-seo';
 import { ReactNode } from 'react';
@@ -7,7 +6,6 @@ type Props = {
   children: ReactNode;
   title: string;
   description: string;
-  // props: AppProps;
 };
 
 const variants = {
@@ -39,8 +37,6 @@ const Content = ({ children, title, description }: Props): JSX.Element => {
           >
             {children}
           </motion.div>
-
-          {/* <TestContent /> */}
         </div>
       </div>
     </>
