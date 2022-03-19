@@ -1,6 +1,7 @@
 import React from 'react';
-export default interface ModalProperties {
+interface ModalProperties {
   title: string;
   description: string;
   onButtonClick: (event: React.MouseEvent) => void;
 }
+export default ModalProperties;
