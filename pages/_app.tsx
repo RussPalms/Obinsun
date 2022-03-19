@@ -16,7 +16,7 @@ import { store } from './app/state/store';
 // import { store } from './app/state/stores/store';
 
 // import { ThemeProvider } from 'next-themes';
-import { MdxComponentsProvider } from './app/context/MdxComponents';
+// import { MdxComponentsProvider } from './app/context/MdxComponents';
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
@@ -124,29 +124,29 @@ function MyApp({
           <>
             <Progress isAnimating={isAnimating} />
             {/* <ThemeProvider attribute="class"> */}
-            <MdxComponentsProvider>
-              <SessionProvider session={session}>
-                <Provider store={store}>
-                  <WishlistProvider>
-                    <UserProvider>
-                      {/* <AnimatePresence
+            {/* <MdxComponentsProvider> */}
+            <SessionProvider session={session}>
+              <Provider store={store}>
+                <WishlistProvider>
+                  <UserProvider>
+                    {/* <AnimatePresence
                         exitBeforeEnter
                         initial={false}
                         onExitComplete={() => window.scrollTo(0, 0)}
                       > */}
-                      {/* <DefaultSeo {...defaultSEO} /> */}
-                      {/* <Header /> */}
-                      {/* <Sidebar /> */}
-                      <Obinsun>
-                        <Component {...pageProps} />
-                      </Obinsun>
-                      {/* <Footer /> */}
-                      {/* </AnimatePresence> */}
-                    </UserProvider>
-                  </WishlistProvider>
-                </Provider>
-              </SessionProvider>
-            </MdxComponentsProvider>
+                    {/* <DefaultSeo {...defaultSEO} /> */}
+                    {/* <Header /> */}
+                    {/* <Sidebar /> */}
+                    <Obinsun>
+                      <Component {...pageProps} />
+                    </Obinsun>
+                    {/* <Footer /> */}
+                    {/* </AnimatePresence> */}
+                  </UserProvider>
+                </WishlistProvider>
+              </Provider>
+            </SessionProvider>
+            {/* </MdxComponentsProvider> */}
             {/* </ThemeProvider> */}
           </>
         ) : (

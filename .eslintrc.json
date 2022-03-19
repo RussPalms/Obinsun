@@ -27,29 +27,29 @@
   "plugins": ["react", "react-hooks", "@typescript-eslint"],
   "rules": {
     "react/react-in-jsx-scope": "off",
-    "react-hooks/rules-of-hooks": "error",
-    // "react-hooks/rules-of-hooks": "off",
-    "react-hooks/exhaustive-deps": "warn"
-    // "react-hooks/exhaustive-deps": "off",
+    // "react-hooks/rules-of-hooks": "error",
+    "react-hooks/rules-of-hooks": "off",
+    // "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "off",
 
     // took out these rules to test production deployment
-    // "@typescript-eslint/no-non-null-assertion": "off",
-    // "@typescript-eslint/no-unused-vars": "off",
-    // "@typescript-eslint/no-explicit-any": "off",
-    // "react/no-unescaped-entities": "off",
-    // "@typescript-eslint/ban-types": "off",
-    // "@typescript-eslint/ban-ts-comment": "off",
-    // "@typescript-eslint/no-empty-interface": "off",
-    // "@typescript-eslint/no-var-requires": "off",
-    // "prefer-const": "off",
-    // "no-empty-pattern": "off",
-    // "@next/next/link-passhref": "off",
-    // "react/display-name": "off",
-    // "import/no-anonymous-default-export": "off",
-    // "@next/next/no-img-element": "off",
-    // "@typescript-eslint/no-namespace": "off",
-    // "jsx-a11y/alt-text": "off",
-    // "react/jsx-key": "off"
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "react/no-unescaped-entities": "off",
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "prefer-const": "off",
+    "no-empty-pattern": "off",
+    "@next/next/link-passhref": "off",
+    "react/display-name": "off",
+    "import/no-anonymous-default-export": "off",
+    "@next/next/no-img-element": "off",
+    "@typescript-eslint/no-namespace": "off",
+    "jsx-a11y/alt-text": "off",
+    "react/jsx-key": "off"
   },
   "settings": {
     "react": {

@@ -34,6 +34,21 @@ const nextConfig = {
       config.experiments = config.experiments || {};
       config.experiments.topLevelAwait = true;
 
+      config.module.rules.push({
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        use: ['@svgr/webpack'],
+        // use: [
+        //   {
+        //     loader: '@svgr/webpack',
+        //     options: {
+        //       typescript: true,
+        //       ext: 'tsx',
+        //     },
+        //   },
+        // ],
+      });
+
       // config.resolve.fallback = {
       //   fs: false,
       //   path: false,

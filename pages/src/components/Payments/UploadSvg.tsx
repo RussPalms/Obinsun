@@ -11,11 +11,11 @@ import UploadForm from './Uploads/UploadForm';
 type Props = {};
 
 function UploadSvg({}: Props) {
-  const { data: session, status } = useSession() as any;
+  // const { data: session, status } = useSession() as any;
   const [selectedImg, setSelectedImg] = useState(null);
-  console.log(session);
+  // console.log(session);
 
-  console.log('this is the selected image url:', selectedImg);
+  // console.log('this is the selected image url:', selectedImg);
 
   //   const uploadingDocuments = async () => {
   //     try {

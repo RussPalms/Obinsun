@@ -11,11 +11,11 @@ function SelectSvg({}: Props) {
 
   const handleChange = (e: any) => {
     let selected = e.target.files[0];
-    console.log(selected);
+    // console.log(selected);
 
     if (selected && types.includes(selected.type)) {
       setFile(selected);
-      console.log('this is the selected image', file);
+      // console.log('this is the selected image', file);
 
       setError('' as any);
     } else {

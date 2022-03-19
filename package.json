@@ -6,9 +6,6 @@
     "dev:watch": "next-remote-watch ./_listings",
     "build": "next build",
     "start": "next start",
-    "type-check": "tsc --noEmit",
-    "lint": "eslint . --ext .ts,.tsx",
-    "cache-listings": "ts-node scripts/cacheListings.ts",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -95,6 +92,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
+    "@svgr/webpack": "^6.2.1",
     "@types/next": "^9.0.0",
     "@types/node": "17.0.9",
     "@types/react": "17.0.38",
