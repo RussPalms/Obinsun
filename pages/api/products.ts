@@ -2,8 +2,10 @@ import shuffle from 'lodash.shuffle';
 import { GetStaticProps } from 'next';
 import { ISyncVariant, Variants } from 'pages/app/state/slices/variantSlice';
 import { formatVariantName } from 'pages/server/lib/format-variant-name';
-import { printful } from 'pages/server/lib/printful-client';
+// import { printful } from 'pages/server/lib/printful-client';
 import { PrintfulProduct } from 'pages/types';
+import axios from 'axios';
+import { access_code } from 'pages/server/lib/printful-client';
 
 export interface ISyncProduct {
   id: string;
@@ -62,13 +64,51 @@ export interface ISyncProduct {
 
 //   export async function getProducts(): Promise<Product[]> {
 export async function getProducts(): Promise<ISyncProduct[]> {
-  const { result: productIds } = await printful.get('sync/products', '');
-  const allProducts = await Promise.all(
+  // const { result: productIds } = await printful.get('sync/products', '');
+  // const allProducts = await Promise.all(
+  //   productIds.map(
+  //     async ({ id }: any) => await printful.get(`sync/products/${id}`, '')
+  //   )
+  // );
+  // const products: ISyncProduct[] = allProducts.map(
+  //   ({ result: { sync_product, sync_variants } }) => ({
+  //     ...sync_product,
+  //     variants: sync_variants.map(({ name, ...variant }: any) => ({
+  //       name: formatVariantName(name),
+  //       ...variant,
+  //     })),
+  //   })
+  // );
+
+  const getProducts = await axios.get(
+    'https://api.printful.com/store/products',
+    {
+      headers: {
+        Authorization: `Bearer ${access_code}`,
+      },
+    }
+  );
+  const { result: productIds } = getProducts.data;
+
+  const synced_products = await Promise.all(
     productIds.map(
-      async ({ id }: any) => await printful.get(`sync/products/${id}`, '')
+      async ({ id }: any) =>
+        await axios
+          .get(`https://api.printful.com/store/products/${id}`, {
+            headers: {
+              Authorization: `Bearer ${access_code}`,
+            },
+          })
+          .then((response) => {
+            const { data } = response;
+            return data;
+          })
     )
   );
-  const products: ISyncProduct[] = allProducts.map(
+
+  // console.log(synced_products);
+
+  const products: ISyncProduct[] = synced_products.map(
     ({ result: { sync_product, sync_variants } }) => ({
       ...sync_product,
       variants: sync_variants.map(({ name, ...variant }: any) => ({
