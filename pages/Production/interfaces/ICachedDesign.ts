@@ -1,6 +1,4 @@
-interface ICachedDesign {
+export default interface ICachedDesign {
   id: number;
   slug: string;
 }
-
-export default ICachedDesign;
