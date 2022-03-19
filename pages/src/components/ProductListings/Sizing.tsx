@@ -1,18 +1,20 @@
-import { useMdxComponentsContext } from '../../../app/context/MdxComponents';
+// import { useMdxComponentsContext } from '../../../app/context/MdxComponents';
 
-const Sizing: React.FC = () => {
-  const { lang, sizing } = useMdxComponentsContext();
+// const Sizing: React.FC = () => {
+//   const { lang, sizing } = useMdxComponentsContext();
 
-  return (
-    <>
-      <h2>{lang === 'ja' ? '材料' : 'Sizing'}</h2>
-      <ul>
-        {sizing.map((size, index) => (
-          <li key={index}>{size}</li>
-        ))}
-      </ul>
-    </>
-  );
-};
+//   return (
+//     <>
+//       <h2>{lang === 'ja' ? '材料' : 'Sizing'}</h2>
+//       <ul>
+//         {sizing.map((size, index) => (
+//           <li key={index}>{size}</li>
+//         ))}
+//       </ul>
+//     </>
+//   );
+// };
 
-export default Sizing;
+// export default Sizing;
+
+export {};
