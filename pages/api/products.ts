@@ -5,7 +5,8 @@ import { formatVariantName } from 'pages/server/lib/format-variant-name';
 // import { printful } from 'pages/server/lib/printful-client';
 import { PrintfulProduct } from 'pages/types';
 import axios from 'axios';
-import { access_code } from 'pages/server/lib/printful-client';
+// import { access_code } from 'pages/server/lib/printful-client';
+import * as admin from 'firebase-admin';
 
 export interface ISyncProduct {
   id: string;
@@ -64,6 +65,68 @@ export interface ISyncProduct {
 
 //   export async function getProducts(): Promise<Product[]> {
 export async function getProducts(): Promise<ISyncProduct[]> {
+  const serviceAccount =
+    require('pages/api/keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6') as string;
+
+  const clientId = process.env.PRINTFUL_CLIENT_ID;
+
+  const clientSecret = process.env.PRINTFUL_SECRET_KEY;
+
+  const app = !admin.apps.length
+    ? admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount),
+      })
+    : admin.app();
+
+  const code: any = {};
+
+  const getAccessCode = async () => {
+    const accessCode = await app
+      .firestore()
+      .collection('accessCodes')
+      .doc('Authorization')
+      .get()
+      .then((snapshot) => {
+        const current_access_token = snapshot.data()?.access_token;
+        const current_expires_at = snapshot.data()?.expires_at;
+        const current_refresh_token = snapshot.data()?.refresh_token;
+        if (Date.now() < current_expires_at) {
+          console.log(Date.now());
+          console.log('Using current access token', current_access_token);
+          return current_access_token;
+        } else {
+          return getRefreshedCode(current_refresh_token);
+        }
+      });
+    return accessCode;
+  };
+
+  const getRefreshedCode = async (current_refresh_token: any) => {
+    const getRefreshedToken = axios.post(
+      'https://www.printful.com/oauth/token',
+      {
+        grant_type: 'refresh_token',
+        client_id: clientId,
+        client_secret: clientSecret,
+        refresh_token: current_refresh_token,
+      }
+    );
+    const response = await getRefreshedToken;
+    const refreshedToken = response.data;
+    let new_access_token = refreshedToken.access_token;
+    let new_expires_at = refreshedToken.expires_at;
+    let new_refresh_token = refreshedToken.refresh_token;
+    app.firestore().collection('accessCodes').doc('Authorization').set({
+      access_token: new_access_token,
+      expires_at: new_expires_at,
+      refresh_token: new_refresh_token,
+    });
+    console.log('Using refreshed access token', new_access_token);
+
+    return new_access_token;
+  };
+  const access_code = await getAccessCode();
+
   // const { result: productIds } = await printful.get('sync/products', '');
   // const allProducts = await Promise.all(
   //   productIds.map(
