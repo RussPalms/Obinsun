@@ -2,7 +2,8 @@
 
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import { firebaseConfig } from '../../../api/keys/firebase';
+import { firebaseConfig } from 'pages/api/keys/firebase';
+// import { firebaseConfig } from '../../../api/keys/firebase';
 import { FirebaseAdapter } from './firebase-adapter';
 // import { getStorage } from "firebase/storage";
 

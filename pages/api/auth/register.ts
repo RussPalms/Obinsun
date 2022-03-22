@@ -14,11 +14,13 @@ import {
   FirestoreDataConverter,
   getFirestore,
 } from 'firebase/firestore';
-import {
-  // connectToFirebase,
-  firestoreConnect,
-} from '../../server/lib/database/firebaseFirestore';
-import { hashPassword } from '../../server/lib/password-auth';
+import { firestoreConnect } from 'pages/server/lib/database/firebaseFirestore';
+import { hashPassword } from 'pages/server/lib/password-auth';
+// import {
+//   // connectToFirebase,
+//   firestoreConnect,
+// } from '../../server/lib/database/firebaseFirestore';
+// import { hashPassword } from '../../server/lib/password-auth';
 
 async function handler(req: any, res: any) {
   if (req.method !== 'POST') {

@@ -25,7 +25,9 @@ import { Progress, Preload } from './src/components/Progress';
 import { useProgressStore } from './app/state/progressing';
 
 import { AnimatePresence } from 'framer-motion';
+// import { Preload, Progress } from '@/components/Progress';
 import Obinsun from 'pages/Production/Layout/Obinsun';
+// import Obinsun from 'pages/Production/Layout/Obinsun';
 // import Header from 'pages/Production/Layout/Header';
 // import Sidebar from 'pages/Production/Layout/Sidebar';
 // import Footer from 'pages/Production/Layout/Footer';

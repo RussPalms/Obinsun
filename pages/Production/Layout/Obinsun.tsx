@@ -35,6 +35,7 @@ import Externals from './Externals';
 
 import LoginModal from './LoginModal';
 import Authorization from './Authorization';
+// import DesignMix from '@/components/DesignMix';
 
 // type AppProps = {} & ConnectedProps<typeof connector>;
 

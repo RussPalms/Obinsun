@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/*@layer base {
+ol {
+  @apply list-disk;
+}
+}*/
+
 /*:root {
   --primary: #efb6b2;
   --secondary: #4e4e4e;
@@ -27,11 +33,6 @@ body {
   box-sizing: border-box;
 }
 
-html,
-body {
-  height: 100%;
-}
-
 /*@layer base {
   body {
     @apply bg-black;
@@ -45,6 +46,10 @@ body {
 }*/
 
 @layer components {
+  /*ol {
+    @apply list-disk;
+  }*/
+
   .floating-square-0 {
     @apply square glass-container square-delay;
   }

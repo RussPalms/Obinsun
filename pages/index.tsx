@@ -1,18 +1,22 @@
 import { GetStaticProps } from 'next';
-import Obinsun from 'pages/Production/Layout/Obinsun';
+// import Obinsun from 'pages/Production/Layout/Obinsun';
 import shuffle from 'lodash.shuffle';
 import { PrintfulProduct } from './types';
 import { formatVariantName } from './server/lib/format-variant-name';
 // import { access_code } from './server/lib/printful-client';
 import ProductGrid from './src/components/ProductIntegration/ProductGrid';
-import IHomePageDesigns from 'pages/Production/interfaces/IHomePageDesigns';
-import Content from './Production/Layout/Content';
-import { useAppDispatch, useAppSelector } from './server/hooks/reduxHooks';
+// import IHomePageDesigns from 'pages/Production/interfaces/IHomePageDesigns';
+// import Content from './Production/Layout/Content';
+// import { useAppDispatch, useAppSelector } from './server/hooks/reduxHooks';
 import { ISyncProduct } from './api/products';
 import { useEffect } from 'react';
 import axios from 'axios';
 import * as admin from 'firebase-admin';
 import rateLimit from 'axios-rate-limit';
+import IHomePageDesigns from 'pages/Production/interfaces/IHomePageDesigns';
+import Content from 'pages/Production/Layout/Content';
+// import ProductGrid from '@/components/ProductIntegration/ProductGrid';
+// import { formatVariantName } from 'server/lib/format-variant-name';
 
 type IndexPageProps = {
   synced_products: ISyncProduct[];
@@ -138,7 +142,8 @@ export const getStaticProps: GetStaticProps = async () => {
   // retrievePrintful();
 
   const getProducts = await axios.get(
-    'https://api.printful.com/store/products',
+    // 'https://api.printful.com/store/products',
+    'https://api.printful.com/sync/products',
     {
       headers: {
         Authorization: `Bearer ${access_code}`,
@@ -151,7 +156,7 @@ export const getStaticProps: GetStaticProps = async () => {
     productIds.map(
       async ({ id }: any) =>
         await axios
-          .get(`https://api.printful.com/store/products/${id}`, {
+          .get(`https://api.printful.com/sync/products/${id}`, {
             headers: {
               Authorization: `Bearer ${access_code}`,
             },
@@ -175,7 +180,7 @@ export const getStaticProps: GetStaticProps = async () => {
     })
   );
 
-  // console.log(products);
+  console.log(products);
 
   return {
     props: {

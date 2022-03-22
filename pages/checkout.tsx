@@ -7,8 +7,8 @@ import Currency from 'react-currency-formatter';
 import { getSession, useSession } from 'next-auth/react';
 // import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
-import Content from './Production/Layout/Content';
-import { useAppDispatch, useAppSelector } from './server/hooks/reduxHooks';
+// import Content from './Production/Layout/Content';
+// import { useAppDispatch, useAppSelector } from './server/hooks/reduxHooks';
 // import {
 //   // checkoutCart,
 //   getTotalPrice,
@@ -16,6 +16,8 @@ import { useAppDispatch, useAppSelector } from './server/hooks/reduxHooks';
 //   updateQuantity,
 // } from './app/state/slices/cartSlice';
 import classNames from 'classnames';
+import Content from 'pages/Production/Layout/Content';
+// import CheckoutProduct from '@/components/StripeCheckout/CheckoutProduct';
 
 export interface IAppProps {}
 

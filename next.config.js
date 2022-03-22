@@ -39,13 +39,22 @@ const nextConfig = {
         issuer: /\.[jt]sx?$/,
         // use: ['@svgr/webpack'],
         use: [
-          {
-            loader: '@svgr/webpack',
-            options: {
-              typescript: true,
-              ext: 'tsx',
-            },
-          },
+          // {
+          //   loader: '@svgr/webpack',
+          //   options: {
+          //     typescript: true,
+          //     ext: 'tsx',
+          //   },
+          // },
+          // {
+          //   loader: 'file-loader',
+          // },
+          // {
+          //   loader: 'svgo-loader',
+          //   options: {
+          //     configFile: './svgo.config.js',
+          //   },
+          // },
         ],
       });
 
@@ -123,6 +132,7 @@ const nextConfig = {
     defaultLocale: 'en',
     localeDetection: false,
   },
+  // pageExtensions: ['page.tsx', 'page.ts', 'page.jsx', 'page.js'],
 };
 
 // const i18n = {

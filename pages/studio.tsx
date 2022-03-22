@@ -1,5 +1,7 @@
+// import { Studio } from '@/components/Studio';
+import Content from 'pages/Production/Layout/Content';
 import React from 'react';
-import Content from './Production/Layout/Content';
+// import Content from './Production/Layout/Content';
 import { Studio } from './src/components/Studio';
 
 type Props = {};

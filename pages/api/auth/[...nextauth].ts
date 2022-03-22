@@ -25,6 +25,12 @@ import {
   FirestoreDataConverter,
   getFirestore,
 } from 'firebase/firestore';
+// import {
+//   adapterInstance,
+//   firestoreConnect,
+// } from 'server/lib/database/firebaseFirestore';
+// import { verifyPassword } from 'server/lib/password-auth';
+// import { ac } from 'server/services';
 import { verifyPassword } from '../../server/lib/password-auth';
 import { ac } from '../../server/services';
 

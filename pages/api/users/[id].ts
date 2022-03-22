@@ -1,5 +1,6 @@
 import nc from 'next-connect';
-import { checkAccess, userAuth } from '../../server/middlewares';
+import { checkAccess, userAuth } from 'pages/server/middlewares';
+// import { checkAccess, userAuth } from '../../server/middlewares';
 
 const accessHandler = nc()
   .use(userAuth) // injects session into req.session

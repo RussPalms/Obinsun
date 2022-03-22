@@ -7,6 +7,7 @@ import { PrintfulProduct } from 'pages/types';
 import axios from 'axios';
 // import { access_code } from 'pages/server/lib/printful-client';
 import * as admin from 'firebase-admin';
+// import { formatVariantName } from 'server/lib/format-variant-name';
 
 export interface ISyncProduct {
   id: string;

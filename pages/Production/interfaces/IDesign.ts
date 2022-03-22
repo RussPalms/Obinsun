@@ -1,4 +1,4 @@
-interface IDesign {
+export default interface IDesign {
   id: number;
   title: string;
   description: string;
@@ -17,5 +17,3 @@ interface IDesign {
   markdown: string;
   html: string;
 }
-
-export default IDesign;

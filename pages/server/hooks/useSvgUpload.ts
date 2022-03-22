@@ -8,6 +8,8 @@ import {
 import { useSession } from 'next-auth/react';
 import { useState, useEffect } from 'react';
 import { db, projectStorage, timestamp } from '../lib/database/firebaseStorage';
+import axios from 'axios';
+import loadSvgFile from 'load-svg-file';
 
 const useSvgUpload = (file: any) => {
   const { data: session } = useSession();
@@ -16,6 +18,22 @@ const useSvgUpload = (file: any) => {
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState(null);
   const [url, setUrl] = useState('');
+
+  const optimizedSvg = async (file: any) => {
+    console.log(file);
+
+    await axios
+      // .post(`${process.env.NEXTAUTH_URL}/api/optimize-svg`, {
+      .post('api/optimize-svg', {
+        // filePath: loadSvgFile(file.webkitRelativePath),
+        filePath: file,
+      })
+      .then((response) => {
+        console.log(response.data);
+      });
+  };
+
+  optimizedSvg(file);
 
   useEffect(() => {
     const storageRef = ref(projectStorage, `${userImage}${file.name}`);
