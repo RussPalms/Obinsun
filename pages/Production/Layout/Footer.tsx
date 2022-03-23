@@ -17,13 +17,13 @@ const Footer = () => {
           </a>
           , Built by{' '}
           <a
-            href="https://twitter.com/obinsun"
+            href="https://palmaview.com"
             title="Follow the creator on Twitter"
             target="_blank"
             rel="noopener noreferrer"
             className="ml-0.5"
           >
-            @obinsun
+            @PalmaView
           </a>
         </p>
         <nav className="flex items-center justify-end space-x-3 md:space-x-6">
