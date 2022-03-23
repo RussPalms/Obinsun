@@ -74,3 +74,5 @@ const firestore = () => {
 };
 
 export const adapterInstance = FirebaseAdapter(firestore());
+
+export default function _() {}

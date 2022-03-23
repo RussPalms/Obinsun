@@ -13,4 +13,4 @@ export const Progress = ({ isAnimating }: any) => {
   );
 };
 
-export default function _() {}
+export default Progress;
