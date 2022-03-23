@@ -1,4 +1,4 @@
-import IDesign from './IDesign';
+import { IDesign } from './IDesign';
 
 export default interface IHomePageDesigns {
   latestBlog: IDesign;
