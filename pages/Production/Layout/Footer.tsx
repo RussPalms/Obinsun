@@ -24,7 +24,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             className="ml-0.5"
           >
-            Russell
+            <b>Russell</b>
           </a>
         </p>
         <nav className="flex items-center justify-end space-x-3 md:space-x-6">
