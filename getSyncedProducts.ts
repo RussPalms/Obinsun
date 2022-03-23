@@ -22,4 +22,4 @@
 //   return products;
 // }
 
-export default {};
+export default function getSyncedProducts() {}

@@ -66,4 +66,4 @@
 
 // export default a;
 
-export default {};
+export default function a() {}

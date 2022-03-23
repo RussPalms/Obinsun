@@ -438,4 +438,4 @@
 
 // export default LayoutTest;
 
-export default {};
+export default function blurTest2() {}
