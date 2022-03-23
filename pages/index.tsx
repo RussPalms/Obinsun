@@ -86,8 +86,8 @@ export const getStaticProps: GetStaticProps = async () => {
         const current_expires_at = snapshot.data()?.expires_at;
         const current_refresh_token = snapshot.data()?.refresh_token;
         if (Date.now() < current_expires_at) {
-          console.log(Date.now());
-          console.log('Using current access token', current_access_token);
+          // console.log(Date.now());
+          // console.log('Using current access token', current_access_token);
           return current_access_token;
         } else {
           return getRefreshedCode(current_refresh_token);
@@ -116,7 +116,7 @@ export const getStaticProps: GetStaticProps = async () => {
       expires_at: new_expires_at,
       refresh_token: new_refresh_token,
     });
-    console.log('Using refreshed access token', new_access_token);
+    // console.log('Using refreshed access token', new_access_token);
 
     return new_access_token;
   };
