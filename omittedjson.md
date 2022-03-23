@@ -6,3 +6,8 @@
 
     "dev:watch": "next-remote-watch ./_listings",
     "prepare": "husky install"
+
+.babelrc
+{
+"presets": ["next/babel"]
+}
