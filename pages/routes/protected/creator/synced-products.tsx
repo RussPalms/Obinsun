@@ -140,7 +140,7 @@ export const getStaticProps: GetStaticProps = async () => {
   );
   const { result: productIds } = getProducts.data;
 
-  console.log(productIds);
+  // console.log(productIds);
 
   //   const synced_products = await Promise.all(
   //     productIds.map(
