@@ -33,17 +33,17 @@ const subtitle =
   'You will fins a plethora of custom graphic designs attatched to high quality merchandise.';
 
 const IndexPage = ({ products }: IProps): JSX.Element => {
-  const retrieveProducts = async () => {
-    const url = `/api/checkout-success`;
-    const response = await fetch(url, {
-      method: 'GET',
-    });
-    const data = await response.json();
-  };
+  // const retrieveProducts = async () => {
+  //   const url = `/api/checkout-success`;
+  //   const response = await fetch(url, {
+  //     method: 'GET',
+  //   });
+  //   const data = await response.json();
+  // };
 
-  useEffect(() => {
-    retrieveProducts();
-  }, []);
+  // useEffect(() => {
+  //   retrieveProducts();
+  // }, []);
   return (
     <>
       <Content title="Home" description={`${title} - ${subtitle}`}>
@@ -181,7 +181,7 @@ export const getStaticProps: GetStaticProps = async () => {
     })
   );
 
-  console.log(products);
+  // console.log(products);
 
   return {
     props: {
