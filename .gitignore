@@ -15,8 +15,8 @@
 # stuff
 /_listings
 /.husky
-renovate.json
-.babelrc
+/renovate.json
+/.babelrc
 
 # testing
 /coverage
