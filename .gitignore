@@ -16,6 +16,7 @@
 /_listings
 /.husky
 renovate.json
+.babelrc
 
 # testing
 /coverage
