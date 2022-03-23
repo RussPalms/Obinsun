@@ -38,7 +38,7 @@ const Externals = () => {
         <li className="socials-icon-list-container">
           <a
             className="socials-icon-transition social-glass-transition-delay"
-            href="#"
+            href="https://twitter.com/obinsun"
           >
             <FaTwitter aria-hidden="true" />
           </a>
