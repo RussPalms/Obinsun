@@ -6,3 +6,5 @@ export { useProgressStore } from './useProgressStore';
 
 // export { default } from './useProgressStore';
 // export {default} from '...'
+
+export default () => {};

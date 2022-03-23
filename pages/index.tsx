@@ -13,8 +13,9 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import * as admin from 'firebase-admin';
 import rateLimit from 'axios-rate-limit';
-import IHomePageDesigns from 'pages/Production/interfaces/IHomePageDesigns';
+// import IHomePageDesigns from 'pages/Production/interfaces/IHomePageDesigns';
 import Content from 'pages/Production/Layout/Content';
+import { IHomePageDesigns } from './Production/interfaces/IHomePageDesigns';
 // import ProductGrid from '@/components/ProductIntegration/ProductGrid';
 // import { formatVariantName } from 'server/lib/format-variant-name';
 

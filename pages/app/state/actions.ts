@@ -1,4 +1,6 @@
-import ModalProperties from 'pages/Production/interfaces/modal-properties';
+// import ModalProperties from 'pages/Production/interfaces/modal-properties';
+
+import { ModalProperties } from 'pages/Production/interfaces/modal-properties';
 
 export enum ModalActionTypes {
   ShowModal,
@@ -22,3 +24,5 @@ export function hideModal(): ModalAction {
     type: ModalActionTypes.HideModal,
   };
 }
+
+export default () => {};

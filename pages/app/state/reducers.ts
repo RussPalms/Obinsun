@@ -1,5 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import ModalProperties from 'pages/Production/interfaces/modal-properties';
+import { ModalProperties } from 'pages/Production/interfaces/modal-properties';
+// import ModalProperties from 'pages/Production/interfaces/modal-properties';
 // import { act } from 'react-dom/test-utils';
 import { ModalAction, ModalActionTypes } from './actions';
 
