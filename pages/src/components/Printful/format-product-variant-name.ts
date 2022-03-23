@@ -6,4 +6,7 @@ export const formatProductVariantName = (
   return name ? name : 'One style';
 };
 
-export default function _() {}
+export default function _() {
+  const div = document.createElement('div');
+  return div;
+}

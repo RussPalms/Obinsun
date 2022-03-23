@@ -31,4 +31,7 @@
 
 // export default Thumbnail;
 
-export default function t0() {}
+export default function _() {
+  const div = document.createElement('div');
+  return div;
+}

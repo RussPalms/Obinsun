@@ -1,5 +1,5 @@
-import React from "react";
-import ImageCaputure from "../../../src/components/Payments/Uploads/ImageCaputure";
+import React from 'react';
+import ImageCaputure from '../../../src/components/Payments/Uploads/ImageCaputure';
 
 type Props = {};
 

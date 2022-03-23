@@ -29,4 +29,7 @@ export const checkAccess =
     return next();
   };
 
-export default function _() {}
+export default function _() {
+  const div = document.createElement('div');
+  return div;
+}

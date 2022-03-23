@@ -12,4 +12,7 @@ export const Container = ({ animationDuration, children, isFinished }: any) => {
   );
 };
 
-export default function _() {}
+export default function _() {
+  const div = document.createElement('div');
+  return div;
+}

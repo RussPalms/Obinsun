@@ -10,4 +10,7 @@ export const Bar = ({ animationDuration, progress }: any) => {
   );
 };
 
-export default function _() {}
+export default function _() {
+  const div = document.createElement('div');
+  return div;
+}

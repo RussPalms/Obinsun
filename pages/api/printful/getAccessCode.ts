@@ -27,4 +27,7 @@
 //   // console.log(await getAccessCode());
 
 //   console.log(await getAccessCode());
-export default function t0() {}
+export default function _() {
+  const div = document.createElement('div');
+  return div;
+}

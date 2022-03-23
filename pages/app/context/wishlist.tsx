@@ -87,4 +87,7 @@ export const WishlistProvider: React.FC<{ children?: React.ReactNode }> = ({
   );
 };
 
-export default function _() {}
+export default function _() {
+  const div = document.createElement('div');
+  return div;
+}

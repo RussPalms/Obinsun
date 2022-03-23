@@ -1,6 +1,6 @@
 // import { getSession } from "next-auth/react";
-import * as React from "react";
-import CustomerInfo from "../../../src/components/Payments/CustomerInfo";
+import * as React from 'react';
+import CustomerInfo from '../../../src/components/Payments/CustomerInfo';
 
 export default function ShippingInfo() {
   return (

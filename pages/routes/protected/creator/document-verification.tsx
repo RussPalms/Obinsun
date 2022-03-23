@@ -1,6 +1,6 @@
 // import { getSession } from "next-auth/react";
 // import * as React from "react";
-import VerifyDocuments from "../../../src/components/Payments/VerifyDocuments";
+import VerifyDocuments from '../../../src/components/Payments/VerifyDocuments';
 
 export interface IPaymenRegistrationProps {}
 

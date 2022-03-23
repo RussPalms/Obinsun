@@ -1,5 +1,5 @@
-import React from "react";
-import WebcamCapture from "./WebcamCapture";
+import React from 'react';
+import WebcamCapture from './WebcamCapture';
 
 type Props = {};
 

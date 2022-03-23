@@ -1,7 +1,7 @@
-import * as React from "react";
-import moment from "moment";
-import { getSession } from "next-auth/react";
-import Currency from "react-currency-formatter";
+import * as React from 'react';
+import moment from 'moment';
+import { getSession } from 'next-auth/react';
+import Currency from 'react-currency-formatter';
 
 // export interface IAppProps {}
 
@@ -18,13 +18,13 @@ export default function Order({
       <div className="flex items-center space-x-10 p-5 bg-gray-100 text-sm text-gray-600">
         <div>
           <p className="font-bold text-xs">ORDER PLACED</p>
-          <p>{moment.unix(timestamp).format("DD MMM YYYY")}</p>
+          <p>{moment.unix(timestamp).format('DD MMM YYYY')}</p>
         </div>
 
         <div>
           <p className="text-xs font-bold">TOTAL</p>
           <p>
-            <Currency quantity={amount} currency="USD" /> - Next Day Delivery{" "}
+            <Currency quantity={amount} currency="USD" /> - Next Day Delivery{' '}
             <Currency quantity={amountShipping} currency="USD" />
           </p>
         </div>

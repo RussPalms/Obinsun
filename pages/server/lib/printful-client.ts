@@ -126,4 +126,7 @@
 // // export const printful = new PrintfulClient(accessCodeGet());
 // // export const printful = new PrintfulClient(getAccessCode());
 
-export default function t0() {}
+export default function _() {
+  const div = document.createElement('div');
+  return div;
+}

@@ -15,4 +15,7 @@ export async function hashEmail(email: any) {
   return hashedEmail;
 }
 
-export default function _() {}
+export default function _() {
+  const div = document.createElement('div');
+  return div;
+}

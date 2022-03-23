@@ -1,6 +1,6 @@
 // import { getSession } from "next-auth/react";
-import * as React from "react";
-import AccountSetup from "../../../src/components/Printful/AccountSetup";
+import * as React from 'react';
+import AccountSetup from '../../../src/components/Printful/AccountSetup';
 
 export default function PrintfulConnect() {
   return (

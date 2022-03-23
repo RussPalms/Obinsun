@@ -66,4 +66,7 @@ ac.grant('admin')
 // we lock ACL to avoid updates out of this file
 ac.lock();
 
-export default function _() {}
+export default function _() {
+  const div = document.createElement('div');
+  return div;
+}

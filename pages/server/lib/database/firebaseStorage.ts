@@ -160,4 +160,7 @@ export { projectStorage, timestamp, db };
 
 // export { projectStorage, db, timestamp };
 
-export default function _() {}
+export default function _() {
+  const div = document.createElement('div');
+  return div;
+}

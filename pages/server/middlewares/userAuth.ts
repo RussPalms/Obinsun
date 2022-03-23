@@ -15,4 +15,7 @@ export const userAuth = async (req: any, res: any, next: any) => {
   return next();
 };
 
-export default function _() {}
+export default function _() {
+  const div = document.createElement('div');
+  return div;
+}

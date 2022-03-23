@@ -3,4 +3,7 @@
 export { Progress } from './Progress';
 export { Preload } from './Preload';
 
-export default function _() {}
+export default function _() {
+  const div = document.createElement('div');
+  return div;
+}
