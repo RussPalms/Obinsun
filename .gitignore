@@ -12,6 +12,11 @@
 .env.*
 !.env.local.example
 
+# stuff
+/_listings
+/.husky
+renovate.json
+
 # testing
 /coverage
 
