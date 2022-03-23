@@ -7,23 +7,24 @@ const Footer = () => {
         <p className="text-sm">
           Powered by
           <a
-            href="http://localhost:3000"
+            href="http://palmaview.com"
             title="Learn more about how this site was made"
             target="_blank"
             rel="noopener noreferrer"
             className="ml-0.5"
           >
-            Obinsun Merch
+            {/* Obinsun Merch */}
+            PalmaView
           </a>
           , Built by{' '}
           <a
-            href="https://palmaview.com"
+            href="https://russellpalma.com"
             title="Follow the creator on Twitter"
             target="_blank"
             rel="noopener noreferrer"
             className="ml-0.5"
           >
-            @PalmaView
+            Russell
           </a>
         </p>
         <nav className="flex items-center justify-end space-x-3 md:space-x-6">
