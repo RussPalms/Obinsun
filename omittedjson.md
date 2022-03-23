@@ -1,4 +1,4 @@
-\_
+#\_
 
 "type-check": "tsc --noEmit",
 "lint": "eslint . --ext .ts,.tsx",
