@@ -3,10 +3,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "dev:watch": "next-remote-watch ./_listings",
     "build": "next build",
-    "start": "next start",
-    "prepare": "husky install"
+    "start": "next start"
   },
   "dependencies": {
     "@babel/plugin-syntax-top-level-await": "^7.14.5",
