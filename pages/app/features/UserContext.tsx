@@ -70,3 +70,5 @@ export const UserProvider = (props: any) => {
     </UserContext.Provider>
   );
 };
+
+export default function r() {}
