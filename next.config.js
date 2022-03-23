@@ -21,14 +21,11 @@ const nextConfig = {
   // },
   // target: 'experimental-serverless-trace',
   // webpack5: true,
-  // future: {
-  //   webpack5: true, // by default, if you customize webpack config, they switch back to version 4.
-  //   // Looks like backward compatibility approach.
-  // },
-  webpack: (
-    config
-    // , { isServer }
-  ) =>
+  future: {
+    webpack5: true, // by default, if you customize webpack config, they switch back to version 4.
+    // Looks like backward compatibility approach.
+  },
+  webpack: (config, { isServer }) =>
     // options
     {
       config.experiments = config.experiments || {};
@@ -65,12 +62,16 @@ const nextConfig = {
       //   constants: false,
       // };
 
+      if (!isServer) {
+        config.resolve.fallback.fs = false;
+      }
+
       // config.resolve.fallback = { fs: false };
 
       // if (!isServer) {
       //   config.node = {
-      //     fs: 'empty'
-      //   }
+      //     fs: 'empty',
+      //   };
       // }
 
       // config.node = {
