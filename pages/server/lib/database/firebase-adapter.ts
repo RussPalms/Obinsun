@@ -1,294 +1,278 @@
 import {
-	runTransaction,
-	collection,
-	query,
-	getDocs,
-	where,
-	limit,
-	doc,
-	getDoc,
-	addDoc,
-	updateDoc,
-	deleteDoc,
-	Firestore,
-	FirestoreDataConverter,
-} from "firebase/firestore";
+  runTransaction,
+  collection,
+  query,
+  getDocs,
+  where,
+  limit,
+  doc,
+  getDoc,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  Firestore,
+  FirestoreDataConverter,
+} from 'firebase/firestore';
 
-import type { Account, Awaitable } from "next-auth";
+import type { Account, Awaitable } from 'next-auth';
 // import {User} from 'next-auth'
 
 import type {
-	Adapter,
-	AdapterSession,
-	AdapterUser,
-	VerificationToken,
-} from "next-auth/adapters";
+  Adapter,
+  AdapterSession,
+  AdapterUser,
+  VerificationToken,
+} from 'next-auth/adapters';
 
 export interface VerificationResult {
-	requester: string;
-	verified: boolean;
+  requester: string;
+  verified: boolean;
 }
 
 export const collections = {
-	Users: "users",
-	Sessions: "sessions",
-	Accounts: "accounts",
-	VerificationTokens: "verificationTokens",
-	// Roles: "roles",
-	VerificationResult: "verificationResult",
+  Users: 'users',
+  Sessions: 'sessions',
+  Accounts: 'accounts',
+  VerificationTokens: 'verificationTokens',
+  // Roles: "roles",
+  VerificationResult: 'verificationResult',
 } as const;
 
 export const format: FirestoreDataConverter<any> = {
-	toFirestore(object) {
-		const newObjectobject: any = {};
-		for (const key in object) {
-			const value = object[key];
-			if (value === undefined) continue;
-			newObjectobject[key] = value;
-		}
-		return newObjectobject;
-	},
-	fromFirestore(snapshot) {
-		if (!snapshot.exists()) return null;
-		const newUser: any = { ...snapshot.data(), id: snapshot.id };
-		for (const key in newUser) {
-			const value = newUser[key];
-			if (value?.toDate) newUser[key] = value.toDate();
-			else newUser[key] = value;
-		}
-		return newUser;
-	},
+  toFirestore(object) {
+    const newObjectobject: any = {};
+    for (const key in object) {
+      const value = object[key];
+      if (value === undefined) continue;
+      newObjectobject[key] = value;
+    }
+    return newObjectobject;
+  },
+  fromFirestore(snapshot) {
+    if (!snapshot.exists()) return null;
+    const newUser: any = { ...snapshot.data(), id: snapshot.id };
+    for (const key in newUser) {
+      const value = newUser[key];
+      if (value?.toDate) newUser[key] = value.toDate();
+      else newUser[key] = value;
+    }
+    return newUser;
+  },
 };
 
 export interface FirebaseClient {
-	db: Firestore;
+  db: Firestore;
 }
 
 // export AdapterExtention extends FirebaseAdapter {}
 
 export function FirebaseAdapter(client: FirebaseClient): Adapter {
-	const { db } = client;
+  const { db } = client;
 
-	// interface AdapterExtension {
-	//     requestVerification?: (params: {
-	//         requester: string;
-	//         verified: boolean;
-	//     }) => Awaitable<VerificationResult | null>
-	// }
+  // interface AdapterExtension {
+  //     requestVerification?: (params: {
+  //         requester: string;
+  //         verified: boolean;
+  //     }) => Awaitable<VerificationResult | null>
+  // }
 
-	//  interface requestVerification: (params: {
-	//             requester: string;
-	//             verified: boolean;
-	//         }) => Awaitable<VerificationResult>
+  //  interface requestVerification: (params: {
+  //             requester: string;
+  //             verified: boolean;
+  //         }) => Awaitable<VerificationResult>
 
-	// interface AdapterExtension extends Adapter {
-	// 	requestVerification?: (params: {
-	// 		requester: string;
-	// 		verified: boolean;
-	// 	}) => Awaitable<VerificationResult | null>;
-	// }
+  // interface AdapterExtension extends Adapter {
+  // 	requestVerification?: (params: {
+  // 		requester: string;
+  // 		verified: boolean;
+  // 	}) => Awaitable<VerificationResult | null>;
+  // }
 
-	const Users = collection(db, collections.Users).withConverter<AdapterUser>(
-		format
-	);
+  const Users = collection(db, collections.Users).withConverter<AdapterUser>(
+    format
+  );
 
-	const Sessions = collection(
-		db,
-		collections.Sessions
-	).withConverter<AdapterSession>(format);
+  const Sessions = collection(
+    db,
+    collections.Sessions
+  ).withConverter<AdapterSession>(format);
 
-	const Accounts = collection(
-		db,
-		collections.Accounts
-	).withConverter<Account>(format);
+  const Accounts = collection(db, collections.Accounts).withConverter<Account>(
+    format
+  );
 
-	const VerificationTokens = collection(
-		db,
-		collections.VerificationTokens
-	).withConverter<VerificationToken>(format);
+  const VerificationTokens = collection(
+    db,
+    collections.VerificationTokens
+  ).withConverter<VerificationToken>(format);
 
-	const VerificationResult = collection(
-		db,
-		collections.VerificationResult
-	).withConverter<VerificationResult>(format);
+  const VerificationResult = collection(
+    db,
+    collections.VerificationResult
+  ).withConverter<VerificationResult>(format);
 
-	return {
-		// async requestVerification({ requester, verified }) {
-		// 	const verifyDoc = await addDoc(
-		// 		VerificationResult,
-		// 		verificationResult
-		// 	);
-		// 	return VerificationResult.converter!.toFirestore(verifyDoc);
-		// },
+  return {
+    // async requestVerification({ requester, verified }) {
+    // 	const verifyDoc = await addDoc(
+    // 		VerificationResult,
+    // 		verificationResult
+    // 	);
+    // 	return VerificationResult.converter!.toFirestore(verifyDoc);
+    // },
 
-		async createUser(user) {
-			const { id } = await addDoc(Users, user);
-			return { ...(user as any), id };
-		},
-		async getUser(id) {
-			const userDoc = await getDoc(doc(Users, id));
-			if (!userDoc.exists()) return null;
-			return Users.converter!.fromFirestore(userDoc);
-		},
-		async getUserByEmail(email) {
-			const userQuery = query(
-				Users,
-				where("email", "==", email),
-				limit(1)
-			);
-			const userDocs = await getDocs(userQuery);
-			if (userDocs.empty) return null;
-			return Users.converter!.fromFirestore(userDocs.docs[0]);
-		},
-		async getUserByAccount({ provider, providerAccountId }) {
-			const accountQuery = query(
-				Accounts,
-				where("provider", "==", provider),
-				where("providerAccountId", "==", providerAccountId),
-				limit(1)
-			);
-			const accountDocs = await getDocs(accountQuery);
-			if (accountDocs.empty) return null;
-			const userDoc = await getDoc(
-				doc(Users, accountDocs.docs[0].data().userId)
-			);
-			if (!userDoc.exists()) return null;
-			return Users.converter!.fromFirestore(userDoc);
-		},
+    async createUser(user) {
+      const { id } = await addDoc(Users, user);
+      return { ...(user as any), id };
+    },
+    async getUser(id) {
+      const userDoc = await getDoc(doc(Users, id));
+      if (!userDoc.exists()) return null;
+      return Users.converter!.fromFirestore(userDoc);
+    },
+    async getUserByEmail(email) {
+      const userQuery = query(Users, where('email', '==', email), limit(1));
+      const userDocs = await getDocs(userQuery);
+      if (userDocs.empty) return null;
+      return Users.converter!.fromFirestore(userDocs.docs[0]);
+    },
+    async getUserByAccount({ provider, providerAccountId }) {
+      const accountQuery = query(
+        Accounts,
+        where('provider', '==', provider),
+        where('providerAccountId', '==', providerAccountId),
+        limit(1)
+      );
+      const accountDocs = await getDocs(accountQuery);
+      if (accountDocs.empty) return null;
+      const userDoc = await getDoc(
+        doc(Users, accountDocs.docs[0].data().userId)
+      );
+      if (!userDoc.exists()) return null;
+      return Users.converter!.fromFirestore(userDoc);
+    },
 
-		async updateUser(partialUser) {
-			await updateDoc(doc(Users, partialUser.id), partialUser as any);
-			const userDoc = await getDoc(doc(Users, partialUser.id));
-			return Users.converter!.fromFirestore(userDoc as any)!;
-		},
+    async updateUser(partialUser) {
+      await updateDoc(doc(Users, partialUser.id), partialUser as any);
+      const userDoc = await getDoc(doc(Users, partialUser.id));
+      return Users.converter!.fromFirestore(userDoc as any)!;
+    },
 
-		async deleteUser(userId) {
-			const userDoc = doc(Users, userId);
-			const accountsQuery = query(
-				Accounts,
-				where("userId", "==", userId)
-			);
-			const sessionsQuery = query(
-				Sessions,
-				where("userId", "==", userId)
-			);
+    async deleteUser(userId) {
+      const userDoc = doc(Users, userId);
+      const accountsQuery = query(Accounts, where('userId', '==', userId));
+      const sessionsQuery = query(Sessions, where('userId', '==', userId));
 
-			await runTransaction(db, async (transaction) => {
-				transaction.delete(userDoc);
-				const accounts = await getDocs(accountsQuery);
-				accounts.forEach((account) => transaction.delete(account.ref));
+      await runTransaction(db, async (transaction) => {
+        transaction.delete(userDoc);
+        const accounts = await getDocs(accountsQuery);
+        accounts.forEach((account) => transaction.delete(account.ref));
 
-				const sessions = await getDocs(sessionsQuery);
-				sessions.forEach((session) => transaction.delete(session.ref));
-			});
-		},
+        const sessions = await getDocs(sessionsQuery);
+        sessions.forEach((session) => transaction.delete(session.ref));
+      });
+    },
 
-		async linkAccount(account) {
-			const { id } = await addDoc(Accounts, account);
-			return { ...account, id };
-		},
+    async linkAccount(account) {
+      const { id } = await addDoc(Accounts, account);
+      return { ...account, id };
+    },
 
-		async unlinkAccount({ provider, providerAccountId }) {
-			const accountQuery = query(
-				Accounts,
-				where("provider", "==", provider),
-				where("providerAccountId", "==", providerAccountId),
-				limit(1)
-			);
-			const accounts = await getDocs(accountQuery);
-			if (accounts.empty) return;
-			await deleteDoc(accounts.docs[0].ref);
-		},
+    async unlinkAccount({ provider, providerAccountId }) {
+      const accountQuery = query(
+        Accounts,
+        where('provider', '==', provider),
+        where('providerAccountId', '==', providerAccountId),
+        limit(1)
+      );
+      const accounts = await getDocs(accountQuery);
+      if (accounts.empty) return;
+      await deleteDoc(accounts.docs[0].ref);
+    },
 
-		async createSession(session) {
-			const { id } = await addDoc(Sessions, session);
-			return { ...session, id };
-		},
+    async createSession(session) {
+      const { id } = await addDoc(Sessions, session);
+      return { ...session, id };
+    },
 
-		async getSessionAndUser(sessionToken) {
-			const sessionQuery = query(
-				Sessions,
-				where("sessionToken", "==", sessionToken),
-				limit(1)
-			);
-			const sessionDocs = await getDocs(sessionQuery);
-			if (sessionDocs.empty) return null;
-			const session = Sessions.converter!.fromFirestore(
-				sessionDocs.docs[0]
-			);
-			if (!session) return null;
+    async getSessionAndUser(sessionToken) {
+      const sessionQuery = query(
+        Sessions,
+        where('sessionToken', '==', sessionToken),
+        limit(1)
+      );
+      const sessionDocs = await getDocs(sessionQuery);
+      if (sessionDocs.empty) return null;
+      const session = Sessions.converter!.fromFirestore(sessionDocs.docs[0]);
+      if (!session) return null;
 
-			const userDoc = await getDoc(doc(Users, session.userId));
-			if (!userDoc.exists()) return null;
-			const user = Users.converter!.fromFirestore(userDoc)!;
-			return { session, user };
-		},
+      const userDoc = await getDoc(doc(Users, session.userId));
+      if (!userDoc.exists()) return null;
+      const user = Users.converter!.fromFirestore(userDoc)!;
+      return { session, user };
+    },
 
-		async updateSession(partialSession) {
-			const sessionQuery = query(
-				Sessions,
-				where("sessionToken", "==", partialSession.sessionToken),
-				limit(1)
-			);
-			const sessionDocs = await getDocs(sessionQuery);
-			if (sessionDocs.empty) return null;
-			await updateDoc(sessionDocs.docs[0].ref, partialSession);
-		},
+    async updateSession(partialSession) {
+      const sessionQuery = query(
+        Sessions,
+        where('sessionToken', '==', partialSession.sessionToken),
+        limit(1)
+      );
+      const sessionDocs = await getDocs(sessionQuery);
+      if (sessionDocs.empty) return null;
+      await updateDoc(sessionDocs.docs[0].ref, partialSession);
+    },
 
-		async deleteSession(sessionToken) {
-			const sessionQuery = query(
-				Sessions,
-				where("sessionToken", "==", sessionToken),
-				limit(1)
-			);
-			const sessionDocs = await getDocs(sessionQuery);
-			if (sessionDocs.empty) return;
-			await deleteDoc(sessionDocs.docs[0].ref);
-		},
+    async deleteSession(sessionToken) {
+      const sessionQuery = query(
+        Sessions,
+        where('sessionToken', '==', sessionToken),
+        limit(1)
+      );
+      const sessionDocs = await getDocs(sessionQuery);
+      if (sessionDocs.empty) return;
+      await deleteDoc(sessionDocs.docs[0].ref);
+    },
 
-		async createVerificationToken(verificationToken) {
-			await addDoc(VerificationTokens, verificationToken);
-			// await addDoc(VerificationTokens.identifier, verificationToken)
-			return verificationToken;
-		},
+    async createVerificationToken(verificationToken) {
+      await addDoc(VerificationTokens, verificationToken);
+      // await addDoc(VerificationTokens.identifier, verificationToken)
+      return verificationToken;
+    },
 
-		// async requestVerification({requester, verified}) {
-		//     await addDoc(VerificationResult, verificationResult);
-		// 	return verificationResult.;
-		// },
+    // async requestVerification({requester, verified}) {
+    //     await addDoc(VerificationResult, verificationResult);
+    // 	return verificationResult.;
+    // },
 
-		// async requestVerification(requestVerification?: (params: {
-		//     requester: string;
-		//     verified: boolean;
-		// }) => Awaitable<VerificationResult | null>)
+    // async requestVerification(requestVerification?: (params: {
+    //     requester: string;
+    //     verified: boolean;
+    // }) => Awaitable<VerificationResult | null>)
 
-		async useVerificationToken({ identifier, token }) {
-			const verificationTokensQuery = query(
-				VerificationTokens,
-				where("identifier", "==", identifier),
-				where("token", "==", token),
-				limit(1)
-			);
-			const verificationTokenDocs = await getDocs(
-				verificationTokensQuery
-			);
-			if (verificationTokenDocs.empty) return null;
+    async useVerificationToken({ identifier, token }) {
+      const verificationTokensQuery = query(
+        VerificationTokens,
+        where('identifier', '==', identifier),
+        where('token', '==', token),
+        limit(1)
+      );
+      const verificationTokenDocs = await getDocs(verificationTokensQuery);
+      if (verificationTokenDocs.empty) return null;
 
-			await deleteDoc(verificationTokenDocs.docs[0].ref);
+      await deleteDoc(verificationTokenDocs.docs[0].ref);
 
-			const verificationToken =
-				VerificationTokens.converter!.fromFirestore(
-					verificationTokenDocs.docs[0]
-				);
-			// @ts-expect-error
-			delete verificationToken.id;
-			return verificationToken;
-		},
-	};
+      const verificationToken = VerificationTokens.converter!.fromFirestore(
+        verificationTokenDocs.docs[0]
+      );
+      // @ts-expect-error
+      delete verificationToken.id;
+      return verificationToken;
+    },
+  };
 }
 
 export interface FirestoreExtension {
-	FirebaseAdapter(client: FirebaseClient): Adapter;
+  FirebaseAdapter(client: FirebaseClient): Adapter;
 }
 
 // export interface VerificationResult {
@@ -329,3 +313,5 @@ export interface FirestoreExtension {
 //             requester: string;
 //             verified: boolean;
 //         }) extends FirebaseAdapter {}
+
+export default function _() {}

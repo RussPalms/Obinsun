@@ -86,3 +86,5 @@ export const WishlistProvider: React.FC<{ children?: React.ReactNode }> = ({
     </WishlistDispatchContext.Provider>
   );
 };
+
+export default function _() {}

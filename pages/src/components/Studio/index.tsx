@@ -192,3 +192,5 @@ export const Studio = (props: Props) => {
     </>
   );
 };
+
+export default Studio;

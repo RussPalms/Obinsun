@@ -65,3 +65,5 @@ ac.grant('admin')
 
 // we lock ACL to avoid updates out of this file
 ac.lock();
+
+export default function _() {}

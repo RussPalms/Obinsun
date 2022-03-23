@@ -54,3 +54,5 @@ export const idbKeyval = (() => {
     },
   };
 })();
+
+export default function _() {}

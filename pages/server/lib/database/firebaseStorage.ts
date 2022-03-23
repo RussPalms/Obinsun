@@ -159,3 +159,5 @@ export { projectStorage, timestamp, db };
 // const timestamp = firebase.firestore.FieldValue.serverTimestamp;
 
 // export { projectStorage, db, timestamp };
+
+export default function _() {}

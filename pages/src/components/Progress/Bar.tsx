@@ -9,3 +9,5 @@ export const Bar = ({ animationDuration, progress }: any) => {
     ></div>
   );
 };
+
+export default function _() {}

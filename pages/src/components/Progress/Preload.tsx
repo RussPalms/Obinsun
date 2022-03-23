@@ -117,3 +117,5 @@ export const Preload = ({}: Props) => {
     </>
   );
 };
+
+export default function _() {}

@@ -162,3 +162,5 @@ export type PrintfulShippingItem = {
   external_variant_id: string;
   quantity: number;
 };
+
+export default function _() {}

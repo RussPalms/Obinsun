@@ -11,3 +11,5 @@ export const Container = ({ animationDuration, children, isFinished }: any) => {
     </div>
   );
 };
+
+export default function _() {}

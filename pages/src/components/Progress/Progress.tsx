@@ -12,3 +12,5 @@ export const Progress = ({ isAnimating }: any) => {
     </Container>
   );
 };
+
+export default function _() {}

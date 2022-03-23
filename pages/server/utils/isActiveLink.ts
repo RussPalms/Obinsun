@@ -8,3 +8,5 @@ export const isActiveLink = (
 
   return currentPathname.startsWith(href);
 };
+
+export default function _() {}

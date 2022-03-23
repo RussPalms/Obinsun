@@ -9,3 +9,5 @@ export interface IListing {
   sizing: string[];
   reviews: string[];
 }
+
+export default function _() {}
