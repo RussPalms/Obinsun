@@ -51,7 +51,8 @@
     "jsx-a11y/alt-text": "off",
     "react/jsx-key": "off",
     "@typescript-eslint/no-empty-function": "off",
-    "no-var": "off"
+    "no-var": "off",
+    "no-irregular-whitespace": "off"
   },
   "settings": {
     "react": {
