@@ -188,7 +188,7 @@ export default NextAuth({
       session.user.permissions =
         token.role in grants ? { [token.role]: grants[token.role] } : {};
 
-      console.log(session);
+      // console.log(session);
 
       // return Promise.resolve(session);
       return session;

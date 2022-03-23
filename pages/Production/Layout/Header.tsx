@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { selectItems } from 'pages/app/state/slices/basketSlice';
 import ZLogo from 'pages/src/assets/ObinsunVectors/ZLogo';
 import DarkModeToggle from 'pages/src/components/DarkModeToggle';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BiBook, BiCart } from 'react-icons/bi';
 import { RiHeartFill } from 'react-icons/ri';
 import { CgProfile, CgSearch } from 'react-icons/cg';
@@ -36,6 +36,8 @@ const Header = ({ openModal }: any) => {
       signOut();
     }
   };
+
+  useEffect(() => {}, [handleLogMode]);
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [closeMenu, setCloseMenu] = useState(false);

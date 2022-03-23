@@ -59,7 +59,8 @@ const IndexPage = ({ products }: IProps): JSX.Element => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+// export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps = async () => {
   const serviceAccount =
     require('pages/api/keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6') as string;
 
