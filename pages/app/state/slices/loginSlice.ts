@@ -28,4 +28,4 @@
 
 // export default loginReducer;
 
-export default {};
+export default function t0() {}

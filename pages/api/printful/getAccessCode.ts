@@ -27,4 +27,4 @@
 //   // console.log(await getAccessCode());
 
 //   console.log(await getAccessCode());
-export default {};
+export default function t0() {}

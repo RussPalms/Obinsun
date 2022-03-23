@@ -108,4 +108,4 @@
 
 // export default calculateTaxes;
 
-export default {};
+export default function t0() {}

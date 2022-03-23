@@ -63,6 +63,5 @@
 //   }
 // }
 
-// // export default {};
-
-export default {};
+// // export default function t0() {}
+export default function t0() {}

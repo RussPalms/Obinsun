@@ -101,4 +101,4 @@
 
 // export default Documents;
 
-export default {};
+export default function t0() {}

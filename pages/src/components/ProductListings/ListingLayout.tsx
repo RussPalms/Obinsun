@@ -21,4 +21,4 @@
 
 // export default Layout;
 
-export default {};
+export default function t0() {}

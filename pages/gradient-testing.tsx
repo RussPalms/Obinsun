@@ -232,4 +232,4 @@
 
 // export default GradientTesting;
 
-export default {};
+export default function GradientTesting() {}

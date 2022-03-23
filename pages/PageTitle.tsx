@@ -16,4 +16,4 @@
 
 // export default PageTitle;
 
-export default {};
+export default function PageTitle() {}

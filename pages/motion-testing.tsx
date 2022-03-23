@@ -454,4 +454,4 @@
 
 // export default MotionTesting;
 
-export default {};
+export default function MotionTesting() {}

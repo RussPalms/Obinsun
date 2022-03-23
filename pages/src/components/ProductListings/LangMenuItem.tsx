@@ -66,4 +66,4 @@
 
 // export default LangMenuItem;
 
-export default {};
+export default function t0() {}

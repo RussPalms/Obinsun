@@ -40,4 +40,4 @@
 //   }
 // }
 
-export default {};
+export default function t0() {}

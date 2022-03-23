@@ -1,4 +1,4 @@
 // export const hasSnipcart = () =>
 //   typeof window !== "undefined" && window.Snipcart;
 
-export default {};
+export default function t0() {}

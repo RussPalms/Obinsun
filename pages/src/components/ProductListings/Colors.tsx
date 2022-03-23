@@ -17,4 +17,4 @@
 
 // export default Colors;
 
-export default {};
+export default function t0() {}

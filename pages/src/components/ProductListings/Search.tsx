@@ -82,4 +82,4 @@
 
 // export default Search;
 
-export default {};
+export default function t0() {}

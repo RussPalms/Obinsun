@@ -24,4 +24,4 @@
 
 // export default NextLink;
 
-export default {};
+export default function t0() {}

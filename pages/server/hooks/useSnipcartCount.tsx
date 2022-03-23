@@ -43,4 +43,4 @@
 // };
 
 // export default useSnipcartCount;
-export default {};
+export default function t0() {}

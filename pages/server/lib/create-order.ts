@@ -48,4 +48,4 @@
 
 // export default createOrder;
 
-export default {};
+export default function t0() {}

@@ -76,4 +76,4 @@
 
 // export default emailHandler;
 
-export default {};
+export default function t0() {}

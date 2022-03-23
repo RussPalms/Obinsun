@@ -91,4 +91,4 @@
 //   };
 // }
 
-export default {};
+export default function orders() {}

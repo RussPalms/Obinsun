@@ -17,4 +17,4 @@
 
 // export default Reviews;
 
-export default {};
+export default function t0() {}

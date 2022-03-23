@@ -23,4 +23,4 @@
 // };
 
 // export default obinsun_id = await getAccessCode();
-export default {};
+export default function t0() {}

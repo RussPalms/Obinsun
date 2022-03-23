@@ -79,4 +79,4 @@
 //   return { props: { listings } };
 // };
 
-export default {};
+export default function listings() {}

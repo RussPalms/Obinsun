@@ -369,4 +369,4 @@
 
 // export default OnboardingForm;
 
-export default {};
+export default function t0() {}

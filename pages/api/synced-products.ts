@@ -19,4 +19,4 @@
 // //   res.status(200).json({ success: true });
 // }
 
-export default {};
+export default function t0() {}

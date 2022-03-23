@@ -22,4 +22,4 @@
 
 // export default Pagination;
 
-export default {};
+export default function t0() {}

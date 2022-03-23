@@ -39,4 +39,4 @@
 
 // export default LangMenu;
 
-export default {};
+export default function t0() {}

@@ -31,4 +31,4 @@
 
 // export default Thumbnail;
 
-export default {};
+export default function t0() {}

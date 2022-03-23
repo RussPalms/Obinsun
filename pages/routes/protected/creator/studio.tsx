@@ -570,4 +570,4 @@
 
 // export default IndexPage;
 
-export default {};
+export default function t0() {}

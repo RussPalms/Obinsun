@@ -34,4 +34,4 @@
 
 // export default ProductHeader;
 
-export default {};
+export default function t0() {}

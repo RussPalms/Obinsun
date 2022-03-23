@@ -68,4 +68,4 @@
 
 // export default IndexPage;
 
-export default {};
+export default function IndexPage2() {}
