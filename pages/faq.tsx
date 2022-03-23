@@ -10,7 +10,8 @@ export default function FAQPage() {
       <div className="max-w-xl mx-auto prose prose-blue">
         <h2>Welcome</h2>
         <p>
-          You&apos;re viewing the{' '}
+          {/* You&apos;re viewing the{' '} */}
+          to{' '}
           <a
             href="http://localhost:3000"
             title="Obinsun"

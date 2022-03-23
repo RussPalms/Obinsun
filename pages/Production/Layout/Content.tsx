@@ -26,7 +26,7 @@ const Content = ({ children, title, description }: Props): JSX.Element => {
         key="content"
         className="z-[49] relative h-full w-[85%] flex items-center justify-center flex-col text-center overflow-hidden rounded-[0.625]em"
       >
-        <div className="relative h-full rounded-[0.625em] w-full border border-gray-300/0 dark:border-gray-800/0 bg-gray-800/20 dark:bg-gray-300/20 pl-[6em] laptop-l:pl-[8em]  pt-[8.5em] pr-[2em] pb-[1em] xl:px-48 4vl:p-32">
+        <div className="relative min-h-[44em] rounded-[0.625em] w-full border border-gray-300/0 dark:border-gray-800/0 bg-gray-800/20 dark:bg-gray-300/20 pl-[6em] laptop-l:pl-[8em]  pt-[8.5em] pr-[2em] pb-[1em] xl:px-48 4vl:p-32">
           <motion.div
             initial="hidden"
             animate="enter"
