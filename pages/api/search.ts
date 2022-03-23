@@ -28,4 +28,4 @@
 //   res.status(200).json({ results });
 // };
 
-export default {};
+export default function cpw() {}
