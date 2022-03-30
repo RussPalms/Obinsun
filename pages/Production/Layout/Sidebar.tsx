@@ -14,7 +14,7 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`z-50 border-top-left-glass border-bottom-right-glass bg-gray-300/50 dark:bg-gray-800/50 shadow-glass dark:shadow-dark-glass rounded-[0.625em] backdrop-blur-[0.25em] sticky top-[20%] xs:top-[25%] mobile-l:top-[26%] tablet:top-[27%] md:top-[26%] laptop:top-[26%] laptop-l:top-[30%] xl:top-[] left-0 h-[35%] laptop-l:h-[] transition-all duration-150 ease-in-out ${
+      className={`z-50 glass-container sticky top-[20%] xs:top-[25%] mobile-l:top-[26%] tablet:top-[27%] md:top-[26%] laptop:top-[26%] laptop-l:top-[30%] xl:top-[] left-0 h-[35%] laptop-l:h-[] transition-all duration-150 ease-in-out ${
         filterOpen
           ? 'w-[70%] xs:w-[60%] mobile-l:w-[59%] tablet:w-[33%] laptop:w-[25%]'
           : 'w-[6.5em] xs:w-[6em] mobile-l:w-[5.5em] tablet:w-[5.3em] laptop-l:w-[16%] 2xl:w-[13%] 3xl:w-[11%] 4vl:w-[10%]'

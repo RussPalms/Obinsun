@@ -1,8 +1,19 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 // import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/router';
 // import Link from 'next/link';
-import { signIn } from 'next-auth/react';
+import { getProviders, getSession, signIn } from 'next-auth/react';
+import { getCsrfToken } from 'next-auth/react';
+import axios from 'axios';
+import Script from 'next/script';
+import {
+  keyCreation,
+  UserCreation,
+} from '../interfaces/objects/obinsun-objects';
+import { loadStripe } from '@stripe/stripe-js';
+// import { DB, dbApi } from '../../app/state/rtkApi';
+import { v4 as uuidv4 } from 'uuid';
+import { NextApiResponse } from 'next';
 
 // const variants = {
 //   hidden: { opacity: 0, x: 0, y: -200 },
@@ -51,13 +62,71 @@ import { signIn } from 'next-auth/react';
 //   return tokenData;
 // }
 
+const stripePromise = loadStripe(`${process.env.stripe_public_key}`);
+
 const Authorization = ({ closeModal }: any) => {
+  // const { data: dbs } = dbApi.useGetAllQuery();
+  // const [updateDB] = dbApi.useUpdateDBMutation();
+  // const [deleteDB] = dbApi.useDeleteDBMutation();
+  // const [addDB] = dbApi.useAddDBMutation();
+
+  // const [obinsunId, setObinsunId] = useState('');
+
+  // const onToggle = useCallback(
+  //   (db: DB) => updateDB({ ...db, done: !db.done }),
+  //   [updateDB]
+  // );
+
+  // const onDelete = useCallback((db: DB) => deleteDB(db), [deleteDB]);
+
+  // const textRef = useRef<HTMLInputElement>(null);
+
+  // const onAdd = useCallback(() => addDB(textRef.current!.value ?? ''), [addDB]);
+
+  // useEffect(() => {}, []);
+
   const [userResponse, setUserResponse] = useState('');
+  const [quickRegister, setQuickRegister] = useState(true);
+
+  const handleRegister = () => {};
+
+  // const createUserParams = {
+  //   username, firstname, lastname, email, password
+  // }
+  useEffect(() => {});
 
   async function createUser(email: any, password: any, role: any) {
+    // async function createUser({
+    //   // enteredUsername,
+    //   // enteredFirstname,
+    //   // enteredLastname,
+    //   // enteredEmail,
+    //   // enteredPassword,
+
+    //   // username,
+    //   // firstname,
+    //   // lastname,
+    //   email,
+    //   password,
+    // }: any) {
+    // : // , role
+    // UserCreation
     const response = await fetch('/api/auth/register', {
       method: 'POST',
-      body: JSON.stringify({ email, password, role }),
+      body: JSON.stringify({
+        // enteredUsername,
+        // enteredFirstname,
+        // enteredLastname,
+        // enteredEmail,
+        // enteredPassword,
+
+        // username,
+        // firstname,
+        // lastname,
+        email,
+        password,
+        role,
+      }),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -68,14 +137,13 @@ const Authorization = ({ closeModal }: any) => {
       setUserResponse(userData.message);
       throw new Error(userData.message || 'Something went wrong!');
     }
-
-    // setUserResponse(userData.error);
   }
+  const usernameInputRef: React.MutableRefObject<any> = useRef();
+  const firstnameInputRef: React.MutableRefObject<any> = useRef();
+  const lastnameInputRef: React.MutableRefObject<any> = useRef();
 
-  // console.log(userResponse);
-
-  const emailInputRef = useRef() as any;
-  const passwordInputRef = useRef() as any;
+  const emailInputRef: React.MutableRefObject<any> = useRef();
+  const passwordInputRef: React.MutableRefObject<any> = useRef();
 
   const [isLogin, setIsLogin] = useState(true);
   const router = useRouter();
@@ -87,67 +155,71 @@ const Authorization = ({ closeModal }: any) => {
   async function submitHandler(e: any) {
     e.preventDefault();
 
-    // try {
-    const enteredEmail = emailInputRef.current?.value;
-    const enteredPassword = passwordInputRef.current?.value;
-
-    // console.log(enteredEmail);
-
-    // optional: Add validation
+    // const enteredUsername = usernameInputRef.current?.value as string;
+    // const enteredFirstname = firstnameInputRef.current?.value as string;
+    // const enteredLastname = lastnameInputRef.current?.value as string;
+    const enteredEmail = emailInputRef.current?.value as string;
+    const enteredPassword = passwordInputRef.current?.value as string;
+    const enteredRole = 'guest';
 
     if (isLogin) {
-      // const enteredPassword = passwordInputRef.current.value;
-
-      // console.log(isLogin);
-
       const result: any = await signIn('credentials', {
         redirect: false,
         email: enteredEmail,
         password: enteredPassword,
       });
 
-      // setUserResponse(JSON.stringify(result.error));
       if (result?.error && result.status == 200) {
         setUserResponse('User Does Not Exist!');
       }
-      // setUserResponse(result.error);
-      // console.log(result);
-
-      // const result = await signIn("email", {
-      // 	redirect: false,
-      // 	email: enteredEmail,
-      // 	// callbackUrl: `${window.location.origin}`,
-      // });
 
       if (!result?.error) {
         router.replace('/profile');
         closeModal();
       }
     } else {
-      try {
-        // const enteredRole = roleInputRef.current?.value;
-        const enteredRole = 'guest';
+      if (quickRegister == true) {
+        // const enteredRole = 'guest';
 
         const result = await createUser(
+          // {
+          // enteredUsername,
+          // enteredFirstname,
+          // enteredLastname,
           enteredEmail,
           enteredPassword,
           enteredRole
+          // }
         );
 
-        await signIn('credentials', {
-          email: enteredEmail,
-          password: enteredPassword,
-          callbackUrl: '/profile',
-        });
-        router.push('/profile');
-      } catch (error) {
-        // console.log(error);
-        // setUserResponse(error.error);
+        console.log(result);
+      } else if (quickRegister == false) {
+        const result = await createUser(
+          // {
+          // enteredUsername,
+          // enteredFirstname,
+          // enteredLastname,
+          enteredEmail,
+          enteredPassword,
+          enteredRole
+          // }
+        );
+
+        console.log(result);
       }
+      await signIn('credentials', {
+        redirect: false,
+        email: enteredEmail,
+        password: enteredPassword,
+        callbackUrl: '/profile',
+      });
+      closeModal();
+      router.push('/profile');
+      // catch (error) {
+      //   console.log(error);
+      // }
     }
   }
-
-  // console.log(userResponse);
 
   return (
     <section
@@ -162,23 +234,44 @@ const Authorization = ({ closeModal }: any) => {
         <div className="floating-square-4" style={{ '--i': '4' } as any} />
         <div className="form-container relative top-0 left-0 vs:w-[15em] xs:w-[20em] mobile-l:w-[21em] tablet:w-[22em] laptop:-w-[23em] laptop-l:w-[24em] 2xl:w-[25em min-h-[25em] bg-gray-300/90 dark:bg-gray-800/90 border rounded-[0.625em] flex justify-center align-center backdrop-blur-[5px] shadow-glass3 glass-container border-white/50">
           <div className="form-body">
-            {/* <Link href="/"> */}
             <button onClick={closeModal}>Close Modal</button>
-            {/* </Link> */}
             <h2 className="form-header">
               {isLogin ? 'Login ' : 'Register '}
               Form
             </h2>
             <form onSubmit={submitHandler}>
               <p>{userResponse}</p>
+              {/* <div className="inputBox">
+                <input
+                  className="input input-glass-container"
+                  type="text"
+                  placeholder="Username"
+                  id="username"
+                  required
+                  ref={usernameInputRef}
+                />
+              </div>
               <div className="inputBox">
                 <input
-                  name="csrfToken"
-                  type="hidden"
-                  // defaultValue={csrfToken}
+                  className="input input-glass-container"
+                  type="text"
+                  placeholder="First"
+                  id="firstname"
+                  required
+                  ref={firstnameInputRef}
                 />
-
-                {/* <label htmlFor="email"></label> */}
+              </div>
+              <div className="inputBox">
+                <input
+                  className="input input-glass-container"
+                  type="text"
+                  placeholder="Last"
+                  id="lastname"
+                  required
+                  ref={lastnameInputRef}
+                />
+              </div> */}
+              <div className="inputBox">
                 <input
                   className="input input-glass-container"
                   type="email"
@@ -189,7 +282,6 @@ const Authorization = ({ closeModal }: any) => {
                 />
               </div>
               <div className="inputBox">
-                {/* <label htmlFor="password"></label> */}
                 <input
                   className="input input-glass-container"
                   type="password"
@@ -200,46 +292,23 @@ const Authorization = ({ closeModal }: any) => {
                 />
               </div>
 
-              {/* {isLogin ? (
-                      ''
-                    ) : ( */}
-              {/* <div className="inputBox"> */}
-              {/* <label htmlFor="email"></label> */}
-              {/* <input */}
-              {/* className="input glass-container"
-                        type="text"
-                        placeholder="Role"
-                        id="role"
-                        required
-                        // ref={roleInputRef}
-                      /> */}
-              {/* </div> */}
-              {/* // )} */}
-
               <div className="inputBox">
                 <input
                   className="input input-glass-container text-black dark:text-[#4C8EFF] bg-gray-800/40 dark:bg-gray-300/40 max-w-[10.25em] cursor-pointer mb-[1.25em] font-semibold"
                   type="submit"
                   value={isLogin ? 'Login' : 'Register'}
-                  // value="Login"
                 />
               </div>
-              {/* <Link href="/"> */}
               <p className="mt-[0.3125em] text-gray-800 dark:text-gray-300">
                 <a
-                  //   onClick={() => {
-                  //     router.push('/social-test');
-                  //   }}
                   className="font-semibold cursor-pointer"
                   onClick={switchAuthModeHandler}
                 >
-                  {/* Sign in with existing account */}
                   {isLogin
                     ? 'Create new account'
                     : 'Sign in with existing account'}
                 </a>
               </p>
-              {/* </Link> */}
             </form>
           </div>
         </div>
@@ -249,3 +318,39 @@ const Authorization = ({ closeModal }: any) => {
 };
 
 export default Authorization;
+
+// export const getServerSideProps = async () => {
+//   const obinsunKey = uuidv4();
+
+//   const dbAttributes: keyCreation[] = [
+//     {
+//       obinsunKey: `string`,
+//       username: `string`,
+//       firstname: `string`,
+//       lastname: `string`,
+//       email: `string`,
+//       password: `string`,
+//       ip: `string`,
+//       cc: `string`,
+//     },
+//   ];
+
+//   const addDBKeys = {
+//     method: 'POST',
+//     body: JSON.stringify(dbAttributes),
+//     headers: {
+//       Database: `Piece 0`,
+//     },
+//   };
+
+//   console.log(dbAttributes);
+
+//   const runRetrieval = async () => {
+//     const retrieveDBkeys = await fetch(`/api/dbs/`, addDBKeys);
+//     console.log({ retrievedKeys: retrieveDBkeys });
+//   };
+
+//   runRetrieval();
+
+//   return {};
+// };

@@ -7,23 +7,34 @@ import BillingInfo from './BillingInfo';
 import StripeAgreement from './StripeAgreement';
 import { useRouter } from 'next/router';
 
+// declare var process: {
+//   env: {
+//     NODE_ENV: string;
+//   };
+// };
+
 const SettingsForm = () => {
+  // console.log(process.env['NODE_ENV']);
+  // console.log(process.env['']);
   const router = useRouter();
 
   const redirectUrl = `${process.env.NEXTAUTH_URL}/api/printful/account-connect`;
-  const clientId = process.env.PRINTFUL_CLIENT_ID;
+  const clientId = process.env.printful_client_id;
   const printfulLogin = `https://www.printful.com/oauth/authorize?grant_type=authorize&client_id=${clientId}&state={stateValue}&redirect_url=${redirectUrl}`;
+  // console.log(clientId);
 
   const { data: session, status } = useSession() as any;
   // const loading = status === 'loading';
 
   const [ip, setIP] = useState('') as any;
   const [ts, setTS] = useState(null) as any;
+  const [cc, setCC] = useState('') as any;
 
   const getData = async () => {
     const res = await axios.get('https://geolocation-db.com/json/');
     setIP(res.data.IPv4);
     setTS(Math.round(new Date().getTime() / 1000));
+    setCC(res.data.country_code);
   };
 
   const [page, setPage] = useState(0);
@@ -65,25 +76,27 @@ const SettingsForm = () => {
   };
 
   const submitInformation = async ({ formdata }: any) => {
-    const createAccount = await axios.post(
-      '/api/stripe/create-custom-account',
-      {
-        firebaseID: session?.id,
-        date: ts,
-        ip: ip,
-        formData,
-      }
-    );
-    console.log(createAccount);
+    const createAccount = await axios.post('/api/events/stripe-events', {
+      transactId: session?.id,
+      // change: input,
+      change: 'create-custom-account',
+      date: ts,
+      ip: ip,
+      cc: cc,
+      formData,
+    });
+    // console.log(createAccount);
     // await router.push(printfulLogin);
   };
   useEffect(() => {
+    // console.log(process.env.printful_client_id);
     getData();
   }, []);
+  // console.log(printfulLogin);
 
   return (
     // <form className="glass-form-section">
-    <div className="glass-form-container container before:bg:gray-800/[5%] dark:before:bg-gray-300/[5%] ">
+    <div className="glass-form-container before:bg-gray-800/[5%] dark:before:bg-gray-300/[5%] h-full">
       <div className="information-heading">
         <div className="glass-progress-bar-container">
           <div

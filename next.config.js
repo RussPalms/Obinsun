@@ -14,6 +14,9 @@ const nextConfig = {
   },
   env: {
     stripe_public_key: process.env.STRIPE_PUBLIC_KEY,
+    printful_client_id: process.env.PRINTFUL_CLIENT_ID,
+    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
   },
   // webpack: (config) => {
   //   config.experiments = { topLevelAwait: true };

@@ -6,6 +6,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import CheckoutForm from './src/components/Payments/CheckoutForm';
 import { GetStaticProps } from 'next';
 import axios from 'axios';
+import Content from './Production/Layout/Content';
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
@@ -17,6 +18,18 @@ const stripePromise = loadStripe(`${process.env.stripe_public_key}`);
 
 export default function Payments() {
   const [clientSecret, setClientSecret] = useState('');
+
+  const personTokenCreation = async () => {
+    const stripeResolver = await Promise.resolve(stripePromise);
+
+    const { token, error } = await stripeResolver.createToken('person', {
+      first_name: 'Jane',
+      last_name: 'Doe',
+      relationship: { owner: true },
+    });
+
+    console.log(token);
+  };
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
@@ -40,13 +53,16 @@ export default function Payments() {
   };
 
   return (
-    <div className="App">
-      {clientSecret && (
-        <Elements options={options as any} stripe={stripePromise}>
-          <CheckoutForm />
-        </Elements>
-      )}
-    </div>
+    <Content title="" description="">
+      <div className="relative flex items-center justify-center">
+        {clientSecret && (
+          <Elements options={options as any} stripe={stripePromise}>
+            <CheckoutForm />
+          </Elements>
+        )}
+        <button onClick={personTokenCreation}>Create Person</button>
+      </div>
+    </Content>
   );
 }
 

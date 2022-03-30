@@ -24,9 +24,13 @@ import type {
   VerificationToken,
 } from 'next-auth/adapters';
 
-export interface VerificationResult {
-  requester: string;
-  verified: boolean;
+// export interface VerificationResult {
+//   requester: string;
+//   verified: boolean;
+// }
+
+export interface ObinsunUser extends AdapterUser {
+  connections?: string[];
 }
 
 export const collections = {
@@ -35,7 +39,7 @@ export const collections = {
   Accounts: 'accounts',
   VerificationTokens: 'verificationTokens',
   // Roles: "roles",
-  VerificationResult: 'verificationResult',
+  // VerificationResult: 'verificationResult',
 } as const;
 
 export const format: FirestoreDataConverter<any> = {
@@ -106,10 +110,10 @@ export function FirebaseAdapter(client: FirebaseClient): Adapter {
     collections.VerificationTokens
   ).withConverter<VerificationToken>(format);
 
-  const VerificationResult = collection(
-    db,
-    collections.VerificationResult
-  ).withConverter<VerificationResult>(format);
+  // const VerificationResult = collection(
+  //   db,
+  //   collections.VerificationResult
+  // ).withConverter<VerificationResult>(format);
 
   return {
     // async requestVerification({ requester, verified }) {

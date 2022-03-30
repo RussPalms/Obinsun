@@ -28,7 +28,7 @@ const BillingInfo = ({ formData, setFormData }: any) => {
               type="number"
               name=""
               required
-              value={formData.postalCode}
+              value={formData.postalCode.toString()}
               onChange={(e) => {
                 setFormData({ ...formData, postalCode: e.target.value });
               }}

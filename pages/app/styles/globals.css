@@ -82,7 +82,7 @@ body {
   }
 
   .parent-container {
-    @apply border-top-left-glass border-bottom-right-glass rounded-[0.625em];
+    @apply glass-container;
   }
 
   .modal-wrapper {
@@ -229,12 +229,20 @@ body {
     @apply xs:scale-x-[15%] xs:scale-y-[178%] sm:scale-x-[50%] sm:scale-y-[160%] md:scale-x-[58%] md:scale-y-[161%] lg:scale-x-[90%] lg:scale-y-[140%] xl:scale-x-[120%] xl:scale-y-[135%] 2xl:scale-x-[140%] 2xl:scale-y-[125%] 3xl:scale-x-[160%] 3xl:scale-y-[125.03%] 4vl:scale-x-[180%] 4vl:scale-y-[112%];
   }
 
-  .glass-container {
+  /*.glass-container {
     @apply border-top-left-glass border-bottom-right-glass bg-gray-300/50 dark:bg-gray-800/50  shadow-glass dark:shadow-dark-glass rounded-[0.625em] backdrop-blur-[0.25em];
+  }*/
+
+  /*  .glass-container {
+    @apply border-t-glass dark:border-t-dark border-l-glass dark:border-l-glass-dark border-b-glass dark:border-b-glass-dark border-r-glass dark:border-r-glass-dark bg-gray-300/50 dark:bg-gray-800/50  shadow-glass dark:shadow-dark-glass rounded-[0.625em] backdrop-blur-[0.25em];
+  }*/
+
+  .glass-container {
+    @apply border-[0.1em] border-solid border-t-gray-300/50 dark:border-t-gray-300/40 border-l-gray-300/50 dark:border-l-gray-300/40 border-b-gray-800/20 dark:border-b-gray-800/10 border-r-gray-800/10 dark:border-r-gray-800/10 bg-gray-300/50 dark:bg-gray-800/50  shadow-glass dark:shadow-dark-glass rounded-[0.625em] backdrop-blur-[0.25em];
   }
 
   .input-glass-container {
-    @apply border-top-left-glass border-bottom-right-glass bg-gray-800/50 dark:bg-gray-300/50 shadow-glass dark:shadow-dark-glass rounded-[0.625em] backdrop-blur-[0.25em];
+    @apply glass-container;
   }
 
   .menu-toggle:before {
@@ -270,7 +278,7 @@ body {
   }
 
   .socials-container::before {
-    @apply content-[''] absolute w-full h-1/2 bottom-0 z-[10] border-top-left-glass backdrop-blur-[0.625em] transition-all bg-gray-900/10;
+    @apply content-[''] absolute w-full h-1/2 bottom-0 z-[10] glass-container transition-all;
   }
 
   .socials-list-container {
@@ -867,14 +875,14 @@ transition: background 1s ease-out; */
 } */
 
 /* base styles & title */
-body {
+/*body {
   font-family: 'Noto Serif';
   color: var(--secondary);
-}
-.App {
+}*/
+/*.App {
   max-width: 960px;
   margin: 0 auto;
-}
+}*/
 .title h1 {
   color: var(--primary);
   font-size: 1.2rem;

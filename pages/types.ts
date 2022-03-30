@@ -1,22 +1,25 @@
 import type { NextApiRequest } from 'next';
+import type { Session } from 'next-auth';
+import type Stripe from 'stripe';
 
-declare global {
-  interface Window {
-    // Snipcart: any;
-    StripeCheckout: any;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      'address-fields': any;
-      // "snipcart-label": any;
-      // "snipcart-input": any;
-      'stripe-label': any;
-      'stripe-input': any;
-      // id: any;
-      id: any;
-    }
-  }
-}
+// declare global {
+//   interface Window {
+//     // Snipcart: any;
+//     StripeCheckout: any;
+//   }
+//   namespace JSX {
+//     interface IntrinsicElements {
+//       'address-fields': any;
+//       // "snipcart-label": any;
+//       // "snipcart-input": any;
+//       'stripe-label': any;
+//       'stripe-input': any;
+//       // id: any;
+//       id: any;
+//       session: Session;
+//     }
+//   }
+// }
 
 // declare type basketTotal = number;
 
@@ -27,52 +30,129 @@ export interface total {
 // export declare type total = number;
 
 export type StripeWebhookEvent =
-  // | "order.completed"
+  Stripe.WebhookEndpointCreateParams.EnabledEvent;
 
-  // | 'order.payment_succeeded'
-  // | 'checkout.session.completed'
-  | 'payment_intent.succeeded'
+// export type StripeWebhookEvent =
+//   | 'account.updated'
+//   | 'account.external_account.created'
+//   | 'account.external_account.deleted'
+//   | 'account.external_account.updated'
+//   | 'application_fee.created'
+//   | 'balance.available'
+//   | 'capability.updated'
+//   | 'charge.captured'
+//   | 'charge.expired'
+//   | 'charge.failed'
+//   | 'charge.pending'
+//   | 'charge.refunded'
+//   | 'charge.succeeded'
+//   | 'charge.updated'
+//   | 'coupon.created'
+//   | 'coupon.deleted'
+//   | 'coupon.updated'
+//   | 'customer.created'
+//   | 'customer.deleted'
+//   | 'customer.updated'
+//   | 'customer.discount.created'
+//   | 'customer.discount.deleted'
+//   | 'file.created'
+//   | 'identity.verification_session.canceled'
+//   | 'identity.verification_session.created'
+//   | 'identity.verification_session.processing'
+//   | 'identity.verification_session.requires_input'
+//   | 'identity.verification_session.verified'
+//   | 'invoice.created'
+//   | 'invoice.deleted'
+//   | 'invoice.finalization_failed'
+//   | 'invoice.finalized'
+//   | 'invoice.payment_succeeded'
+//   | 'invoice.sent'
+//   | 'invoice.upcoming'
+//   | 'invoice.updated'
+//   | 'invoice.voided'
+//   | 'invoiceitem.created'
+//   | 'invoiceitem.deleted'
+//   | 'invoiceitem.updated'
+//   | 'issuing_dispute.closed'
+//   | 'issuing_dispute.created'
+//   | 'issuing_dispute.funds_reinstated'
+//   | 'issuing_dispute.submitted'
+//   | 'issuing_dispute.updated'
+//   | 'issuing_transaction.created'
+//   | 'issuing_transaction.updated'
+//   | 'order.created'
+//   | 'order.payment_failed'
+//   | 'order.payment_succeeded'
+//   | 'order.updated'
+//   | 'order_return.created'
+//   | 'payment_intent.amount_capturable_updated'
+//   | 'payment_intent.canceled'
+//   | 'payment_intent.created'
+//   | 'payment_intent.payment_failed'
+//   | 'payment_intent.processing'
+//   | 'payment_intent.requires_action'
+//   | 'payment_intent.succeeded'
+//   | 'payment_link.created'
+//   | 'payment_link.updated'
+//   | 'payment_method.attached'
+//   | 'payment_method.automatically_updated'
+//   | 'payment_method.detached'
+//   | 'payment_method.updated'
+//   | 'payout.canceled'
+//   | 'payout.created'
+//   | 'payout.failed'
+//   | 'payout.paid'
+//   | 'payout.updated'
+//   | 'person.created'
+//   | 'person.deleted'
+//   | 'person.updated'
+//   | 'price.created'
+//   | 'price.deleted'
+//   | 'price.updated'
+//   | 'product.created'
+//   | 'product.deleted'
+//   | 'product.updated'
+//   | 'radar.early_fraud_warning.created'
+//   | 'radar.early_fraud_warning.updated'
+//   | 'recipient.created'
+//   | 'recipient.deleted'
+//   | 'recipient.updated'
+//   | 'setup_intent.canceled'
+//   | 'setup_intent.created'
+//   | 'setup_intent.requires_action'
+//   | 'setup_intent.setup_failed'
+//   | 'setup_intent.succeeded'
+//   | 'tax_rate.created'
+//   | 'tax_rate.updated'
+//   | 'topup.canceled'
+//   | 'topup.created'
+//   | 'topup.failed'
+//   | 'topup.reversed'
+//   | 'topup.succeeded'
+//   | 'transfer.created'
+//   | 'transfer.failed'
+//   | 'transfer.paid'
+//   | 'transfer.reversed'
+//   | 'transfer.updated';
 
-  // | "order.status.changed"
-  | 'order.updated'
+// export type StripeActions =
+// '*'
+// |
 
-  // | "order.paymentStatus.changed"
-  | 'payment_method.updated'
-
-  // | "order.trackingNumber.changed"
-
-  // | "order.refund.created"
-  // | 'charge.refunded'
-  | 'order_return.created'
-
-  // | "order.notification.created"
-  | 'order.created'
-
-  // | "subscription.created"
-  | 'customer.subscription.created'
-
-  // | "subscription.cancelled"
-  | 'customer.subscription.deleted'
-
-  // | "subscription.paused"
-  | 'customer.subscription.pending_update_applied'
-
-  // | "subscription.resumed"
-  | 'customer.subscription.updated'
-
-  // | "subscription.invoice.created"
-  | 'invoice.created'
-
-  // | "shippingrates.fetch"
-
-  // | "taxes.calculate"
-  // | 'tax_rate.created'
-  | 'tax_rate.updated'
-
-  // | "customauth:customer_updated";
-  // | 'account.updated'
-  // | "account.application.authorized"
-  | 'account.external_account.updated';
+export type PrintfulWebhookEvent =
+  | 'package_shipped'
+  | 'order_failed'
+  | 'order_canceled'
+  | 'order_refunded'
+  | 'product_synced'
+  | 'product_updated'
+  | 'product_deleted'
+  | 'stock_updated'
+  | 'order_put_hold'
+  | 'order_remove_hold'
+  | 'package_returned'
+  | 'order_created'
+  | 'order_updated';
 
 export interface StripeWebhookContent {
   discounts: { [key: string]: any };

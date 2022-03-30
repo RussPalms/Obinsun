@@ -26,7 +26,7 @@ const BusinessInfo = ({ formData, setFormData }: any) => {
               type="text"
               name=""
               required
-              value={formData.mcc}
+              value={formData.mcc.toString()}
               onChange={(e) => {
                 setFormData({ ...formData, mcc: e.target.value });
               }}
@@ -62,7 +62,7 @@ const BusinessInfo = ({ formData, setFormData }: any) => {
           <div className="glass-form-input-container">
             <input
               className="glass-form-input"
-              type="text"
+              type="email"
               name=""
               required
               value={formData.email}
@@ -81,7 +81,7 @@ const BusinessInfo = ({ formData, setFormData }: any) => {
               type="text"
               name=""
               required
-              value={formData.phone}
+              value={formData.phone.toString()}
               onChange={(e) => {
                 setFormData({ ...formData, phone: e.target.value });
               }}

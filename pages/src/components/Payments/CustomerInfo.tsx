@@ -6,7 +6,7 @@ import { DateTime } from 'luxon';
 import { useEffect, useRef, useState } from 'react';
 import CustomerShipping from './CustomerShipping';
 
-// const stripePromise = loadStripe(`${process.env.stripe_public_key}`);
+const stripePromise = loadStripe(`${process.env.stripe_public_key}`);
 
 // async function createCustomAccount({firebaseID: session.id})
 

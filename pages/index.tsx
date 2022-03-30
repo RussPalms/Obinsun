@@ -16,8 +16,12 @@ import rateLimit from 'axios-rate-limit';
 // import IHomePageDesigns from 'pages/Production/interfaces/IHomePageDesigns';
 import Content from 'pages/Production/Layout/Content';
 import { IHomePageDesigns } from './Production/interfaces/IHomePageDesigns';
+import { getSession } from 'next-auth/react';
 // import ProductGrid from '@/components/ProductIntegration/ProductGrid';
 // import { formatVariantName } from 'server/lib/format-variant-name';
+import { getToken, JWT } from 'next-auth/jwt';
+import { keyCreation } from './Production/interfaces/objects/obinsun-objects';
+import { buffer } from 'micro';
 
 type IndexPageProps = {
   synced_products: ISyncProduct[];
@@ -33,6 +37,14 @@ const subtitle =
   'You will fins a plethora of custom graphic designs attatched to high quality merchandise.';
 
 const IndexPage = ({ products }: IProps): JSX.Element => {
+  // const getTestResults = async () => {
+  //   fetch(
+  //     `https://firestore.googleapis.com/v1/projects/photo-gallery-upload/databases/(default)/documents/accessCodes/Authorization`
+  //   )
+  //     .then((response) => response.json())
+  //     .then((data) => console.log(data));
+  // };
+
   // const retrieveProducts = async () => {
   //   const url = `/api/checkout-success`;
   //   const response = await fetch(url, {
@@ -55,12 +67,13 @@ const IndexPage = ({ products }: IProps): JSX.Element => {
 
         <ProductGrid products={products} />
       </Content>
+      {/* <button onClick={getTestResults}>Retrieve</button> */}
     </>
   );
 };
 
-// export const getStaticProps: GetStaticProps = async () => {
-export const getServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  // export const getServerSideProps = async (ctx) => {
   const serviceAccount =
     require('pages/api/keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6') as string;
 
@@ -182,13 +195,162 @@ export const getServerSideProps = async () => {
     })
   );
 
+  // const getProviders = async () => {
+  //   await fetch(`${process.env.NEXTAUTH_URL}/api/auth/providers`).then(
+  //     (response) => console.log(response)
+  //   );
+  //   // .then((data) => console.log(data));
+  // };
+
+  // getProviders();
+
+  // const getProviders = async () => {
+  //   await fetch(`${process.env.NEXTAUTH_URL}/api/auth/examples/jwt`).then(
+  //     (response) => console.log(response)
+  //   );
+  //   // .then((data) => console.log(data));
+  // };
+
+  // getProviders();
+
   // console.log(products);
+
+  // const getTestResults = async () => {
+  //   fetch(
+  //     `https://firestore.googleapis.com/v1/projects/photo-gallery-upload/databases/(default)/documents/accessCodes/Authorization`
+  //   )
+  //     .then((response) => response.json())
+  //     .then((data) => console.log(data));
+  // };
+
+  // // console.log(getTestResults);
+  // getTestResults();
+
+  // const nextSession = await getSession(ctx);
+  // console.log({ nextAuthSession: nextSession });
+
+  const dbAttributes: keyCreation[] = [
+    {
+      obinsunKey: `string`,
+      username: `string`,
+      firstname: `string`,
+      lastname: `string`,
+      email: `string`,
+      password: `string`,
+      ip: `string`,
+      cc: `string`,
+    },
+  ];
+
+  const addDBKeys = {
+    method: 'POST',
+    body: JSON.stringify(dbAttributes),
+    headers: {
+      'Content-Type': 'application/json',
+      // 'obinsun-db': `Piece 0`,
+      'obinsun-db': `Piece 0`,
+      // Authorization: `Bearer token`,
+    },
+  };
+
+  console.log(dbAttributes);
+
+  const runRetrieval = async () => {
+    // const reader = new FileReader();
+
+    // const requestBuffer = await buffer(req);
+    // const payload = requestBuffer.toString();
+    // const sig = req.headers['stripe-signature'];
+    // const retrieveDBkeys =
+    await fetch(`${process.env.NEXTAUTH_URL}/api/dbs/`, addDBKeys).then(
+      (keys) =>
+        // console.log({ returnedKeys: keys.body})
+        {
+          // const jsonString = Buffer.from(keys.body).toString('utf8');
+          // async ({id}) => {await keys.text()};
+          // console.log({ jsonString });
+          // const {sentKeys} = keys.body
+          // console.log(keys.text());
+          const getKeys = async () => {
+            const keyRetrieval = await keys.text();
+            console.log(keyRetrieval);
+          };
+          // full retrieval of html document?
+
+          getKeys();
+          // const parsedData = JSON.parse(jsonString);
+
+          // console.log(parsedData);
+        }
+    );
+    // .then((text) => console.log(text));
+    // .then((array) => console.log(array.body)
+    // );
+    // console.log({ retrievedKeys: retrieveDBkeys });
+  };
+  runRetrieval();
 
   return {
     props: {
       products: shuffle(products),
+      // nextSession,
     },
   };
 };
 
 export default IndexPage;
+
+// const getStaticProps: GetStaticProps = async(ctx) => {
+//   const nextSession = await getSession(ctx);
+//   console.log({ nextAuthSession: nextSession });
+
+//   return {}
+// }
+
+// export const getServerSideProps = async () => {
+//   const obinsunKey = uuidv4();
+
+//   const dbAttributes: keyCreation[] = [
+//     {
+//       obinsunKey: `string`,
+//       username: `string`,
+//       firstname: `string`,
+//       lastname: `string`,
+//       email: `string`,
+//       password: `string`,
+//       ip: `string`,
+//       cc: `string`,
+//     },
+//   ];
+
+//   const addDBKeys = {
+//     method: 'POST',
+//     body: JSON.stringify(dbAttributes),
+//     headers: {
+//       Database: `Piece 0`,
+//     },
+//   };
+
+//   console.log(dbAttributes);
+
+//   const runRetrieval = async () => {
+//     const retrieveDBkeys = await fetch(`/api/dbs/`, addDBKeys);
+//     console.log({ retrievedKeys: retrieveDBkeys });
+//   };
+
+//   runRetrieval();
+
+//   return {};
+// };
+
+export const config = {
+  api: {
+    bodyParser: false,
+    externalResolver: true,
+  },
+};
+
+// export const getServerSideProps = async ({
+//   req: NextApiRequest,
+//   res: NextApiResponse,
+// }) => {};

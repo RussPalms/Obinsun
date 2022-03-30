@@ -35,7 +35,18 @@
 // app.listen(4242, () => console.log("Node server listening on port 4242!"));
 
 // const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY as string);
-const stripe = require("stripe")(`${process.env.STRIPE_SECRET_KEY}`);
+
+// import {stripe} from '@types/stripe'
+import { NextApiRequest, NextApiResponse } from 'next';
+import type Stripe from 'stripe';
+
+type stripeType = Stripe;
+
+const stripeApi: stripeType = require('stripe')(
+  `${process.env.STRIPE_SECRET_KEY}`
+);
+
+// const stripe = require("stripe")
 
 const calculateOrderAmount = (items) => {
   // Replace this constant with a calculation of the order's amount
@@ -44,12 +55,12 @@ const calculateOrderAmount = (items) => {
   return 1400;
 };
 
-export default async (req: any, res: any) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { items } = req.body;
 
-  const paymentIntent = await stripe.paymentIntents.create({
+  const paymentIntent = await stripeApi.paymentIntents.create({
     amount: calculateOrderAmount(items),
-    currency: "eur",
+    currency: 'eur',
     automatic_payment_methods: {
       enabled: true,
     },

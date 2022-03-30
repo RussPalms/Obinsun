@@ -65,7 +65,7 @@ const PersonalInfo = ({ formData, setFormData }: any) => {
               type="number"
               name=""
               required
-              value={formData.ssnLast4}
+              value={formData.ssnLast4.toString()}
               onChange={(e) => {
                 setFormData({ ...formData, ssnLast4: e.target.value });
               }}

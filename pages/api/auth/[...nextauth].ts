@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import FacebookProvider from 'next-auth/providers/facebook';
 import EmailProvider from 'next-auth/providers/email';
 import nodemailer from 'nodemailer';
 import { html, text } from '../emails/email-create';
@@ -33,6 +34,10 @@ import {
 // import { ac } from 'server/services';
 import { verifyPassword } from '../../server/lib/password-auth';
 import { ac } from '../../server/services';
+import { v4 as uuidv4 } from 'uuid';
+import { getToken, JWT } from 'next-auth/jwt';
+import { NextApiRequest, NextApiResponse } from 'next';
+import type { CookieSerializeOptions } from 'cookie';
 
 const THIRTY_DAYS = 30 * 24 * 60 * 60;
 const THIRTY_MINUTES = 30 * 60;
@@ -52,11 +57,62 @@ export default NextAuth({
   },
   adapter: adapterInstance,
   providers: [
-    CredentialsProvider({
-      authorize: async (credentials: any) => {
-        // const db = await connectToFirebase();
-        // const db = firestoreConnect;
+    // CredentialsProvider({
+    //   authorize: async (credentials: any) => {
+    //     console.log(credentials);
+    //     // const db = await connectToFirebase();
+    //     // const db = firestoreConnect;
+    //     const AuthenticationQuery = query(
+    //       collection(db, 'users'),
+    //       where('email', '==', credentials?.email)
+    //     );
+    //     const authSnapshot = await getDocs(AuthenticationQuery);
+    //     const userCollection: any = {};
+    //     authSnapshot.forEach((doc) => {
+    //       let a = doc.data();
+    //       a['_id'] = doc.id;
+    //       userCollection[doc.id] = a;
+    //     });
+    //     const user: any = Object.values(userCollection)[0];
+    //     const isValid = await verifyPassword(
+    //       credentials.password,
+    //       user.password
+    //     );
+    //     if (!isValid) {
+    //       throw new Error('Could not log you in!');
+    //     }
+    //     // if (isValid) {
+    //     return { email: user.email, role: user.role };
+    //     // } else {
+    //     //   return null;
+    //     // }
+    //     // console.log(user);
+    //     // 		const payload = {
+    //     // 			email: user.email,
+    //     // 			password: user.password
+    //     // 		}
+    //     // 		const res = await fetch('http://localhost:3000/api/auth/session', {
+    //     //   method: 'POST',
+    //     //   body: JSON.stringify(payload),
+    //     //   headers: {
+    //     //     'Content-Type': 'application/json',
+    //     //     tenant: credentials.tenantKey,
+    //     //     'Accept-Language': 'en-US',
+    //     //   },
+    //     // });
+    //   },
+    // } as any),
 
+    CredentialsProvider({
+      name: 'Credentials',
+      credentials: {
+        email: { label: 'email', type: 'email', placeholder: 'email' },
+        password: { label: 'Password', type: 'password', placeholder: 'email' },
+      },
+      async authorize(credentials, req) {
+        // async authorize(req, res) {
+        // console.log(req);
+        // return res;
         const AuthenticationQuery = query(
           collection(db, 'users'),
           where('email', '==', credentials?.email)
@@ -76,23 +132,36 @@ export default NextAuth({
         if (!isValid) {
           throw new Error('Could not log you in!');
         }
-        console.log(user);
-        return { email: user.email, role: user.role };
-        // 		const payload = {
-        // 			email: user.email,
-        // 			password: user.password
-        // 		}
-        // 		const res = await fetch('http://localhost:3000/api/auth/session', {
-        //   method: 'POST',
-        //   body: JSON.stringify(payload),
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //     tenant: credentials.tenantKey,
-        //     'Accept-Language': 'en-US',
-        //   },
-        // });
+        // return { email: user.email, role: user.role };
+        if (user) {
+          return {
+            // name: 'Fill Murray',
+            email: user.email,
+            // image: 'https://www.fillmurray.com/64/64',
+            // role: user.role,
+          };
+        }
+        // return null;
+        return req;
       },
-    } as any),
+    }),
+    // CredentialsProvider({
+    //   name: 'Credentials',
+    //   credentials: {
+    //     // email: { label: 'email', type: 'email' },
+    //     password: { label: 'Password', type: 'password' },
+    //   },
+    //   async authorize(credentials) {
+    //     if (credentials.password === 'pw') {
+    //       return {
+    //         name: 'Fill Murray',
+    //         email: 'bill@fillmurray.com',
+    //         image: 'https://www.fillmurray.com/64/64',
+    //       };
+    //     }
+    //     return null;
+    //   },
+    // }),
     EmailProvider({
       server: {
         host: process.env.SMTP_HOST,
@@ -120,8 +189,69 @@ export default NextAuth({
         });
       },
     }),
+
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_CLIENT_ID,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    }),
   ],
   callbacks: {
+    // signIn: async (credentials)=> {},
+    // async signIn({ user, account, profile, email, credentials }) {
+    //   console.log({
+    //     signIn: {
+    //       user: user,
+    //       account: account,
+    //       profile: profile,
+    //       email: email,
+    //       credentials: credentials,
+    //     },
+    //   });
+    //   const isAllowedToSignIn = true;
+    //   if (isAllowedToSignIn) {
+    //     return true;
+    //   } else {
+    //     // Return false to display a default error message
+    //     return false;
+    //     // Or you can return a URL to redirect to:
+    //     // return '/unauthorized'
+    //   }
+    // },
+    signIn: async ({ user, account, profile, email, credentials }) => {
+      // const signedInProperties = {
+      //   user, account, profile, email, credentials
+      // }
+      console.log({
+        signIn: {
+          user: user,
+          account: account,
+          profile: profile,
+          email: email,
+          credentials: credentials,
+        },
+      });
+
+      // const signedInJWT = await getToken(req:NextApiRequest);
+      // const signedInJWT = getToken();
+
+      // console.log({ signedInJWT: signedInJWT });
+
+      const isAllowedToSignIn = true;
+      if (isAllowedToSignIn) {
+        // return true;
+        return true;
+      } else {
+        // Return false to display a default error message
+        return false;
+        // Or you can return a URL to redirect to:
+        // return '/unauthorized'
+      }
+    },
+
+    // async redirect({ url, baseUrl }) {
+    //   console.log(url);
+    //   return baseUrl;
+    // },
     // async jwt({ token, user, account }) {
     // 	if (account && user) {
     // 		return {
@@ -142,8 +272,17 @@ export default NextAuth({
     // 	return session;
     // },
 
-    jwt: async ({ token }) => {
+    jwt: async ({ token, user, account, profile, isNewUser }) => {
       // const db = await connectToFirebase();
+      console.log({
+        retrievedJWT: {
+          token: token,
+          user: user,
+          account: account,
+          profile: profile,
+          isNewUser: isNewUser,
+        },
+      });
 
       const authTokenQuery = query(
         collection(db, 'users'),
@@ -172,9 +311,20 @@ export default NextAuth({
         token.obinsunId = userToken.obinsunId;
       }
 
+      console.log({
+        injectedJWT: {
+          token: token,
+          user: user,
+          account: account,
+          profile: profile,
+          isNewUser: isNewUser,
+        },
+      });
       return token;
     },
-    session: async ({ session, token }: any) => {
+    session: async ({ session, user, token }: any) => {
+      console.log({ retrievedSession: { session, user, token } });
+
       if (token) session.id = token.id;
       session.user.role = token.role;
       session.user.stripeId = token.stripeId;
@@ -188,16 +338,154 @@ export default NextAuth({
       session.user.permissions =
         token.role in grants ? { [token.role]: grants[token.role] } : {};
 
-      // console.log(session);
+      console.log({ injectedSession: { session, user, token } });
 
       // return Promise.resolve(session);
       return session;
     },
-    async redirect({ url, baseUrl }) {
+    // async redirect({ url, baseUrl }) {
+    //   console.log({ redirect: { url, baseUrl } });
+
+    //   if (url.startsWith(baseUrl)) return url;
+    //   // Allows relative callback URLs
+    //   else if (url.startsWith('/')) return new URL(url, baseUrl).toString();
+    //   return baseUrl;
+    // },
+    redirect: async ({ url, baseUrl }) => {
+      console.log({ redirect: { url, baseUrl } });
+
       if (url.startsWith(baseUrl)) return url;
       // Allows relative callback URLs
       else if (url.startsWith('/')) return new URL(url, baseUrl).toString();
       return baseUrl;
     },
   },
+  // debug: true,
+  events: {
+    // signIn: async () => {
+    //   console.log('signing in');
+    // },
+
+    async signIn(message) {
+      /* on successful sign in */
+      console.log({ signIn: `${message.user} signed in (immutable)`, message });
+    },
+    async signOut(message) {
+      /* on signout */
+      console.log({
+        signOut: `${message.token} signed out (immutable)`,
+        message,
+      });
+    },
+    async createUser(message) {
+      /* user created */
+      console.log({ createUser: 'new user created (immutable)', message });
+    },
+    async updateUser(message) {
+      /* user updated - e.g. their email was verified */
+      console.log({ updateUser: 'user updated (immutable)', message });
+    },
+    async linkAccount(message) {
+      /* account (e.g. Twitter) linked to a user */
+      console.log({ linkAccount: 'account linked (immutable)', message });
+    },
+    async session(message) {
+      /* session is active */
+      console.log({ session: 'active session (immutable)', message });
+    },
+    //   async error(message) { /* error in authentication flow */
+    //   console.log({error: 'authentication flow error', message})
+
+    // }
+
+    // error: async() => {}
+    // async signIn({ user, account, profile, email, credentials }) {
+    //   console.log(credentials);
+    //   const isAllowedToSignIn = true;
+    //   if (isAllowedToSignIn) {
+    //     return true;
+    //   } else {
+    //     // Return false to display a default error message
+    //     return false;
+    //     // Or you can return a URL to redirect to:
+    //     // return '/unauthorized'
+    //   }
+    // },
+  },
+  // pages: {
+  //   signIn: '/auth/signin',
+  //   signOut: '/auth/signout',
+  //   // error: '/auth/error',
+  //   error: '/auth/error',
+  //   verifyRequest: '/auth/verify-request',
+  //   newUser: '/auth/new-user',
+  // },
+  // cookies: {
+  //   sessionToken: {
+  //     // name: `__Secure-next-auth.session-token`,
+  //     name: `__Secure-obinsun.session-token`,
+  //     options: {
+  //       httpOnly: true,
+  //       sameSite: 'lax',
+  //       path: '/',
+  //       secure: true
+  //     }
+  //   },
+  //   callbackUrl: {
+  //     // name: `__Secure-next-auth.callback-url`,
+  //     name: `__Secure-obinsun.callback-url`,
+  //     options: {
+  //       sameSite: 'lax',
+  //       path: '/',
+  //       secure: true
+  //     }
+  //   },
+  //   csrfToken: {
+  //     // name: `__Host-next-auth.csrf-token`,
+  //     name: `__Host-obinsun.csrf-token`,
+  //     options: {
+  //       httpOnly: true,
+  //       sameSite: 'lax',
+  //       path: '/',
+  //       secure: true
+  //     }
+  //   },
+  //   pkceCodeVerifier: {
+  //     // name: `${cookiePrefix}next-auth.pkce.code_verifier`,
+  //     name: `${cookiePrefix}obinsun.pkce.code_verifier`,
+  //     options: {
+  //       httpOnly: true,
+  //       sameSite: 'lax',
+  //       path: '/',
+  //       secure: useSecureCookies: CookieSerializeOptions
+  //     }
+  //   },
+  //   state: {
+  //     // name: `${cookiePrefix}next-auth.state`,
+  //     name: `${cookiePrefix}obinsun.state`,
+  //     options: {
+  //       httpOnly: true,
+  //       sameSite: "lax",
+  //       path: "/",
+  //       secure: useSecureCookies: CookieSerializeOptions,
+  //     },
+  //   },
+  // },
+  // jwt: {
+  //   async encode(params: {
+  //     token: JWT
+  //     secret: string
+  //     maxAge: number
+  //   }): Promise<string> {
+  //     // return a custom encoded JWT string
+  //     return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+  //   },
+  //   async decode(params: {
+  //     token: string
+  //     secret: string
+  //   }): Promise<JWT | null> {
+  //     // return a `JWT` object, or `null` if decoding failed
+  //     return {}
+  //   },
+  // }
 });

@@ -15,6 +15,7 @@ import { CgGitFork } from 'react-icons/cg';
 
 import { useSelector } from 'react-redux';
 import { useUserContext } from 'pages/app/features';
+import { useRouter } from 'next/router';
 // import ZLogo from '@/assets/ObinsunVectors/ZLogo';
 // import DarkModeToggle from '@/components/DarkModeToggle';
 // import { useAppSelector } from 'pages/server/hooks/reduxHooks';
@@ -25,15 +26,29 @@ const Header = ({ openModal }: any) => {
 
   const { data: session } = useSession();
 
+  console.log({ obinsunSession: session });
+
   const items = useSelector(selectItems);
+
+  const router = useRouter();
 
   const { access } = useUserContext() as any;
 
-  const handleLogMode = () => {
+  const handleLogMode = async () => {
     if (!session) {
       openModal();
     } else {
-      signOut();
+      // signOut();
+      signOut({ redirect: false, callbackUrl: '/' });
+      // signOut({ redirect: false, callbackUrl: '/api/auth/logout' }).then(
+      //   (response) => console.log({ tokenResponse: response })
+      // );
+      // .then(
+      //   (signOutRes) => {
+      //     console.log({ redirectingTo: { signingOut: signOutRes } });
+      //   }
+      // );
+      router.push('/');
     }
   };
 
@@ -98,8 +113,12 @@ const Header = ({ openModal }: any) => {
                   onClick={handleLogMode}
                 >
                   <h2 className="relative z-50 h-full w-full">
-                    {session ? 'Logout' : 'Login'}
+                    {session ? <Link href="/">Logout</Link> : 'Login'}
                   </h2>
+
+                  {/* <h2 className="relative z-50 h-full w-full">
+                    {session ? 'Logout' : 'Login'}
+                  </h2> */}
                 </button>
 
                 <div className="relative w-full flex-[0.2] items-center justify-center">

@@ -34,6 +34,7 @@ async function handler(req: any, res: any) {
   if (
     !email ||
     !email.includes('@') ||
+    !email.includes('.') ||
     !password ||
     password.trim().length < 7
   ) {

@@ -21,8 +21,10 @@ export default function AccountSetup() {
   const [success, setSuccess] = useState('') as any;
 
   const clientId = process.env.PRINTFUL_CLIENT_ID;
+  // const clientId = 'app-2258814';
   //   const redirectUrl = `${process.env.NEXTAUTH_URL}/routes/protected/creator/printful-connect`;
-  const redirectUrl = `${process.env.NEXTAUTH_URL}/api/printful/account-connect`;
+  // const redirectUrl = `${process.env.NEXTAUTH_URL}/api/printful/account-connect`;
+  const redirectUrl = 'http://localhost:3000/api/printful/account-connect';
   //    const redirectUrl = `${process.env.NEXTAUTH_URL}/routes/protected/creator/document-verification`;
 
   // const stateValue = session?.id;
@@ -35,6 +37,16 @@ export default function AccountSetup() {
   //   const { data: session, status } = useSession();
   //   const loading = status === "loading";
   //   console.log(status, session);
+
+  // console.log(clientId);
+  const util = require('util');
+  // console.log(util.inspect(process.env, { maxArrayLength: null }));
+  console.dir(process.env, {
+    depth: null,
+    colors: true,
+    maxArrayLength: null,
+  });
+  // console.log(`${process.env.STRIPE_PUBLIC_KEY}`);
 
   return (
     <section className="relative flex justify-center align-center w-screen min-h-screen bg-gradient-to-b from-[#f1f4f9] to-[#dff1ff] overflow-hidden">

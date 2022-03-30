@@ -20,7 +20,10 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": { "@/*": ["src/*"] },
-    "useUnknownInCatchVariables": false
+    "useUnknownInCatchVariables": false,
+    "typeRoots": ["./types"]
+    // "types": ["node"]
+    // "types": ["./@types/**"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "*/index.d.ts"],
   "exclude": ["node_modules"]

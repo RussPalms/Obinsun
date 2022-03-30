@@ -1,3 +1,14 @@
+// require('dotenv').config();
+// import * as dotenv from 'dotenv';
+// dotenv.config();
+// import './config';
+// require('dotenv').config();
+process.on('warning', (e) => console.warn(e.stack));
+import React, { useCallback, useRef } from 'react';
+import { ApiProvider } from '@reduxjs/toolkit/query/react';
+
+// import { DB, dbApi } from './app/state/rtkApi';
+
 import './app/styles/globals.css';
 //  import "tailwindcss/tailwind.css";
 
@@ -11,7 +22,8 @@ import { WishlistProvider } from './app/context/wishlist';
 // import { defaultSEO } from '../next-seo.config';
 // import Layout from './src/components/ProductIntegration/Layout';
 import { Provider } from 'react-redux';
-import { store } from './app/state/store';
+import { Provider as ProviderEnhancer } from 'react-redux';
+import { store, storeConfig } from './app/state/store';
 // import { stores } from './app/state/stores/store';
 // import { store } from './app/state/stores/store';
 
@@ -51,7 +63,7 @@ function MyApp({
   router,
   pageProps: { session, ...pageProps },
 }: AppProps): JSX.Element {
-  const url = `http://localhost:3000${router.route}`;
+  const url = `${process.env.NEXTAUTH_URL}${router.route}`;
 
   const [loading, setLoading] = useState(false);
 
@@ -72,9 +84,9 @@ function MyApp({
     }
   });
 
-  useEffect(() => {
-    setTimeout(() => setLoading(!loading), 1000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => setLoading(!loading), 1000);
+  // }, []);
 
   useEffect(() => {
     const handleStart = () => {
@@ -99,6 +111,8 @@ function MyApp({
     };
   }, [loadingRouter]);
 
+  // useEffect(() => {}, []);
+
   return (
     <>
       <Head>
@@ -122,13 +136,15 @@ function MyApp({
         initial={false}
         onExitComplete={() => window.scrollTo(0, 0)}
       >
-        {loading ? (
-          <>
-            <Progress isAnimating={isAnimating} />
-            {/* <ThemeProvider attribute="class"> */}
-            {/* <MdxComponentsProvider> */}
-            <SessionProvider session={session}>
-              <Provider store={store}>
+        {/* {loading ? ( */}
+        <>
+          <Progress isAnimating={isAnimating} />
+          {/* <ThemeProvider attribute="class"> */}
+          {/* <MdxComponentsProvider> */}
+          <SessionProvider session={session}>
+            {/* <ApiProvider api={dbApi}> */}
+            <ProviderEnhancer store={store}>
+              <Provider store={storeConfig}>
                 <WishlistProvider>
                   <UserProvider>
                     {/* <AnimatePresence
@@ -147,13 +163,15 @@ function MyApp({
                   </UserProvider>
                 </WishlistProvider>
               </Provider>
-            </SessionProvider>
-            {/* </MdxComponentsProvider> */}
-            {/* </ThemeProvider> */}
-          </>
-        ) : (
+            </ProviderEnhancer>
+            {/* </ApiProvider> */}
+          </SessionProvider>
+          {/* </MdxComponentsProvider> */}
+          {/* </ThemeProvider> */}
+        </>
+        {/* ) : (
           <Preload />
-        )}
+        )} */}
       </AnimatePresence>
     </>
   );

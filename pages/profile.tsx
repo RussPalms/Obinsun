@@ -24,7 +24,10 @@ export default function ProfilePage({}: Props) {
 export async function getServerSideProps(context: any) {
   const session = await getSession({ req: context.req });
 
+  console.log({ currentSession: session });
+
   if (!session) {
+    console.log({ redirectedSession: session });
     // return (
     //   <LoginModal>
     //     <Authorization />

@@ -8,6 +8,9 @@ const clientId = process.env.PRINTFUL_CLIENT_ID;
 
 const clientSecret = process.env.PRINTFUL_SECRET_KEY;
 
+const redirectUrl = `${process.env.NEXTAUTH_URL}/settings`;
+// const redirectUrl = 'http://localhost:3000/settings';
+
 const app = !admin.apps.length
   ? admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
@@ -53,7 +56,7 @@ async function handler(req: any, res: any) {
     console.log(printfulTokenData);
 
     return createAccessCode(printfulTokenData)
-      .then(() => res.redirect(307, 'http://localhost:3000/settings'))
+      .then(() => res.redirect(307, redirectUrl))
       .catch((err) => res.status(400).send(`Error: ${err.message}`));
   }
 }
