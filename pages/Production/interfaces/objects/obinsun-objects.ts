@@ -20,10 +20,10 @@ export interface AccountSetup {
 export interface ExternalSetup extends AccountSetup {
   // country?: string;
   currency?: string;
-  bank_name?: string;
+  bankName?: string;
   routing_number?: string;
   account_number?: string;
-  card_name?: string;
+  cardName?: string;
   number?: string;
   exp_month?: string;
   exp_year?: string;
@@ -64,12 +64,19 @@ export interface InitialAccount {
 // }
 
 export interface UserCreation {
-  enteredUsername?: string;
-  enteredFirstname?: string;
-  enteredLastname?: string;
-  enteredEmail: string;
-  enteredPassword: string;
+  // enteredUsername?: string;
+  // enteredFirstname?: string;
+  // enteredLastname?: string;
+  // enteredEmail: string;
+  // enteredPassword: string;
   // role: string;
+
+  username?: string;
+  firstname?: string;
+  lastname?: string;
+  email: string;
+  password: string;
+  role: string;
 }
 
 export interface keyCreation {

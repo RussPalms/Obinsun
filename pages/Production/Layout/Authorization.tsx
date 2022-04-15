@@ -65,6 +65,18 @@ import { NextApiResponse } from 'next';
 const stripePromise = loadStripe(`${process.env.stripe_public_key}`);
 
 const Authorization = ({ closeModal }: any) => {
+  // const personTokenCreator = async () => {
+  //   const stripeResolver = await Promise.resolve(stripePromise);
+
+  //   const { token, error } = await stripeResolver.createToken('person', {
+  //     first_name: 'Jane',
+  //     last_name: 'Doe',
+  //     relationship: { owner: true },
+  //   });
+
+  //   console.log(token);
+  // };
+
   // const { data: dbs } = dbApi.useGetAllQuery();
   // const [updateDB] = dbApi.useUpdateDBMutation();
   // const [deleteDB] = dbApi.useDeleteDBMutation();
@@ -86,31 +98,118 @@ const Authorization = ({ closeModal }: any) => {
   // useEffect(() => {}, []);
 
   const [userResponse, setUserResponse] = useState('');
-  const [quickRegister, setQuickRegister] = useState(true);
+  // const [register, setregister] = useState(true);
+  // const [personToken, setPersonToken] = useState({});
 
-  const handleRegister = () => {};
+  // const handleRegister = () => {};
 
   // const createUserParams = {
   //   username, firstname, lastname, email, password
   // }
-  useEffect(() => {});
+  // useEffect(() => {});
 
-  async function createUser(email: any, password: any, role: any) {
-    // async function createUser({
-    //   // enteredUsername,
-    //   // enteredFirstname,
-    //   // enteredLastname,
-    //   // enteredEmail,
-    //   // enteredPassword,
+  // const personTokenCreation = async () => {
+  //   const stripeResolver = await Promise.resolve(stripePromise);
 
-    //   // username,
-    //   // firstname,
-    //   // lastname,
-    //   email,
-    //   password,
-    // }: any) {
+  //   const { token, error } = await stripeResolver.createToken('person', {
+  //     first_name: 'Jane',
+  //     last_name: 'Doe',
+  //     relationship: { owner: true },
+  //   });
+
+  //   console.log(token);
+  // };
+
+  const personTokenCreation = async ({
+    email,
+    firstname,
+    lastname,
+    obinsunUuid,
+  }) => {
+    const stripeResolver = await Promise.resolve(stripePromise);
+
+    console.log(email, firstname, lastname);
+
+    const { token, error } = await stripeResolver.createToken('person', {
+      // address,
+      // dob,
+      // type: 'custom',
+      // individual: {
+      email: email,
+      first_name: firstname,
+      // id_number,
+      last_name: lastname,
+
+      // first_name: 'Jane',
+      // last_name: 'Doe',
+      // relationship: { owner: true },
+      // relationship: { owner: true },
+      // },
+
+      // metadata: {
+      //   obId: obinsunUuid,
+      // },
+
+      // phone,
+      // relationship,
+    });
+
+    // console.log(token);
+
+    // console.log(token);
+    // setPersonToken(token);
+    return token;
+  };
+
+  // async function createUser(email: any, password: any, role: any) {
+  async function createUser(
+    // enteredUsername,
+    // enteredFirstname,
+    // enteredLastname,
+    // enteredEmail,
+    // enteredPassword,
+
+    {
+      obinsunUuid,
+      username,
+      firstname,
+      lastname,
+      email,
+      password,
+      role,
+      // createdToken,
+      personToken,
+    }
+  ) {
+    //  UserCreation {
+    // any) {
     // : // , role
     // UserCreation
+
+    // const personTokenCreation = async () => {
+    //   const stripeResolver = await Promise.resolve(stripePromise);
+
+    //   const { token, error } = await stripeResolver.createToken('person', {
+    //     // address,
+    //     // dob,
+
+    //     email: email,
+    //     first_name: firstname,
+    //     // id_number,
+    //     last_name: lastname,
+    //     // relationship: { owner: true },
+    //     metadata: {
+    //       obId: obinsunUuid,
+    //     },
+    //     // phone,
+    //     // relationship,
+    //   });
+
+    //   console.log(token);
+    //   setPersonToken(token);
+    // };
+
+    // if (token) {
     const response = await fetch('/api/auth/register', {
       method: 'POST',
       body: JSON.stringify({
@@ -119,13 +218,16 @@ const Authorization = ({ closeModal }: any) => {
         // enteredLastname,
         // enteredEmail,
         // enteredPassword,
-
-        // username,
-        // firstname,
-        // lastname,
+        obinsunUuid,
+        username,
+        firstname,
+        lastname,
         email,
         password,
         role,
+        // personToken,
+        // accountToken: createdToken,
+        personToken,
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -137,6 +239,8 @@ const Authorization = ({ closeModal }: any) => {
       setUserResponse(userData.message);
       throw new Error(userData.message || 'Something went wrong!');
     }
+    // }
+    return userData;
   }
   const usernameInputRef: React.MutableRefObject<any> = useRef();
   const firstnameInputRef: React.MutableRefObject<any> = useRef();
@@ -155,9 +259,13 @@ const Authorization = ({ closeModal }: any) => {
   async function submitHandler(e: any) {
     e.preventDefault();
 
-    // const enteredUsername = usernameInputRef.current?.value as string;
-    // const enteredFirstname = firstnameInputRef.current?.value as string;
-    // const enteredLastname = lastnameInputRef.current?.value as string;
+    const createUuid = uuidv4();
+
+    const obinsunUuid = `0b!n$un_${createUuid}`;
+
+    const enteredUsername = usernameInputRef.current?.value as string;
+    const enteredFirstname = firstnameInputRef.current?.value as string;
+    const enteredLastname = lastnameInputRef.current?.value as string;
     const enteredEmail = emailInputRef.current?.value as string;
     const enteredPassword = passwordInputRef.current?.value as string;
     const enteredRole = 'guest';
@@ -165,6 +273,7 @@ const Authorization = ({ closeModal }: any) => {
     if (isLogin) {
       const result: any = await signIn('credentials', {
         redirect: false,
+        name: enteredFirstname + ' ' + enteredLastname,
         email: enteredEmail,
         password: enteredPassword,
       });
@@ -178,35 +287,45 @@ const Authorization = ({ closeModal }: any) => {
         closeModal();
       }
     } else {
-      if (quickRegister == true) {
-        // const enteredRole = 'guest';
+      // if (register == true) {
+      const createdToken = await personTokenCreation({
+        obinsunUuid,
+        firstname: enteredFirstname,
+        lastname: enteredLastname,
+        email: enteredEmail,
+      }).then((retrievedToken) => retrievedToken);
+      // personTokenCreator();
 
-        const result = await createUser(
-          // {
-          // enteredUsername,
-          // enteredFirstname,
-          // enteredLastname,
-          enteredEmail,
-          enteredPassword,
-          enteredRole
-          // }
-        );
+      // console.log({ generatedToken: createdToken });
 
-        console.log(result);
-      } else if (quickRegister == false) {
-        const result = await createUser(
-          // {
-          // enteredUsername,
-          // enteredFirstname,
-          // enteredLastname,
-          enteredEmail,
-          enteredPassword,
-          enteredRole
-          // }
-        );
+      const result = await createUser({
+        obinsunUuid,
+        username: enteredUsername,
+        firstname: enteredFirstname,
+        lastname: enteredLastname,
+        email: enteredEmail,
+        password: enteredPassword,
+        role: enteredRole,
+        // personToken: Promise.resolve(createdToken),
+        personToken: createdToken,
+      });
 
-        console.log(result);
-      }
+      console.log(result);
+      // }
+      // else if (register == false) {
+      //   const result = await createUser(
+      //     // {
+      //     enteredUsername,
+      //     enteredFirstname,
+      //     enteredLastname,
+      //     enteredEmail,
+      //     enteredPassword,
+      //     enteredRole
+      //     // }
+      //   );
+
+      //   console.log(result);
+      // }
       await signIn('credentials', {
         redirect: false,
         email: enteredEmail,
@@ -241,56 +360,84 @@ const Authorization = ({ closeModal }: any) => {
             </h2>
             <form onSubmit={submitHandler}>
               <p>{userResponse}</p>
-              {/* <div className="inputBox">
-                <input
-                  className="input input-glass-container"
-                  type="text"
-                  placeholder="Username"
-                  id="username"
-                  required
-                  ref={usernameInputRef}
-                />
-              </div>
-              <div className="inputBox">
-                <input
-                  className="input input-glass-container"
-                  type="text"
-                  placeholder="First"
-                  id="firstname"
-                  required
-                  ref={firstnameInputRef}
-                />
-              </div>
-              <div className="inputBox">
-                <input
-                  className="input input-glass-container"
-                  type="text"
-                  placeholder="Last"
-                  id="lastname"
-                  required
-                  ref={lastnameInputRef}
-                />
-              </div> */}
-              <div className="inputBox">
-                <input
-                  className="input input-glass-container"
-                  type="email"
-                  placeholder="E-Mail"
-                  id="email"
-                  required
-                  ref={emailInputRef}
-                />
-              </div>
-              <div className="inputBox">
-                <input
-                  className="input input-glass-container"
-                  type="password"
-                  placeholder="Password"
-                  id="password"
-                  required
-                  ref={passwordInputRef}
-                />
-              </div>
+
+              {isLogin ? (
+                <>
+                  <div className="inputBox">
+                    <input
+                      className="input input-glass-container"
+                      type="email"
+                      placeholder="E-Mail"
+                      id="email"
+                      required
+                      ref={emailInputRef}
+                    />
+                  </div>
+                  <div className="inputBox">
+                    <input
+                      className="input input-glass-container"
+                      type="password"
+                      placeholder="Password"
+                      id="password"
+                      required
+                      ref={passwordInputRef}
+                    />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="inputBox">
+                    <input
+                      className="input input-glass-container"
+                      type="text"
+                      placeholder="Username"
+                      id="username"
+                      required
+                      ref={usernameInputRef}
+                    />
+                  </div>
+                  <div className="inputBox">
+                    <input
+                      className="input input-glass-container"
+                      type="text"
+                      placeholder="First"
+                      id="firstname"
+                      required
+                      ref={firstnameInputRef}
+                    />
+                  </div>
+                  <div className="inputBox">
+                    <input
+                      className="input input-glass-container"
+                      type="text"
+                      placeholder="Last"
+                      id="lastname"
+                      required
+                      ref={lastnameInputRef}
+                    />
+                  </div>
+                  <div className="inputBox">
+                    <input
+                      className="input input-glass-container"
+                      type="email"
+                      placeholder="E-Mail"
+                      id="email"
+                      required
+                      ref={emailInputRef}
+                    />
+                  </div>
+                  <div className="inputBox">
+                    <input
+                      className="input input-glass-container"
+                      type="password"
+                      placeholder="Password"
+                      id="password"
+                      required
+                      ref={passwordInputRef}
+                    />
+                  </div>
+                </>
+              )}
 
               <div className="inputBox">
                 <input
@@ -309,6 +456,7 @@ const Authorization = ({ closeModal }: any) => {
                     : 'Sign in with existing account'}
                 </a>
               </p>
+              {/* <button onClick={personTokenCreator}>Create Person</button> */}
             </form>
           </div>
         </div>

@@ -10,6 +10,7 @@ import { CgProfile, CgSearch } from 'react-icons/cg';
 import { IoIosHome, IoIosColorPalette } from 'react-icons/io';
 import { VscSettingsGear } from 'react-icons/vsc';
 import { CgGitFork } from 'react-icons/cg';
+import { FaPenFancy } from 'react-icons/fa';
 
 // import { connect, ConnectedProps } from 'react-redux';
 
@@ -21,12 +22,12 @@ import { useRouter } from 'next/router';
 // import { useAppSelector } from 'pages/server/hooks/reduxHooks';
 // import { getMemoizedNumItems } from 'pages/app/state/slices/cartSlice';
 // import { selectItems } from "../slices/basketSlice";
-const Header = ({ openModal }: any) => {
+const Header = ({ openModal }: any, { openQuickSketch }: any) => {
   // const numItems = useAppSelector(getMemoizedNumItems);
 
   const { data: session } = useSession();
 
-  console.log({ obinsunSession: session });
+  // console.log({ obinsunSession: session });
 
   const items = useSelector(selectItems);
 
@@ -120,6 +121,17 @@ const Header = ({ openModal }: any) => {
                     {session ? 'Logout' : 'Login'}
                   </h2> */}
                 </button>
+
+                <div className="relative w-full flex-[0.2] items-center justify-center">
+                  <li className="relative filter-container">
+                    <a className="relative filter-icon-list-container">
+                      <FaPenFancy
+                        className="relative h-[2.5em] w-[2.5em] cursor-pointer"
+                        onClick={() => openQuickSketch}
+                      />
+                    </a>
+                  </li>
+                </div>
 
                 <div className="relative w-full flex-[0.2] items-center justify-center">
                   <Link href="/checkout">
@@ -244,6 +256,22 @@ const Header = ({ openModal }: any) => {
                               onClick={handleRoute}
                               className="filter-icon-size"
                             />
+                            {/* {Object.values(
+                              session.user.neccessary_actions.currently_due
+                            ).length > 0 ? (
+                              <a className="relative">
+                                <span className="z-50 pt-[0.125em] mobile-l:pt-[0.15em] pl-[0.05em] absolute flex items-center justify-center top-[-2em] xs:top-[-0.025em] mobile-l:top-[0.2em] right-[6em] vs:h-[1em] xs:h-[1.25em] vs:w-[1em] xs:w-[1.25em]  bg-gray-300/70 dark:bg-gray-800/70 text-center border-black dark:border-[#4C8EFF] border-[0.025em] rounded-full text-gray-800 dark:text-gray-300 text-xs mobile-l:text-sm font-bold">
+                                  {
+                                    Object.values(
+                                      session.user.neccessary_actions
+                                        .currently_due
+                                    ).length
+                                  }
+                                </span>
+                              </a>
+                            ) : (
+                              ''
+                            )} */}
                           </span>
                         </Link>
                         <span className="filter-text-container laptop-l:hidden">

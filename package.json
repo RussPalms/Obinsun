@@ -4,10 +4,14 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "webhook": "stripe listen --forward-to http://localhost:3000/api/webhooks/stripe/transact"
   },
   "dependencies": {
     "@babel/plugin-syntax-top-level-await": "^7.14.5",
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.1.18",
     "@google-cloud/firestore": "^5.0.2",
     "@google-cloud/storage": "^5.18.1",
     "@headlessui/react": "^1.5.0",
@@ -61,7 +65,9 @@
     "next-seo": "^4.28.1",
     "next-themes": "^0.0.15",
     "next-transpile-modules": "^9.0.0",
+    "node-fetch": "^3.2.3",
     "nodemailer": "^6.7.2",
+    "normalize.css": "^8.0.1",
     "pako": "^2.0.4",
     "prettier": "^2.5.1",
     "printful-request": "^1.1.1",
@@ -83,6 +89,7 @@
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
     "retry-axios": "^2.6.0",
+    "sharp": "^0.30.3",
     "stripe": "^8.198.0",
     "svg64": "^1.1.0",
     "svgo": "^2.8.0",

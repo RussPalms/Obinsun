@@ -10,7 +10,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['files.cdn.printful.com'],
+    domains: ['files.cdn.printful.com', 'firebasestorage.googleapis.com'],
   },
   env: {
     stripe_public_key: process.env.STRIPE_PUBLIC_KEY,

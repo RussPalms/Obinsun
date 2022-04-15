@@ -21,13 +21,13 @@ const ExternalAccounts = () => {
   const [page, setPage] = useState(0);
   const [object, setObject] = useState('bank_account');
   const [formData, setFormData] = useState({
-    bank_name: '',
+    bankName: '',
     // country: cc,
     currency: 'usd',
     routing_number: '',
     account_number: '',
 
-    card_name: '',
+    cardName: '',
     number: '',
     exp_month: '',
     exp_year: '',
@@ -62,6 +62,17 @@ const ExternalAccounts = () => {
     // console.log(object);
     getData();
   });
+
+  useEffect(() => {
+    if (session.user.external_accounts) {
+      setFormData({
+        ...formData,
+        bankName: session.user.external_accounts.data[0].bank_name,
+        routing_number: session.user.external_accounts.data[0].routing_number,
+        account_number: 'PROVIDED',
+      });
+    }
+  }, [session]);
 
   //   useEffect(() => {}, [AccountDisplay]);
 

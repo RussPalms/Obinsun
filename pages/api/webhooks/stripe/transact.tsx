@@ -1,6 +1,8 @@
 import { buffer } from 'micro';
 import * as admin from 'firebase-admin';
 import { NextApiRequest, NextApiResponse } from 'next';
+import type Stripe from 'stripe';
+// import type { Stripe } from '@stripe/stripe-js';
 const serviceAccount =
   require('/pages/api/keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6') as string;
 
@@ -10,7 +12,7 @@ const firebaseAdmin = !admin.apps.length
     })
   : admin.app();
 
-const stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`);
+const stripe: Stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`);
 
 const endpointSecret = `${process.env.STRIPE_SIGNING_SECRET}`;
 
@@ -18,23 +20,31 @@ const fulfillCapabilityUpdate = async (capabilityUpdate: any) => {
   const customAccount = await stripe.accounts.retrieve(
     capabilityUpdate.account
   );
-  console.log(
-    'neccessary actions:',
-    customAccount.requirements.currently_due[0]
-  );
-  firebaseAdmin.firestore().collection('accessCodes').doc('Payment').set({
-    obinsunId: customAccount.id,
-  });
 
-  firebaseAdmin
-    .firestore()
-    .collection('users')
-    .doc(customAccount.metadata.transactId)
-    .collection('custom_account')
-    .doc(customAccount.id)
-    .set({
-      last_time_updated: admin.firestore.FieldValue.serverTimestamp(),
-    });
+  // const person = await stripe.accounts.retrievePerson(
+  //   capabilityUpdate.account,
+  //   customAccount.individual.id
+  // );
+
+  // console.log(person);
+
+  // console.log(
+  //   'neccessary actions:',
+  //   customAccount.requirements.currently_due[0]
+  // );
+  // firebaseAdmin.firestore().collection('accessCodes').doc('Payment').set({
+  //   obinsunId: customAccount.id,
+  // });
+
+  // firebaseAdmin
+  //   .firestore()
+  //   .collection('users')
+  //   .doc(customAccount.metadata.transactId)
+  //   .collection('custom_account')
+  //   .doc(customAccount.id)
+  //   .set({
+  //     last_time_updated: admin.firestore.FieldValue.serverTimestamp(),
+  //   });
 
   return firebaseAdmin
     .firestore()
@@ -42,7 +52,17 @@ const fulfillCapabilityUpdate = async (capabilityUpdate: any) => {
     .doc(customAccount.metadata.transactId)
     .update({
       stripeId: customAccount.id,
-      personId: customAccount.individual.id,
+      // personId: customAccount.individual.id,
+      last_stripe_update: admin.firestore.FieldValue.serverTimestamp(),
+      // neccessary_actions: customAccount.requirements.currently_due[0],
+      neccessary_actions: customAccount.requirements,
+      verification: customAccount.individual.verification,
+      // business_info: customAccount.
+      personal_info: {
+        dob: customAccount.individual.dob,
+        phone: customAccount.individual.phone,
+        ssnLast4: customAccount.individual.ssn_last_4_provided,
+      },
     })
     .then(() => {
       console.log(
@@ -51,12 +71,117 @@ const fulfillCapabilityUpdate = async (capabilityUpdate: any) => {
     });
 };
 
+const fulfillAccountUpdate = async (accountUpdate: any) => {
+  const customAccountUpdate = await stripe.accounts.retrieve(accountUpdate.id);
+  console.log(customAccountUpdate);
+
+  return firebaseAdmin
+    .firestore()
+    .collection('users')
+    .doc(customAccountUpdate.metadata.transactId)
+    .update({
+      last_stripe_update: admin.firestore.FieldValue.serverTimestamp(),
+      neccessary_actions: customAccountUpdate.requirements,
+      verification: customAccountUpdate.individual.verification,
+      external_accounts: customAccountUpdate.external_accounts,
+      stripe_metadata: customAccountUpdate.metadata,
+    })
+    .then(() => {
+      console.log(
+        `SUCCESS: Account ${customAccountUpdate.id} has been updated`
+      );
+    });
+};
+
+const fulfillExternalAccountCreation = async (externalAccountCreation: any) => {
+  // const externalAccount = await stripe.accounts.retrieveExternalAccount(externalAccountCreation.id);
+  // console.log(customAccountUpdate);
+
+  const customExternalAccountUpdate = await stripe.accounts.retrieve(
+    externalAccountCreation.id
+  );
+  console.log(customExternalAccountUpdate);
+
+  return firebaseAdmin
+    .firestore()
+    .collection('users')
+    .doc(customExternalAccountUpdate.metadata.transactId)
+    .update({
+      last_stripe_update: admin.firestore.FieldValue.serverTimestamp(),
+      neccessary_actions: customExternalAccountUpdate.requirements,
+      verification: customExternalAccountUpdate.individual.verification,
+      external_accounts: customExternalAccountUpdate.external_accounts,
+    })
+    .then(() => {
+      console.log(
+        `SUCCESS: Account ${customExternalAccountUpdate.id} has been updated`
+      );
+    });
+};
+
+// const fulfillPersonUpdate = async (personUpdate: any) => {
+//   const person = await stripe.accounts.retrievePerson(
+//     personUpdate.id
+//   );
+
+//   return firebaseAdmin
+//     .firestore()
+//     .collection('users')
+//     .doc(person.metadata.transactId)
+//     .update({
+//       personId: person.id,
+//       last_stripe_update: admin.firestore.FieldValue.serverTimestamp(),
+//             personal_info: {
+//         dob: person.individual.dob,
+//         phone: person.individual.phone,
+//         ssnLast4: person.individual.ssn_last_4,
+//       },
+//     })
+//     .then(() => {
+//       console.log(
+//         `SUCCESS: Account ${person.id} has been added to firestore`
+//       );
+//     });
+// };
+
+const fulfillCustomerCreation = async (customerCreation: any) => {
+  const customerAccount = await stripe.customers.retrieve(customerCreation.id);
+
+  return firebaseAdmin
+    .firestore()
+    .collection('users')
+    .doc(customerAccount.metadata.username)
+    .update({
+      customerId: customerAccount.id,
+    })
+    .then(() => {
+      console.log(
+        `SUCCESS: Account ${customerAccount.id} has been added to firestore`
+      );
+    });
+};
+
+const fulfillCustomerUpdate = async (customerUpdate: any) => {
+  const customerAccount = await stripe.customers.retrieve(customerUpdate.id);
+
+  return firebaseAdmin
+    .firestore()
+    .collection('users')
+    .doc(customerAccount.metadata.username)
+    .update({
+      shipping: customerAccount.shipping,
+    })
+    .then(() => {
+      console.log(`SUCCESS: Updated ${customerAccount.id} shipping address.`);
+    });
+};
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     const requestBuffer = await buffer(req);
     const payload = requestBuffer.toString();
     const sig = req.headers['stripe-signature'];
-    let event;
+    let event: Stripe.Event;
 
     try {
       event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
@@ -71,13 +196,26 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     switch (event.type) {
       case 'account.updated':
         const accountUpdate = event.data.object;
-        console.log('accountUpdate:', event.pending_webhooks);
-        res.status(200).send('account updated');
+        // console.log('accountUpdate:', event.pending_webhooks);
+        // res.status(200).send('account updated');
+        return (
+          fulfillAccountUpdate(accountUpdate)
+            // .then(() => res.status(200).send('successfully updated account'))
+            .then(() => res.status(200))
+            .catch((err) =>
+              res.status(400).send(`Webhook Error: ${err.message}`)
+            )
+        );
 
         break;
       case 'account.external_account.created':
         const externalAccountCreation = event.data.object;
-        res.status(200).send('external account created');
+        // res.status(200).send('external account created');
+        return fulfillExternalAccountCreation(externalAccountCreation)
+          .then(() => res.status(200))
+          .catch((err: any) =>
+            res.status(400).send(`Webhook Error: ${err.message}`)
+          );
 
         break;
       case 'account.external_account.deleted':
@@ -159,11 +297,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       case 'coupon.updated':
         const couponUpdate = event.data.object;
         res.status(200).send('coupon updated');
-
         break;
       case 'customer.created':
         const customerCreation = event.data.object;
-        res.status(200).send('customer created');
+        return fulfillCustomerCreation(customerCreation)
+          .then(() => res.status(200).send('successfully created customer'))
+          .catch((err) =>
+            res.status(400).send(`Webhook Error: ${err.message}`)
+          );
 
         break;
       case 'customer.deleted':
@@ -173,8 +314,16 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         break;
       case 'customer.updated':
         const customerUpdate = event.data.object;
+        console.log(customerUpdate);
         res.status(200).send('customer updated');
-
+        return fulfillCustomerUpdate(customerUpdate)
+          .then(() =>
+            // res.status(200).json({ message: 'successfully updated customer' })
+            res.status(200)
+          )
+          .catch((err) =>
+            res.status(400).send(`Webhook Error: ${err.message}`)
+          );
         break;
       case 'customer.discount.created':
         const discountCreation = event.data.object;
@@ -459,7 +608,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         break;
       case 'person.updated':
         const personUpdate = event.data.object;
-        console.log('personUpdate:', event.pending_webhooks);
+        // console.log('personUpdate:', event.pending_webhooks);
         res.status(200).send('person updated');
 
         break;
@@ -608,7 +757,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         console.log(`Unhandled event type ${event.type}`);
     }
   } else {
-    res.status(204).send({});
+    return res.status(204).send({});
   }
 };
 

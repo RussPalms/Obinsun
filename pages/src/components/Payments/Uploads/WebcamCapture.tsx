@@ -18,6 +18,7 @@ export default function WebcamCapture({}: Props) {
   const webcamRef = useRef(null) as any;
   const dispatch = useDispatch() as any;
   const router = useRouter();
+  // const {data: session, status} = useSession()
 
   const capture = useCallback(() => {
     const imageSrc = webcamRef.current!.getScreenshot();
@@ -30,15 +31,21 @@ export default function WebcamCapture({}: Props) {
       <div className="relative">
         <Webcam
           audio={false}
-          height={videoConstraints.height}
+          // height={videoConstraints.height}
+          // height="100%"
+          height="720"
           ref={webcamRef}
-          screenshotFormat="image/jpeg"
-          width={videoConstraints.width}
+          // screenshotFormat="image/jpeg"
+          screenshotFormat="image/png"
+          // width={videoConstraints.width}
+          // width="100%"
+          width="1080"
           videoConstraints={videoConstraints}
           mirrored={true}
+          className="glass-container h-full w-full"
         />
         <RadioButtonUncheckedIcon
-          className="absolute bottom-0 left-[50%] transform translate-x-[-50%] translate-y-[-50%] cursor-pointer text-white"
+          className="absolute bottom-0 left-[50%] transform translate-x-[-50%] translate-y-[-50%] cursor-pointer text-black dark:text-[#4C8EFF]"
           onClick={capture}
           fontSize="large"
         />

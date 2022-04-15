@@ -1,6 +1,7 @@
 import { getSession, useSession } from 'next-auth/react';
 import Content from './Production/Layout/Content';
 import UserSettings from './src/components/Settings/UserSettings';
+import ExternalAccounts from './src/components/Settings/ExternalAccounts';
 import type Stripe from 'stripe';
 import { useEffect } from 'react';
 import type { Session } from 'next-auth';
@@ -10,6 +11,8 @@ import react from 'react';
 // import type {JSX} from 'jsx'
 import type SessionProviderProps from 'next-auth';
 import { GetServerSidePropsContext } from 'next';
+import PrintfulSignin from './src/components/Settings/PrintfulSignin';
+import WebcamCapture from './src/components/Payments/Uploads/WebcamCapture';
 
 // type Props = {
 //   session: SessionProviderProps
@@ -56,30 +59,44 @@ const subtitle =
   'You will fins a plethora of custom graphic designs attatched to high quality merchandise.';
 
 export default function SettingsPage() {
-  // useEffect(() => {
-  //   console.log('session loaded');
-  // }, []);
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    console.log('session loaded', session.user.neccessary_actions);
+    console.log('session loaded', session.user.verification);
+  }, []);
 
   return (
     <>
       <Content title="Settings" description={`${title} - ${subtitle}`}>
+        Todos: Neccessary Actions -{' '}
+        {session.user.neccessary_actions?.currently_due[0]
+          ? session.user.neccessary_actions.currently_due[0]
+          : ''}
+        {/* Neccessary Verifications - {session.user.verification} */}
         <UserSettings />
+        <PrintfulSignin />
+        <ExternalAccounts />
+        <WebcamCapture />
       </Content>
     </>
   );
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const stripe: Stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`);
+  // const stripe: Stripe = require('stripe')(`${process.env.STRIPE_SECRET_KEY}`);
 
-  // console.log(process.env);
+  // // console.log(process.env);
 
-  const session = await getSession({ req: context.req });
-  const retrievedAccount = await stripe.accounts.retrieve(
-    session.user.stripeId
-  );
+  // const session = await getSession({ req: context.req });
+  // const retrievedAccount = await stripe.accounts.retrieve(
+  //   session.user.stripeId
+  // );
 
-  console.log(retrievedAccount);
+  // console.log(retrievedAccount);
+
+  const session = await getSession(context);
+  console.log(session);
 
   // console.log(retrievedAccount.requirements);
   // console.log(retrievedAccount.future_requirements);

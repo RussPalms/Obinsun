@@ -7,7 +7,7 @@ import {
   selectCameraImage,
 } from '../../../app/state/slices/cameraSlice';
 import { useRouter } from 'next/router';
-import { useSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import {
   db,
   projectStorage,
@@ -21,6 +21,7 @@ import {
 } from 'firebase/storage';
 import { addDoc, collection } from 'firebase/firestore';
 import { v4 as uuid } from 'uuid';
+import Content from 'pages/Production/Layout/Content';
 
 type Props = {};
 
@@ -47,9 +48,10 @@ const Preview = () => {
   };
 
   const sendPost = () => {
-    const capturedImage = `users/${session?.id}/documents/`;
+    const capturedImage = `users/${session.id}/documents/`;
 
-    const imageRef = ref(projectStorage, `${capturedImage}${id}.jpeg`);
+    // const imageRef = ref(projectStorage, `${capturedImage}${id}.jpeg`);
+    const imageRef = ref(projectStorage, `${capturedImage}${id}.png`);
 
     const capturedImageRef = collection(db, capturedImage);
 
@@ -62,31 +64,54 @@ const Preview = () => {
           imageUrl,
           read: false,
           createdAt,
+          username: session.user.username,
         });
       };
 
       getUrl();
+      // router.replace('/routes/protected/creator/documents');
       router.replace('/routes/protected/creator/documents');
     });
   };
   return (
-    <>
+    <Content title="" description="">
       <div className="relative">
         <CloseIcon
           onClick={closePreview}
-          className="absolute top-0 margin-[5px] cursor-pointer bg-white"
+          className="absolute top-0 left-0 margin-[5px] cursor-pointer z-50 glass-container"
         />
-        <img src={cameraImage} alt="" />
+        <img
+          src={cameraImage}
+          alt=""
+          className="glass-container h-full w-full"
+        />
         <div
           onClick={sendPost}
-          className="absolute bottom-0 right-[-25px] transform translate-x-[-50%] translate-y-[-50%] bg-yellow-50 text-black flex space-evenly items-center border-[30px] p-[7px] cursor-pointer"
+          className="absolute bottom-0 right-0 glass-container flex justify-center items-center border-[1rem] p-[1rem] cursor-pointer"
         >
           <h2>Save</h2>
           <SendIcon fontSize="small" className="text-large" />
         </div>
       </div>
-    </>
+    </Content>
   );
 };
 
 export default Preview;
+
+export async function getServerSideProps(context: any) {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { session },
+  };
+}

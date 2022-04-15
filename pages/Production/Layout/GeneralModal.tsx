@@ -13,7 +13,7 @@ const variants = {
   exit: { opacity: 0, x: -100, y: 0 },
 };
 
-const LoginModal = forwardRef((props: any, ref) => {
+const GeneralModal = forwardRef((props: any, ref) => {
   const [display, setDisplay] = useState(false);
 
   useImperativeHandle(ref, () => {
@@ -61,4 +61,4 @@ const LoginModal = forwardRef((props: any, ref) => {
   //   }
 });
 
-export default LoginModal;
+export default GeneralModal;

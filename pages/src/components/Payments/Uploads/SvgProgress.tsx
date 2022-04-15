@@ -2,14 +2,31 @@ import React, { useEffect } from 'react';
 import useSvgUpload from '../../../../server/hooks/useSvgUpload';
 import { motion } from 'framer-motion';
 
-function SvgProgress({ file, setFile }: any) {
-  const { progress, url } = useSvgUpload(file);
+function SvgProgress({
+  file,
+  setFile,
+  designData,
+  setDesignData,
+  designName,
+  setDesignName,
+  designDescription,
+  setDesignDescription,
+}: any) {
+  const { progress, url } = useSvgUpload(
+    file,
+    designData,
+    designName,
+    designDescription
+  );
 
   useEffect(() => {
     if (url) {
       setFile(null);
+      // setDesignData({ name: '', description: '' });
+      setDesignName('');
+      setDesignDescription('');
     }
-  }, [url, setFile]);
+  }, [url, setFile, setDesignData, setDesignName, setDesignDescription]);
 
   return (
     <motion.div

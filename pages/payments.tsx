@@ -4,7 +4,7 @@ import { Elements } from '@stripe/react-stripe-js';
 
 // import "./App.css";
 import CheckoutForm from './src/components/Payments/CheckoutForm';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps, GetStaticProps } from 'next';
 import axios from 'axios';
 import Content from './Production/Layout/Content';
 
@@ -88,3 +88,36 @@ export default function Payments() {
 //     props: {},
 //   };
 // };
+
+// export const getServerSideProps = async () => {
+//   const keyGet = async () => {
+//     const getting = {
+//       method: 'GET',
+//       // body: JSON.stringify(dbAttributes),
+//       headers: {
+//         'Content-Type': 'application/json',
+//         // 'obinsun-db': `Piece 0`,
+//         'obinsun-db': `Piece 0`,
+//         // Authorization: `Bearer token`,
+//       },
+//     };
+
+//     await fetch(`${process.env.NEXTAUTH_URL}/api/dbs/keys`, getting).then(
+//       (gotKeys) => {
+//         const theKeys = async () => {
+//           // const keyRetrieval = await keys.text();
+//           // console.log(keyRetrieval);
+
+//           const keyGetting = await gotKeys.json();
+//           console.log(keyGetting);
+//         };
+//         theKeys();
+//       }
+//     );
+//   };
+//   keyGet();
+
+//   return;
+// };
+
+// export default function _() {}

@@ -5,12 +5,15 @@
 // require('dotenv').config();
 process.on('warning', (e) => console.warn(e.stack));
 import React, { useCallback, useRef } from 'react';
-import { ApiProvider } from '@reduxjs/toolkit/query/react';
 
 // import { DB, dbApi } from './app/state/rtkApi';
 
+import 'normalize.css';
+
+// import './app/styles/sketchTest.css';
+
 import './app/styles/globals.css';
-//  import "tailwindcss/tailwind.css";
+import 'tailwindcss/tailwind.css';
 
 import Head from 'next/head';
 
@@ -23,9 +26,11 @@ import { WishlistProvider } from './app/context/wishlist';
 // import Layout from './src/components/ProductIntegration/Layout';
 import { Provider } from 'react-redux';
 import { Provider as ProviderEnhancer } from 'react-redux';
-import { store, storeConfig } from './app/state/store';
+import store from './app/state/store';
 // import { stores } from './app/state/stores/store';
 // import { store } from './app/state/stores/store';
+import { todoApi } from './app/state/rtkApi';
+import { ApiProvider } from '@reduxjs/toolkit/query/react';
 
 // import { ThemeProvider } from 'next-themes';
 // import { MdxComponentsProvider } from './app/context/MdxComponents';
@@ -45,7 +50,7 @@ import Obinsun from 'pages/Production/Layout/Obinsun';
 // import Footer from 'pages/Production/Layout/Footer';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-declare const window: any;
+// declare const window: any;
 
 // export function reportWebVitals({ id, name, label, value }: NextWebVitalsMetric): void {
 //   window.gtag('event', name, {
@@ -71,6 +76,89 @@ function MyApp({
   const isAnimating = useProgressStore((state: any) => state.isAnimating);
   const loadingRouter = useRouter();
 
+  // useEffect(() => {
+  //   // window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB
+  //   const windowDB = window.indexedDB;
+  //   // window.indexedDB = window.indexedDB || window.webkitIndexedDB;
+  //   // if (!windowDB) {
+  //   //   alert();
+  //   // }
+  //   if (!windowDB) {
+  //     alert();
+  //   }
+  //   let request = windowDB.open('ObinsunDB', 1),
+  //     database: IDBDatabase,
+  //     transaction: IDBTransaction,
+  //     storage: IDBObjectStore,
+  //     index: IDBIndex;
+
+  //   request.onupgradeneeded = function (event) {
+  //     event.preventDefault();
+  //     let database = request.result,
+  //       // storage = database.createObjectStore('ObinsunStorage', {
+  //       //   keyPath: 'obinsunIdentification',
+  //       // }),
+  //       // or
+  //       storage = database.createObjectStore('ObinsunStorage', {
+  //         // autoIncrement: true,
+  //         autoIncrement: false,
+  //       });
+  //     index = storage.createIndex('obinsunText', 'obinsunText', {
+  //       // unique: false,
+  //       unique: true,
+  //     });
+  //   };
+
+  //   request.onerror = function (event) {
+  //     event.preventDefault();
+  //     // console.log(`There was an error: ${event.target.errorCode}`)
+  //     // console.log(`There was an error: ${event}`);
+  //     // console.log(`There was an error: ${event}`);
+  //     console.log(`There was an error: ${event.target}`);
+  //   };
+
+  //   request.onsuccess = function (event) {
+  //     event.preventDefault();
+  //     database = request.result;
+  //     transaction = database.transaction('ObinsunStorage', 'readwrite');
+  //     storage = transaction.objectStore('ObinsunStorage');
+  //     index = storage.index('obinsunText');
+  //     database.onerror = function (event) {
+  //       event.preventDefault();
+  //       // console.log("ERROR" + event.target.error)
+  //       // console.log('ERROR' + event);
+  //       console.log('ERROR' + event.target);
+  //     };
+  //     storage.put({
+  //       obinsunIdentification: 1,
+  //       obinsunText: 'username',
+  //       enteredEntry: 'obinsunUsername',
+  //     });
+  //     storage.put({
+  //       obinsunIdentification: 2,
+  //       obinsunText: 'firstname',
+  //       enteredEntry: 'obinsunFirstname',
+  //     });
+  //     storage.put({
+  //       obinsunIdentification: 3,
+  //       obinsunText: 'firstname',
+  //       enteredEntry: 'obinsunLastname',
+  //     });
+  //     let obinsun1 = storage.get(1);
+  //     let obinsun = index.get('username');
+  //     obinsun1.onsuccess = function () {
+  //       console.log(obinsun1.result);
+  //       console.log(obinsun1.result.obinsunText);
+  //     };
+  //     obinsun.onsuccess = function () {
+  //       console.log(obinsun.result.obinsunText);
+  //     };
+  //     transaction.oncomplete = function () {
+  //       database.close();
+  //     };
+  //   };
+  // });
+
   useEffect(() => {
     // On page load or when changing themes, best to add inline in `head` to avoid FOUC
     if (
@@ -84,9 +172,9 @@ function MyApp({
     }
   });
 
-  // useEffect(() => {
-  //   setTimeout(() => setLoading(!loading), 1000);
-  // }, []);
+  useEffect(() => {
+    setTimeout(() => setLoading(!loading), 500);
+  }, []);
 
   useEffect(() => {
     const handleStart = () => {
@@ -136,15 +224,15 @@ function MyApp({
         initial={false}
         onExitComplete={() => window.scrollTo(0, 0)}
       >
-        {/* {loading ? ( */}
-        <>
-          <Progress isAnimating={isAnimating} />
-          {/* <ThemeProvider attribute="class"> */}
-          {/* <MdxComponentsProvider> */}
-          <SessionProvider session={session}>
-            {/* <ApiProvider api={dbApi}> */}
-            <ProviderEnhancer store={store}>
-              <Provider store={storeConfig}>
+        {loading ? (
+          <>
+            <Progress isAnimating={isAnimating} />
+            {/* <ThemeProvider attribute="class"> */}
+            {/* <MdxComponentsProvider> */}
+            <SessionProvider session={session}>
+              {/* <ApiProvider api={todoApi}> */}
+              {/* <ProviderEnhancer store={store}> */}
+              <Provider store={store}>
                 <WishlistProvider>
                   <UserProvider>
                     {/* <AnimatePresence
@@ -163,15 +251,15 @@ function MyApp({
                   </UserProvider>
                 </WishlistProvider>
               </Provider>
-            </ProviderEnhancer>
-            {/* </ApiProvider> */}
-          </SessionProvider>
-          {/* </MdxComponentsProvider> */}
-          {/* </ThemeProvider> */}
-        </>
-        {/* ) : (
+              {/* </ProviderEnhancer> */}
+              {/* </ApiProvider> */}
+            </SessionProvider>
+            {/* </MdxComponentsProvider> */}
+            {/* </ThemeProvider> */}
+          </>
+        ) : (
           <Preload />
-        )} */}
+        )}
       </AnimatePresence>
     </>
   );

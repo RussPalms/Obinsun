@@ -22,6 +22,7 @@ import { getSession } from 'next-auth/react';
 import { getToken, JWT } from 'next-auth/jwt';
 import { keyCreation } from './Production/interfaces/objects/obinsun-objects';
 import { buffer } from 'micro';
+import { printful } from './server/lib/printful-client';
 
 type IndexPageProps = {
   synced_products: ISyncProduct[];
@@ -37,6 +38,10 @@ const subtitle =
   'You will fins a plethora of custom graphic designs attatched to high quality merchandise.';
 
 const IndexPage = ({ products }: IProps): JSX.Element => {
+  // useEffect(() => {
+  //   console.log(products);
+  // }, []);
+
   // const getTestResults = async () => {
   //   fetch(
   //     `https://firestore.googleapis.com/v1/projects/photo-gallery-upload/databases/(default)/documents/accessCodes/Authorization`
@@ -72,120 +77,81 @@ const IndexPage = ({ products }: IProps): JSX.Element => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
-  // export const getServerSideProps = async (ctx) => {
-  const serviceAccount =
-    require('pages/api/keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6') as string;
+// export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getServerSideProps = async (context) => {
+  const session = await getSession(context);
 
-  const clientId = process.env.PRINTFUL_CLIENT_ID;
+  // const serviceAccount =
+  //   require('pages/api/keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6') as string;
 
-  const clientSecret = process.env.PRINTFUL_SECRET_KEY;
+  // const clientId = process.env.PRINTFUL_CLIENT_ID;
 
-  const app = !admin.apps.length
-    ? admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount),
-      })
-    : admin.app();
+  // const clientSecret = process.env.PRINTFUL_SECRET_KEY;
 
-  const code: any = {};
+  // const app = !admin.apps.length
+  //   ? admin.initializeApp({
+  //       credential: admin.credential.cert(serviceAccount),
+  //     })
+  //   : admin.app();
 
-  const getAccessCode = async () => {
-    const accessCode = await app
-      .firestore()
-      .collection('accessCodes')
-      .doc('Authorization')
-      .get()
-      .then((snapshot) => {
-        const current_access_token = snapshot.data()?.access_token;
-        const current_expires_at = snapshot.data()?.expires_at;
-        const current_refresh_token = snapshot.data()?.refresh_token;
-        if (Date.now() < current_expires_at) {
-          // console.log(Date.now());
-          // console.log('Using current access token', current_access_token);
-          return current_access_token;
-        } else {
-          return getRefreshedCode(current_refresh_token);
-        }
-      });
-    return accessCode;
-  };
+  // const code: any = {};
 
-  const getRefreshedCode = async (current_refresh_token: any) => {
-    const getRefreshedToken = axios.post(
-      'https://www.printful.com/oauth/token',
-      {
-        grant_type: 'refresh_token',
-        client_id: clientId,
-        client_secret: clientSecret,
-        refresh_token: current_refresh_token,
-      }
-    );
-    const response = await getRefreshedToken;
-    const refreshedToken = response.data;
-    let new_access_token = refreshedToken.access_token;
-    let new_expires_at = refreshedToken.expires_at;
-    let new_refresh_token = refreshedToken.refresh_token;
-    app.firestore().collection('accessCodes').doc('Authorization').set({
-      access_token: new_access_token,
-      expires_at: new_expires_at,
-      refresh_token: new_refresh_token,
-    });
-    // console.log('Using refreshed access token', new_access_token);
+  // const getAccessCode = async () => {
+  //   const accessCode = await app
+  //     .firestore()
+  //     .collection('accessCodes')
+  //     .doc('Authorization')
+  //     .get()
+  //     .then((snapshot) => {
+  //       const current_access_token = snapshot.data()?.access_token;
+  //       const current_expires_at = snapshot.data()?.expires_at;
+  //       const current_refresh_token = snapshot.data()?.refresh_token;
+  //       if (Date.now() < current_expires_at) {
+  //         // console.log(Date.now());
+  //         // console.log('Using current access token', current_access_token);
+  //         return current_access_token;
+  //       } else {
+  //         return getRefreshedCode(current_refresh_token);
+  //       }
+  //     });
+  //   return accessCode;
+  // };
 
-    return new_access_token;
-  };
-  const access_code = await getAccessCode();
+  // const getRefreshedCode = async (current_refresh_token: any) => {
+  //   const getRefreshedToken = axios.post(
+  //     'https://www.printful.com/oauth/token',
+  //     {
+  //       grant_type: 'refresh_token',
+  //       client_id: clientId,
+  //       client_secret: clientSecret,
+  //       refresh_token: current_refresh_token,
+  //     }
+  //   );
+  //   const response = await getRefreshedToken;
+  //   const refreshedToken = response.data;
+  //   let new_access_token = refreshedToken.access_token;
+  //   let new_expires_at = refreshedToken.expires_at;
+  //   let new_refresh_token = refreshedToken.refresh_token;
+  //   app.firestore().collection('accessCodes').doc('Authorization').set({
+  //     access_token: new_access_token,
+  //     expires_at: new_expires_at,
+  //     refresh_token: new_refresh_token,
+  //   });
+  //   // console.log('Using refreshed access token', new_access_token);
 
-  // const { result: productIds } = await printful.get('sync/products', '');
+  //   return new_access_token;
+  // };
+  // const access_code = await getAccessCode();
+
+  const { result: productIds } = await printful.get('sync/products', '');
   // console.log(productIds);
-  // const allProducts = await Promise.all(
-  //   productIds.map(
-  //     async ({ id }: any) => await printful.get(`sync/products/${id}`, '')
-  //   )
-  // );
-  // console.log(allProducts);
-  // const products: PrintfulProduct[] = allProducts.map(
-  //   ({ result: { sync_product, sync_variants } }) => ({
-  //     ...sync_product,
-  //     variants: sync_variants.map(({ name, ...variant }: any) => ({
-  //       name: formatVariantName(name),
-  //       ...variant,
-  //     })),
-  //   })
-  // );
-
-  // retrievePrintful();
-
-  const getProducts = await axios.get(
-    // 'https://api.printful.com/store/products',
-    'https://api.printful.com/sync/products',
-    {
-      headers: {
-        Authorization: `Bearer ${access_code}`,
-      },
-    }
-  );
-  const { result: productIds } = getProducts.data;
-
-  const synced_products = await Promise.all(
+  const allProducts = await Promise.all(
     productIds.map(
-      async ({ id }: any) =>
-        await axios
-          .get(`https://api.printful.com/sync/products/${id}`, {
-            headers: {
-              Authorization: `Bearer ${access_code}`,
-            },
-          })
-          .then((response) => {
-            const { data } = response;
-            return data;
-          })
+      async ({ id }: any) => await printful.get(`sync/products/${id}`, '')
     )
   );
-
-  // console.log(synced_products);
-
-  const products = synced_products.map(
+  // console.log(allProducts);
+  const products: PrintfulProduct[] = allProducts.map(
     ({ result: { sync_product, sync_variants } }) => ({
       ...sync_product,
       variants: sync_variants.map(({ name, ...variant }: any) => ({
@@ -194,6 +160,47 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
       })),
     })
   );
+
+  // retrievePrintful();
+
+  // const getProducts = await axios.get(
+  //   // 'https://api.printful.com/store/products',
+  //   'https://api.printful.com/sync/products',
+  //   {
+  //     headers: {
+  //       Authorization: `Bearer ${access_code}`,
+  //     },
+  //   }
+  // );
+  // const { result: productIds } = getProducts.data;
+
+  // const synced_products = await Promise.all(
+  //   productIds.map(
+  //     async ({ id }: any) =>
+  //       await axios
+  //         .get(`https://api.printful.com/sync/products/${id}`, {
+  //           headers: {
+  //             Authorization: `Bearer ${access_code}`,
+  //           },
+  //         })
+  //         .then((response) => {
+  //           const { data } = response;
+  //           return data;
+  //         })
+  //   )
+  // );
+
+  // console.log(synced_products);
+
+  // const products = synced_products.map(
+  //   ({ result: { sync_product, sync_variants } }) => ({
+  //     ...sync_product,
+  //     variants: sync_variants.map(({ name, ...variant }: any) => ({
+  //       name: formatVariantName(name),
+  //       ...variant,
+  //     })),
+  //   })
+  // );
 
   // const getProviders = async () => {
   //   await fetch(`${process.env.NEXTAUTH_URL}/api/auth/providers`).then(
@@ -229,6 +236,8 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   // const nextSession = await getSession(ctx);
   // console.log({ nextAuthSession: nextSession });
 
+  // const fs = require('fs');
+
   const dbAttributes: keyCreation[] = [
     {
       obinsunKey: `string`,
@@ -253,7 +262,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     },
   };
 
-  console.log(dbAttributes);
+  // console.log(dbAttributes);
 
   const runRetrieval = async () => {
     // const reader = new FileReader();
@@ -262,8 +271,10 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     // const payload = requestBuffer.toString();
     // const sig = req.headers['stripe-signature'];
     // const retrieveDBkeys =
-    await fetch(`${process.env.NEXTAUTH_URL}/api/dbs/`, addDBKeys).then(
+    await fetch(`${process.env.NEXTAUTH_URL}/api/dbs/keys`, addDBKeys).then(
       (keys) =>
+        // console.log(keys.json())
+        // keys.json()
         // console.log({ returnedKeys: keys.body})
         {
           // const jsonString = Buffer.from(keys.body).toString('utf8');
@@ -271,27 +282,66 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
           // console.log({ jsonString });
           // const {sentKeys} = keys.body
           // console.log(keys.text());
+
+          // const getKeys = async () => {
+          //   const keyRetrieval = await keys.text();
+          //   console.log(keyRetrieval);
+          // };
+          // // full retrieval of html document?
+
+          // getKeys();
+
           const getKeys = async () => {
-            const keyRetrieval = await keys.text();
-            console.log(keyRetrieval);
+            // const keyRetrieval = await keys.text();
+            // console.log(keyRetrieval);
+
+            const keyRetrieval = await keys.json();
+            // console.log(keyRetrieval);
+            // const keyRetrieval = keys.arrayBuffer();
+            // const keyRetrieval = await keys.arrayBuffer()[0];
+            // console.log(keyRetrieval);
+
+            // const typedArray = new Uint8Array(keyRetrieval);
+            // // const array = [...typedArray];
+            // const retrievedArray = Array.from(typedArray);
+            // console.log(retrievedArray);
+
+            // const content = fs.readFileSync(keyRetrieval, 'utf8');
+            // console.log(content);
+
+            // const removeTags = (keyRetrieval) => {
+            //   if (keyRetrieval === null || keyRetrieval === '') return false;
+            //   else keyRetrieval = keyRetrieval.toString();
+
+            //   // Regular expression to identify HTML tags in
+            //   // the input string. Replacing the identified
+            //   // HTML tag with a null string.
+            //   return keyRetrieval.replace(/(<([^>]+)>)/gi, '');
+            // };
+            // const removedTags = document.write(removeTags(keyRetrieval));
+            // console.log(removedTags);
           };
           // full retrieval of html document?
 
-          getKeys();
+          // getKeys();
+
           // const parsedData = JSON.parse(jsonString);
 
           // console.log(parsedData);
         }
     );
+    // .then((body) => console.log(body));
     // .then((text) => console.log(text));
     // .then((array) => console.log(array.body)
     // );
     // console.log({ retrievedKeys: retrieveDBkeys });
   };
-  runRetrieval();
+
+  // runRetrieval();
 
   return {
     props: {
+      session,
       products: shuffle(products),
       // nextSession,
     },
@@ -343,12 +393,12 @@ export default IndexPage;
 //   return {};
 // };
 
-export const config = {
-  api: {
-    bodyParser: false,
-    externalResolver: true,
-  },
-};
+// export const config = {
+//   api: {
+//     bodyParser: false,
+//     externalResolver: true,
+//   },
+// };
 
 // export const getServerSideProps = async ({
 //   req: NextApiRequest,

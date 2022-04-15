@@ -136,6 +136,8 @@ export default NextAuth({
         if (user) {
           return {
             // name: 'Fill Murray',
+            id: user.obinsunUuid,
+            name: `${user.firstname} ${user.lastname}`,
             email: user.email,
             // image: 'https://www.fillmurray.com/64/64',
             // role: user.role,
@@ -221,15 +223,7 @@ export default NextAuth({
       // const signedInProperties = {
       //   user, account, profile, email, credentials
       // }
-      console.log({
-        signIn: {
-          user: user,
-          account: account,
-          profile: profile,
-          email: email,
-          credentials: credentials,
-        },
-      });
+      // console.log({ß
 
       // const signedInJWT = await getToken(req:NextApiRequest);
       // const signedInJWT = getToken();
@@ -273,16 +267,13 @@ export default NextAuth({
     // },
 
     jwt: async ({ token, user, account, profile, isNewUser }) => {
+      // console.log('jwt', user);
       // const db = await connectToFirebase();
-      console.log({
-        retrievedJWT: {
-          token: token,
-          user: user,
-          account: account,
-          profile: profile,
-          isNewUser: isNewUser,
-        },
-      });
+      // console.log({ß
+
+      // if (token) {
+
+      // }
 
       const authTokenQuery = query(
         collection(db, 'users'),
@@ -302,43 +293,74 @@ export default NextAuth({
       const userToken: any = Object.values(userCollection)[0];
 
       if (userToken) {
+        token.name = userToken.name;
+
         token.id = userToken._id;
+        token.firestoreId = userToken._id;
         token.role = userToken.role;
         token.stripeId = userToken.stripeId;
-        token.personId = userToken.personId;
+        // token.personId = userToken.personId;
         token.customerId = userToken.customerId;
         token.images = userToken.images;
-        token.obinsunId = userToken.obinsunId;
+        // token.obinsunId = userToken.obinsunId;
+        token.obinsunId = userToken.obinsunUuid;
+        token.printful = userToken.printful;
+        token.registeredInfo = userToken.registeredInfo;
+        token.firstname = userToken.firstname;
+        token.lastname = userToken.lastname;
+        token.username = userToken.username;
+        token.shipping = userToken.shipping;
+        token.neccessary_actions = userToken.neccessary_actions;
+        token.personal_info = userToken.personal_info;
+        token.verification = userToken.verification;
+        token.external_accounts = userToken.external_accounts;
       }
 
-      console.log({
-        injectedJWT: {
-          token: token,
-          user: user,
-          account: account,
-          profile: profile,
-          isNewUser: isNewUser,
-        },
-      });
+      // if (userToken) {
+      //   token.name = userToken.name;
+
+      // }
+
+      // console.log({
+      //   injectedJWT: {
+      //     token: token,
+      //     user: user,
+      //     account: account,
+      //     profile: profile,
+      //     isNewUser: isNewUser,
+      //   },
+      // });
       return token;
     },
     session: async ({ session, user, token }: any) => {
-      console.log({ retrievedSession: { session, user, token } });
+      // console.log({ retrievedSession: { session, user, token } });ß
 
+      // if (token) session.id = token.id;
       if (token) session.id = token.id;
       session.user.role = token.role;
       session.user.stripeId = token.stripeId;
-      session.user.personId = token.personId;
+      // session.user.personId = token.personId;
       session.user.customerId = token.customerId;
       session.user.images = token.images;
       session.user.obinsunId = token.obinsunId;
+      session.user.firestoreId = token.firestoreId;
+      session.user.printful = token.printful;
+      session.user.registeredInfo = token.registeredInfo;
+      session.user.firstname = token.firstname;
+      session.user.lastname = token.lastname;
+      session.user.username = token.username;
+      session.user.shipping = token.shipping;
+      session.user.neccessary_actions = token.neccessary_actions;
+      session.user.personal_info = token.personal_info;
+      session.user.verification = token.verification;
+      session.user.external_accounts = token.external_accounts;
 
       const grants = ac.getGrants();
       // expose only the current role permissions
       session.user.permissions =
         token.role in grants ? { [token.role]: grants[token.role] } : {};
 
-      console.log({ injectedSession: { session, user, token } });
+      // console.log({ injectedSession: { session, user, token } });ß
 
       // return Promise.resolve(session);
       return session;
@@ -352,7 +374,7 @@ export default NextAuth({
     //   return baseUrl;
     // },
     redirect: async ({ url, baseUrl }) => {
-      console.log({ redirect: { url, baseUrl } });
+      // console.log({ redirect: { url, baseUrl } });ß
 
       if (url.startsWith(baseUrl)) return url;
       // Allows relative callback URLs
@@ -365,39 +387,33 @@ export default NextAuth({
     // signIn: async () => {
     //   console.log('signing in');
     // },
-
-    async signIn(message) {
-      /* on successful sign in */
-      console.log({ signIn: `${message.user} signed in (immutable)`, message });
-    },
-    async signOut(message) {
-      /* on signout */
-      console.log({
-        signOut: `${message.token} signed out (immutable)`,
-        message,
-      });
-    },
-    async createUser(message) {
-      /* user created */
-      console.log({ createUser: 'new user created (immutable)', message });
-    },
-    async updateUser(message) {
-      /* user updated - e.g. their email was verified */
-      console.log({ updateUser: 'user updated (immutable)', message });
-    },
-    async linkAccount(message) {
-      /* account (e.g. Twitter) linked to a user */
-      console.log({ linkAccount: 'account linked (immutable)', message });
-    },
-    async session(message) {
-      /* session is active */
-      console.log({ session: 'active session (immutable)', message });
-    },
+    // async signIn(message) {
+    //   /* on successful sign in */
+    //   console.log({ signIn: `${message.user} signed in (immutable)`, message });
+    // },
+    // async signOut(message) {
+    //   /* on signout */
+    //   // console.log({ß
+    // },
+    // async createUser(message) {
+    //   /* user created */
+    //   console.log({ createUser: 'new user created (immutable)', message });
+    // },
+    // async updateUser(message) {
+    //   /* user updated - e.g. their email was verified */
+    //   console.log({ updateUser: 'user updated (immutable)', message });
+    // },
+    // async linkAccount(message) {
+    //   /* account (e.g. Twitter) linked to a user */
+    //   console.log({ linkAccount: 'account linked (immutable)', message });
+    // },
+    // async session(message) {
+    //   /* session is active */
+    //   console.log({ session: 'active session (immutable)', message });
+    // },
     //   async error(message) { /* error in authentication flow */
     //   console.log({error: 'authentication flow error', message})
-
     // }
-
     // error: async() => {}
     // async signIn({ user, account, profile, email, credentials }) {
     //   console.log(credentials);

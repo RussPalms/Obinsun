@@ -33,8 +33,9 @@ import Externals from './Externals';
 // import { showModal } from 'pages/app/state/actions';
 // import { connect, ConnectedProps } from 'react-redux';
 
-import LoginModal from './LoginModal';
+import GeneralModal from './GeneralModal';
 import Authorization from './Authorization';
+import QuickSketch from './QuickSketch';
 // import DesignMix from '@/components/DesignMix';
 
 // type AppProps = {} & ConnectedProps<typeof connector>;
@@ -66,22 +67,34 @@ const Obinsun = ({ children }: any) => {
   // const [modalOpen, setModalOpen] = useState(false)
 
   const obinsunRef = useRef() as any;
-  const modalRef = useRef() as any;
+  const authModalRef = useRef() as any;
+  const quickSketchModalRef = useRef() as any;
 
   const openModal = () => {
-    modalRef.current?.openModal();
+    authModalRef.current?.openModal();
   };
 
   const closeModal = () => {
-    modalRef.current?.close();
+    authModalRef.current?.close();
+  };
+
+  const openQuickSketch = () => {
+    quickSketchModalRef.current?.openQuickSketch();
+  };
+
+  const closeQuickSketch = () => {
+    quickSketchModalRef.current?.close();
   };
 
   return (
     <main ref={obinsunRef}>
       {/* <AnimatePresence> */}
-      <LoginModal ref={modalRef}>
+      <GeneralModal ref={authModalRef}>
         <Authorization closeModal={closeModal} passHref />
-      </LoginModal>
+      </GeneralModal>
+      <GeneralModal ref={quickSketchModalRef}>
+        <QuickSketch closeQuickSketch={closeQuickSketch} passHref />
+      </GeneralModal>
       {/* </AnimatePresence> */}
       <DesignMix key="design_mix" />
       {/* <motion.div
@@ -91,7 +104,12 @@ const Obinsun = ({ children }: any) => {
           variants={variants}
           transition={{ type: 'linear' }} */}
       <div className="relative top-0 h-full w-full z-40 flex flex-col items-center justify-center text-center text-xs xs:text-sm mobile-l:text-base laptop-l:text-lg">
-        <Header key="header" openModal={openModal} passHref />
+        <Header
+          key="header"
+          openModal={openModal}
+          openQuickSketch={openQuickSketch}
+          passHref
+        />
         <Sidebar
           key="sidebar"
           //  passHref

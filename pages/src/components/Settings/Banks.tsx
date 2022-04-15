@@ -9,9 +9,9 @@ const Banks = ({ formData, setFormData }: any) => {
               type="text"
               name=""
               required
-              value={formData.bank_name}
+              value={formData?.bankName}
               onChange={(e) => {
-                setFormData({ ...formData, bank_name: e.target.value });
+                setFormData({ ...formData, bankName: e.target.value });
               }}
             />
             <span className="glass-form-text">Bank Account Name</span>
@@ -58,10 +58,12 @@ const Banks = ({ formData, setFormData }: any) => {
           <div className="glass-form-input-container">
             <input
               className="glass-form-input"
-              type="number"
+              // type="number"
+              type="text"
               name=""
               required
-              value={formData.routing_number.toString()}
+              // value={formData.routing_number.toString()}
+              value={formData?.routing_number}
               onChange={(e) => {
                 setFormData({ ...formData, routing_number: e.target.value });
               }}
@@ -74,10 +76,12 @@ const Banks = ({ formData, setFormData }: any) => {
           <div className="glass-form-input-container">
             <input
               className="glass-form-input"
-              type="number"
+              // type="number"
+              type="text"
               name=""
               required
-              value={formData.account_number.toString()}
+              // value={formData.account_number.toString()}
+              value={formData?.account_number}
               onChange={(e) => {
                 setFormData({ ...formData, account_number: e.target.value });
               }}

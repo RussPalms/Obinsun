@@ -6,15 +6,16 @@ import {
   onSnapshot,
   query,
   setDoc,
-} from "firebase/firestore";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import React from "react";
-import { useDispatch } from "react-redux";
-import ReactTimeago from "react-timeago";
-import StopRoundedIcon from "@material-ui/icons/StopRounded";
-import { selectCameraImage } from "../../../../app/state/slices/cameraSlice";
-import { db } from "../../../../server/lib/database/firebaseStorage";
+} from 'firebase/firestore';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import ReactTimeago from 'react-timeago';
+import StopRoundedIcon from '@material-ui/icons/StopRounded';
+import { selectCameraImage } from '../../../../app/state/slices/cameraSlice';
+import { db } from '../../../../server/lib/database/firebaseStorage';
+import { selectImage } from 'pages/app/state/slices/snapSlice';
 
 const CapturedDocuments = ({ id, timestamp, read, imageUrl }: any) => {
   const { data: session } = useSession();
@@ -26,7 +27,7 @@ const CapturedDocuments = ({ id, timestamp, read, imageUrl }: any) => {
 
   const open = () => {
     if (!read) {
-      dispatch(selectCameraImage(imageUrl));
+      dispatch(selectImage(imageUrl));
 
       const imageReference = collection(db, capturedImageRef);
 
@@ -42,7 +43,7 @@ const CapturedDocuments = ({ id, timestamp, read, imageUrl }: any) => {
 
       setDoc(doc(imageReference, id), { read: true, merge: true });
 
-      router.push("/routes/protected/creator/document-view");
+      router.push('/routes/protected/creator/document-view');
     }
   };
 
@@ -54,7 +55,7 @@ const CapturedDocuments = ({ id, timestamp, read, imageUrl }: any) => {
       >
         <div className="left-[5px] flex-1">
           <p>
-            {!read && "Tap to view -"}{" "}
+            {!read && 'Tap to view -'}{' '}
             <ReactTimeago date={new Date(timestamp?.toDate()).toUTCString()} />
           </p>
         </div>

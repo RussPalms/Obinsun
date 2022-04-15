@@ -9,9 +9,9 @@ const Cards = ({ formData, setFormData }: any) => {
               type="text"
               name=""
               required
-              value={formData.card_name}
+              value={formData.cardName}
               onChange={(e) => {
-                setFormData({ ...formData, card_name: e.target.value });
+                setFormData({ ...formData, cardName: e.target.value });
               }}
             />
             <span className="glass-form-text">Card Name</span>

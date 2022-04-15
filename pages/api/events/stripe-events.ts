@@ -19,6 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     cc,
     country,
     stripeId,
+
     object,
   }: InitialAccount = nextRequest;
 
@@ -44,6 +45,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     exp_month,
     exp_year,
     cvc,
+    bankName,
+    cardName,
   }: ExternalSetup = formData;
 
   // console.log(nextRequest);
@@ -83,7 +86,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         type: 'custom',
         business_profile: {
           mcc: mcc,
+          // mcc: '7333',
           url: `https://${url}.com`,
+          // url,
         },
         business_type: 'individual',
         capabilities: {
@@ -135,7 +140,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
         await stripe.accounts.createExternalAccount(stripeId, {
           external_account: bankToken.id,
-          metadata: { transactId },
+          metadata: { transactId, bankName },
         });
         res.status(200).send(`adding ${object}`);
       }
@@ -151,7 +156,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         });
         await stripe.accounts.createExternalAccount(stripeId, {
           external_account: cardToken.id,
-          metadata: { transactId },
+          metadata: { transactId, cardName },
         });
         res.status(200).send(`adding ${object}`);
       }
