@@ -40,7 +40,7 @@ const Header = ({ openModal }: any, { openQuickSketch }: any) => {
       openModal();
     } else {
       // signOut();
-      signOut({ redirect: false, callbackUrl: '/' });
+      await signOut({ redirect: false, callbackUrl: '/' });
       // signOut({ redirect: false, callbackUrl: '/api/auth/logout' }).then(
       //   (response) => console.log({ tokenResponse: response })
       // );
@@ -53,7 +53,8 @@ const Header = ({ openModal }: any, { openQuickSketch }: any) => {
     }
   };
 
-  useEffect(() => {}, [handleLogMode]);
+  // useEffect(() => {}, [handleLogMode]);
+  useEffect(() => {}, [session]);
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [closeMenu, setCloseMenu] = useState(false);
@@ -127,7 +128,7 @@ const Header = ({ openModal }: any, { openQuickSketch }: any) => {
                     <a className="relative filter-icon-list-container">
                       <FaPenFancy
                         className="relative h-[2.5em] w-[2.5em] cursor-pointer"
-                        onClick={() => openQuickSketch}
+                        onClick={openQuickSketch}
                       />
                     </a>
                   </li>

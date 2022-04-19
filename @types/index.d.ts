@@ -12,8 +12,9 @@ declare module 'next-auth' {
   interface Session {
     user?: {
       role?: string;
-      // stripeId?: string;
+      stripeId?: string;
       customerId?: string;
+      // accountId?: string;
       // personId?: string;
       username?: string;
       firstname?: string;

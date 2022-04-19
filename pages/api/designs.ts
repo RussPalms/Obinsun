@@ -21,7 +21,7 @@ handler.use(fileUpload);
 
 handler.post(async (req: any, res: any) => {
   console.log(req.body);
-  console.log(req.files);
+  console.log(req.files.svg[0].headers);
 
   const svgFile = req.files;
 
@@ -84,7 +84,8 @@ handler.post(async (req: any, res: any) => {
 
   //...
   // res.status(200).JSON({ message: 'file was uploaded' }, req.files);
-  return res.status(200).json('recieved file');
+  // return res.status(200).json('recieved file');
+  return res.status(200);
   // return res.redirect(307, redirectUrl);
   // return res.end('recieved file');
 });
@@ -119,12 +120,12 @@ export default handler;
 
 // };
 
-export const apiHandler = async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log({ ncRequest: req });
+// export const apiHandler = async (req: NextApiRequest, res: NextApiResponse) => {
+//   console.log({ ncRequest: req });
 
-  if (req.method == 'POST') {
-    console.log(req.body);
+//   if (req.method == 'POST') {
+//     console.log(req.body);
 
-    return res.status(200).json('recieved svg file');
-  }
-};
+//     return res.status(200).json('recieved svg file');
+//   }
+// };

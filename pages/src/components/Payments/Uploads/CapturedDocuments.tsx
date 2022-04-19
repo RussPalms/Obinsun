@@ -1,10 +1,10 @@
 import {
   collection,
   doc,
-  getDoc,
-  getDocs,
-  onSnapshot,
-  query,
+  // getDoc,
+  // getDocs,
+  // onSnapshot,
+  // query,
   setDoc,
 } from 'firebase/firestore';
 import { useSession } from 'next-auth/react';

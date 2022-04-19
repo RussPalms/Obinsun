@@ -151,7 +151,8 @@ export const Studio = () => {
           method="post"
           action="/api/designs"
           encType="multipart/form-data"
-          // onSubmit={handleSubmit}
+          target="_self"
+          // onSubmit={(e) => e.preventDefault()}
         >
           <div className="flex flex-col justify-center items-center">
             <div className="flex flex-col justify-center items-center">
@@ -161,6 +162,7 @@ export const Studio = () => {
                   name="svg"
                   id="svg_file"
                   type="file"
+                  // accept=".svg"
                   accept=".svg"
                   // value="select svg"
                   onChange={(e) => {

@@ -82,7 +82,8 @@ const fulfillAccountUpdate = async (accountUpdate: any) => {
     .update({
       last_stripe_update: admin.firestore.FieldValue.serverTimestamp(),
       neccessary_actions: customAccountUpdate.requirements,
-      verification: customAccountUpdate.individual.verification,
+      individualVerification: customAccountUpdate.individual.verification,
+      companyVerification: customAccountUpdate.company.verification,
       external_accounts: customAccountUpdate.external_accounts,
       stripe_metadata: customAccountUpdate.metadata,
     })

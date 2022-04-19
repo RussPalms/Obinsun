@@ -57,8 +57,10 @@ const useSvgUpload = (
       },
     };
 
+    const changedFileName = file.name.replace(' ', '_');
+
     console.log({ svgFile: { file } });
-    const storageRef = ref(projectStorage, `${userImage}${file.name}`);
+    const storageRef = ref(projectStorage, `${userImage}${changedFileName}`);
     // const collectionRef = collection(db, userImage);
     const documentRef = doc(db, 'designs', metadata.customMetadata.name);
 

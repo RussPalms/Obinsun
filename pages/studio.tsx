@@ -5,6 +5,7 @@ import SvgGrid from './src/components/Payments/Uploads/SvgGrid';
 // import Content from './Production/Layout/Content';
 import { Studio } from './src/components/Studio';
 import { motion } from 'framer-motion';
+import { getSession } from 'next-auth/react';
 
 const title = 'Welcome, this is Obinsun 👋';
 const subtitle =
@@ -53,6 +54,8 @@ export default function StudioPage(retrievedDesigns: []) {
 }
 
 export const getServerSideProps = async (ctx) => {
+  // const session = await getSession(ctx);
+
   // console.log(ctx);
 
   const getDesigns = {
@@ -68,7 +71,12 @@ export const getServerSideProps = async (ctx) => {
   )
     .then((response) => response.json())
     .then((data) => data);
-  return { props: { retrievedDesigns } };
+  return {
+    props: {
+      // session,
+      retrievedDesigns,
+    },
+  };
 };
 
 // export const getServerSideProps = async () => {

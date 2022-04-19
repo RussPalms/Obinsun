@@ -76,7 +76,7 @@ export default async (req: any, res: any) => {
         // data: fs.readFileSync(`${documentUploadUrl}`),
         // data: documentUpload,
         name: 'success.png',
-        type: 'application/octed-stream',
+        type: 'application/octet-stream',
       },
       //   metadata: { firebaseID },
     },
