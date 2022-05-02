@@ -1,5 +1,5 @@
 import { usePainter } from 'pages/server/hooks/usePainter';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Intro } from './Sketch/Intro';
 import { Goo } from './Sketch/Goo';
 import { Canvas } from './Sketch/Canvas';
@@ -16,19 +16,24 @@ const QuickSketch = ({ closeQuickSketch }: any) => {
   }, [canvas]);
 
   const toolbarProps = { ...state, ...api, dateUrl, handleDownload };
+
+  useEffect(() => {
+    init();
+  }, []);
   return (
-    <>
+    <div className="flex items-center justify-center">
       {/* <div className='quick-sketch-root'>
             <div className='quick-sketch-base'> */}
       {/* <body className="quick-sketch-body"> */}
-      <Intro isReady={isReady} init={init} />
+      <button onClick={closeQuickSketch}>Close QuickSketch</button>
+      {/* <Intro isReady={isReady} init={init} /> */}
       <Toolbar {...toolbarProps} />
       <Canvas width={state.currentWidth} canvasRef={canvas} />
-      <Goo />
+      {/* <Goo /> */}
       {/* </body> */}
       {/* </div>
         </div> */}
-    </>
+    </div>
   );
 };
 

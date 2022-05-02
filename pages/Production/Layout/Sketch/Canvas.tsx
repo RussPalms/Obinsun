@@ -11,7 +11,7 @@ export const Canvas: React.FC<Props> = ({ canvasRef, width }) => {
 
   return (
     <section>
-      <canvas style={{ cursor }} ref={canvasRef as any} />
+      <canvas className="z-50" style={{ cursor }} ref={canvasRef as any} />
     </section>
   );
 };

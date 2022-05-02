@@ -13,6 +13,7 @@ import type SessionProviderProps from 'next-auth';
 import { GetServerSidePropsContext } from 'next';
 import PrintfulSignin from './src/components/Settings/PrintfulSignin';
 import WebcamCapture from './src/components/Payments/Uploads/WebcamCapture';
+import ExistingDocument from './src/components/ExistingDocument';
 
 // type Props = {
 //   session: SessionProviderProps
@@ -59,6 +60,15 @@ const subtitle =
   'You will fins a plethora of custom graphic designs attatched to high quality merchandise.';
 
 export default function SettingsPage() {
+  const payoutStatus = () => {
+    let payoutsActivity = session.user.neccessary_actions.currently_due;
+    if (payoutsActivity.length !== 0) {
+      return 'PAYOUTS DISABLED. Please complete neccessary actions in order to recieve payments.';
+    } else {
+      return "You're all caught up and should now be able to recieve payments!";
+    }
+  };
+
   const { data: session } = useSession();
 
   useEffect(() => {
@@ -69,15 +79,16 @@ export default function SettingsPage() {
   return (
     <>
       <Content title="Settings" description={`${title} - ${subtitle}`}>
-        Todos: Neccessary Actions -{' '}
-        {session.user.neccessary_actions?.currently_due[0]
+        Todos: Neccessary Actions -{payoutStatus()}
+        {/* {session.user.neccessary_actions?.currently_due[0]
           ? session.user.neccessary_actions.currently_due[0]
-          : ''}
+          : ''} */}
         {/* Neccessary Verifications - {session.user.verification} */}
         <UserSettings />
         <PrintfulSignin />
         <ExternalAccounts />
         <WebcamCapture />
+        <ExistingDocument />
       </Content>
     </>
   );

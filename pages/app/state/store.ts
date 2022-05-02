@@ -6,6 +6,7 @@ import snapReducer from './slices/snapSlice';
 import productsReducer from './slices/productsSlice';
 import cartReducer from './slices/cartSlice';
 import variantReducer from './slices/variantSlice';
+import documentReducer from './slices/documentSlice';
 // import loginReducer from './slices/loginSlice';
 // import { createStore } from '@reduxjs/toolkit';
 
@@ -19,6 +20,7 @@ export default configureStore({
     camera: cameraReducer,
     snap: snapReducer,
     // login: loginReducer,
+    document: documentReducer,
 
     products: productsReducer,
     cart: cartReducer,

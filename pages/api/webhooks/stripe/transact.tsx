@@ -5,6 +5,7 @@ import type Stripe from 'stripe';
 // import type { Stripe } from '@stripe/stripe-js';
 const serviceAccount =
   require('/pages/api/keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6') as string;
+const util = require('util');
 
 const firebaseAdmin = !admin.apps.length
   ? admin.initializeApp({
@@ -99,9 +100,19 @@ const fulfillExternalAccountCreation = async (externalAccountCreation: any) => {
   // console.log(customAccountUpdate);
 
   const customExternalAccountUpdate = await stripe.accounts.retrieve(
-    externalAccountCreation.id
+    externalAccountCreation.account
   );
-  console.log(customExternalAccountUpdate);
+
+  // console.log(customExternalAccountUpdate);
+
+  console.dir(
+    { 'custom-account-directory': customExternalAccountUpdate },
+    {
+      depth: null,
+      colors: true,
+      maxArrayLength: null,
+    }
+  );
 
   return firebaseAdmin
     .firestore()
@@ -191,7 +202,20 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(400).send(`Webhook error: ${err.message}`);
     }
 
-    console.log(event);
+    // console.log(event);
+
+    console.log({
+      'event-logger': util.inspect(event, { maxArrayLength: null }),
+    });
+
+    console.dir(
+      { 'event-directory': event },
+      {
+        depth: null,
+        colors: true,
+        maxArrayLength: null,
+      }
+    );
 
     // Handle the event
     switch (event.type) {

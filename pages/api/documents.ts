@@ -13,6 +13,7 @@ import documentUpload from 'pages/server/middlewares/documentUpload';
 import nc from 'next-connect';
 import type Stripe from 'stripe';
 import { File } from 'node-fetch';
+const util = require('util');
 
 // type Data = {
 //   success: boolean;
@@ -199,6 +200,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       description,
       stripeId,
       username,
+      base64Document,
+      documentUrl,
+      documentAction,
     } = JSON.parse(req.body);
 
     console.log(cameraImage);
@@ -209,7 +213,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const ext = matches[1];
     const data = matches[2];
     const buffer = Buffer.from(data, 'base64');
-    fs.writeFileSync(`pages/api/${documentName}.` + ext, buffer);
+    const documentExtension = `pages/api/${documentName}.` + ext;
+    fs.writeFileSync(documentExtension, buffer);
 
     // console.log(req.body.cameraImage);
 
@@ -264,9 +269,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         purpose: 'account_requirement',
         file: {
           //   data: fs.readFileSync(cameraImage.replace(/(\r\n|\n|\r)/gm, '')),
-          data: fs.readFileSync(`pages/api/${documentName}.` + ext),
+          data: fs.readFileSync(documentExtension),
           // data: fs.readFileSync(documentFile.name),
-          name: `${documentName}.png`,
+          name: `${documentName}.${ext}`,
           type: 'application/octet-stream',
           //   type: 'image/png',
           // type: 'multipart/form-data',
@@ -277,12 +282,132 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       }
     );
 
-    console.log(file);
+    switch (documentAction) {
+      case 'bank-account-ownership':
+        console.log(file);
 
-    // await stripe.accounts.update(stripeId, {
-    //   company: { verification: { document: { front: file.id } } },
-    //   metadata: { username },
-    // });
+        const identityVerification = await stripe.accounts
+          .update(stripeId, {
+            // One or more documents that support the Bank account ownership verification requirement. Must be a document associated with the account's primary active bank account that displays the last 4 digits of the account number, either a statement or a voided check.
+            // Files contains one or more document ids returned by a file upload with a purpose value of account_requirement.
+            documents: {
+              bank_account_ownership_verification: { files: [file.id] },
+            },
+            metadata: { username },
+          })
+          // .catch((errors) => JSON.parse(errors))
+          // .then((errorStructure) => {
+          //   console.log(
+          //     util.inspect(
+          //       {
+          //         'identity-verification-error-logger': errorStructure,
+          //       },
+          //       {
+          //         maxArrayLength: null,
+          //         colors: true,
+          //       }
+          //     )
+          //   );
+          // });
+          .catch((errors) => {
+            console.error(
+              { IdentityVerificationErrorMessage: errors.raw.message }
+
+              // util.inspect(
+              //   {
+              //     'identity-verification-error-logger': errors,
+              //   },
+              //   {
+              //     maxArrayLength: null,
+              //     colors: true,
+              //   }
+              // )
+            );
+            console.dir(
+              {
+                'identity-verification-error-logger': errors,
+              },
+              {
+                depth: null,
+                maxArrayLength: null,
+                colors: true,
+              }
+            );
+          });
+
+        // console.log(
+        //   util.inspect(
+        //     {
+        //       'identity-verification-logger': identityVerification,
+        //     },
+        //     {
+        //       maxArrayLength: null,
+        //     }
+        //   )
+        // );
+        console.dir(
+          { 'identity-update-directory': identityVerification },
+          {
+            depth: null,
+            colors: true,
+            maxArrayLength: null,
+          }
+        );
+        break;
+
+      case 'business-tax-id':
+        const companyVerification = await stripe.accounts
+          .update(stripeId, {
+            // The front of a document returned by a file upload with a purpose value of additional_verification. The uploaded file needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in size.
+            company: { verification: { document: { front: file.id } } },
+            metadata: { username },
+          })
+          .catch((errors) => {
+            console.error({
+              IdentityVerificationErrorMessage: errors.raw.message,
+            });
+            console.dir(
+              {
+                'identity-verification-error-logger': errors,
+              },
+              {
+                depth: null,
+                maxArrayLength: null,
+                colors: true,
+              }
+            );
+          });
+
+        // console.log(
+        //   util.inspect(
+        //     {
+        //       'company-verification-logger': companyVerification,
+        //     },
+        //     {
+        //       maxArrayLength: null,
+        //     }
+        //   )
+        // );
+        console.dir(
+          { 'verification-update-directory': companyVerification },
+          {
+            depth: null,
+            colors: true,
+            maxArrayLength: null,
+          }
+        );
+        break;
+
+      default:
+        console.log(`Unhandled action type ${documentAction}`);
+    }
+    try {
+      fs.unlinkSync(documentExtension);
+      //file removed
+      console.log('file removed');
+    } catch (err) {
+      console.error(err);
+    }
 
     return res.status(200);
   }

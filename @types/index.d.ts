@@ -47,6 +47,10 @@ declare module 'next-auth' {
       neccessary_actions?: Object<T>;
       personal_info?: Object<T>;
       verification?: Object<T>;
+      company_verification?: Object<T>;
+      individual_verification?: Object<T>;
+      stripe_metadata?: Object<T>;
+      stripeBalance?: Object<T>;
       external_accounts?: Object<T>;
       permissions?: { admin: [Object] };
     } & DefaultSession['user'];

@@ -22,7 +22,7 @@ import { useRouter } from 'next/router';
 // import { useAppSelector } from 'pages/server/hooks/reduxHooks';
 // import { getMemoizedNumItems } from 'pages/app/state/slices/cartSlice';
 // import { selectItems } from "../slices/basketSlice";
-const Header = ({ openModal }: any, { openQuickSketch }: any) => {
+const Header = ({ openModal, openSketch }: any) => {
   // const numItems = useAppSelector(getMemoizedNumItems);
 
   const { data: session } = useSession();
@@ -38,6 +38,7 @@ const Header = ({ openModal }: any, { openQuickSketch }: any) => {
   const handleLogMode = async () => {
     if (!session) {
       openModal();
+      // openSketch();
     } else {
       // signOut();
       await signOut({ redirect: false, callbackUrl: '/' });
@@ -51,6 +52,14 @@ const Header = ({ openModal }: any, { openQuickSketch }: any) => {
       // );
       router.push('/');
     }
+  };
+
+  const quickSketch = (e: any) => {
+    // e.preventDefault();
+    console.log('opening quick sketch...');
+    // openModal();
+
+    openSketch();
   };
 
   // useEffect(() => {}, [handleLogMode]);
@@ -128,7 +137,9 @@ const Header = ({ openModal }: any, { openQuickSketch }: any) => {
                     <a className="relative filter-icon-list-container">
                       <FaPenFancy
                         className="relative h-[2.5em] w-[2.5em] cursor-pointer"
-                        onClick={openQuickSketch}
+                        onClick={(e) => {
+                          quickSketch(e);
+                        }}
                       />
                     </a>
                   </li>

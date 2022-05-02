@@ -1,3 +1,4 @@
+import type { Card } from '@stripe/stripe-js';
 import { NextApiRequest, NextApiResponse } from 'next';
 import {
   AccountSetup,
@@ -42,8 +43,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     routing_number,
     account_number,
     number,
-    exp_month,
-    exp_year,
+    // exp_month,
+    // exp_year,
+    exp_month_year,
     cvc,
     bankName,
     cardName,
@@ -145,19 +147,73 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         res.status(200).send(`adding ${object}`);
       }
       if (object === 'card') {
+        const expPattern = /(\d{4})-(\d{1,2})/;
+        const expDate = expPattern.exec(exp_month_year);
+        const expYear = expDate[1];
+        const expMonth = expDate[2];
         const cardToken = await stripe.tokens.create({
           card: {
             currency,
             number,
-            exp_month,
-            exp_year,
+            exp_month: expMonth,
+            exp_year: expYear,
             cvc,
           },
         });
-        await stripe.accounts.createExternalAccount(stripeId, {
-          external_account: cardToken.id,
-          metadata: { transactId, cardName },
-        });
+        // .then(stripeResponse => {
+        //   console.log(stripeResponse)
+        // })
+        // .catch((errors) => {console.log(errors)
+        // });
+
+        // if (cardToken.error) {
+
+        // }
+
+        console.log(cardToken);
+
+        const addCard = await stripe.accounts
+          .createExternalAccount(stripeId, {
+            external_account: cardToken.id,
+            metadata: { transactId, cardName },
+          })
+          // .then((addCard) => {
+          //     if (!addCard) {
+          //       throw new Error('Could not create card.');
+          //   } else {
+          //     return addCard;
+          //   }
+          // });
+          .catch((errors) => {
+            const { message } = errors.raw;
+            console.error({
+              ExternalAccountCardErrorMessage: message,
+            });
+            console.dir(
+              {
+                'external-account-card-error-logger': errors,
+              },
+              {
+                depth: null,
+                maxArrayLength: null,
+                colors: true,
+              }
+            );
+            // res.status(400).send(errorMessage);
+            return { errorMessage: message };
+          });
+        // .then((errorResponse) => console.log(errorResponse));
+        // .then(resolveErrors => {res.status(400).send(resolveErrors.message)});
+        console.dir(
+          {
+            'external-account-card-logger': addCard,
+          },
+          {
+            depth: null,
+            maxArrayLength: null,
+            colors: true,
+          }
+        );
         res.status(200).send(`adding ${object}`);
       }
       // else {

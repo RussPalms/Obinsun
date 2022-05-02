@@ -36,6 +36,7 @@ class MyDocument extends Document {
           <Main />
           <NextScript />
           <div id="modal-root"></div>
+          <div id="sketch-root"></div>
           {/* <script
             async
             src="https://cdn.snipcart.com/themes/v3.0.31/default/snipcart.js"

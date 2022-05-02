@@ -29,8 +29,9 @@ const ExternalAccounts = () => {
 
     cardName: '',
     number: '',
-    exp_month: '',
-    exp_year: '',
+    // exp_month: '',
+    // exp_year: '',
+    exp_month_year: '',
     cvc: '',
   });
 
@@ -65,11 +66,23 @@ const ExternalAccounts = () => {
 
   useEffect(() => {
     if (session.user.external_accounts) {
+      let externalAccounts = session.user.external_accounts.data;
+
+      const expirationMonth = externalAccounts[1].exp_month;
+      let expiration_month: string;
+      if (expirationMonth < 10) {
+        expiration_month = '0';
+      }
+
       setFormData({
         ...formData,
-        bankName: session.user.external_accounts.data[0].bank_name,
-        routing_number: session.user.external_accounts.data[0].routing_number,
-        account_number: 'PROVIDED',
+        bankName: externalAccounts[0].bank_name,
+        routing_number: externalAccounts[0].routing_number,
+        account_number: `******${externalAccounts[0].last4}`,
+        cardName: externalAccounts[1].brand,
+        number: `**** **** **** ${externalAccounts[1].last4}`,
+        exp_month_year: `${externalAccounts[1].exp_year}-${expiration_month}${externalAccounts[1].exp_month}`,
+        cvc: externalAccounts[1].cvc_check,
       });
     }
   }, [session]);

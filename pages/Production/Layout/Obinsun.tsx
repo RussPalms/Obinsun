@@ -36,6 +36,7 @@ import Externals from './Externals';
 import GeneralModal from './GeneralModal';
 import Authorization from './Authorization';
 import QuickSketch from './QuickSketch';
+import SketchModal from './SketchModal';
 // import DesignMix from '@/components/DesignMix';
 
 // type AppProps = {} & ConnectedProps<typeof connector>;
@@ -78,12 +79,12 @@ const Obinsun = ({ children }: any) => {
     authModalRef.current?.close();
   };
 
-  const openQuickSketch = () => {
-    quickSketchModalRef.current?.openQuickSketch();
+  const openSketch = () => {
+    quickSketchModalRef.current?.openSketch();
   };
 
   const closeQuickSketch = () => {
-    quickSketchModalRef.current?.close();
+    quickSketchModalRef.current?.closeQuickSketchModal();
   };
 
   return (
@@ -92,9 +93,9 @@ const Obinsun = ({ children }: any) => {
       <GeneralModal ref={authModalRef}>
         <Authorization closeModal={closeModal} passHref />
       </GeneralModal>
-      <GeneralModal ref={quickSketchModalRef}>
+      <SketchModal ref={quickSketchModalRef}>
         <QuickSketch closeQuickSketch={closeQuickSketch} passHref />
-      </GeneralModal>
+      </SketchModal>
       {/* </AnimatePresence> */}
       <DesignMix key="design_mix" />
       {/* <motion.div
@@ -107,7 +108,7 @@ const Obinsun = ({ children }: any) => {
         <Header
           key="header"
           openModal={openModal}
-          openQuickSketch={openQuickSketch}
+          openSketch={openSketch}
           passHref
         />
         <Sidebar

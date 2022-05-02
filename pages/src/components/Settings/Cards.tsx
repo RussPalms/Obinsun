@@ -9,7 +9,7 @@ const Cards = ({ formData, setFormData }: any) => {
               type="text"
               name=""
               required
-              value={formData.cardName}
+              value={formData?.cardName}
               onChange={(e) => {
                 setFormData({ ...formData, cardName: e.target.value });
               }}
@@ -22,10 +22,11 @@ const Cards = ({ formData, setFormData }: any) => {
           <div className="glass-form-input-container">
             <input
               className="glass-form-input"
-              type="number"
+              // type="number"
+              type="text"
               name=""
               required
-              value={formData.number.toString()}
+              value={formData?.number.toString()}
               onChange={(e) => {
                 setFormData({ ...formData, number: e.target.value });
               }}
@@ -35,7 +36,8 @@ const Cards = ({ formData, setFormData }: any) => {
           </div>
         </div>
       </div>
-      <div className="glass-form-row">
+
+      {/* <div className="glass-form-row">
         <div className="glass-form-column">
           <div className="glass-form-input-container">
             <input
@@ -68,15 +70,38 @@ const Cards = ({ formData, setFormData }: any) => {
             <span className="glass-form-line"></span>
           </div>
         </div>
-      </div>
+      </div> */}
+
       <div className="glass-form-row">
         <div className="glass-form-column">
           <div className="glass-form-input-container">
             <input
               className="glass-form-input"
-              type="number"
+              type="month"
               name=""
-              //   required
+              required
+              value={formData?.exp_month_year}
+              onChange={(e) => {
+                setFormData({ ...formData, exp_month_year: e.target.value });
+                // console.log(e.target.value);
+              }}
+              // disabled={formData?.exp_month_year ? true : false}
+            />
+            <span className="glass-form-text">Expiration Month & Year</span>
+            <span className="glass-form-line"></span>
+          </div>
+        </div>
+      </div>
+
+      <div className="glass-form-row">
+        <div className="glass-form-column">
+          <div className="glass-form-input-container">
+            <input
+              className="glass-form-input"
+              // type="number"
+              type="text"
+              name=""
+              required
               value={formData.cvc}
               onChange={(e) => {
                 setFormData({ ...formData, cvc: e.target.value });

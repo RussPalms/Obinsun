@@ -25,8 +25,9 @@ export interface ExternalSetup extends AccountSetup {
   account_number?: string;
   cardName?: string;
   number?: string;
-  exp_month?: string;
-  exp_year?: string;
+  // exp_month?: string;
+  // exp_year?: string;
+  exp_month_year?: string;
   cvc?: string;
 }
 

@@ -314,6 +314,10 @@ export default NextAuth({
         token.personal_info = userToken.personal_info;
         token.verification = userToken.verification;
         token.external_accounts = userToken.external_accounts;
+        token.company_verification = userToken.company_verification;
+        token.individual_verification = userToken.individual_verification;
+        token.stripe_metadata = userToken.stripe_metadata;
+        token.stripeBalance = userToken.stripeBalance;
       }
 
       // if (userToken) {
@@ -354,6 +358,10 @@ export default NextAuth({
       session.user.personal_info = token.personal_info;
       session.user.verification = token.verification;
       session.user.external_accounts = token.external_accounts;
+      session.user.company_verification = token.company_verification;
+      session.user.individual_verification = token.individual_verification;
+      session.user.stripe_metadata = token.stripe_metadata;
+      session.user.stripeBalance = token.stripeBalance;
 
       const grants = ac.getGrants();
       // expose only the current role permissions
