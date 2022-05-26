@@ -45,7 +45,7 @@ const Sidebar = () => {
             <span className="filter-icon-glass-container">
               <IoIosMan className="filter-icon-size" />
             </span>
-            <span className="filter-text-container">Men's Clothing</span>
+            <span className="filter-text-container">Men&apos;s Clothing</span>
           </a>
         </li>
         <li className="filter-container">
@@ -53,7 +53,7 @@ const Sidebar = () => {
             <span className="filter-icon-glass-container">
               <IoIosWoman className="filter-icon-size" />
             </span>
-            <span className="filter-text-container">Women's Clothing</span>
+            <span className="filter-text-container">Women&apos;s Clothing</span>
           </a>
         </li>
         <li className="filter-container">
@@ -61,7 +61,7 @@ const Sidebar = () => {
             <span className="filter-icon-glass-container">
               <FaChild className="filter-icon-size" />
             </span>
-            <span className="filter-text-container">Kid's Clothing</span>
+            <span className="filter-text-container">Kid&apos;s Clothing</span>
           </a>
         </li>
         <li className="filter-container">

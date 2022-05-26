@@ -1,106 +1,101 @@
-// import type { NextApiRequest, NextApiResponse } from 'next';
-// import {
-//   PrintfulShippingItem,
-//   // SnipcartShippingRate
-//   StripeShippingRate,
-// } from '../../types';
+import type { NextApiRequest, NextApiResponse } from 'next';
+import {
+  PrintfulShippingItem,
+  // SnipcartShippingRate
+  StripeShippingRate,
+} from '../../types';
 
-// import { printful } from './printful-client';
+import { printful } from './printful-client';
 
-// // interface SnipcartRequest extends NextApiRequest {
-// interface StripeRequest extends NextApiRequest {
-//   body: {
-//     eventName: string;
-//     mode: string;
-//     createdOn: string;
-//     content: { [key: string]: any };
-//   };
-// }
+// interface SnipcartRequest extends NextApiRequest {
+interface StripeRequest extends NextApiRequest {
+  body: {
+    eventName: string;
+    mode: string;
+    createdOn: string;
+    content: { [key: string]: any };
+  };
+}
 
-// type Data = {
-//   /** An array of shipping rates. */
-//   rates: StripeShippingRate[];
-// };
+type Data = {
+  /** An array of shipping rates. */
+  rates: StripeShippingRate[];
+};
 
-// type Error = {
-//   errors: { key: string; message: string }[];
-// };
+type Error = {
+  errors: { key: string; message: string }[];
+};
 
-// export default async function handler(
-//   // req: SnipcartRequest,
-//   req: StripeRequest,
-//   res: NextApiResponse<Data | Error>
-// ) {
-//   const { eventName, content } = req.body;
+export default async function handler(
+  // req: SnipcartRequest,
+  req: StripeRequest,
+  res: NextApiResponse<Data | Error>
+) {
+  const { eventName, content } = req.body;
 
-//   if (eventName !== 'shippingrates.fetch') return res.status(200).end();
+  if (eventName !== 'shippingrates.fetch') return res.status(200).end();
 
-//   if (content.items.length === 0)
-//     return res.status(200).json({
-//       errors: [
-//         {
-//           key: 'no_items',
-//           message: 'No items in cart to calculate shipping.',
-//         },
-//       ],
-//     });
+  if (content.items.length === 0)
+    return res.status(200).json({
+      errors: [
+        {
+          key: 'no_items',
+          message: 'No items in cart to calculate shipping.',
+        },
+      ],
+    });
 
-//   const {
-//     items: cartItems,
-//     shippingAddress1,
-//     shippingAddress2,
-//     shippingAddressCity,
-//     shippingAddressCountry,
-//     shippingAddressProvince,
-//     shippingAddressPostalCode,
-//     shippingAddressPhone,
-//   } = content;
+  const {
+    items: cartItems,
+    shippingAddress1,
+    shippingAddress2,
+    shippingAddressCity,
+    shippingAddressCountry,
+    shippingAddressProvince,
+    shippingAddressPostalCode,
+    shippingAddressPhone,
+  } = content;
 
-//   const recipient = {
-//     ...(shippingAddress1 && { address1: shippingAddress1 }),
-//     ...(shippingAddress2 && { address2: shippingAddress2 }),
-//     ...(shippingAddressCity && { city: shippingAddressCity }),
-//     ...(shippingAddressCountry && { country_code: shippingAddressCountry }),
-//     ...(shippingAddressProvince && { state_code: shippingAddressProvince }),
-//     ...(shippingAddressPostalCode && { zip: shippingAddressPostalCode }),
-//     ...(shippingAddressPhone && { phone: shippingAddressPhone }),
-//   };
+  const recipient = {
+    ...(shippingAddress1 && { address1: shippingAddress1 }),
+    ...(shippingAddress2 && { address2: shippingAddress2 }),
+    ...(shippingAddressCity && { city: shippingAddressCity }),
+    ...(shippingAddressCountry && { country_code: shippingAddressCountry }),
+    ...(shippingAddressProvince && { state_code: shippingAddressProvince }),
+    ...(shippingAddressPostalCode && { zip: shippingAddressPostalCode }),
+    ...(shippingAddressPhone && { phone: shippingAddressPhone }),
+  };
 
-//   const items: PrintfulShippingItem[] = cartItems.map(
-//     (item): PrintfulShippingItem => ({
-//       external_variant_id: item.id,
-//       quantity: item.quantity,
-//     })
-//   );
+  const items: PrintfulShippingItem[] = cartItems.map(
+    (item): PrintfulShippingItem => ({
+      external_variant_id: item.id,
+      quantity: item.quantity,
+    })
+  );
 
-//   try {
-//     const { result } = await printful.post('shipping/rates', {
-//       recipient,
-//       items,
-//     });
+  try {
+    const { result } = await printful.post('shipping/rates', {
+      recipient,
+      items,
+    });
 
-//     res.status(200).json({
-//       rates: result.map((rate) => ({
-//         cost: rate.rate,
-//         description: rate.name,
-//         userDefinedId: rate.id,
-//         guaranteedDaysToDelivery: rate.maxDeliveryDays,
-//       })),
-//     });
-//   } catch ({ error }) {
-//     console.log(error);
-//     res.status(200).json({
-//       errors: [
-//         {
-//           key: error?.reason,
-//           message: error?.message,
-//         },
-//       ],
-//     });
-//   }
-// }
-
-export default function _() {
-  const div = document.createElement('div');
-  return div;
+    res.status(200).json({
+      rates: result.map((rate) => ({
+        cost: rate.rate,
+        description: rate.name,
+        userDefinedId: rate.id,
+        guaranteedDaysToDelivery: rate.maxDeliveryDays,
+      })),
+    });
+  } catch ({ error }) {
+    console.log(error);
+    res.status(200).json({
+      errors: [
+        {
+          key: error?.reason,
+          message: error?.message,
+        },
+      ],
+    });
+  }
 }

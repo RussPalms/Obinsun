@@ -7,18 +7,10 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 import useDocumentUpload from 'pages/server/hooks/useDocumentUpload';
-// import DocumentProgress from './DocumentProgress';
-
-// import Image from 'next/image';
 
 const ExistingDocument = () => {
   const documentReader = new FileReader();
   const documentTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-
-  //   const documentReference = useRef(null);
-  //   const documentDispatch = useDispatch();
-
-  //   const documentFile = useSelector(selectDocumentFile);
 
   const [verificationDocument, setVerificationDocument] = useState(null);
   const [documentFile, setDocumentFile] = useState(null);
@@ -29,17 +21,6 @@ const ExistingDocument = () => {
     height: 0,
   });
 
-  //   const verificationDocument = (e: any) => {
-  //     e.preventDefault();
-
-  //     // const documentSource = documentReference.current.files[0];
-  //     const documentSource = e.target.files[0];
-  //     documentDispatch(setDocumentFile(documentSource));
-  //   };
-
-  /**
-   * Returns image dimensions for specified URL.
-   */
   const getImageDimensions = (
     url: string
   ): Promise<{ width: number; height: number }> => {
@@ -57,30 +38,10 @@ const ExistingDocument = () => {
 
   const loadDocument = (e: any) => {
     e.preventDefault();
-    // let images = new Image();
-    // images.onload = () => {
-    //   console.log('Image Size', images.width, images.height);
-    // };
 
     const selectedDocument = e.target.files[0];
 
     setDocumentFile(selectedDocument);
-
-    // console.log(
-    //   'natural:',
-    //   selectedDocument.naturalWidth,
-    //   selectedDocument.naturalHeight
-    // );
-    // console.log(
-    //   'width,height:',
-    //   selectedDocument.width,
-    //   selectedDocument.height
-    // );
-    // console.log(
-    //   'offsetW,offsetH:',
-    //   selectedDocument.offsetWidth,
-    //   selectedDocument.offsetHeight
-    // );
 
     documentReader.readAsDataURL(selectedDocument);
 
@@ -94,7 +55,6 @@ const ExistingDocument = () => {
         console.log(`Image dimensions: ${width}px x ${height}px`);
         setDocumentDimensions({ width, height });
       } catch (e) {
-        // Could not load image from specified URL
         console.error(e);
       }
 
@@ -120,27 +80,15 @@ const ExistingDocument = () => {
         'Please select a .jpeg, .jpg or .png image' as any
       );
     }
-
-    //   const { progress, url } = useDocumentUpload(documentFile);
-
-    //   return {progress, url}
   };
-
-  //   const {progress, url} = submitDocument()
 
   useEffect(() => {
     if (!verificationDocument) {
       console.log('no file selected');
     } else {
       console.log(verificationDocument);
-      //   if (!submitDocumentFile) {
-      //     setSubmitDocumentFile(null);
-      //   }
     }
-  }, [
-    verificationDocument,
-    // , submitDocumentFile
-  ]);
+  }, [verificationDocument]);
 
   return (
     <div className="relative h-[100%] w-[100%] overflow-hidden flex flex-col items-center justify-center">
@@ -155,7 +103,6 @@ const ExistingDocument = () => {
           type="file"
           name="document"
           id="document_file"
-          //   ref={documentReference}
           onChange={(e) => {
             loadDocument(e);
           }}
@@ -163,19 +110,10 @@ const ExistingDocument = () => {
         <div className="glass-container h-[25rem] w-[37.5rem] flex items-center justify-center">
           {verificationDocument !== null && (
             <img
-              //   className={`object-contain h-[${documentDimensions.height}px] w-[${documentDimensions.width}px]`}
               className="h-full w-full border rounded-[0.625rem] object-contain"
               src={verificationDocument}
               alt="Verification Document"
             />
-            // {/* <Image
-            //   className="glass-container flex items-center justify-center h-[100%] w-[100%]"
-            //   height={documentDimensions.height}
-            //   width={documentDimensions.width}
-            //   src={verificationDocument}
-            //   alt="verification document"
-            //   objectFit="fill"
-            // /> */}
           )}
         </div>
 

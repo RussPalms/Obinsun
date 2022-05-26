@@ -1,7 +1,5 @@
-import type { Card } from '@stripe/stripe-js';
 import { NextApiRequest, NextApiResponse } from 'next';
 import {
-  AccountSetup,
   ExternalSetup,
   InitialAccount,
 } from 'pages/Production/interfaces/objects/obinsun-objects';
@@ -38,43 +36,23 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     phone,
     ssnLast4,
 
-    // object,
     currency,
     routing_number,
     account_number,
     number,
-    // exp_month,
-    // exp_year,
     exp_month_year,
     cvc,
     bankName,
     cardName,
   }: ExternalSetup = formData;
 
-  // console.log(nextRequest);
-
-  // const datePattern = /(\d{4})-(\d{1,2})-(\d{1,2})/;
-  // const birthDate = datePattern.exec(dob);
-  // const birthYear = birthDate[1];
-  // const birthMonth = birthDate[2];
-  // const birthDay = birthDate[3];
-
-  //   const webhookEndpoint = await stripe.webhookEndpoints.retrieve(
-  //     'we_1KganeHgBISqeUGdXkHy6gSd'
-  //   );
-
-  //   const selectedEvents = webhookEndpoint.enabled_events
-
-  let selectedChange;
+  let selectedChange: any;
   try {
     selectedChange = change;
   } catch (err: any) {
     res.status(400).send(`${change} is not an option`);
   }
 
-  // console.log(selectedChange);
-
-  //   const createCustomAccount = async (selectedChange) => {
   switch (selectedChange) {
     case 'create-custom-account':
       const datePattern = /(\d{4})-(\d{1,2})-(\d{1,2})/;
@@ -88,9 +66,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         type: 'custom',
         business_profile: {
           mcc: mcc,
-          // mcc: '7333',
           url: `https://${url}.com`,
-          // url,
         },
         business_type: 'individual',
         capabilities: {
@@ -125,16 +101,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       break;
 
     case 'create-external-account':
-      // switch(object) {
-      //   case (object === 'bank'):
       console.log(object);
       if (object === 'bank_account') {
         const bankToken = await stripe.tokens.create({
           bank_account: {
             country,
             currency,
-            // account_holder_name: '',
-            // account_holder_type: '',
             routing_number,
             account_number,
           },
@@ -160,15 +132,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             cvc,
           },
         });
-        // .then(stripeResponse => {
-        //   console.log(stripeResponse)
-        // })
-        // .catch((errors) => {console.log(errors)
-        // });
-
-        // if (cardToken.error) {
-
-        // }
 
         console.log(cardToken);
 
@@ -177,13 +140,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             external_account: cardToken.id,
             metadata: { transactId, cardName },
           })
-          // .then((addCard) => {
-          //     if (!addCard) {
-          //       throw new Error('Could not create card.');
-          //   } else {
-          //     return addCard;
-          //   }
-          // });
           .catch((errors) => {
             const { message } = errors.raw;
             console.error({
@@ -199,11 +155,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 colors: true,
               }
             );
-            // res.status(400).send(errorMessage);
             return { errorMessage: message };
           });
-        // .then((errorResponse) => console.log(errorResponse));
-        // .then(resolveErrors => {res.status(400).send(resolveErrors.message)});
         console.dir(
           {
             'external-account-card-logger': addCard,
@@ -216,15 +169,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         );
         res.status(200).send(`adding ${object}`);
       }
-      // else {
-      //   return res
-      //     .status(200)
-      //     .send(`custom account option ${object} is not available`);
-      // }
       break;
 
     default:
       console.log(`Unhandled action ${selectedChange}`);
-    // }
   }
 };

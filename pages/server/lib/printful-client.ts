@@ -21,8 +21,6 @@ const app = !admin.apps.length
     })
   : admin.app();
 
-const code: any = {};
-
 export const getAccessCode = async () => {
   const accessCode = await app
     .firestore()
@@ -70,9 +68,9 @@ const getRefreshedCode = async (current_refresh_token: any) => {
   });
   const response = await getRefreshedToken;
   const refreshedToken = response.data;
-  let new_access_token = refreshedToken.access_token;
-  let new_expires_at = refreshedToken.expires_at;
-  let new_refresh_token = refreshedToken.refresh_token;
+  const new_access_token = refreshedToken.access_token;
+  const new_expires_at = refreshedToken.expires_at;
+  const new_refresh_token = refreshedToken.refresh_token;
   app.firestore().collection('accessCodes').doc('Authorization').set({
     access_token: new_access_token,
     expires_at: new_expires_at,

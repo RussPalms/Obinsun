@@ -11,8 +11,7 @@ import { IoIosHome, IoIosColorPalette } from 'react-icons/io';
 import { VscSettingsGear } from 'react-icons/vsc';
 import { CgGitFork } from 'react-icons/cg';
 import { FaPenFancy } from 'react-icons/fa';
-
-// import { connect, ConnectedProps } from 'react-redux';
+import { MdPrint } from 'react-icons/md';
 
 import { useSelector } from 'react-redux';
 import { useUserContext } from 'pages/app/features';
@@ -254,6 +253,24 @@ const Header = ({ openModal, openSketch }: any) => {
                         </Link>
                         <span className="filter-text-container laptop-l:hidden">
                           Studio
+                        </span>
+                      </a>
+                    </li>
+                  )}
+
+                  {access('users', 'read:any').granted && (
+                    <li className="filter-container flex-1">
+                      <a className="filter-icon-list-container">
+                        <Link href="/print">
+                          <span className="filter-icon-glass-container">
+                            <MdPrint
+                              onClick={handleRoute}
+                              className="filter-icon-size"
+                            />
+                          </span>
+                        </Link>
+                        <span className="filter-text-container laptop-l:hidden">
+                          Print
                         </span>
                       </a>
                     </li>
