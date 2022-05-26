@@ -52,7 +52,8 @@
     "react/jsx-key": "off",
     "@typescript-eslint/no-empty-function": "off",
     "no-var": "off",
-    "no-irregular-whitespace": "off"
+    "no-irregular-whitespace": "off",
+    "no-case-declarations": "off"
   },
   "settings": {
     "react": {
