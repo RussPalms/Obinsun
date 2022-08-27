@@ -5,7 +5,7 @@ import { ac } from '../services'; // load ACL
 export const checkAccess =
   (resource: any, action: any, possession: any) =>
   (req: any, res: any, next: any) => {
-    let permission;
+    let permission: any;
     try {
       permission = ac.permission({
         role: req.session?.user?.role, // we'll see later about that

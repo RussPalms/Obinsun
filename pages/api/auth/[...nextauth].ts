@@ -18,8 +18,6 @@ import { db } from 'pages/server/lib/database/firebaseStorage';
 const THIRTY_DAYS = 30 * 24 * 60 * 60;
 const THIRTY_MINUTES = 30 * 60;
 
-// const db = firestoreConnect;
-
 export default NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
   session: {
