@@ -7,7 +7,7 @@ import ProductGrid from './src/components/ProductIntegration/ProductGrid';
 
 const title = 'Welcome, this is Obinsun 👋';
 const subtitle =
-  'You will fins a plethora of custom graphic designs attatched to high quality merchandise.';
+  'You will find a plethora of custom graphic designs attatched to high quality merchandise.';
 
 export default function WishlistPage() {
   const { hasItems, items } = useWishlistState();

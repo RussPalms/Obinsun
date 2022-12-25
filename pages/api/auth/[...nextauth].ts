@@ -4,15 +4,10 @@ import FacebookProvider from 'next-auth/providers/facebook';
 import EmailProvider from 'next-auth/providers/email';
 import nodemailer from 'nodemailer';
 import { html, text } from '../emails/email-create';
-import {
-  adapterInstance,
-  firestoreConnect,
-} from '../../server/lib/database/firebaseFirestore';
+import { adapterInstance } from '../../server/lib/database/firebaseFirestore';
 import { collection, query, getDocs, where } from 'firebase/firestore';
 import { verifyPassword } from '../../server/lib/password-auth';
 import { ac } from '../../server/services';
-import { firestoreGet } from 'pages/server/utils/data-fetch';
-import { WhereFilterOp } from '@google-cloud/firestore';
 import { db } from 'pages/server/lib/database/firebaseStorage';
 
 const THIRTY_DAYS = 30 * 24 * 60 * 60;
@@ -39,17 +34,12 @@ export default NextAuth({
           where('email', '==', credentials?.email)
         );
         const authSnapshot = await getDocs(AuthenticationQuery);
-        // const userCollection: Record<string, unknown> = {};
         const userCollection: any = {};
         authSnapshot.forEach((doc) => {
           const a = doc.data();
           a['_id'] = doc.id;
           userCollection[doc.id] = a;
         });
-        // const user = Object.values(userCollection)[0] as Record<
-        //   string,
-        //   unknown
-        // >;
 
         const user = Object.values(userCollection)[0] as any;
 
@@ -103,25 +93,16 @@ export default NextAuth({
     }),
   ],
   callbacks: {
-    signIn: async () =>
-      // { user, account, profile, email, credentials }
-      {
-        const isAllowedToSignIn = true;
-        if (isAllowedToSignIn) {
-          return true;
-        } else {
-          return false;
-        }
-      },
+    signIn: async () => {
+      const isAllowedToSignIn = true;
+      if (isAllowedToSignIn) {
+        return true;
+      } else {
+        return false;
+      }
+    },
 
-    jwt: async ({
-      token,
-      // , user, account, profile, isNewUser
-    }) => {
-      // const userRefrence = 'users';
-      // const querySearch = 'email';
-      // const filtering = '=' as WhereFilterOp;
-      // const searchReference = token.email as string;
+    jwt: async ({ token }) => {
       const authTokenQuery = query(
         collection(db, 'users'),
         where('email', '==', token.email)
@@ -131,21 +112,13 @@ export default NextAuth({
 
       const userCollection: Record<string, unknown> = {};
 
-      await authTokenSnapshot.forEach((doc) => {
+      authTokenSnapshot.forEach((doc) => {
         const a = doc.data();
         a['_id'] = doc.id;
         userCollection[doc.id] = a;
       });
 
       const userToken: any = Object.values(userCollection)[0];
-
-      // const userToken = (await firestoreGet(
-      //   userRefrence,
-      //   querySearch,
-      //   filtering,
-      //   searchReference
-      //   // ) as Record<string, unknown>[];
-      // )) as any;
 
       if (userToken) {
         token.name = userToken.name;
@@ -174,7 +147,7 @@ export default NextAuth({
       }
       return token;
     },
-    session: async ({ session, user, token }: any) => {
+    session: async ({ session, token }: any) => {
       if (token) session.id = token.id;
       session.user.role = token.role;
       session.user.stripeId = token.stripeId;

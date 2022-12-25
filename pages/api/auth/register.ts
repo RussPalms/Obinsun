@@ -7,7 +7,6 @@ import {
   getDoc,
   setDoc,
 } from 'firebase/firestore';
-import { firestoreConnect } from 'pages/server/lib/database/firebaseFirestore';
 import { hashPassword } from 'pages/server/lib/password-auth';
 import type Stripe from 'stripe';
 import fetch from 'node-fetch';
@@ -47,11 +46,9 @@ async function handler(req: any, res: any) {
     return;
   }
 
-  // const db = firestoreConnect;
-
   const hashedPassword = await hashPassword(password);
 
-  const checkExistingUser = await query(
+  const checkExistingUser = query(
     collection(db, 'users'),
     where('email', '==', email)
   );

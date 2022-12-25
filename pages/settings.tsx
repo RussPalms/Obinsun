@@ -57,7 +57,7 @@ import ExistingDocument from './src/components/ExistingDocument';
 
 const title = 'Welcome, this is Obinsun 👋';
 const subtitle =
-  'You will fins a plethora of custom graphic designs attatched to high quality merchandise.';
+  'You will find a plethora of custom graphic designs attatched to high quality merchandise.';
 
 export default function SettingsPage() {
   const payoutStatus = () => {

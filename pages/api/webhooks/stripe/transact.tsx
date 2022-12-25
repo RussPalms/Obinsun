@@ -2,10 +2,10 @@ import { buffer } from 'micro';
 import * as admin from 'firebase-admin';
 import { NextApiRequest, NextApiResponse } from 'next';
 import type Stripe from 'stripe';
+import util from 'util';
 // import type { Stripe } from '@stripe/stripe-js';
 const serviceAccount =
   require('/pages/api/keys/photo-gallery-upload-firebase-adminsdk-wnbhz-ae0e426bf6') as string;
-const util = require('util');
 
 const firebaseAdmin = !admin.apps.length
   ? admin.initializeApp({

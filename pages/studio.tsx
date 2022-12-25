@@ -9,7 +9,7 @@ import { getSession } from 'next-auth/react';
 
 const title = 'Welcome, this is Obinsun 👋';
 const subtitle =
-  'You will fins a plethora of custom graphic designs attatched to high quality merchandise.';
+  'You will find a plethora of custom graphic designs attatched to high quality merchandise.';
 
 export default function StudioPage(retrievedDesigns: []) {
   const designs = Object.values(retrievedDesigns)[0] as [];

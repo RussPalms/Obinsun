@@ -85,9 +85,10 @@ const useDocumentUpload = (
           // //   description: metadata.customMetadata.description,
           // };
 
-          const createUuid = uuidv4();
+          // const createUuid = uuidv4();
 
-          const obinsunUuid = `0b!n$un_${createUuid}`;
+          // const obinsunUuid = `0b!n$un_${createUuid}`;
+          const obinsunUuid = `0b!n$un_${uuidv4()}`;
 
           const documentAddition = {
             id: obinsunUuid,
